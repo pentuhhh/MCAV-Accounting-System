@@ -58,7 +58,7 @@ Network Topology:
 Authentication and Authorization
 
     User passowrds are Encrypted in the database via BCrypt
-    Session feature Via PHP
+    Session feature Via PHP (JWT)
 
     Unauthorized users cannot access pages that they are forbidden
         Prevent URL manipulation
