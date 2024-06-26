@@ -12,8 +12,10 @@ $pagePath = BASE_PATH . "/pages$urlPath";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MCAV</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:wght,FILL@300,1" />
+    <link type="text/css" rel="stylesheet" href="/output.css"/>
 </head>
-<body>
+<body class="font-poppins">
     <?php
     if (file_exists($pagePath . "/index.php")) {
         include_once $pagePath . "/index.php";
