@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+	.COMPONENT_SIDEBAR_BUTTON {
+		@apply relative
+        px-9
+        py-2
+        outline-none
+        data-[active="true"]:bg-[#191C21]
+        data-[active="true"]:pl-12
+        before:absolute
+        before:left-0
+        before:top-0
+        before:w-[4px]
+        before:h-full
+        duration-300
+        hover:pl-12
+        hover:bg-[#111317]
+        transition-all; 
+	}
+
+	.COMPONENT_SIDEBAR_BUTTON a {
+		@apply flex items-center gap-2;
+	}
+
+    .COMPONENT_SIDEBAR_LOGOUT_BUTTON {
+        @apply relative
+        px-9
+        py-2
+        outline-none
+        before:absolute
+        before:left-0
+        before:top-0
+        before:w-[4px]
+        before:h-full
+        hover:bg-[#111317]
+        transition-all;
+    }
+
+    .COMPONENT_SIDEBAR_LOGOUT_BUTTON a{
+        @apply flex items-center gap-2;
+    }
+}
