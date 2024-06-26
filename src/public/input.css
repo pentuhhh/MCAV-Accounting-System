@@ -9,7 +9,6 @@
 		@apply relative
         px-9
         py-2
-        outline-none
         data-[active="true"]:bg-[#191C21]
         data-[active="true"]:pl-12
         before:absolute
@@ -20,15 +19,19 @@
         duration-300
         hover:pl-12
         hover:bg-[#111317]
-        transition-all; 
+        transition-all;
 	}
 
 	.COMPONENT_SIDEBAR_BUTTON a {
-		@apply flex items-center gap-2;
+		@apply flex items-center gap-2 outline-none;
 	}
 
-    .COMPONENT_SIDEBAR_LOGOUT_BUTTON {
-        @apply relative
+	.COMPONENT_SIDEBAR_BUTTON:has(a:focus) {
+		@apply bg-[#111317];
+	}
+
+	.COMPONENT_SIDEBAR_LOGOUT_BUTTON {
+		@apply relative
         px-9
         py-2
         outline-none
@@ -39,9 +42,13 @@
         before:h-full
         hover:bg-[#111317]
         transition-all;
-    }
+	}
 
-    .COMPONENT_SIDEBAR_LOGOUT_BUTTON a{
-        @apply flex items-center gap-2;
-    }
+	.COMPONENT_SIDEBAR_LOGOUT_BUTTON a {
+		@apply flex items-center gap-2 outline-none;
+	}
+
+	.COMPONENT_SIDEBAR_LOGOUT_BUTTON:has(a:focus) {
+		@apply bg-[#111317];
+	}
 }
