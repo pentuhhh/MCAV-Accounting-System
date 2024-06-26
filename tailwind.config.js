@@ -6,7 +6,11 @@ module.exports = {
 		"./src/components/**/*.php",
 	],
 	theme: {
-		extend: {},
+		extend: {
+			fontFamily: {
+				poppins: ["Poppins", "sans-serif"],
+			},
+		},
 	},
 	plugins: [],
 };
