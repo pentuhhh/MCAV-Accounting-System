@@ -3,8 +3,8 @@
 Checklist of Features:
 
 Core Functionalities:
-    CRUD for users,
-    
+CRUD for users,
+
     Three User Levels:
         For Accountants or Authorized Users-
             Can Create Entries
@@ -16,7 +16,7 @@ Core Functionalities:
                 Updated / Deleted Records are marked as Updated/Removes but still kept
 
         For Technicians and Support-
-            
+
             Manually Create Accounts for Employees
             Cannot Make Entries no Delete Old entries
             Can manage permissions and other functionalities but cannot tamper with the Data
@@ -27,14 +27,14 @@ Core Functionalities:
 
     Efficient Data Modeling
         Atomize data structures and eliminate large tables with many fields
-        
+
         AMAP we should use conditional tables
 
 Technical Functionalities:
 
 Network Topology:
 
-    2 Minimal Cost Servers Will be Used. Since we are only making a webapp for the 
+    2 Minimal Cost Servers Will be Used. Since we are only making a webapp for the
     employees of a business the size of 20~ employees, any modern comptuer with a recent
     generation cpu will do, ~12,000-15,000 php EACH
 
@@ -64,7 +64,7 @@ Authentication and Authorization
         Prevent URL manipulation
 
     Double Authorization Layers
-        
+
         The database will be encrypted, particularly the transactional records, its decryption hash will be separate from the rest.
         On the end of the webserver, for it to be able to retrieve any form of Data from the database, it must first need to retrieve
         the separate decryption hash that is stored. This separate decryption hash is only accessible if and only if there is a user login wherein there is
@@ -88,8 +88,6 @@ Logging and Tracking
     Logging will only happen for specified triggers such as when an entry is created and removed, a report is generated or something is downloaded
 
     Error handling may be done similarly to logging in which the server will log successful executions of functions
-
-
 
 Documentation
 
@@ -127,14 +125,9 @@ Documentation
 
     for the love of god please do not use Button1, Button2 and etc
 
+Code Stack :
 
-
-
-
-Code Stack : 
-
-- HTML
-- CSS
-- PHP
-- JAVASCRIPT
-
+-   HTML
+-   CSS
+-   PHP
+-   JAVASCRIPT
