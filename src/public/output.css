@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 /*
-! tailwindcss v3.4.4 | MIT License | https://tailwindcss.com
+! tailwindcss v3.4.1 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -12,19 +12,19 @@
 *,
 ::before,
 ::after {
-	box-sizing: border-box;
-	/* 1 */
-	border-width: 0;
-	/* 2 */
-	border-style: solid;
-	/* 2 */
-	border-color: #e5e7eb;
-	/* 2 */
+  box-sizing: border-box;
+  /* 1 */
+  border-width: 0;
+  /* 2 */
+  border-style: solid;
+  /* 2 */
+  border-color: #e5e7eb;
+  /* 2 */
 }
 
 ::before,
 ::after {
-	--tw-content: "";
+  --tw-content: '';
 }
 
 /*
@@ -39,24 +39,23 @@
 
 html,
 :host {
-	line-height: 1.5;
-	/* 1 */
-	-webkit-text-size-adjust: 100%;
-	/* 2 */
-	-moz-tab-size: 4;
-	/* 3 */
-	-o-tab-size: 4;
-	tab-size: 4;
-	/* 3 */
-	font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
-		"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-	/* 4 */
-	font-feature-settings: normal;
-	/* 5 */
-	font-variation-settings: normal;
-	/* 6 */
-	-webkit-tap-highlight-color: transparent;
-	/* 7 */
+  line-height: 1.5;
+  /* 1 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */
+  -moz-tab-size: 4;
+  /* 3 */
+  -o-tab-size: 4;
+     tab-size: 4;
+  /* 3 */
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  /* 4 */
+  font-feature-settings: normal;
+  /* 5 */
+  font-variation-settings: normal;
+  /* 6 */
+  -webkit-tap-highlight-color: transparent;
+  /* 7 */
 }
 
 /*
@@ -65,10 +64,10 @@ html,
 */
 
 body {
-	margin: 0;
-	/* 1 */
-	line-height: inherit;
-	/* 2 */
+  margin: 0;
+  /* 1 */
+  line-height: inherit;
+  /* 2 */
 }
 
 /*
@@ -78,12 +77,12 @@ body {
 */
 
 hr {
-	height: 0;
-	/* 1 */
-	color: inherit;
-	/* 2 */
-	border-top-width: 1px;
-	/* 3 */
+  height: 0;
+  /* 1 */
+  color: inherit;
+  /* 2 */
+  border-top-width: 1px;
+  /* 3 */
 }
 
 /*
@@ -91,8 +90,8 @@ Add the correct text decoration in Chrome, Edge, and Safari.
 */
 
 abbr:where([title]) {
-	-webkit-text-decoration: underline dotted;
-	text-decoration: underline dotted;
+  -webkit-text-decoration: underline dotted;
+          text-decoration: underline dotted;
 }
 
 /*
@@ -105,8 +104,8 @@ h3,
 h4,
 h5,
 h6 {
-	font-size: inherit;
-	font-weight: inherit;
+  font-size: inherit;
+  font-weight: inherit;
 }
 
 /*
@@ -114,8 +113,8 @@ Reset links to optimize for opt-in styling instead of opt-out.
 */
 
 a {
-	color: inherit;
-	text-decoration: inherit;
+  color: inherit;
+  text-decoration: inherit;
 }
 
 /*
@@ -124,7 +123,7 @@ Add the correct font weight in Edge and Safari.
 
 b,
 strong {
-	font-weight: bolder;
+  font-weight: bolder;
 }
 
 /*
@@ -138,15 +137,14 @@ code,
 kbd,
 samp,
 pre {
-	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-		"Liberation Mono", "Courier New", monospace;
-	/* 1 */
-	font-feature-settings: normal;
-	/* 2 */
-	font-variation-settings: normal;
-	/* 3 */
-	font-size: 1em;
-	/* 4 */
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  /* 1 */
+  font-feature-settings: normal;
+  /* 2 */
+  font-variation-settings: normal;
+  /* 3 */
+  font-size: 1em;
+  /* 4 */
 }
 
 /*
@@ -154,7 +152,7 @@ Add the correct font size in all browsers.
 */
 
 small {
-	font-size: 80%;
+  font-size: 80%;
 }
 
 /*
@@ -163,18 +161,18 @@ Prevent `sub` and `sup` elements from affecting the line height in all browsers.
 
 sub,
 sup {
-	font-size: 75%;
-	line-height: 0;
-	position: relative;
-	vertical-align: baseline;
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
 }
 
 sub {
-	bottom: -0.25em;
+  bottom: -0.25em;
 }
 
 sup {
-	top: -0.5em;
+  top: -0.5em;
 }
 
 /*
@@ -184,12 +182,12 @@ sup {
 */
 
 table {
-	text-indent: 0;
-	/* 1 */
-	border-color: inherit;
-	/* 2 */
-	border-collapse: collapse;
-	/* 3 */
+  text-indent: 0;
+  /* 1 */
+  border-color: inherit;
+  /* 2 */
+  border-collapse: collapse;
+  /* 3 */
 }
 
 /*
@@ -203,26 +201,24 @@ input,
 optgroup,
 select,
 textarea {
-	font-family: inherit;
-	/* 1 */
-	font-feature-settings: inherit;
-	/* 1 */
-	font-variation-settings: inherit;
-	/* 1 */
-	font-size: 100%;
-	/* 1 */
-	font-weight: inherit;
-	/* 1 */
-	line-height: inherit;
-	/* 1 */
-	letter-spacing: inherit;
-	/* 1 */
-	color: inherit;
-	/* 1 */
-	margin: 0;
-	/* 2 */
-	padding: 0;
-	/* 3 */
+  font-family: inherit;
+  /* 1 */
+  font-feature-settings: inherit;
+  /* 1 */
+  font-variation-settings: inherit;
+  /* 1 */
+  font-size: 100%;
+  /* 1 */
+  font-weight: inherit;
+  /* 1 */
+  line-height: inherit;
+  /* 1 */
+  color: inherit;
+  /* 1 */
+  margin: 0;
+  /* 2 */
+  padding: 0;
+  /* 3 */
 }
 
 /*
@@ -231,7 +227,7 @@ Remove the inheritance of text transform in Edge and Firefox.
 
 button,
 select {
-	text-transform: none;
+  text-transform: none;
 }
 
 /*
@@ -240,15 +236,15 @@ select {
 */
 
 button,
-input:where([type="button"]),
-input:where([type="reset"]),
-input:where([type="submit"]) {
-	-webkit-appearance: button;
-	/* 1 */
-	background-color: transparent;
-	/* 2 */
-	background-image: none;
-	/* 2 */
+[type='button'],
+[type='reset'],
+[type='submit'] {
+  -webkit-appearance: button;
+  /* 1 */
+  background-color: transparent;
+  /* 2 */
+  background-image: none;
+  /* 2 */
 }
 
 /*
@@ -256,7 +252,7 @@ Use the modern Firefox focus style for all focusable elements.
 */
 
 :-moz-focusring {
-	outline: auto;
+  outline: auto;
 }
 
 /*
@@ -264,7 +260,7 @@ Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/
 */
 
 :-moz-ui-invalid {
-	box-shadow: none;
+  box-shadow: none;
 }
 
 /*
@@ -272,7 +268,7 @@ Add the correct vertical alignment in Chrome and Firefox.
 */
 
 progress {
-	vertical-align: baseline;
+  vertical-align: baseline;
 }
 
 /*
@@ -281,7 +277,7 @@ Correct the cursor style of increment and decrement buttons in Safari.
 
 ::-webkit-inner-spin-button,
 ::-webkit-outer-spin-button {
-	height: auto;
+  height: auto;
 }
 
 /*
@@ -289,11 +285,11 @@ Correct the cursor style of increment and decrement buttons in Safari.
 2. Correct the outline style in Safari.
 */
 
-[type="search"] {
-	-webkit-appearance: textfield;
-	/* 1 */
-	outline-offset: -2px;
-	/* 2 */
+[type='search'] {
+  -webkit-appearance: textfield;
+  /* 1 */
+  outline-offset: -2px;
+  /* 2 */
 }
 
 /*
@@ -301,7 +297,7 @@ Remove the inner padding in Chrome and Safari on macOS.
 */
 
 ::-webkit-search-decoration {
-	-webkit-appearance: none;
+  -webkit-appearance: none;
 }
 
 /*
@@ -310,10 +306,10 @@ Remove the inner padding in Chrome and Safari on macOS.
 */
 
 ::-webkit-file-upload-button {
-	-webkit-appearance: button;
-	/* 1 */
-	font: inherit;
-	/* 2 */
+  -webkit-appearance: button;
+  /* 1 */
+  font: inherit;
+  /* 2 */
 }
 
 /*
@@ -321,7 +317,7 @@ Add the correct display in Chrome and Safari.
 */
 
 summary {
-	display: list-item;
+  display: list-item;
 }
 
 /*
@@ -341,24 +337,24 @@ hr,
 figure,
 p,
 pre {
-	margin: 0;
+  margin: 0;
 }
 
 fieldset {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 legend {
-	padding: 0;
+  padding: 0;
 }
 
 ol,
 ul,
 menu {
-	list-style: none;
-	margin: 0;
-	padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 /*
@@ -366,7 +362,7 @@ Reset default styling for dialogs.
 */
 
 dialog {
-	padding: 0;
+  padding: 0;
 }
 
 /*
@@ -374,7 +370,7 @@ Prevent resizing textareas horizontally by default.
 */
 
 textarea {
-	resize: vertical;
+  resize: vertical;
 }
 
 /*
@@ -382,20 +378,19 @@ textarea {
 2. Set the default placeholder color to the user's configured gray 400 color.
 */
 
-input::-moz-placeholder,
-textarea::-moz-placeholder {
-	opacity: 1;
-	/* 1 */
-	color: #9ca3af;
-	/* 2 */
+input::-moz-placeholder, textarea::-moz-placeholder {
+  opacity: 1;
+  /* 1 */
+  color: #9ca3af;
+  /* 2 */
 }
 
 input::placeholder,
 textarea::placeholder {
-	opacity: 1;
-	/* 1 */
-	color: #9ca3af;
-	/* 2 */
+  opacity: 1;
+  /* 1 */
+  color: #9ca3af;
+  /* 2 */
 }
 
 /*
@@ -404,7 +399,7 @@ Set the default cursor for buttons.
 
 button,
 [role="button"] {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 /*
@@ -412,7 +407,7 @@ Make sure disabled buttons don't get the pointer cursor.
 */
 
 :disabled {
-	cursor: default;
+  cursor: default;
 }
 
 /*
@@ -429,10 +424,10 @@ audio,
 iframe,
 embed,
 object {
-	display: block;
-	/* 1 */
-	vertical-align: middle;
-	/* 2 */
+  display: block;
+  /* 1 */
+  vertical-align: middle;
+  /* 2 */
 }
 
 /*
@@ -441,273 +436,410 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 
 img,
 video {
-	max-width: 100%;
-	height: auto;
+  max-width: 100%;
+  height: auto;
 }
 
 /* Make elements with the HTML hidden attribute stay hidden by default */
 
 [hidden] {
-	display: none;
+  display: none;
 }
 
-*,
-::before,
-::after {
-	--tw-border-spacing-x: 0;
-	--tw-border-spacing-y: 0;
-	--tw-translate-x: 0;
-	--tw-translate-y: 0;
-	--tw-rotate: 0;
-	--tw-skew-x: 0;
-	--tw-skew-y: 0;
-	--tw-scale-x: 1;
-	--tw-scale-y: 1;
-	--tw-pan-x:  ;
-	--tw-pan-y:  ;
-	--tw-pinch-zoom:  ;
-	--tw-scroll-snap-strictness: proximity;
-	--tw-gradient-from-position:  ;
-	--tw-gradient-via-position:  ;
-	--tw-gradient-to-position:  ;
-	--tw-ordinal:  ;
-	--tw-slashed-zero:  ;
-	--tw-numeric-figure:  ;
-	--tw-numeric-spacing:  ;
-	--tw-numeric-fraction:  ;
-	--tw-ring-inset:  ;
-	--tw-ring-offset-width: 0px;
-	--tw-ring-offset-color: #fff;
-	--tw-ring-color: rgb(59 130 246 / 0.5);
-	--tw-ring-offset-shadow: 0 0 #0000;
-	--tw-ring-shadow: 0 0 #0000;
-	--tw-shadow: 0 0 #0000;
-	--tw-shadow-colored: 0 0 #0000;
-	--tw-blur:  ;
-	--tw-brightness:  ;
-	--tw-contrast:  ;
-	--tw-grayscale:  ;
-	--tw-hue-rotate:  ;
-	--tw-invert:  ;
-	--tw-saturate:  ;
-	--tw-sepia:  ;
-	--tw-drop-shadow:  ;
-	--tw-backdrop-blur:  ;
-	--tw-backdrop-brightness:  ;
-	--tw-backdrop-contrast:  ;
-	--tw-backdrop-grayscale:  ;
-	--tw-backdrop-hue-rotate:  ;
-	--tw-backdrop-invert:  ;
-	--tw-backdrop-opacity:  ;
-	--tw-backdrop-saturate:  ;
-	--tw-backdrop-sepia:  ;
-	--tw-contain-size:  ;
-	--tw-contain-layout:  ;
-	--tw-contain-paint:  ;
-	--tw-contain-style:  ;
+*, ::before, ::after{
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
 }
 
-::backdrop {
-	--tw-border-spacing-x: 0;
-	--tw-border-spacing-y: 0;
-	--tw-translate-x: 0;
-	--tw-translate-y: 0;
-	--tw-rotate: 0;
-	--tw-skew-x: 0;
-	--tw-skew-y: 0;
-	--tw-scale-x: 1;
-	--tw-scale-y: 1;
-	--tw-pan-x:  ;
-	--tw-pan-y:  ;
-	--tw-pinch-zoom:  ;
-	--tw-scroll-snap-strictness: proximity;
-	--tw-gradient-from-position:  ;
-	--tw-gradient-via-position:  ;
-	--tw-gradient-to-position:  ;
-	--tw-ordinal:  ;
-	--tw-slashed-zero:  ;
-	--tw-numeric-figure:  ;
-	--tw-numeric-spacing:  ;
-	--tw-numeric-fraction:  ;
-	--tw-ring-inset:  ;
-	--tw-ring-offset-width: 0px;
-	--tw-ring-offset-color: #fff;
-	--tw-ring-color: rgb(59 130 246 / 0.5);
-	--tw-ring-offset-shadow: 0 0 #0000;
-	--tw-ring-shadow: 0 0 #0000;
-	--tw-shadow: 0 0 #0000;
-	--tw-shadow-colored: 0 0 #0000;
-	--tw-blur:  ;
-	--tw-brightness:  ;
-	--tw-contrast:  ;
-	--tw-grayscale:  ;
-	--tw-hue-rotate:  ;
-	--tw-invert:  ;
-	--tw-saturate:  ;
-	--tw-sepia:  ;
-	--tw-drop-shadow:  ;
-	--tw-backdrop-blur:  ;
-	--tw-backdrop-brightness:  ;
-	--tw-backdrop-contrast:  ;
-	--tw-backdrop-grayscale:  ;
-	--tw-backdrop-hue-rotate:  ;
-	--tw-backdrop-invert:  ;
-	--tw-backdrop-opacity:  ;
-	--tw-backdrop-saturate:  ;
-	--tw-backdrop-sepia:  ;
-	--tw-contain-size:  ;
-	--tw-contain-layout:  ;
-	--tw-contain-paint:  ;
-	--tw-contain-style:  ;
+::backdrop{
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
 }
 
-.COMPONENT_SIDEBAR_BUTTON {
-	position: relative;
-	padding-left: 2.25rem;
-	padding-right: 2.25rem;
-	padding-top: 0.5rem;
-	padding-bottom: 0.5rem;
-	transition-property: all;
-	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-	transition-duration: 300ms;
+.container{
+  width: 100%;
 }
 
-.COMPONENT_SIDEBAR_BUTTON::before {
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	height: 100%;
-	content: var(--tw-content);
-	width: 4px;
+@media (min-width: 640px){
+  .container{
+    max-width: 640px;
+  }
 }
 
-.COMPONENT_SIDEBAR_BUTTON:hover {
-	--tw-bg-opacity: 1;
-	background-color: rgb(17 19 23 / var(--tw-bg-opacity));
-	padding-left: 3rem;
+@media (min-width: 768px){
+  .container{
+    max-width: 768px;
+  }
 }
 
-.COMPONENT_SIDEBAR_BUTTON[data-active="true"] {
-	--tw-bg-opacity: 1;
-	background-color: rgb(25 28 33 / var(--tw-bg-opacity));
-	padding-left: 3rem;
+@media (min-width: 1024px){
+  .container{
+    max-width: 1024px;
+  }
 }
 
-.COMPONENT_SIDEBAR_BUTTON a {
-	display: flex;
-	align-items: center;
-	gap: 0.5rem;
-	outline: 2px solid transparent;
-	outline-offset: 2px;
+@media (min-width: 1280px){
+  .container{
+    max-width: 1280px;
+  }
 }
 
-.COMPONENT_SIDEBAR_BUTTON:has(a:focus) {
-	--tw-bg-opacity: 1;
-	background-color: rgb(17 19 23 / var(--tw-bg-opacity));
+@media (min-width: 1536px){
+  .container{
+    max-width: 1536px;
+  }
 }
 
-.COMPONENT_SIDEBAR_LOGOUT_BUTTON {
-	position: relative;
-	padding-left: 2.25rem;
-	padding-right: 2.25rem;
-	padding-top: 0.5rem;
-	padding-bottom: 0.5rem;
-	outline: 2px solid transparent;
-	outline-offset: 2px;
-	transition-property: all;
-	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-	transition-duration: 150ms;
+/* Sidebar Component */
+
+.COMPONENT_SIDEBAR_BUTTON{
+  position: relative;
+  padding-left: 2.25rem;
+  padding-right: 2.25rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
 }
 
-.COMPONENT_SIDEBAR_LOGOUT_BUTTON::before {
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	height: 100%;
-	content: var(--tw-content);
-	width: 4px;
+.COMPONENT_SIDEBAR_BUTTON::before{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  content: var(--tw-content);
+  width: 4px;
 }
 
-.COMPONENT_SIDEBAR_LOGOUT_BUTTON:hover {
-	--tw-bg-opacity: 1;
-	background-color: rgb(17 19 23 / var(--tw-bg-opacity));
+.COMPONENT_SIDEBAR_BUTTON:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 19 23 / var(--tw-bg-opacity));
+  padding-left: 3rem;
 }
 
-.COMPONENT_SIDEBAR_LOGOUT_BUTTON a {
-	display: flex;
-	align-items: center;
-	gap: 0.5rem;
-	outline: 2px solid transparent;
-	outline-offset: 2px;
+.COMPONENT_SIDEBAR_BUTTON[data-active="true"]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(25 28 33 / var(--tw-bg-opacity));
+  padding-left: 3rem;
 }
 
-.COMPONENT_SIDEBAR_LOGOUT_BUTTON:has(a:focus) {
-	--tw-bg-opacity: 1;
-	background-color: rgb(17 19 23 / var(--tw-bg-opacity));
+.COMPONENT_SIDEBAR_BUTTON a{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 }
 
-.mb-6 {
-	margin-bottom: 1.5rem;
+.COMPONENT_SIDEBAR_BUTTON:has(a:focus){
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 19 23 / var(--tw-bg-opacity));
 }
 
-.mb-8 {
-	margin-bottom: 2rem;
+.COMPONENT_SIDEBAR_LOGOUT_BUTTON{
+  position: relative;
+  padding-left: 2.25rem;
+  padding-right: 2.25rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 }
 
-.flex {
-	display: flex;
+.COMPONENT_SIDEBAR_LOGOUT_BUTTON::before{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  content: var(--tw-content);
+  width: 4px;
 }
 
-.h-dvh {
-	height: 100dvh;
+.COMPONENT_SIDEBAR_LOGOUT_BUTTON:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 19 23 / var(--tw-bg-opacity));
 }
 
-.w-full {
-	width: 100%;
+.COMPONENT_SIDEBAR_LOGOUT_BUTTON a{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 }
 
-.max-w-\[300px\] {
-	max-width: 300px;
+.COMPONENT_SIDEBAR_LOGOUT_BUTTON:has(a:focus){
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 19 23 / var(--tw-bg-opacity));
 }
 
-.flex-col {
-	flex-direction: column;
+/* End of Sidebar Component */
+
+.mb-6{
+  margin-bottom: 1.5rem;
 }
 
-.justify-between {
-	justify-content: space-between;
+.mb-8{
+  margin-bottom: 2rem;
 }
 
-.bg-\[\#0C0E0D\] {
-	--tw-bg-opacity: 1;
-	background-color: rgb(12 14 13 / var(--tw-bg-opacity));
+.block{
+  display: block;
 }
 
-.font-poppins {
-	font-family: Poppins, sans-serif;
+.flex{
+  display: flex;
 }
 
-.text-3xl {
-	font-size: 1.875rem;
-	line-height: 2.25rem;
+.h-dvh{
+  height: 100dvh;
 }
 
-.text-lg {
-	font-size: 1.125rem;
-	line-height: 1.75rem;
+.max-h-\[100px\]{
+  max-height: 100px;
 }
 
-.font-semibold {
-	font-weight: 600;
+.w-dvw{
+  width: 100dvw;
 }
 
-.text-white {
-	--tw-text-opacity: 1;
-	color: rgb(255 255 255 / var(--tw-text-opacity));
+.w-full{
+  width: 100%;
 }
 
-.before\:bg-\[\#049FDD\]::before {
-	content: var(--tw-content);
-	--tw-bg-opacity: 1;
-	background-color: rgb(4 159 221 / var(--tw-bg-opacity));
+.max-w-\[300px\]{
+  max-width: 300px;
+}
+
+.break-after-auto{
+  -moz-column-break-after: auto;
+       break-after: auto;
+}
+
+.flex-row{
+  flex-direction: row;
+}
+
+.flex-col{
+  flex-direction: column;
+}
+
+.items-center{
+  align-items: center;
+}
+
+.justify-between{
+  justify-content: space-between;
+}
+
+.gap-y-1{
+  row-gap: 0.25rem;
+}
+
+.bg-\[\#0C0E0D\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(12 14 13 / var(--tw-bg-opacity));
+}
+
+.p-7{
+  padding: 1.75rem;
+}
+
+.p-8{
+  padding: 2rem;
+}
+
+.pl-1{
+  padding-left: 0.25rem;
+}
+
+.pl-2{
+  padding-left: 0.5rem;
+}
+
+.font-poppins{
+  font-family: Poppins, sans-serif;
+}
+
+.text-3xl{
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
+.text-5xl{
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.text-lg{
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.text-xl{
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.text-2xl{
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.text-4xl{
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+.text-\[40px\]{
+  font-size: 40px;
+}
+
+.text-\[42px\]{
+  font-size: 42px;
+}
+
+.font-semibold{
+  font-weight: 600;
+}
+
+.font-bold{
+  font-weight: 700;
+}
+
+.text-white{
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-\[\]{
+  color: ;
+}
+
+.text-\[40p2\]{
+  color: 40p2;
+}
+
+.text-\[40p\]{
+  color: 40p;
+}
+
+.text-\[40pz\]{
+  color: 40pz;
+}
+
+.\*\:items-center > *{
+  align-items: center;
+}
+
+.data-\[active\=\'true\'\]\:before\:bg-\[\#049FDD\][data-active='true']::before{
+  content: var(--tw-content);
+  --tw-bg-opacity: 1;
+  background-color: rgb(4 159 221 / var(--tw-bg-opacity));
+}
+
+.data-\[active\=\'true\'\]\:before\:bg-\[\#DC186E\][data-active='true']::before{
+  content: var(--tw-content);
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 24 110 / var(--tw-bg-opacity));
+}
+
+.data-\[active\=\'true\'\]\:before\:bg-\[\#FEED03\][data-active='true']::before{
+  content: var(--tw-content);
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 237 3 / var(--tw-bg-opacity));
 }
