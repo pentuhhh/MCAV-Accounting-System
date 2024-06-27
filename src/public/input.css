@@ -5,6 +5,7 @@
 @tailwind utilities;
 
 @layer components {
+    /* Sidebar Component */
 	.COMPONENT_SIDEBAR_BUTTON {
 		@apply relative
         px-9
@@ -51,4 +52,5 @@
 	.COMPONENT_SIDEBAR_LOGOUT_BUTTON:has(a:focus) {
 		@apply bg-[#111317];
 	}
+    /* End of Sidebar Component */
 }
