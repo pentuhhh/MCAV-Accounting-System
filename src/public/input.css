@@ -53,4 +53,10 @@
 		@apply bg-[#111317];
 	}
     /* End of Sidebar Component */
+
+    /* Table Component */
+    th {
+        @apply font-semibold
+    }
+    /* End of Table Component */
 }
