@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 /*
-! tailwindcss v3.4.1 | MIT License | https://tailwindcss.com
+! tailwindcss v3.4.4 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -213,6 +213,8 @@ textarea {
   /* 1 */
   line-height: inherit;
   /* 1 */
+  letter-spacing: inherit;
+  /* 1 */
   color: inherit;
   /* 1 */
   margin: 0;
@@ -236,9 +238,9 @@ select {
 */
 
 button,
-[type='button'],
-[type='reset'],
-[type='submit'] {
+input:where([type='button']),
+input:where([type='reset']),
+input:where([type='submit']) {
   -webkit-appearance: button;
   /* 1 */
   background-color: transparent;
@@ -494,6 +496,10 @@ video {
   --tw-backdrop-opacity:  ;
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
 }
 
 ::backdrop{
@@ -544,40 +550,10 @@ video {
   --tw-backdrop-opacity:  ;
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
-}
-
-.container{
-  width: 100%;
-}
-
-@media (min-width: 640px){
-  .container{
-    max-width: 640px;
-  }
-}
-
-@media (min-width: 768px){
-  .container{
-    max-width: 768px;
-  }
-}
-
-@media (min-width: 1024px){
-  .container{
-    max-width: 1024px;
-  }
-}
-
-@media (min-width: 1280px){
-  .container{
-    max-width: 1280px;
-  }
-}
-
-@media (min-width: 1536px){
-  .container{
-    max-width: 1536px;
-  }
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
 }
 
 /* Sidebar Component */
@@ -669,6 +645,14 @@ video {
 
 /* End of Sidebar Component */
 
+/* Table Component */
+
+th{
+  font-weight: 600;
+}
+
+/* End of Table Component */
+
 .mb-6{
   margin-bottom: 1.5rem;
 }
@@ -677,12 +661,12 @@ video {
   margin-bottom: 2rem;
 }
 
-.block{
-  display: block;
-}
-
 .flex{
   display: flex;
+}
+
+.table{
+  display: table;
 }
 
 .h-dvh{
@@ -701,17 +685,12 @@ video {
   width: 100%;
 }
 
+.w-1\/2{
+  width: 50%;
+}
+
 .max-w-\[300px\]{
   max-width: 300px;
-}
-
-.break-after-auto{
-  -moz-column-break-after: auto;
-       break-after: auto;
-}
-
-.flex-row{
-  flex-direction: row;
 }
 
 .flex-col{
@@ -726,8 +705,17 @@ video {
   justify-content: space-between;
 }
 
-.gap-y-1{
-  row-gap: 0.25rem;
+.rounded-lg{
+  border-radius: 0.5rem;
+}
+
+.border{
+  border-width: 1px;
+}
+
+.border-gray-300{
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
 
 .bg-\[\#0C0E0D\]{
@@ -735,44 +723,59 @@ video {
   background-color: rgb(12 14 13 / var(--tw-bg-opacity));
 }
 
-.p-7{
-  padding: 1.75rem;
+.bg-blue-500{
+  --tw-bg-opacity: 1;
+  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
 }
 
 .p-8{
   padding: 2rem;
 }
 
-.pl-1{
-  padding-left: 0.25rem;
+.p-2{
+  padding: 0.5rem;
+}
+
+.px-5{
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+.px-8{
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.pb-8{
+  padding-bottom: 2rem;
 }
 
 .pl-2{
   padding-left: 0.5rem;
 }
 
+.pb-3{
+  padding-bottom: 0.75rem;
+}
+
+.pb-5{
+  padding-bottom: 1.25rem;
+}
+
+.pb-6{
+  padding-bottom: 1.5rem;
+}
+
+.pb-4{
+  padding-bottom: 1rem;
+}
+
+.pb-7{
+  padding-bottom: 1.75rem;
+}
+
 .font-poppins{
   font-family: Poppins, sans-serif;
-}
-
-.text-3xl{
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-}
-
-.text-5xl{
-  font-size: 3rem;
-  line-height: 1;
-}
-
-.text-lg{
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-}
-
-.text-xl{
-  font-size: 1.25rem;
-  line-height: 1.75rem;
 }
 
 .text-2xl{
@@ -780,25 +783,34 @@ video {
   line-height: 2rem;
 }
 
-.text-4xl{
-  font-size: 2.25rem;
-  line-height: 2.5rem;
-}
-
-.text-\[40px\]{
-  font-size: 40px;
+.text-3xl{
+  font-size: 1.875rem;
+  line-height: 2.25rem;
 }
 
 .text-\[42px\]{
   font-size: 42px;
 }
 
-.font-semibold{
-  font-weight: 600;
+.text-lg{
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.text-\[16px\]{
+  font-size: 16px;
+}
+
+.text-\[18px\]{
+  font-size: 18px;
 }
 
 .font-bold{
   font-weight: 700;
+}
+
+.font-semibold{
+  font-weight: 600;
 }
 
 .text-white{
@@ -810,20 +822,8 @@ video {
   color: ;
 }
 
-.text-\[40p2\]{
-  color: 40p2;
-}
-
-.text-\[40p\]{
-  color: 40p;
-}
-
-.text-\[40pz\]{
-  color: 40pz;
-}
-
-.\*\:items-center > *{
-  align-items: center;
+.text-\[1t\]{
+  color: 1t;
 }
 
 .data-\[active\=\'true\'\]\:before\:bg-\[\#049FDD\][data-active='true']::before{
