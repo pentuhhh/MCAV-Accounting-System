@@ -27,7 +27,7 @@
         </div>
         <!-- End of Search Bar -->
 
-        <!-- Recent Orders -->
+        <!-- Orders Table -->
         <div class="items-center px-8">
             <h1 class="text-2xl font-bold">Recent Orders</h1>
             <div>
@@ -51,6 +51,6 @@
                 </table>
             </div>
         </div>
-        <!-- End of Recent Orders -->
+        <!-- End of Orders Table -->
     </div>
 </div>
