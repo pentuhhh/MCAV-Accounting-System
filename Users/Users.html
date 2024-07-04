@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Users</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="Users.css">
+</head>
+<body class="bg-gray-100 font-sans">
+
+  <div class="p-6">
+    <h2 class="text-4xl font-semibold mb-6 mx-60 my-16">Users</h2>
+  </div>
+
+  <div class="container mx-auto p-3 m-2 bg-white rounded-lg shadow-md"> 
+    <div class="flex items-center m-2">
+    <input type="text" id="search-input" placeholder="Search" class="width =  border rounded mr-2">
+    <button onclick="handleSearchButtonClick()" class="px-4 py-2 bg-blue-500 text-white rounded cursor-pointer">Search</button>
+    </div>
+  </div>
+
+  <div class="container mx-auto p-6 bg-white rounded-lg shadow-md"> 
+
+    <table id="user-table" class="w-full mb-6">
+
+
+      <thead>
+        <tr>
+          <th class="px-2 py-2">#</th>
+          <th class="px-2 py-2">User</th>
+          <th class="px-2 py-2">Last Name</th>
+          <th class="px-2 py-2">First Name</th>
+          <th class="px-2 py-2">Email</th>
+          <th class="px-2 py-2">Contact Number</th>
+          <th class="px-2 py-2">Position</th>
+          <th class="px-2 py-2"></th>
+        </tr>
+      </thead>
+
+
+      <tbody>
+        <tr>
+          <td class="px-2 py-2 text-center">1</td>
+          <td class="px-2 py-2 "><img src="img1.png" alt="User Image" class="user-image items-center"></td>
+          <td class="px-2 py-2 text-center">Radon</td>
+          <td class="px-2 py-2 text-center">Ron</td>
+          <td class="px-2 py-2 text-center">radonronus@gmail.com</td>
+          <td class="px-2 py-2 text-center">09238742842</td>
+          <td class="px-2 py-2 text-center">Admin</td>
+          <td>
+            <div class="dropdown">
+              <button class="dropbtn">:</button>
+              <div class="dropdown-content">
+                <a href="#">Details User</a>
+                <a href="#">Modify User</a>
+                <a href="#">Delete User</a>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+
+      
+      <tbody>
+        <tr>
+          <td class="px-2 py-2 text-center">2</td>
+          <td class="px-2 py-2 "><img src="img2.png" alt="User Image" class="user-image items-center"></td>
+          <td class="px-2 py-2 text-center">Doe</td>
+          <td class="px-2 py-2 text-center">John</td>
+          <td class="px-2 py-2 text-center">johnnytoes@gmail.com</td>
+          <td class="px-2 py-2 text-center">092387422343</td>
+          <td class="px-2 py-2 text-center">User</td>
+          <td>
+            <div class="dropdown">
+              <button class="dropbtn">:</button>
+              <div class="dropdown-content">
+                <a href="#">Details User</a>
+                <a href="#">Modify User</a>
+                <a href="#">Delete User</a>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+
+      
+      <tbody>
+        <tr>
+          <td class="px-2 py-2 text-center">3</td>
+          <td class="px-2 py-2 "><img src="img3.jpg" alt="User Image" class="user-image items-center"></td>
+          <td class="px-2 py-2 text-center">Escarma</td>
+          <td class="px-2 py-2 text-center">Destin</td>
+          <td class="px-2 py-2 text-center">theblackestblack@gmail.com</td>
+          <td class="px-2 py-2 text-center">09238741232</td>
+          <td class="px-2 py-2 text-center">User</td>
+          <td>
+            <div class="dropdown">
+              <button class="dropbtn">:</button>
+              <div class="dropdown-content">
+                <a href="#">Details User</a>
+                <a href="#">Modify User</a>
+                <a href="#">Delete User</a>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+
+    
+
+</body>
+</html>
