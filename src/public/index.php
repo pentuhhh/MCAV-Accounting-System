@@ -23,7 +23,7 @@ $pagePath = BASE_PATH . "/pages$urlPath";
         include_once $pagePath . ".php";
     } else {
         // TODO: Improve 404 error page.
-        http_response_code(404);
+        // http_response_code(404); 
         echo "404 Not Found";
     }
     ?>
