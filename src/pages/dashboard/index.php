@@ -1,49 +1,56 @@
-<div class="flex w- full">
+<div class="GLOBAL_PAGE">
     <?php
     include_once __DIR__ . "/../../components/sidebar.php";
     ?>
 
-    <div class="flex flex-col">
-        <!-- Header -->
-        <div class="flex items-center p-8">
-            <i class="material-symbols-rounded text-[42px]">
-                dashboard
-            </i>
-            <span class="pl-2 text-2xl font-bold">Dashboard</span>
-        </div>
-        <!-- End of Header -->
-    
-        <!-- Analytics -->
-        <div class="items-center px-8 pb-4">
-            <h1 class="text-2xl font-bold">Analytics</h1>
-        </div>
-    
-        <div class="flex px-8">
-            <!-- Monthly Sales -->
-            <div class="column-1">
-                <h3>Monthly Sales</h3>
+    <div class="GLOBAL_PAGE_CONTAINER">
+        <div class="GLOBAL_HEADER">
+            <div class="GLOBAL_HEADER_TITLE">
+                <i class="material-symbols-rounded text-[42px]">
+                    dashboard
+                </i>
+                <span>Dashboard</span>
             </div>
-            <!-- Total Orders -->
-            <div class="column-2">
-                <h3>Total Orders</h3>
-            </div>
-            <!-- Total Sales -->
-            <div class="column-3">
-                <h3>Total Sales</h3>
-            </div>
-        </div>
-        <!-- End of Analytics -->
-
-        <!-- Recent Orders -->
-        <div class="items-center px-8">
-            <h1 class="text-2xl font-bold">Recent Orders</h1>
             <div>
+                <div class="GLOBAL_HEADER_COLUMN">
+                    <p class="text-sm text-[#7F7F7F]">Hey, <strong class="text-black">Radon</strong></p>
+                    <p class="text-sm text-[#7F7F7F]">Admin</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="DASHBOARD_ANALYTICS">
+            <div class="DASHBOARD_ANALYTICS_HEADER">
+                <h1 class="DASHBOARD_ANALYTICS_HEADER_TITLE">Analytics</h1> 
+                <a href="">
+                    <i class="material-symbols-rounded text-[#7F7F7F] text-3xl">
+                        arrow_back
+                    </i>
+                </a>
+            </div>
+            <div class="DASHBOARD_ANALYTICS_ROW">
+                <div class="DASHBOARD_ANALYTICS_CARD GLOBAL_BOX_DIV">
+                    <h1 class="DASHBOARD_ANALYTICS_CARD_TITLE">Monthly Sales</h1>
+                    <h1 class="DASHBOARD_ANALYTICS_CARD_VALUE">Php 65,521</h1>
+                </div>
+                <div class="DASHBOARD_ANALYTICS_CARD GLOBAL_BOX_DIV">
+                    <h1 class="DASHBOARD_ANALYTICS_CARD_TITLE">Total Orders</h1>
+                    <h1 class="DASHBOARD_ANALYTICS_CARD_VALUE">1,002</h1>
+                </div>
+                <div class="DASHBOARD_ANALYTICS_CARD GLOBAL_BOX_DIV">
+                    <h1 class="DASHBOARD_ANALYTICS_CARD_TITLE">Total Sales</h1>
+                    <h1 class="DASHBOARD_ANALYTICS_CARD_VALUE">Php 105,156</h1>
+                </div>
+            </div>
+        </div>
+    
+        <div class="DASHBOARD_RECENT">
+            <h1 class="DASHBOARD_RECENT_HEADER">Recent Orders</h1>
+            <div class="GLOBAL_TABLE">
                 <table>
                     <tr>
-                        <th>Order ID</th>
+                        <th>#</th>
                         <th>Customer</th>
-                        <th>Product Description</th>
-                        <th>Qty</th>
                         <th>Order Date</th>
                         <th>Amount</th>
                         <th>Date Released</th>
@@ -54,9 +61,8 @@
                         <td></td>
                     </tr>
                 </table>
-                <a href="">Show all</a>
             </div>
+            <a href="">Show all</a>
         </div>
-        <!-- End of Recent Orders -->
     </div>
 </div>
