@@ -1,0 +1,32 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Serve: PHP",
+			"type": "process",
+			"isBackground": true,
+			"icon": {
+				"id": "server",
+				"color": "terminal.ansiCyan"
+			},
+			"options": {
+				"cwd": "${workspaceFolder}/src/public"
+			},
+			"problemMatcher": [],
+			"command": "php",
+			"args": ["-S", "localhost:8000", "-f", "index.php"]
+		},
+		{
+			"label": "Dev: Tailwind",
+			"type": "shell",
+			"isBackground": true,
+			"icon": {
+				"id": "server",
+				"color": "terminal.ansiGreen"
+			},
+			"problemMatcher": [],
+			"command": "npm",
+			"args": ["run", "tailwind"]
+		}
+	]
+}
