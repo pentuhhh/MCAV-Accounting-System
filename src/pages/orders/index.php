@@ -1,36 +1,38 @@
-<div class="flex">
+<div class="GLOBAL_PAGE">
     <?php
     include_once __DIR__ . "/../../components/sidebar.php";
     ?>
 
-    <div class="flex flex-col">
-        <!-- Header -->
-        <div class="flex items-center p-8">
-            <i class="material-symbols-rounded text-[42px]">
-                receipt_long
-            </i>
-            <span class="pl-2 text-2xl font-bold">Orders</span>
+    <div class="GLOBAL_PAGE_CONTAINER">
+        <div class="GLOBAL_HEADER">
+            <div class="GLOBAL_HEADER_TITLE">
+                <i class="material-symbols-rounded text-[42px]">
+                    receipt_long
+                </i>
+                <span>Order Management</span>
+                <button class="GLOBAL_BUTTON_BLUE ml-5">Add order</button>
+            </div>
+            <div>
+                <div class="GLOBAL_HEADER_COLUMN">
+                    <p>Hey, <strong>Radon</strong></p>
+                    <p>Admin</p>
+                </div>
+            </div>
         </div>
-        <!-- End of Header -->
 
-        <!-- Search Bar -->
-        <div class="flex px-8 pb-3">
-            <div class="column-1">
+        <div class="ORDERS_SEARCH">
+            <div class="columns-1">
                 <a href="">
-                    <i class="material-symbols-rounded text-[18px]">
+                    <i class="material-symbols-rounded">
                         search
                     </i>
                 </a>
-                <input type="text" placeholder="Search" class="p-2 w-1/2 border border-gray-300 rounded-lg">
+                <input type="text" placeholder="Search">
             </div>
-            <a href="/input/customer">Add order</a>
         </div>
-        <!-- End of Search Bar -->
 
-        <!-- Orders Table -->
-        <div class="items-center px-8">
-            <h1 class="text-2xl font-bold">Recent Orders</h1>
-            <div>
+        <div class="ORDERS_CONTENT">
+            <div class="GLOBAL_TABLE">
                 <table>
                     <tr>
                         <th>#</th>
@@ -43,14 +45,12 @@
                         <th>Date Released</th>
                         <th>Status</th>
                         <th>Remarks</th>
-                        <th><!-- edit column --></th>
                     </tr>
                     <tr>
-                        <!-- Insert php here -->
+                        <td></td>
                     </tr>
                 </table>
             </div>
         </div>
-        <!-- End of Orders Table -->
     </div>
 </div>
