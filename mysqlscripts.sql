@@ -77,7 +77,7 @@ create table products(
 );
 
 create table orders(
-    OrderID int auto_increment,
+    OrderID int auto_increment,c
     EmployeeID int NOT NULL,
     CustomerID int NOT NULL,
     ProductID int NOT NULL,
@@ -235,6 +235,23 @@ create table Payment_Receipt_Archive(
     primary key(ReceiptArchiveID),
     foreign key(ReceiptID) references Payment_Receipts(ReceiptID)
 );
+
+/*Order Management table query*/
+
+SELECT      
+    o.OrderID,      
+    CONCAT(c.CustomerFname, ' ', c.CustomerLname) AS CustomerName,      
+    p.ProductDescription,      
+    P.ProductQuantity,      
+    o.OrderStartDate,      
+    o.OrderDeadline,      
+    o.OrderStatusCode AS Status  
+FROM      
+    orders o     
+INNER JOIN customers c ON o.customerid = c.customerID      
+INNER JOIN products p ON p.productid = o.productid 
+where o.isremoved = 0 order by o.orderId asc;
+
 
 INSERT INTO customers (CustomerFname, CustomerLname, CustomerEmail, CustomerPhone) VALUES
 ('John', 'Doe', 'john.doe@example.com', '1234567890'),
