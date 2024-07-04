@@ -109,7 +109,7 @@
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${item.ReceiptID}</td>
-                <td>${item.OrderID}</td>
+                <td><a href="/MCAV/skeleton/OrderManagement/orderdetails.php?orderID=${item.OrderID}">${item.OrderID}</a></td>
                 <td>${item.PaymentMethod}</td>
                 <td>${item.ReceiptAmountPaid}</td>
                 <td>${item.PaymentDate}</td>
