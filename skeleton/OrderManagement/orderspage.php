@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Orders</title>
+    <title>Orders Page</title>
     <style>
         table {
             width: 100%;
@@ -29,18 +29,16 @@
 </head>
 <body>
 
-<h2>Orders</h2>
+<h2>Orders Page</h2>
 
 <table id="ordersTable">
     <thead>
         <tr>
+            <th>Receipt ID</th>
             <th>Order ID</th>
-            <th>Customer Name</th>
-            <th>Product Description</th>
-            <th>Product Quantity</th>
-            <th>Order Start Date</th>
-            <th>Order Deadline</th>
-            <th>Status</th>
+            <th>Payment Method</th>
+            <th>Amount Paid</th>
+            <th>Payment Date</th>
         </tr>
     </thead>
     <tbody>
@@ -49,11 +47,9 @@
 </table>
 
 <div class="pagination">
-    <button onclick="firstPage()">First</button>
     <button onclick="prevPage()">Previous</button>
     <span id="pageButtons"></span>
     <button onclick="nextPage()">Next</button>
-    <button onclick="lastPage()">Last</button>
 </div>
 
 <script>
@@ -72,20 +68,11 @@
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $sql = "SELECT
-                    o.OrderID,
-                    CONCAT(c.CustomerFname, ' ', c.CustomerLname) AS CustomerName,
-                    p.ProductDescription,
-                    p.ProductQuantity,
-                    o.OrderStartDate,
-                    o.OrderDeadline,
-                    o.OrderStatusCode AS Status
-                FROM
-                    orders o
-                INNER JOIN customers c ON o.customerid = c.customerID
-                INNER JOIN products p ON p.productid = o.productid
-                WHERE o.isremoved = 0
-                ORDER BY o.orderId ASC";
+        $sql = "SELECT r.ReceiptID, p.OrderID, p.PaymentMethod, r.ReceiptAmountPaid, r.PaymentDate
+                FROM Payment_Receipts r
+                INNER JOIN payment_plans p ON r.PlanID = p.planID
+                WHERE r.isremoved = 0
+                ORDER BY r.ReceiptID ASC";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
@@ -100,8 +87,7 @@
     ];
 
     let currentPage = 1;
-    const rowsPerPage = 2;
-    const maxPageButtons = 5;
+    const rowsPerPage = 5;
 
     function displayTable(page) {
         const tableBody = document.getElementById('ordersTable').getElementsByTagName('tbody')[0];
@@ -112,15 +98,18 @@
 
         paginatedItems.forEach(item => {
             const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${item.OrderID}</td>
-                <td>${item.CustomerName}</td>
-                <td>${item.ProductDescription}</td>
-                <td>${item.ProductQuantity}</td>
-                <td>${item.OrderStartDate}</td>
-                <td>${item.OrderDeadline}</td>
-                <td>${item.Status}</td>
-            `;
+            Object.keys(item).forEach(key => {
+                const cell = document.createElement('td');
+                if (key === 'OrderID') {
+                    const link = document.createElement('a');
+                    link.href = `OrderDetails.php?orderID=${item[key]}`;
+                    link.textContent = item[key];
+                    cell.appendChild(link);
+                } else {
+                    cell.textContent = item[key];
+                }
+                row.appendChild(cell);
+            });
             tableBody.appendChild(row);
         });
         updatePageButtons();
@@ -140,16 +129,6 @@
         }
     }
 
-    function firstPage() {
-        currentPage = 1;
-        displayTable(currentPage);
-    }
-
-    function lastPage() {
-        currentPage = Math.ceil(data.length / rowsPerPage);
-        displayTable(currentPage);
-    }
-
     function goToPage(page) {
         currentPage = page;
         displayTable(currentPage);
@@ -159,14 +138,7 @@
         const pageButtonsContainer = document.getElementById('pageButtons');
         pageButtonsContainer.innerHTML = '';
         const totalPages = Math.ceil(data.length / rowsPerPage);
-        let startPage = Math.max(currentPage - Math.floor(maxPageButtons / 2), 1);
-        let endPage = Math.min(startPage + maxPageButtons - 1, totalPages);
-
-        if (endPage - startPage < maxPageButtons - 1) {
-            startPage = Math.max(endPage - maxPageButtons + 1, 1);
-        }
-
-        for (let i = startPage; i <= endPage; i++) {
+        for (let i = 1; i <= totalPages; i++) {
             const button = document.createElement('button');
             button.textContent = i;
             button.onclick = (function(i) {
