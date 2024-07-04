@@ -62,25 +62,10 @@ create table employee_credentials(
     foreign key(EmployeeID) references employee_info(EmployeeID)
 );
 
-create table products(
-    productID int auto_increment,
-    productDescription varchar(255),
-    productFilePath varchar(255),
-    productDimenstions varchar(32),
-    ProductQuantity int,
-    ProductStatusCode int,
-
-    IsRemoved boolean,
-
-    primary key(ProductID)
-
-);
-
 create table orders(
-    OrderID int auto_increment,c
+    OrderID int auto_increment,
     EmployeeID int NOT NULL,
     CustomerID int NOT NULL,
-    ProductID int NOT NULL,
     OrderStartDate Date NOT NULL,
     OrderDeadline Date,
     OrderStatusCode int NOT NULL,
@@ -89,9 +74,27 @@ create table orders(
 
     primary key(OrderID),
     foreign key(EmployeeID) references employee_info(EmployeeID),
-    foreign key(customerID) references customers(CustomerID),
-    foreign key(ProductID) references products(productID)
+    foreign key(customerID) references customers(CustomerID)
 );
+
+create table products(
+    productID int auto_increment,
+    OrderID int NOT NULL,
+    productDescription varchar(255),
+    productFilePath varchar(255),
+    productDimenstions varchar(32),
+    ProductQuantity int,
+    ProductStatusCode int,
+    ProductPrice float default 0,
+
+    IsRemoved boolean,
+
+    primary key(ProductID),
+    foreign key(OrderID) references Orders(orderID)
+
+);
+
+
 
 create table payment_plans(
     PlanID int auto_increment,
@@ -100,7 +103,9 @@ create table payment_plans(
     PaymentStatus int default 0 NOT NULL,
     PaymentMethod varchar(32),
     PaymentProcessor varchar(32),
+    TotalAmount float default 0,
     AmountPaid float default 0,
+    Balance float default 0,
 
     IsRemoved boolean,
 
@@ -114,7 +119,7 @@ create table Payment_Receipts(
     ReceiptImagePath varchar(255),
     HasPicture bool default 0,
     ReceiptAmountPaid float default 0,
-
+    PaymentDate date,
 
     PaymentProcessor varchar(32),
     PaymentProcessorReferenceNumber float default 0,
@@ -179,7 +184,6 @@ create table order_archive (
     OrderID int NOT NULL,
     EmployeeID int NOT NULL,
     CustomerID int NOT NULL,
-    ProductID int NOT NULL,
     OrderStartDate Date NOT NULL,
     OrderDeadline Date,
     OrderStatusCode int NOT NULL,
@@ -194,11 +198,13 @@ create table product_archive(
     productArchiveID int auto_increment,
 
     productID int NOT NULL,
+    OrderID int NOT NULL,
     productDescription varchar(255),
     productFilePath varchar(255),
     productDimenstions varchar(32),
     ProductQuantity int,
     ProductStatusCode int,
+    ProductPrice float default 0,
 
     primary key(productArchiveID),
     foreign key(ProductID) references products(ProductID)
@@ -213,7 +219,9 @@ create table payment_plans_Archive (
     PaymentStatus int default 0 NOT NULL,
     PaymentMethod varchar(32),
     PaymentProcessor varchar(32),
+    TotalAmount float default 0,
     AmountPaid float default 0,
+    Balance float default 0,
 
     primary key(planArchiveID),
     foreign key(planID) references payment_plans(planID)
@@ -227,6 +235,7 @@ create table Payment_Receipt_Archive(
     ReceiptImagePath varchar(255),
     HasPicture bool default 0,
     ReceiptAmountPaid float default 0,
+    PaymentDate date,
 
 
     PaymentProcessor varchar(32),
@@ -236,21 +245,7 @@ create table Payment_Receipt_Archive(
     foreign key(ReceiptID) references Payment_Receipts(ReceiptID)
 );
 
-/*Order Management table query*/
 
-SELECT      
-    o.OrderID,      
-    CONCAT(c.CustomerFname, ' ', c.CustomerLname) AS CustomerName,      
-    p.ProductDescription,      
-    P.ProductQuantity,      
-    o.OrderStartDate,      
-    o.OrderDeadline,      
-    o.OrderStatusCode AS Status  
-FROM      
-    orders o     
-INNER JOIN customers c ON o.customerid = c.customerID      
-INNER JOIN products p ON p.productid = o.productid 
-where o.isremoved = 0 order by o.orderId asc;
 
 
 INSERT INTO customers (CustomerFname, CustomerLname, CustomerEmail, CustomerPhone) VALUES
