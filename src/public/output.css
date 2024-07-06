@@ -448,6 +448,77 @@ video {
   display: none;
 }
 
+table{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+tr{
+  --tw-border-opacity: 1;
+  border-color: rgb(229 231 235 / var(--tw-border-opacity));
+}
+
+tr:not(:first-child){
+  border-bottom-width: 1px;
+}
+
+tr:hover:not(:first-child){
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+
+th{
+  cursor: pointer;
+  border-radius: 0.375rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  transition-duration: 300ms;
+}
+
+th:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+
+/* !! Hyperlink Elements (may cause error) */
+
+a{
+  cursor: pointer;
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
+input{
+  width: 100%;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity));
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+select{
+  width: 100%;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity));
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
 *, ::before, ::after{
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -669,6 +740,12 @@ video {
   padding-bottom: 1.5rem;
 }
 
+.GLOBAL_HEADER img{
+  margin-left: 1.5rem;
+  width: 45px;
+  border-radius: 9999px;
+}
+
 .GLOBAL_HEADER_TITLE{
   display: flex;
   flex-direction: row;
@@ -680,6 +757,12 @@ video {
   font-size: 1.5rem;
   line-height: 2rem;
   font-weight: 700;
+}
+
+.GLOBAL_HEADER_USER{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .GLOBAL_HEADER_COLUMN{
@@ -754,6 +837,12 @@ video {
   font-weight: 600;
   --tw-text-opacity: 1;
   color: rgb(112 112 112 / var(--tw-text-opacity));
+  transition-duration: 300ms;
+}
+
+.GLOBAL_BUTTON_GRAY:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(221 221 221 / var(--tw-bg-opacity));
 }
 
 .GLOBAL_BUTTON_BLUE{
@@ -766,61 +855,21 @@ video {
   font-weight: 600;
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+  transition-duration: 200ms;
 }
 
-table{
-  width: 100%;
-  border-collapse: collapse;
-}
-
-th{
-  font-weight: 600;
-}
-
-tr{
-  --tw-border-opacity: 1;
-  border-color: rgb(229 231 235 / var(--tw-border-opacity));
-}
-
-tr:not(:first-child){
-  border-bottom-width: 1px;
-}
-
-tr:hover:not(:first-child){
+.GLOBAL_BUTTON_BLUE:hover{
   --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+  background-color: rgb(0 123 181 / var(--tw-bg-opacity));
 }
 
-th{
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  font-weight: 600;
-}
-
-/* !! Hyperlink Elements (may cause error) */
-
-a{
-  display: flex;
-  align-items: center;
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-}
-
-/* -- End of Global Classes -- */
-
-/* -- Dashboard Classes -- */
-
-.DASHBOARD_ANALYTICS{
+.GLOBAL_ANALYTICS{
   padding-left: 2.5rem;
   padding-right: 2.5rem;
   padding-bottom: 2.5rem;
 }
 
-.DASHBOARD_ANALYTICS_HEADER{
+.GLOBAL_SUBHEADER{
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -828,25 +877,25 @@ a{
   padding-bottom: 1.25rem;
 }
 
-.DASHBOARD_ANALYTICS_HEADER_TITLE{
+.GLOBAL_SUBHEADER_TITLE{
   font-size: 1.5rem;
   line-height: 2rem;
   font-weight: 700;
 }
 
-.DASHBOARD_ANALYTICS_ROW{
+.GLOBAL_ANALYTICS_ROW{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   gap: 2.5rem;
 }
 
-.ORDERS_SEARCH .DASHBOARD_ANALYTICS_CARD{
+.ORDERS_SEARCH .GLOBAL_ANALYTICS_CARD{
   display: flex;
   flex-direction: row;
 }
 
-.DASHBOARD_ANALYTICS_CARD{
+.GLOBAL_ANALYTICS_CARD{
   display: flex;
   height: 8rem;
   width: 33.333333%;
@@ -858,24 +907,28 @@ a{
   padding: 1.75rem;
 }
 
-.DASHBOARD_ANALYTICS_CARD_TITLE{
+.GLOBAL_ANALYTICS_CARD_TITLE{
   font-size: 0.875rem;
   line-height: 1.25rem;
   font-weight: 600;
 }
 
-.DASHBOARD_ANALYTICS_CARD_VALUE{
+.GLOBAL_ANALYTICS_CARD_VALUE{
   font-size: 1.5rem;
   line-height: 2rem;
   font-weight: 700;
 }
+
+/* -- End of Global Classes -- */
+
+/* -- Dashboard Classes -- */
 
 .DASHBOARD_RECENT{
   padding-left: 2.5rem;
   padding-right: 2.5rem;
 }
 
-.DASHBOARD_RECENT a{
+.DASHBOARD_RECENT_SHOW_A{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -927,6 +980,11 @@ a{
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.ORDER_SEARCH_BUTTON{
+  display: flex;
+  align-items: center;
+}
+
 .ORDERS_SEARCH i{
   font-size: 20px;
   --tw-text-opacity: 1;
@@ -962,8 +1020,8 @@ a{
   margin-bottom: 2rem;
 }
 
-.ml-5{
-  margin-left: 1.25rem;
+.ml-7{
+  margin-left: 1.75rem;
 }
 
 .mr-4{
@@ -982,20 +1040,8 @@ a{
   height: 100dvh;
 }
 
-.max-h-\[100px\]{
-  max-height: 100px;
-}
-
-.w-1\/2{
-  width: 50%;
-}
-
-.w-1\/3{
-  width: 33.333333%;
-}
-
-.w-dvw{
-  width: 100dvw;
+.w-\[400px\]{
+  width: 400px;
 }
 
 .w-full{
@@ -1037,6 +1083,10 @@ a{
   align-items: center;
 }
 
+.justify-start{
+  justify-content: flex-start;
+}
+
 .justify-end{
   justify-content: flex-end;
 }
@@ -1049,25 +1099,16 @@ a{
   justify-content: space-between;
 }
 
+.gap-10{
+  gap: 2.5rem;
+}
+
 .gap-2{
   gap: 0.5rem;
 }
 
 .gap-4{
   gap: 1rem;
-}
-
-.rounded-lg{
-  border-radius: 0.5rem;
-}
-
-.border{
-  border-width: 1px;
-}
-
-.border-gray-300{
-  --tw-border-opacity: 1;
-  border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
 
 .bg-\[\#0C0E0D\]{
@@ -1078,14 +1119,6 @@ a{
 .bg-\[\#F6F6F9\]{
   --tw-bg-opacity: 1;
   background-color: rgb(246 246 249 / var(--tw-bg-opacity));
-}
-
-.p-2{
-  padding: 0.5rem;
-}
-
-.p-8{
-  padding: 2rem;
 }
 
 .px-10{
@@ -1109,14 +1142,6 @@ a{
 
 .pb-5{
   padding-bottom: 1.25rem;
-}
-
-.pl-2{
-  padding-left: 0.5rem;
-}
-
-.text-right{
-  text-align: right;
 }
 
 .font-poppins{
