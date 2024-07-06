@@ -4,6 +4,54 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+	table {
+		@apply w-full
+		border-collapse;
+	}
+
+	tr {
+		@apply [&:not(:first-child)]:border-b
+		border-gray-200
+		[&:not(:first-child)]:hover:bg-gray-100;
+	}
+
+	th {
+		@apply px-5
+		py-3
+		text-sm
+		font-semibold
+		bg-white hover:bg-gray-100
+		rounded-md
+		cursor-pointer
+		duration-300;
+	}
+
+	/* !! Hyperlink Elements (may cause error) */
+	a {
+		@apply cursor-pointer
+		text-black;
+	}
+
+	input {
+		@apply px-5
+		py-1
+		w-full
+		border
+		border-gray-300
+		rounded-lg;
+	}
+
+	select {
+		@apply px-5
+		py-1
+		w-full
+		border
+		border-gray-300
+		rounded-lg;
+	}
+}
+
 @layer components {
 	/* -- Sidebar Component -- */
 	.COMPONENT_SIDEBAR_BUTTON {
@@ -60,6 +108,10 @@
 	}
 	/* -- End of Sidebar Component -- */
 
+
+
+
+
 	/* -- Global Classes -- */
 	.GLOBAL_PAGE {
 		@apply flex
@@ -81,6 +133,12 @@
 		pb-6;
 	}
 
+	.GLOBAL_HEADER img {
+		@apply rounded-full
+		w-[45px]
+		ml-6;
+	}
+
 	.GLOBAL_HEADER_TITLE {
 		@apply flex
 		flex-row
@@ -91,6 +149,12 @@
 		@apply pl-2
 		text-2xl
 		font-bold;
+	}
+
+	.GLOBAL_HEADER_USER {
+		@apply flex
+		flex-row
+		items-center;
 	}
 
 	.GLOBAL_HEADER_COLUMN {
@@ -137,11 +201,15 @@
         font-semibold
         rounded-3xl
 		bg-[#F0F0F0] 
+		hover:bg-[#dddddd]
+		duration-300
 		text-[#707070];
 	}
 
 	.GLOBAL_BUTTON_BLUE {
-		@apply bg-[#00A1E2] 
+		@apply bg-[#00A1E2]
+		hover:bg-[#007BB5]
+		duration-200
 		text-white
 		p-1
         px-5
@@ -149,43 +217,12 @@
         rounded-3xl;
 	}
 
-	table {
-		@apply w-full
-		border-collapse;
-	}
-
-	th {
-		@apply font-semibold;
-	}
-
-	tr {
-		@apply [&:not(:first-child)]:border-b
-		border-gray-200
-		[&:not(:first-child)]:hover:bg-gray-100;
-	}
-
-	th {
-		@apply px-5
-		py-3
-		text-sm
-		font-semibold;
-	}
-
-	/* !! Hyperlink Elements (may cause error) */
-	a {
-		@apply flex
-		items-center
-		outline-none
-	}
-	/* -- End of Global Classes -- */
-
-	/* -- Dashboard Classes -- */
-	.DASHBOARD_ANALYTICS {
+	.GLOBAL_ANALYTICS {
 		@apply px-10
 		pb-10;
 	}
 
-	.DASHBOARD_ANALYTICS_HEADER {
+	.GLOBAL_SUBHEADER {
 		@apply flex
 		flex-row
 		pb-5
@@ -193,19 +230,19 @@
 		justify-between;
 	}
 
-	.DASHBOARD_ANALYTICS_HEADER_TITLE {
+	.GLOBAL_SUBHEADER_TITLE {
 		@apply text-2xl
 		font-bold;
 	}
 
-	.DASHBOARD_ANALYTICS_ROW {
+	.GLOBAL_ANALYTICS_ROW {
 		@apply flex
 		flex-row
 		gap-10
 		justify-between;
 	}
 
-	.DASHBOARD_ANALYTICS_CARD {
+	.GLOBAL_ANALYTICS_CARD {
 		@apply flex
 		flex-col
 		flex-grow
@@ -216,25 +253,32 @@
 		w-1/3;
 	}
 
-	.DASHBOARD_ANALYTICS_CARD_TITLE {
+	.GLOBAL_ANALYTICS_CARD_TITLE {
 		@apply text-sm
 		font-semibold;
 	}
 
-	.DASHBOARD_ANALYTICS_CARD_VALUE {
+	.GLOBAL_ANALYTICS_CARD_VALUE {
 		@apply text-2xl
 		font-bold;
 	}
 
-	.DASHBOARD_ANALYTICS_CARD_ICON {
+	.GLOBAL_ANALYTICS_CARD_ICON {
 		@apply text-4xl;
 	}
 
+	/* -- End of Global Classes -- */
+
+
+
+
+
+	/* -- Dashboard Classes -- */
 	.DASHBOARD_RECENT {
 		@apply px-10;
 	}
 
-	.DASHBOARD_RECENT a {
+	.DASHBOARD_RECENT_SHOW_A {
 		@apply flex
 		outline-none
 		items-center
@@ -254,6 +298,10 @@
 	}
 	/* -- End of Dashboard Classes -- */
 
+
+
+
+	
 	/* -- Orders Classes -- */
 	.ORDERS_SEARCH {
 		@apply mx-10
@@ -269,10 +317,14 @@
 		rounded-3xl;
 	}
 
+	.ORDER_SEARCH_BUTTON {
+		@apply flex
+		items-center;
+	}
+
 	.ORDERS_SEARCH i {
 		@apply text-[#7F7F7F]
 		text-[20px];
-		
 	}
 
 	.ORDERS_SEARCH input {
