@@ -11,17 +11,18 @@
                 </i>
                 <span>Users</span>
             </div>
-            <div>
+            <div class="GLOBAL_HEADER_USER">
                 <div class="GLOBAL_HEADER_COLUMN">
-                    <p>Hey, <strong>Radon</strong></p>
-                    <p>Admin</p>
+                    <p class="text-sm text-[#7F7F7F]">Hey, <strong class="text-black">Radon</strong></p>
+                    <p class="text-sm text-[#7F7F7F]">Admin</p>
                 </div>
+                <img src="/assets/JumanjiRon.png" alt="">
             </div>
         </div>
     
         <div class="ORDERS_SEARCH">
             <div class="columns-1">
-                <a href="">
+                <a href="" class="ORDER_SEARCH_BUTTON">
                     <i class="material-symbols-rounded">
                         search
                     </i>
