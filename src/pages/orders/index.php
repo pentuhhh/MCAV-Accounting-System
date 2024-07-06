@@ -10,19 +10,20 @@
                     receipt_long
                 </i>
                 <span>Order Management</span>
-                <button class="GLOBAL_BUTTON_BLUE ml-5">Add order</button>
+                <a href="/orders/add-new/customers" class="GLOBAL_BUTTON_BLUE ml-7">Add order</a>
             </div>
-            <div>
+            <div class="GLOBAL_HEADER_USER">
                 <div class="GLOBAL_HEADER_COLUMN">
                     <p>Hey, <strong>Radon</strong></p>
                     <p>Admin</p>
                 </div>
+                <img src="/assets/JumanjiRon.png" alt="">
             </div>
         </div>
 
         <div class="ORDERS_SEARCH">
             <div class="columns-1">
-                <a href="">
+                <a href="" class="ORDER_SEARCH_BUTTON">
                     <i class="material-symbols-rounded">
                         search
                     </i>
@@ -38,13 +39,12 @@
                         <th>#</th>
                         <th>Order ID</th>
                         <th>Customer</th>
-                        <th>Product Description</th>
-                        <th>Qty</th>
                         <th>Order Date</th>
                         <th>Amount</th>
                         <th>Date Released</th>
                         <th>Status</th>
                         <th>Remarks</th>
+                        <th><!-- EDIT DROPDOWN --></th>
                     </tr>
                     <tr>
                         <td></td>
