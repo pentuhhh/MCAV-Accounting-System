@@ -941,16 +941,6 @@ select{
   outline-offset: 2px;
 }
 
-.DASHBOARD_RECENT_HEADER{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding-bottom: 1.25rem;
-  font-size: 1.5rem;
-  line-height: 2rem;
-  font-weight: 700;
-}
-
 /* -- End of Dashboard Classes -- */
 
 /* -- Orders Classes -- */
