@@ -14,6 +14,7 @@ $pagePath = BASE_PATH . "/pages$urlPath";
     <title>MCAV</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:wght,FILL@300,1" />
     <link type="text/css" rel="stylesheet" href="/output.css"/>
+    <script src="/../utilities/script.js" defer></script>
 </head>
 <body class="font-poppins">
     <?php
