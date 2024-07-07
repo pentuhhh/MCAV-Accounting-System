@@ -94,6 +94,8 @@
         ?>
     ];
 
+/*  Pagination Logic */
+    
     let currentPage = 1;
     const rowsPerPage = 5;
     const maxPageButtons = 5;
@@ -109,11 +111,12 @@
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${item.ReceiptID}</td>
-                <td><a href="/MCAV/skeleton/OrderManagement/orderdetails.php?orderID=${item.OrderID}">${item.OrderID}</a></td>
+                <td><a href="/skeleton/OrderManagement/orderdetails.php?orderID=${item.OrderID}">${item.OrderID}</a></td>
                 <td>${item.PaymentMethod}</td>
                 <td>${item.ReceiptAmountPaid}</td>
                 <td>${item.PaymentDate}</td>
-            `;
+            `; 
+            // for the HREF, you might want to add /MCAV before the /skeleton if it doesnt work
             tableBody.appendChild(row);
         });
         updatePageButtons();
