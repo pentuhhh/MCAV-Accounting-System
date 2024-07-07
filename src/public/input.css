@@ -4,7 +4,56 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+	table {
+		@apply w-full
+		border-collapse;
+	}
+
+	tr {
+		@apply [&:not(:first-child)]:border-b
+		border-gray-200
+		[&:not(:first-child)]:hover:bg-gray-100;
+	}
+
+	th {
+		@apply px-5
+		py-3
+		text-sm
+		font-semibold
+		bg-white hover:bg-gray-100
+		rounded-md
+		cursor-pointer
+		duration-300;
+	}
+
+	/* !! Hyperlink Elements (may cause error) */
+	a {
+		@apply cursor-pointer
+		text-black;
+	}
+
+	input {
+		@apply px-5
+		py-1
+		w-full
+		border
+		border-gray-300
+		rounded-lg;
+	}
+
+	select {
+		@apply px-5
+		py-1
+		w-full
+		border
+		border-gray-300
+		rounded-lg;
+	}
+}
+
 @layer components {
+	/* -- Sidebar Component -- */
 	.COMPONENT_SIDEBAR_BUTTON {
 		@apply relative
         px-9
@@ -23,7 +72,10 @@
 	}
 
 	.COMPONENT_SIDEBAR_BUTTON a {
-		@apply flex items-center gap-2 outline-none;
+		@apply flex
+		items-center
+		gap-2
+		outline-none;
 	}
 
 	.COMPONENT_SIDEBAR_BUTTON:has(a:focus) {
@@ -45,10 +97,251 @@
 	}
 
 	.COMPONENT_SIDEBAR_LOGOUT_BUTTON a {
-		@apply flex items-center gap-2 outline-none;
+		@apply flex
+		items-center
+		gap-2
+		outline-none;
 	}
 
 	.COMPONENT_SIDEBAR_LOGOUT_BUTTON:has(a:focus) {
 		@apply bg-[#111317];
 	}
+	/* -- End of Sidebar Component -- */
+
+
+
+
+
+	/* -- Global Classes -- */
+	.GLOBAL_PAGE {
+		@apply flex
+		bg-[#F6F6F9];
+	}
+
+	.GLOBAL_PAGE_CONTAINER {
+		@apply flex
+		flex-col
+		w-full;
+	}
+
+	.GLOBAL_HEADER {
+		@apply flex
+		items-center
+		justify-between
+		px-10
+		pt-8
+		pb-6;
+	}
+
+	.GLOBAL_HEADER img {
+		@apply rounded-full
+		w-[45px]
+		ml-6;
+	}
+
+	.GLOBAL_HEADER_TITLE {
+		@apply flex
+		flex-row
+		items-center;
+	}
+
+	.GLOBAL_HEADER_TITLE span {
+		@apply pl-2
+		text-2xl
+		font-bold;
+	}
+
+	.GLOBAL_HEADER_USER {
+		@apply flex
+		flex-row
+		items-center;
+	}
+
+	.GLOBAL_HEADER_COLUMN {
+		@apply flex
+		flex-col
+		text-right;
+	}
+
+	.GLOBAL_HEADER_COLUMN p {
+		@apply text-sm
+		text-[#7F7F7F];
+	}
+
+	.GLOBAL_HEADER_COLUMN strong {
+		@apply text-black;
+	}
+
+	.GLOBAL_BOX_DIV {
+		@apply rounded-3xl
+        shadow-[0_2rem_3rem_rgba(132,139,200,0.18)] hover:shadow-none
+		duration-300
+		bg-white;
+	}
+
+	.GLOBAL_BOX_DIV label {
+		@apply font-semibold
+        text-lg;
+	}
+
+	.GLOBAL_TABLE {
+		@apply w-full
+		overflow-x-auto
+		shadow-[0_2rem_3rem_rgba(132,139,200,0.18)] hover:shadow-none
+		duration-300
+		bg-white
+		rounded-3xl
+		px-5
+		py-5;
+	}
+
+	.GLOBAL_BUTTON_GRAY {
+		@apply p-1
+        px-5
+        font-semibold
+        rounded-3xl
+		bg-[#F0F0F0] 
+		hover:bg-[#dddddd]
+		duration-300
+		text-[#707070];
+	}
+
+	.GLOBAL_BUTTON_BLUE {
+		@apply bg-[#00A1E2]
+		hover:bg-[#007BB5]
+		duration-200
+		text-white
+		p-1
+        px-5
+        font-semibold
+        rounded-3xl;
+	}
+
+	.GLOBAL_ANALYTICS {
+		@apply px-10
+		pb-10;
+	}
+
+	.GLOBAL_SUBHEADER {
+		@apply flex
+		flex-row
+		pb-5
+		items-center
+		justify-between;
+	}
+
+	.GLOBAL_SUBHEADER_TITLE {
+		@apply text-2xl
+		font-bold;
+	}
+
+	.GLOBAL_ANALYTICS_ROW {
+		@apply flex
+		flex-row
+		gap-10
+		justify-between;
+	}
+
+	.GLOBAL_ANALYTICS_CARD {
+		@apply flex
+		flex-col
+		flex-grow
+		justify-center
+		columns-1
+		p-7
+		h-32
+		w-1/3;
+	}
+
+	.GLOBAL_ANALYTICS_CARD_TITLE {
+		@apply text-sm
+		font-semibold;
+	}
+
+	.GLOBAL_ANALYTICS_CARD_VALUE {
+		@apply text-2xl
+		font-bold;
+	}
+
+	.GLOBAL_ANALYTICS_CARD_ICON {
+		@apply text-4xl;
+	}
+
+	/* -- End of Global Classes -- */
+
+
+
+
+
+	/* -- Dashboard Classes -- */
+	.DASHBOARD_RECENT {
+		@apply px-10;
+	}
+
+	.DASHBOARD_RECENT_SHOW_A {
+		@apply flex
+		outline-none
+		items-center
+		justify-center
+		p-5
+		text-sm
+		text-[#02A0E0];
+	}
+
+	.DASHBOARD_RECENT_HEADER {
+		@apply flex
+		flex-row
+		pb-5
+		items-center
+		text-2xl
+		font-bold;
+	}
+	/* -- End of Dashboard Classes -- */
+
+
+
+
+	
+	/* -- Orders Classes -- */
+	.ORDERS_SEARCH {
+		@apply mx-10
+		mb-3
+		px-10
+		flex
+		flex-row
+		items-center
+		justify-between
+		shadow-[0_2rem_3rem_rgba(132,139,200,0.18)] hover:shadow-none
+		duration-300
+		bg-white
+		rounded-3xl;
+	}
+
+	.ORDER_SEARCH_BUTTON {
+		@apply flex
+		items-center;
+	}
+
+	.ORDERS_SEARCH i {
+		@apply text-[#7F7F7F]
+		text-[20px];
+	}
+
+	.ORDERS_SEARCH input {
+		@apply p-2
+		pl-4
+		w-full
+		border-none
+		outline-none;
+	}
+
+	.ORDERS_SEARCH .columns-1 {
+		@apply flex
+		flex-row;
+	}
+
+	.ORDERS_CONTENT {
+		@apply px-10;
+	}
+	/* End of Orders Classes */
 }

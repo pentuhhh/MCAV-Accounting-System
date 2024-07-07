@@ -17,7 +17,7 @@ $activePath = [
 
         <ul>
             <!-- Dashboard -->
-            <li data-active=<?= var_export($activePath["dashboard"]); ?> class="COMPONENT_SIDEBAR_BUTTON before:bg-[#049FDD]">
+            <li data-active=<?= var_export($activePath["dashboard"]); ?> class="COMPONENT_SIDEBAR_BUTTON data-[active='true']:before:bg-[#049FDD]">
                 <a href="/dashboard">
                     <i class="material-symbols-rounded text-white text-3xl">
                         dashboard
@@ -26,7 +26,7 @@ $activePath = [
                 </a>
             </li>
             <!-- Users -->
-            <li data-active=<?= var_export($activePath["users"]); ?> class="COMPONENT_SIDEBAR_BUTTON">
+            <li data-active=<?= var_export($activePath["users"]); ?> class="COMPONENT_SIDEBAR_BUTTON data-[active='true']:before:bg-[#DC186E]">
                 <a href="/users">
                     <i class="material-symbols-rounded text-white text-3xl">
                         person
@@ -35,7 +35,7 @@ $activePath = [
                 </a>
             </li>
             <!-- Orders -->
-            <li data-active=<?= var_export($activePath["orders"]); ?> class="COMPONENT_SIDEBAR_BUTTON">
+            <li data-active=<?= var_export($activePath["orders"]); ?> class="COMPONENT_SIDEBAR_BUTTON data-[active='true']:before:bg-[#FEED03]">
                 <a href="/orders">
                     <i class="material-symbols-rounded text-white text-3xl">
                         receipt_long
@@ -44,7 +44,7 @@ $activePath = [
                 </a>
             </li>
             <!-- Receipts -->
-            <li data-active=<?= var_export($activePath["receipts"]); ?> class="COMPONENT_SIDEBAR_BUTTON">
+            <li data-active=<?= var_export($activePath["receipts"]); ?> class="COMPONENT_SIDEBAR_BUTTON data-[active='true']:before:bg-[#049FDD]">
                 <a href="/receipts">
                     <i class="material-symbols-rounded text-white text-3xl">
                         payments
@@ -53,7 +53,7 @@ $activePath = [
                 </a>
             </li>
             <!-- New Login -->
-            <li data-active=<?= var_export($activePath["new-login"]); ?> class="COMPONENT_SIDEBAR_BUTTON">
+            <li data-active=<?= var_export($activePath["new-login"]); ?> class="COMPONENT_SIDEBAR_BUTTON data-[active='true']:before:bg-[#DC186E]">
                 <a href="/new-login">
                     <i class="material-symbols-rounded text-white text-3xl">
                         add
@@ -64,6 +64,7 @@ $activePath = [
         </ul>
     </div>
 
+    <!-- Log Out -->
     <div class="COMPONENT_SIDEBAR_LOGOUT_BUTTON mb-6">
         <a href="/log-out">
             <i class="material-symbols-rounded text-white text-3xl">
@@ -73,3 +74,4 @@ $activePath = [
         </a>
     </div>
 </div>
+<!-- End of Sidebar -->

@@ -7,9 +7,9 @@
         <div class="GLOBAL_HEADER">
             <div class="GLOBAL_HEADER_TITLE">
                 <i class="material-symbols-rounded text-[42px]">
-                    dashboard
+                    payments
                 </i>
-                <span>Dashboard</span>
+                <span>Receipts</span>
             </div>
             <div class="GLOBAL_HEADER_USER">
                 <div class="GLOBAL_HEADER_COLUMN">
@@ -19,46 +19,52 @@
                 <img src="/assets/JumanjiRon.png" alt="">
             </div>
         </div>
-
+    
         <div class="GLOBAL_ANALYTICS">
-            <div class="GLOBAL_SUBHEADER">
-                <h1 class="GLOBAL_SUBHEADER_TITLE">Analytics</h1> 
-            </div>
             <div class="GLOBAL_ANALYTICS_ROW">
                 <div class="GLOBAL_ANALYTICS_CARD GLOBAL_BOX_DIV">
-                    <h1 class="GLOBAL_ANALYTICS_CARD_TITLE">Monthly Sales</h1>
-                    <h1 class="GLOBAL_ANALYTICS_CARD_VALUE">Php 65,521</h1>
+                    <h1 class="GLOBAL_ANALYTICS_CARD_TITLE">Last Month's Income</h1></h1>
+                    <h1 class="GLOBAL_ANALYTICS_CARD_VALUE">Php 65,521+</h1>
                 </div>
                 <div class="GLOBAL_ANALYTICS_CARD GLOBAL_BOX_DIV">
-                    <h1 class="GLOBAL_ANALYTICS_CARD_TITLE">Total Orders</h1>
-                    <h1 class="GLOBAL_ANALYTICS_CARD_VALUE">1,002</h1>
+                    <h1 class="GLOBAL_ANALYTICS_CARD_TITLE">This Month's Income</h1>
+                    <h1 class="GLOBAL_ANALYTICS_CARD_VALUE">Php 48,200+</h1>
                 </div>
                 <div class="GLOBAL_ANALYTICS_CARD GLOBAL_BOX_DIV">
                     <h1 class="GLOBAL_ANALYTICS_CARD_TITLE">Total Sales</h1>
-                    <h1 class="GLOBAL_ANALYTICS_CARD_VALUE">Php 105,156</h1>
+                    <h1 class="GLOBAL_ANALYTICS_CARD_VALUE">Php 48,156+</h1>
                 </div>
             </div>
         </div>
+
+        <div class="ORDERS_SEARCH">
+            <div class="columns-1">
+                <a href="" class="ORDER_SEARCH_BUTTON">
+                    <i class="material-symbols-rounded">
+                        search
+                    </i>
+                </a>
+                <input type="text" placeholder="Search">
+            </div>
+        </div>
     
-        <div class="DASHBOARD_RECENT">
-            <h1 class="GLOBAL_SUBHEADER_TITLE">Recent Orders</h1>
+        <div class="ORDERS_CONTENT">
             <div class="GLOBAL_TABLE">
                 <table>
                     <tr>
-                        <th><a href="">#</a></th>
-                        <th><a href="">Customer</a></th>
-                        <th><a href="">Order Date</a></th>
-                        <th><a href="">Amount</a></th>
-                        <th><a href="">Date Released</a></th>
-                        <th><a href="">Status</a></th>
-                        <th><a href="">Remarks</a></th>
+                        <th>#</th>
+                        <th>Receipt</th>
+                        <th>Order</th>
+                        <th>Payment Method</th>
+                        <th>Amount Paid</th>
+                        <th>Payment Date</th>
+                        <th></th>
                     </tr>
                     <tr>
                         <td></td>
                     </tr>
                 </table>
             </div>
-            <a href="" class="DASHBOARD_RECENT_SHOW_A">Show all</a>
         </div>
     </div>
 </div>
