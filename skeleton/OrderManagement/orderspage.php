@@ -104,7 +104,7 @@
                 const cell = document.createElement('td');
                 if (key === 'OrderID') {
                     const link = document.createElement('a');
-                    link.href = `OrderDetails.php?orderID=${item[key]}`;
+                    link.href = `orderdetails.php?orderID=${item[key]}`;
                     link.textContent = item[key];
                     cell.appendChild(link);
                 } else {
