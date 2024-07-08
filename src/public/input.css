@@ -54,6 +54,18 @@
 
 @layer components {
 	/* -- Sidebar Component -- */
+	.COMPONENT_SIDEBAR_CONTAINER {
+		@apply flex
+		flex-col
+		justify-between
+		w-full
+		max-w-[300px]
+		h-dvh
+		bg-[#0C0E0D]
+		sticky
+		top-0;
+	}
+	
 	.COMPONENT_SIDEBAR_BUTTON {
 		@apply relative
         px-9
@@ -107,6 +119,96 @@
 		@apply bg-[#111317];
 	}
 	/* -- End of Sidebar Component -- */
+
+
+
+
+
+	/* Sticker Tab Component */
+	.COMPONENT_STICKER_CONTAINER {
+		@apply flex
+		flex-col
+		gap-5
+		pt-2;
+	}
+
+	.COMPONENT_STICKER_CONTAINER_ROW {
+		@apply columns-5
+		gap-5
+		w-full
+		justify-between;
+	}
+
+	.COMPONENT_STICKER_CONTAINER_ROW_OPTION {
+		@apply flex
+		flex-col
+		w-full
+		h-28
+		justify-between
+		p-3
+		cursor-pointer
+		text-black;
+	}
+
+	.COMPONENT_STICKER_CONTAINER_ROW_OPTION_PRICE {
+		@apply flex
+		w-full
+		justify-end
+		text-xs;
+	}
+
+	.COMPONENT_STICKER_CONTAINER_ROW_OPTION_TITLE {
+		@apply text-center
+		text-lg
+		font-semibold;
+	}
+
+	.COMPONENT_STICKER_CONTAINER_ROW_OPTION_TYPE {
+		@apply text-center
+		text-xs
+		font-semibold;
+	}
+
+	.COMPONENT_STICKER_CONTAINER_ROW:nth-of-type(3) {
+		@apply columns-3
+		gap-5
+		flex
+		flex-row
+		justify-center;
+	}
+
+	.COMPONENT_STICKER_CONTAINER_ROW_OPTION_CENTER {
+		@apply flex
+		flex-col
+		max-w-40
+		w-full
+		h-24
+		justify-start
+		cursor-pointer
+		p-3;
+	}
+
+	.COMPONENT_STICKER_CONTAINER_ROW_OPTION_NONE {
+		@apply flex
+		flex-col
+		max-w-40
+		w-full
+		h-24
+		text-sm
+		font-semibold
+		justify-center
+		cursor-pointer
+		items-center;
+	}
+
+	.COMPONENT_STICKER_CONTAINER_ROW_OPTION_CENTER div:nth-of-type(2) {
+		@apply text-center
+		text-sm
+		font-semibold
+		text-black
+		pt-3;
+	}
+	/* End of Sticker Tab Component */
 
 
 
@@ -181,7 +283,7 @@
 
 	.GLOBAL_BOX_DIV label {
 		@apply font-semibold
-        text-lg;
+		text-lg;
 	}
 
 	.GLOBAL_TABLE {
@@ -192,7 +294,7 @@
 		bg-white
 		rounded-3xl
 		px-5
-		py-5;
+		py-3;
 	}
 
 	.GLOBAL_BUTTON_GRAY {
@@ -200,26 +302,48 @@
         px-5
         font-semibold
         rounded-3xl
-		bg-[#F0F0F0] 
+		bg-[#ebebeb] 
 		hover:bg-[#dddddd]
 		duration-300
-		text-[#707070];
+		text-[#707070]
+		text-sm;
 	}
 
 	.GLOBAL_BUTTON_BLUE {
 		@apply bg-[#00A1E2]
 		hover:bg-[#007BB5]
+		duration-300
+		text-white
+		p-1
+        px-5
+        font-semibold
+        rounded-3xl
+		text-sm;
+	}
+
+	.GLOBAL_BUTTON_RED {
+		@apply bg-[#DF166E]
+		hover:bg-[#B90D5A]
 		duration-200
 		text-white
 		p-1
         px-5
         font-semibold
-        rounded-3xl;
+        rounded-3xl
+		text-sm;
 	}
 
-	.GLOBAL_ANALYTICS {
-		@apply px-10
-		pb-10;
+	.GLOBAL_BUTTON_GREEN {
+		@apply bg-[#6FD273]
+		hover:bg-[#4E9A4F]
+		duration-200
+		text-white
+		p-1
+        px-5
+		ml-2
+        font-semibold
+        rounded-3xl
+		text-sm;
 	}
 
 	.GLOBAL_SUBHEADER {
@@ -230,9 +354,19 @@
 		justify-between;
 	}
 
+	.GLOBAL_SUBHEADER h1 {
+		@apply text-2xl
+		font-bold;
+	}
+
 	.GLOBAL_SUBHEADER_TITLE {
 		@apply text-2xl
 		font-bold;
+	}
+
+	.GLOBAL_ANALYTICS {
+		@apply px-10
+		pb-7;
 	}
 
 	.GLOBAL_ANALYTICS_ROW {
@@ -244,18 +378,23 @@
 
 	.GLOBAL_ANALYTICS_CARD {
 		@apply flex
-		flex-col
+		flex-row
 		flex-grow
-		justify-center
-		columns-1
+		justify-between
+		items-center
+		columns-2
 		p-7
 		h-32
 		w-1/3;
 	}
 
+	.GLOBAL_ANALYTICS_CARD_TEXT {
+		@apply pr-10;
+	}
+
 	.GLOBAL_ANALYTICS_CARD_TITLE {
 		@apply text-sm
-		font-semibold;
+		font-semibold
 	}
 
 	.GLOBAL_ANALYTICS_CARD_VALUE {
@@ -263,10 +402,9 @@
 		font-bold;
 	}
 
-	.GLOBAL_ANALYTICS_CARD_ICON {
-		@apply text-4xl;
+	.GLOBAL_ANALYTICS_CARD_ICON i {
+		@apply text-[84px];
 	}
-
 	/* -- End of Global Classes -- */
 
 
@@ -344,4 +482,265 @@
 		@apply px-10;
 	}
 	/* End of Orders Classes */
+
+
+
+
+
+	/* New-login Classes */
+	.NEWLOGIN_INFO {
+		@apply px-10
+		flex-grow;
+	}
+
+	.NEWLOGIN_INFO_BUTTONS {
+		@apply flex
+		flex-row
+		justify-end;
+	}
+
+	.NEWLOGIN_INPUT {
+		@apply flex
+		flex-row
+		gap-4
+		justify-between
+		px-12
+		py-8
+		mb-6
+		columns-3;
+	}
+
+	.NEWLOGIN_INPUT_COLUMN {
+		@apply flex
+		flex-col
+		w-full;
+	}
+
+	.NEWLOGIN_INPUT_COLUMN_CONTAINER {
+		@apply flex
+		flex-col
+		pb-3;
+	}
+
+	/* End of New-login Classes */
+
+
+
+
+
+	/* Customers Input Classes */
+	.CUSTOMERS_INFO {
+		@apply px-10
+		flex-grow;
+	}
+
+	.CUSTOMERS_INPUT {
+		@apply flex
+		flex-row
+		gap-10
+		justify-start
+		px-12
+		py-8
+		mb-6;
+	}
+
+	.CUSTOMERS_INPUT_COLUMN {
+		@apply flex
+		flex-col
+		max-w-[400px]
+		w-full;
+	}
+
+	.CUSTOMERS_INPUT_COLUMN_CONTAINER {
+		@apply flex
+		flex-col
+		pb-3;
+	}
+	/* End of Customers Input Classes */
+
+
+
+
+
+	/* Products Input Classes */
+	.PRODUCTS_INPUT {
+		@apply px-10
+		pb-10
+		flex-grow;
+	}
+
+	.PRODUCTS_INPUT_NOTE {
+		@apply flex
+		flex-row
+		justify-start
+		py-4;
+	}
+
+	.PRODUCTS_INPUT_NOTE p {
+		@apply text-xs
+		font-light
+		text-[#DC186E];
+	}
+
+	.PRODUCTS_BUTTON_ACTIVE {
+		@apply bg-[#00A1E2]
+		hover:bg-[#007BB5]
+		duration-200
+		text-white
+		p-1
+        px-5
+        font-semibold
+        rounded-3xl;
+	}
+
+	.PRODUCTS_BUTTON_INACTIVE {
+		@apply p-1
+		px-5
+		font-semibold
+		bg-[#ffffff] 
+		hover:bg-gray-100
+		duration-300
+		text-black;
+	}
+
+	.PRODUCTS_INPUT_ITEMS {
+		@apply flex
+		flex-row
+		columns-2
+		gap-5
+		justify-between;
+	}
+
+	.PRODUCTS_INPUT_ITEMS_TABLE {
+		@apply w-full
+		px-5
+		py-3;
+	}
+
+	.PRODUCTS_INPUT_ITEMS_TOTAL {
+		@apply flex
+		flex-col
+		p-5
+		max-w-[300px]
+		w-full
+		min-h-40
+		max-h-44
+		justify-between;
+	}
+
+	.PRODUCTS_INPUT_ITEMS_TOTAL_TITLE {
+		@apply flex
+		flex-col
+		justify-items-start;
+	}
+
+	.PRODUCTS_INPUT_ITEMS_TOTAL_TITLE h1:nth-of-type(1) {
+		@apply text-xl
+		font-bold
+		text-black;
+	}
+
+	.PRODUCTS_INPUT_ITEMS_TOTAL_TITLE h1:nth-of-type(2) {
+		@apply font-medium
+		text-[#059212];
+	}
+
+	.PRODUCTS_INPUT_ITEMS_TOTAL_BUTTONS {
+		@apply flex
+		flex-row
+		justify-end;
+	}
+	/* End of Products Input Classes */
+
+	/* Order Details Classes */
+	.DETAILS_CONTAINER {
+		@apply px-10
+		pb-10
+		flex-grow;
+	}
+
+	.DETAILS_ORDERID h1 {
+		@apply text-2xl
+		text-[#00A1E2]
+		font-semibold;
+	}
+
+	.DETAILS_CONTAINER_ROW {
+		@apply flex
+		flex-row
+		gap-5
+		justify-between;
+	}
+
+	.DETAILS_CONTAINER_ROW_LEFT {
+		@apply flex
+		flex-col
+		w-1/2;
+	}
+
+	.DETAILS_CONTAINER_ROW_RIGHT {
+		@apply flex
+		flex-col
+		w-1/2;
+	}
+
+	.DETAILS_CONTAINER_ROW_COLUMN {
+		@apply flex
+		flex-col
+		w-full;
+	}
+
+	.DETAILS_CONTAINER_ROW_TABLE {
+		@apply w-full
+		my-5
+		px-7
+		pt-3
+		pb-5;
+	}
+
+	.DETAILS_CONTAINER_ROW_TABLE tr {
+		@apply border-b
+		border-gray-200
+		hover:bg-gray-100;
+	}
+
+	.DETAILS_CONTAINER_ROW_TABLE td {
+		@apply px-4
+		py-2
+		font-semibold
+		text-sm;
+	}
+
+	.DETAILS_CONTAINER_ROW_BUTTON {
+		@apply flex
+		flex-row
+		justify-end
+		pt-5;
+	}
+
+	.DETAILS_CONTAINER_SUBHEADER {
+		@apply flex
+		flex-row
+		pt-3
+		items-center
+		font-bold
+		text-2xl;
+	}
+
+	/* End of Order Details Classes */
+
+
+
+	/* Temporary Experimetal CSS */
+	.tab {
+		@apply p-1 px-5 font-semibold rounded-3xl;
+		background-color: theme('colors.tab.inactive'); /* Inactive tab color */
+		color: theme('colors.tab.inactive'); /* Inactive tab color */
+		transition: background-color 200ms, color 200ms; /* Add transition effect */
+	}
+
+	.tab.tab-active {
+		background-color: theme('colors.tab.active'); /* Active tab color */
+		color: theme('colors.tab.active'); /* Active tab color */
+	}
 }

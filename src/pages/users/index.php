@@ -13,8 +13,8 @@
             </div>
             <div class="GLOBAL_HEADER_USER">
                 <div class="GLOBAL_HEADER_COLUMN">
-                    <p class="text-sm text-[#7F7F7F]">Hey, <strong class="text-black">Radon</strong></p>
-                    <p class="text-sm text-[#7F7F7F]">Admin</p>
+                    <p>Hey, <strong class="text-black">Radon</strong></p>
+                    <p>Admin</p>
                 </div>
                 <img src="/assets/JumanjiRon.png" alt="">
             </div>

@@ -13,8 +13,8 @@
             </div>
             <div class="GLOBAL_HEADER_USER">
                 <div class="GLOBAL_HEADER_COLUMN">
-                    <p class="text-sm text-[#7F7F7F]">Hey, <strong class="text-black">Radon</strong></p>
-                    <p class="text-sm text-[#7F7F7F]">Admin</p>
+                    <p>Hey, <strong class="text-black">Radon</strong></p>
+                    <p>Admin</p>
                 </div>
                 <img src="/assets/JumanjiRon.png" alt="">
             </div>
@@ -23,16 +23,31 @@
         <div class="GLOBAL_ANALYTICS">
             <div class="GLOBAL_ANALYTICS_ROW">
                 <div class="GLOBAL_ANALYTICS_CARD GLOBAL_BOX_DIV">
-                    <h1 class="GLOBAL_ANALYTICS_CARD_TITLE">Last Month's Income</h1></h1>
-                    <h1 class="GLOBAL_ANALYTICS_CARD_VALUE">Php 65,521+</h1>
+                    <div class="GLOBAL_ANALYTICS_CARD_TEXT">
+                        <h1 class="GLOBAL_ANALYTICS_CARD_TITLE">Last Month's Income</h1></h1>
+                        <h1 class="GLOBAL_ANALYTICS_CARD_VALUE">Php 65,521+</h1>
+                    </div>
+                    <div class="GLOBAL-ANALYTICS_CARD_ICON">
+
+                    </div>
                 </div>
                 <div class="GLOBAL_ANALYTICS_CARD GLOBAL_BOX_DIV">
-                    <h1 class="GLOBAL_ANALYTICS_CARD_TITLE">This Month's Income</h1>
-                    <h1 class="GLOBAL_ANALYTICS_CARD_VALUE">Php 48,200+</h1>
+                    <div class="GLOBAL_ANALYTICS_CARD_TEXT">
+                        <h1 class="GLOBAL_ANALYTICS_CARD_TITLE">This Month's Income</h1>
+                        <h1 class="GLOBAL_ANALYTICS_CARD_VALUE">Php 48,200+</h1>
+                    </div>
+                    <div class="GLOBAL-ANALYTICS_CARD_ICON">
+
+                    </div>
                 </div>
                 <div class="GLOBAL_ANALYTICS_CARD GLOBAL_BOX_DIV">
-                    <h1 class="GLOBAL_ANALYTICS_CARD_TITLE">Total Sales</h1>
-                    <h1 class="GLOBAL_ANALYTICS_CARD_VALUE">Php 48,156+</h1>
+                    <div class="GLOBAL_ANALYTICS_CARD_TEXT">
+                        <h1 class="GLOBAL_ANALYTICS_CARD_TITLE">Total Sales</h1>
+                        <h1 class="GLOBAL_ANALYTICS_CARD_VALUE">Php 48,156+</h1>
+                    </div>
+                    <div class="GLOBAL-ANALYTICS_CARD_ICON">
+
+                    </div>
                 </div>
             </div>
         </div>
