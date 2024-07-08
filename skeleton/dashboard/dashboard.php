@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 $servername = "localhost";
 $username = "MCAVDB";
 $password = "password1010";
@@ -15,6 +19,9 @@ if ($conn->connect_error) {
 // Function to fetch single value
 function fetchSingleValue($conn, $query) {
     $result = $conn->query($query);
+    if ($result === false) {
+        die("Query failed: " . $conn->error);
+    }
     $row = $result->fetch_assoc();
     return array_values($row)[0];
 }
@@ -56,6 +63,9 @@ $recentOrdersQuery = "
     ORDER BY o.OrderDeadline ASC LIMIT 5
 ";
 $recentOrders = $conn->query($recentOrdersQuery);
+if ($recentOrders === false) {
+    die("Query failed: " . $conn->error);
+}
 
 // HTML Output
 ?>
