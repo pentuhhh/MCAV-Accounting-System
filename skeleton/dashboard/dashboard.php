@@ -58,7 +58,7 @@ $recentOrdersQuery = "
         o.OrderDeadline AS 'Deadline',
         o.OrderStatusCode AS 'Status'
     FROM orders o
-    INNER JOIN payment_Plans pp ON pp.orderID = o.orderID
+    INNER JOIN payment_plans pp ON pp.orderID = o.orderID
     INNER JOIN customers c ON o.customerID = c.customerID
     ORDER BY o.OrderDeadline ASC LIMIT 5
 ";
