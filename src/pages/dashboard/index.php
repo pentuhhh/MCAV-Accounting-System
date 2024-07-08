@@ -44,16 +44,16 @@
             <h1 class="GLOBAL_SUBHEADER_TITLE">Recent Orders</h1>
             <div class="GLOBAL_TABLE">
                 <table>
-                    <tr>
-                        <th><a href="">#</a></th>
-                        <th><a href="">Customer</a></th>
-                        <th><a href="">Order Date</a></th>
-                        <th><a href="">Amount</a></th>
-                        <th><a href="">Date Released</a></th>
-                        <th><a href="">Status</a></th>
-                        <th><a href="">Remarks</a></th>
-                    </tr>
-                    <tr>
+                        <?php while ($row = $recentOrders->fetch_assoc()) { ?>
+                            <tr>
+                                <td><?php echo $row['Order ID']; ?></td>
+                                <td><?php echo $row['Customer Name']; ?></td>
+                                <td><?php echo $row['Order Date']; ?></td>
+                                <td>$<?php echo number_format($row['Amount'], 2); ?></td>
+                                <td><?php echo $row['Deadline']; ?></td>
+                                <td><?php echo $row['Status']; ?></td>
+                            </tr>
+                        <?php } ?>
                         <td></td>
                     </tr>
                 </table>
@@ -62,3 +62,7 @@
         </div>
     </div>
 </div>
+
+<?php
+$conn->close();
+?>
