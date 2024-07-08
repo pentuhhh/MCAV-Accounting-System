@@ -3,9 +3,9 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-$servername = "localhost";
-$username = "MCAVDB";
-$password = "password1010";
+$servername = "172.20.20.66";
+$username = "constable";
+$password = "batoncuff1013";
 $dbname = "MCAV";
 
 // Create connection
