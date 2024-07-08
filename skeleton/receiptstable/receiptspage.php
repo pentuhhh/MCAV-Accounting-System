@@ -57,9 +57,9 @@
 <script>
     const data = [
         <?php
-        $servername = "localhost";
-        $username = "MCAVDB";
-        $password = "password1010";
+        $servername = "172.20.20.66";
+        $username = "constable";
+        $password = "batoncuff1013";
         $dbname = "MCAV";
 
         // Create connection
