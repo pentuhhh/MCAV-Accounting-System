@@ -10,20 +10,28 @@
 </head>
 <body class="bg-gray-100 font-sans">
 
-  <div class="p-6">
-    <h2 class="text-4xl font-semibold mb-6 mx-60 my-16">Users</h2>
+  <div class="container mx-auto pt-12 pb-2">
+    
+    <h2 class="text-4xl font-semibold "><span class="material-symbols-outlined text-4xl">person</span>Users</h2>
+
   </div>
 
-  <div class="container mx-auto p-3 m-2 bg-white rounded-lg shadow-md"> 
-    <div class="flex items-center m-2">
-    <input type="text" id="search-input" placeholder="Search" class="width =  border rounded mr-2">
-    <button onclick="handleSearchButtonClick()" class="px-4 py-2 bg-blue-500 text-white rounded cursor-pointer">Search</button>
+    <!--------------------------------------Search----------------------------------------->
+
+  <div class="container mx-auto p-3 m-2 bg-white rounded-3xl shadow-md"> 
+    <div class="flex m-2">
+
+    <input type="text" id="SearchInput" placeholder="Search" class="box-border w-full p-1 rounded-lg mr-2"> 
+      <button id="SortButton" class="px-2 py-2 bg-blue-500 text-white rounded cursor-pointer">Sort</button>
+
     </div>
   </div>
 
+  <!--------------------------------------Table----------------------------------------->
+
   <div class="container mx-auto p-6 bg-white rounded-lg shadow-md"> 
 
-    <table id="user-table" class="w-full mb-6">
+    <table id="UserTable" class="w-full mb-6">
 
 
       <thead>
@@ -42,8 +50,8 @@
 
       <tbody>
         <tr>
-          <td class="px-2 py-2 text-center">1</td>
-          <td class="px-2 py-2 "><img src="img1.png" alt="User Image" class="user-image items-center"></td>
+          <td class="text-blue py-2 text-center">1</td>
+          <td class="px-2 py-2 flex justify-center"><img src="img1.png" alt="User Image" class="user-image"></td>
           <td class="px-2 py-2 text-center">Radon</td>
           <td class="px-2 py-2 text-center">Ron</td>
           <td class="px-2 py-2 text-center">radonronus@gmail.com</td>
@@ -53,44 +61,22 @@
             <div class="dropdown">
               <button class="dropbtn">:</button>
               <div class="dropdown-content">
-                <a href="#">Details User</a>
-                <a href="#">Modify User</a>
-                <a href="#">Delete User</a>
+                <a href="Users Details/Users Details.html">Details User</a>
+                <a href="Users Modify/Users Modify.html">Modify User</a>
+                <a href="Delete">Delete User</a>
               </div>
             </div>
           </td>
         </tr>
       </tbody>
 
-      
-      <tbody>
-        <tr>
-          <td class="px-2 py-2 text-center">2</td>
-          <td class="px-2 py-2 "><img src="img2.png" alt="User Image" class="user-image items-center"></td>
-          <td class="px-2 py-2 text-center">Doe</td>
-          <td class="px-2 py-2 text-center">John</td>
-          <td class="px-2 py-2 text-center">johnnytoes@gmail.com</td>
-          <td class="px-2 py-2 text-center">092387422343</td>
-          <td class="px-2 py-2 text-center">User</td>
-          <td>
-            <div class="dropdown">
-              <button class="dropbtn">:</button>
-              <div class="dropdown-content">
-                <a href="#">Details User</a>
-                <a href="#">Modify User</a>
-                <a href="#">Delete User</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-      </tbody>
 
       
       <tbody>
         <tr>
-          <td class="px-2 py-2 text-center">3</td>
-          <td class="px-2 py-2 "><img src="img3.jpg" alt="User Image" class="user-image items-center"></td>
-          <td class="px-2 py-2 text-center">Escarma</td>
+          <td class="text-blue px-2 py-2 text-center">2</td>
+          <td class="px-2 py-2  flex justify-center"><img src="img3.jpg" alt="User Image" class="user-image "></td>
+          <td class="px-2 py-2 text-center">Ecarma</td>
           <td class="px-2 py-2 text-center">Destin</td>
           <td class="px-2 py-2 text-center">theblackestblack@gmail.com</td>
           <td class="px-2 py-2 text-center">09238741232</td>
@@ -99,18 +85,87 @@
             <div class="dropdown">
               <button class="dropbtn">:</button>
               <div class="dropdown-content">
-                <a href="#">Details User</a>
-                <a href="#">Modify User</a>
-                <a href="#">Delete User</a>
+                <a href="Users Details/Users Details.html">Details User</a>
+                <a href="Users Modify/Users Modify.html">Modify User</a>
+                <a href="Delete">Delete User</a>
+
               </div>
             </div>
           </td>
         </tr>
       </tbody>
 
-    </table>
 
-    
+      <tbody>
+        <tr>
+          <td class="text-blue px-2 py-2 text-center">3</td>
+          <td class="px-2 py-2  flex justify-center"><img src="img5.png" alt="User Image" class="user-image "></td>
+          <td class="px-2 py-2 text-center">Gou</td>
+          <td class="px-2 py-2 text-center">Anderson</td>
+          <td class="px-2 py-2 text-center">gogosonichedgehog@gmail.com</td>
+          <td class="px-2 py-2 text-center">0935723689234</td>
+          <td class="px-2 py-2 text-center">User</td>
+          <td>
+            <div class="dropdown">
+              <button class="dropbtn">:</button>
+              <div class="dropdown-content">
+                <a href="Users Details/Users Details.html">Details User</a>
+                <a href="Users Modify/Users Modify.html">Modify User</a>
+                <a href="Delete">Delete User</a>
+  
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
 
+
+      
+  <tbody>
+    <tr>
+      <td class="text-blue px-2 py-2 text-center">4</td>
+      <td class="px-2 py-2  flex justify-center"><img src="img6.png" alt="User Image" class="user-image "></td>
+      <td class="px-2 py-2 text-center">Emanuelo</td>
+      <td class="px-2 py-2 text-center">Manuel</td>
+      <td class="px-2 py-2 text-center">thestrongestfilipino@gmail.com</td>
+      <td class="px-2 py-2 text-center">092387414353</td>
+      <td class="px-2 py-2 text-center">User</td>
+      <td>
+        <div class="dropdown">
+          <button class="dropbtn">:</button>
+          <div class="dropdown-content">
+            <a href="Users Details/Users Details.html">Details User</a>
+            <a href="Users Modify/Users Modify.html">Modify User</a>
+            <a href="Delete">Delete User</a>
+
+          </div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+
+    </table> 
+
+
+      <!--------------------------------------Navigation Buttons----------------------------------------->
+
+
+    <div class="text-center">
+      <button id="prevPage" class="px-4 py-2 bg-blue-500 text-white rounded cursor-pointer">&lt;</button>
+      <span id="pageNumber"class="px-4 py-3 bg-blue-500 text-white rounded cursor-pointer">1</span>
+      <button id="nextPage" class="px-4 py-2 bg-blue-500 text-white rounded cursor-pointer">&gt;</button>
+  </div>
+  
 </body>
 </html>
+
+
+<!-- 
+      
+      
+      
+      
+    
+  
+  
+-->
