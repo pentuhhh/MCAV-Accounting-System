@@ -34,11 +34,12 @@
 <table id="ordersTable">
     <thead>
         <tr>
-            <th>Receipt ID</th>
             <th>Order ID</th>
-            <th>Payment Method</th>
-            <th>Amount Paid</th>
-            <th>Payment Date</th>
+            <th>Customer Name</th>
+            <th>Order Date</th>
+            <th>Amount</th>
+            <th>Order Deadline</th>
+            <th>Order Status</th>
         </tr>
     </thead>
     <tbody>
@@ -55,9 +56,9 @@
 <script>
     const data = [
         <?php
-        $servername = "172.20.20.66";
-        $username = "constable";
-        $password = "batoncuff1013";
+        $servername = "localhost";
+        $username = "MCAVDB";
+        $password = "password1010";
         $dbname = "MCAV";
 
         // Create connection
@@ -68,11 +69,24 @@
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $sql = "SELECT r.ReceiptID, p.OrderID, p.PaymentMethod, r.ReceiptAmountPaid, r.PaymentDate
-                FROM Payment_Receipts r
-                INNER JOIN payment_plans p ON r.PlanID = p.planID
-                WHERE r.isremoved = 0
-                ORDER BY r.ReceiptID ASC";
+        $sql = "SELECT      
+                    o.OrderID,      
+                    CONCAT(c.CustomerFname, ' ', c.CustomerLname) AS CustomerName,           
+                    o.OrderStartDate,
+                    p.totalamount,      
+                    o.OrderDeadline,      
+                    CASE
+                        WHEN o.OrderStatusCode = 1 THEN 'Pending'
+                        WHEN o.OrderStatusCode = 2 THEN 'Started'
+                        WHEN o.OrderStatusCode = 3 THEN 'Completed'
+                        ELSE 'Unknown'
+                    END AS Status
+                FROM      
+                    orders o     
+                INNER JOIN customers c ON o.customerid = c.customerID
+                INNER JOIN payment_plans p ON p.orderID = o.orderID      
+                WHERE o.isremoved = 0 
+                ORDER BY o.orderId ASC;";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
