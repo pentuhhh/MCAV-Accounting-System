@@ -8,14 +8,16 @@ $pagePath = BASE_PATH . "/pages$urlPath";
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MCAV</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:wght,FILL@300,1" />
-    <link type="text/css" rel="stylesheet" href="/output.css"/>
+    <link type="text/css" rel="stylesheet" href="/output.css" />
     <script src="/script.js" defer></script>
 </head>
+
 <body class="font-poppins">
     <?php
     if (file_exists($pagePath . "/index.php")) {
@@ -29,4 +31,5 @@ $pagePath = BASE_PATH . "/pages$urlPath";
     }
     ?>
 </body>
+
 </html>

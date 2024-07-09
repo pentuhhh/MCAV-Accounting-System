@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
-$username = "MCAVDB";
-$password = "password1010";
+$username = "constable";
+$password = "batoncuff1013";
 $dbname = "MCAV";
 
 // Create connection
@@ -46,10 +46,9 @@ $recentOrdersQuery = <<<SQL
                             o.orderStartDate AS OrderDate, pp.TotalAmount AS Amount, o.OrderDeadline AS Deadline,
                             o.OrderStatusCode AS Status
                         FROM orders o
-                        INNER JOIN payment_Plans pp ON pp.orderID = o.orderID
+                        INNER JOIN payment_plans pp ON pp.orderID = o.orderID
                         INNER JOIN customers c ON o.customerID = c.customerID
                         ORDER BY o.OrderDeadline ASC
                         LIMIT 5
                         SQL;
 $recentOrdersResult = $conn->query($recentOrdersQuery);
-?>

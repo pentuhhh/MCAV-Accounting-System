@@ -33,7 +33,6 @@ const contents = document.querySelectorAll(".content");
 
 tabs.forEach((tab) => {
 	tab.addEventListener("click", () => {
-
 		tabs.forEach((t) => t.classList.remove("tab-active"));
 
 		tab.classList.add("tab-active");
