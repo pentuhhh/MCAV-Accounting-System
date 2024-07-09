@@ -6,6 +6,7 @@
   <title>Login</title>
   <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Quantico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     
@@ -38,6 +39,15 @@
       width: 75%;
     }
 
+    
+    .material-symbols-outlined {
+      font-variation-settings:
+      'FILL' 1,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 20
+    }
+
   </style>
 </head>
 
@@ -57,16 +67,22 @@
     <!-------------------------------------USERNAME------------------------------------------->
     <form class="form-container">
       <div class="form-group UsernameSec">
-        <label for="username" class="block text-gray-300 font-bold mb-2 quantico">Username</label>
+        <div class="items-center flex flex-row mb-2">
+          <span class="material-symbols-outlined text-gray-300 -translate-y-1">person</span>
+          <label for="username" class="block text-gray-300 font-bold  quantico"> Username</label>
+        </div>
         <input type="text" id="username" name="username" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Enter your username">
       </div>
 
 
     <!-------------------------------------PASSWORD------------------------------------------->
-      <div class="form-group PasswordSec">
-        <label for="password" class="block text-gray-300 font-bold mb-2 quantico">Password</label>
+    <form class="form-container">
+      <div class="form-group UsernameSec">
+        <div class="items-center flex flex-row mb-2">
+          <span class="material-symbols-outlined text-gray-300 -translate-y-1">lock</span>
+          <label for="password" class="block text-gray-300 font-bold quantico justify-center"> Password</label>
+        </div>
         <input type="password" id="password" name="password" class="shadow appearance-none border rounded py-2 px-3 mb-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Enter your password">
-      </div>
 
 
     <!--------------------------------LOGIN BUTTON AND LOGO------------------------------------>
