@@ -13,8 +13,8 @@
             </div>
             <div class="GLOBAL_HEADER_USER">
                 <div class="GLOBAL_HEADER_COLUMN">
-                    <p class="text-sm text-[#7F7F7F]">Hey, <strong class="text-black">Radon</strong></p>
-                    <p class="text-sm text-[#7F7F7F]">Admin</p>
+                    <p>Hey, <strong class="text-black">Radon</strong></p>
+                    <p>Admin</p>
                 </div>
                 <img src="/assets/JumanjiRon.png" alt="">
             </div>
@@ -45,7 +45,21 @@
                         <th></th>
                     </tr>
                     <tr>
+                        <td>1</td>
                         <td></td>
+                        <td>Pastor</td>
+                        <td>Alnino</td>
+                        <td>23102078@usc.edu.ph</td>
+                        <td>09927822748</td>
+                        <td>User</td>
+                        <td>
+                            <select>
+                                <option value="">
+                                </option>
+                                <option value="">
+                                </option>
+                            </select>
+                        </td>
                     </tr>
                 </table>
             </div>

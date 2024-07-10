@@ -11,7 +11,7 @@ $activePath = [
 ?>
 
 <!-- Sidebar Component -->
-<div class="flex flex-col justify-between w-full max-w-[300px] h-dvh bg-[#0C0E0D]">
+<div class="COMPONENT_SIDEBAR_CONTAINER">
     <div>
         <img src="/assets/mcav.jpg" alt="mcav logo" class="w-full mb-8">
 
