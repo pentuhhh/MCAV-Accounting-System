@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Form</title>
+</head>
+<body>
+    <h2>Add New Customer / Search Existing</h2>
+    <form action="process_order.php" method="post">
+        <label for="fname">First Name:</label>
+        <input type="text" id="fname" name="fname">
+        <label for="lname">Last Name:</label>
+        <input type="text" id="lname" name="lname">
+        <button type="submit" name="action" value="search">Search Customer</button>
+    </form>
+
+    <hr>
+
+    <h2>Select Payment Plan</h2>
+    <form action="process_order.php" method="post">
+        <label for="payment_method">Payment Method:</label>
+        <select id="payment_method" name="payment_method" onchange="toggleProcessor()">
+            <option value="cash">Cash</option>
+            <option value="card">Card</option>
+        </select><br><br>
+        <label for="payment_processor">Payment Processor:</label>
+        <input type="text" id="payment_processor" name="payment_processor" disabled><br><br>
+        <label for="due_date">Due Date:</label>
+        <input type="date" id="due_date" name="due_date"><br><br>
+        <button type="submit" name="action" value="select_payment_plan">Select Payment Plan</button>
+    </form>
+
+    <hr>
+
+    <h2>Select Products</h2>
+    <form action="process_order.php" method="post">
+        <label>Products:</label><br>
+        <input type="checkbox" id="product1" name="products[]" value="product1">
+        <label for="product1">Product 1</label><br>
+        <input type="checkbox" id="product2" name="products[]" value="product2">
+        <label for="product2">Product 2</label><br>
+        <input type="checkbox" id="product3" name="products[]" value="product3">
+        <label for="product3">Product 3</label><br><br>
+        <button type="submit" name="action" value="select_products">Select Products</button>
+    </form>
+
+    <hr>
+
+    <!-- Hidden fields to store CustomerID and OrderID -->
+    <input type="hidden" id="customer_id" name="customer_id">
+    <input type="hidden" id="order_id" name="order_id">
+
+    <button type="button" onclick="createOrder()">Create Order</button>
+
+    <script>
+        function toggleProcessor() {
+            var paymentMethod = document.getElementById("payment_method").value;
+            var processorInput = document.getElementById("payment_processor");
+            if (paymentMethod === "cash") {
+                processorInput.value = "Cash payment, no processor needed";
+                processorInput.disabled = true;
+            } else {
+                processorInput.value = "";
+                processorInput.disabled = false;
+            }
+        }
+
+        function createOrder() {
+            // Submit the form with action 'create_order'
+            document.getElementById("order_id").value = ""; // Clear previous OrderID if any
+            document.getElementById("customer_id").value = ""; // Clear previous CustomerID if any
+            document.forms[0].submit(); // Submit the form to process_order.php
+        }
+    </script>
+</body>
+</html>

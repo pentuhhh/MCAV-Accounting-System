@@ -64,7 +64,7 @@ create table employee_credentials(
 
 create table orders(
     OrderID int auto_increment,
-    EmployeeID int NOT NULL,
+    EmployeeID int,
     CustomerID int NOT NULL,
     OrderStartDate Date NOT NULL,
     OrderDeadline Date,
