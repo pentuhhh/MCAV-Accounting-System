@@ -32,20 +32,20 @@ create table Permissions (
     primary key(PermissionsID)
 );
 
-    create table employee_info(
-        EmployeeID int auto_increment,
-        ProfilePicturePath varchar(255) NOT NULL,
-        EmployeeFirstname varchar(32) NOT NULL,
-        EmployeeLastname varchar(32) NOT NULL,
-        EmployeeHireDate varchar(32) NOT NULL,
-        Gender enum('M','F') NOT NULL,
-        Position varchar(32) NOT NULL,
-        WebUserLevel int NOT NULL,
-        IsRemoved boolean,
+create table employee_info(
+    EmployeeID int auto_increment,
+    ProfilePicturePath varchar(255) NOT NULL,
+    EmployeeFirstname varchar(32) NOT NULL,
+    EmployeeLastname varchar(32) NOT NULL,
+    EmployeeHireDate varchar(32) NOT NULL,
+    Gender enum('M','F') NOT NULL,
+    Position varchar(32) NOT NULL,
+    WebUserLevel int NOT NULL,
+    IsRemoved boolean,
 
-        primary key(EmployeeID),
-        check (Gender in ('M','F'))
-    );
+    primary key(EmployeeID),
+    check (Gender in ('M','F'))
+);
 
 create table employee_credentials(
     EmployeeWebID int auto_increment,
@@ -64,7 +64,7 @@ create table employee_credentials(
 
 create table orders(
     OrderID int auto_increment,
-    EmployeeID int NOT NULL,
+    EmployeeID int,
     CustomerID int NOT NULL,
     OrderStartDate Date NOT NULL,
     OrderDeadline Date,
@@ -411,7 +411,7 @@ INSERT INTO products (productDescription, productFilePath, productDimenstions, P
 INSERT INTO orders (EmployeeID, CustomerID, ProductID, OrderStartDate, OrderDeadline, OrderStatusCode, IsRemoved) VALUES
 (1, 1, 1, '2023-01-10', '2023-01-20', 1, 0),
 (2, 2, 2, '2023-01-15', '2023-01-25', 1, 0),
-(3, 3, 3, '2023- 01-20', '2023-01-30', 1, 0),
+(3, 3, 3, '2023-01-20', '2023-01-30', 1, 0),
 (4, 4, 4, '2023-01-25', '2023-02-04', 1, 0),
 (5, 5, 5, '2023-02-01', '2023-02-11', 1, 0),
 (6, 6, 6, '2023-02-05', '2023-02-15', 1, 0),

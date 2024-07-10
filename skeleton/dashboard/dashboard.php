@@ -17,8 +17,7 @@ if ($conn->connect_error) {
 }
 
 // Function to fetch single value
-function fetchSingleValue($conn, $query)
-{
+function fetchSingleValue($conn, $query) {
     $result = $conn->query($query);
     if ($result === false) {
         die("Query failed: " . $conn->error);
@@ -72,7 +71,6 @@ if ($recentOrders === false) {
 ?>
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Dashboard</title>
     <style>
@@ -81,62 +79,55 @@ if ($recentOrders === false) {
             border-collapse: collapse;
             margin: 20px 0;
         }
-
-        table,
-        th,
-        td {
+        table, th, td {
             border: 1px solid black;
         }
-
-        th,
-        td {
+        th, td {
             padding: 8px;
             text-align: left;
         }
     </style>
 </head>
-
 <body>
 
-    <h1>Dashboard</h1>
+<h1>Dashboard</h1>
 
-    <h2>Analytics</h2>
-    <p><strong>Monthly Sales:</strong> $<?php echo number_format($monthlySales, 2); ?></p>
+<h2>Analytics</h2>
+<p><strong>Monthly Sales:</strong> $<?php echo number_format($monthlySales, 2); ?></p>
 
-    <h2>Total Orders</h2>
-    <p><strong>Total Orders:</strong> <?php echo $totalOrders; ?></p>
+<h2>Total Orders</h2>
+<p><strong>Total Orders:</strong> <?php echo $totalOrders; ?></p>
 
-    <h2>Total Sales</h2>
-    <p><strong>Total Sales:</strong> $<?php echo number_format($totalSales, 2); ?></p>
+<h2>Total Sales</h2>
+<p><strong>Total Sales:</strong> $<?php echo number_format($totalSales, 2); ?></p>
 
-    <h2>Recent Orders</h2>
-    <table>
-        <thead>
+<h2>Recent Orders</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Customer Name</th>
+            <th>Order Date</th>
+            <th>Amount</th>
+            <th>Deadline</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php while ($row = $recentOrders->fetch_assoc()) { ?>
             <tr>
-                <th>Order ID</th>
-                <th>Customer Name</th>
-                <th>Order Date</th>
-                <th>Amount</th>
-                <th>Deadline</th>
-                <th>Status</th>
+                <td><?php echo $row['Order ID']; ?></td>
+                <td><?php echo $row['Customer Name']; ?></td>
+                <td><?php echo $row['Order Date']; ?></td>
+                <td>$<?php echo number_format($row['Amount'], 2); ?></td>
+                <td><?php echo $row['Deadline']; ?></td>
+                <td><?php echo $row['Status']; ?></td>
             </tr>
-        </thead>
-        <tbody>
-            <?php while ($row = $recentOrders->fetch_assoc()) { ?>
-                <tr>
-                    <td><?php echo $row['Order ID']; ?></td>
-                    <td><?php echo $row['Customer Name']; ?></td>
-                    <td><?php echo $row['Order Date']; ?></td>
-                    <td>$<?php echo number_format($row['Amount'], 2); ?></td>
-                    <td><?php echo $row['Deadline']; ?></td>
-                    <td><?php echo $row['Status']; ?></td>
-                </tr>
-            <?php } ?>
-        </tbody>
-    </table>
+        <?php } ?>
+    </tbody>
+</table>
 
 </body>
-
 </html>
 
 <?php
