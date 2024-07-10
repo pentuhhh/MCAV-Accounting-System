@@ -9,7 +9,7 @@
                     receipt_long
                 </i>
                 <span class="ml-3 text-2xl font-semibold">Order Management</span>
-                <a href="/orders/add-new/customers" class="ml-7 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Add order</a>
+                <a href="/orders/add-order" class="ml-7 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Add order</a>
             </div>
             <div class="GLOBAL_HEADER_USER flex items-center">
                 <div class="GLOBAL_HEADER_COLUMN text-right mr-4">
