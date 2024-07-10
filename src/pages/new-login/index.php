@@ -22,7 +22,7 @@
 
         <div class="NEWLOGIN_INFO">
             <div class="GLOBAL_SUBHEADER">
-                <h1>User Information</h1> 
+                <h1>User Information</h1>
             </div>
             <form action="" method="post">
                 <div class="NEWLOGIN_INPUT GLOBAL_BOX_DIV">
@@ -98,7 +98,24 @@
                     <!-- Column 3 -->
                     <div class="NEWLOGIN_INPUT_COLUMN">
                         <div class="NEWLOGIN_INPUT_COLUMN_CONTAINER">
-                            
+                            <label>Upload a file</label>
+                            <input id="fileInput" type="file" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+                            <p class="mt-2 text-xs text-gray-500">Only .jpg, .png, files allowed</p>
+                        </div>
+                        <div class="NEWLOGIN_INPUT_COLUMN_CONTAINER">
+                            <label>Password</label>
+                            <input type="password" name="password" placeholder="Password" required>
+                        </div>
+                        <div class="NEWLOGIN_INPUT_COLUMN_CONTAINER">
+                            <label class="pb-2">Permission</label>
+                            <label for="user" class="NEWLOGIN_INPUT_COLUMN_CONTAINER_RADIO pb-2">
+                                <input type="radio" id="user" name="permission" class="form-radio h-4 w-4 text-blue-600">
+                                <span>User</span>
+                            </label>
+                            <label for="admin" class="NEWLOGIN_INPUT_COLUMN_CONTAINER_RADIO pb-2">
+                                <input type="radio" id="admin" name="permission" class="form-radio h-4 w-4 text-blue-600">
+                                <span>Administrator</span>
+                            </label>
                         </div>
                     </div>
                 </div>

@@ -10,6 +10,7 @@
                     payments
                 </i>
                 <span>Receipts</span>
+                <a href="/receipts/add-receipt/" class="GLOBAL_BUTTON_BLUE ml-7">Add receipt</a>
             </div>
             <div class="GLOBAL_HEADER_USER">
                 <div class="GLOBAL_HEADER_COLUMN">
@@ -19,12 +20,13 @@
                 <img src="/assets/JumanjiRon.png" alt="">
             </div>
         </div>
-    
+
         <div class="GLOBAL_ANALYTICS">
             <div class="GLOBAL_ANALYTICS_ROW">
                 <div class="GLOBAL_ANALYTICS_CARD GLOBAL_BOX_DIV">
                     <div class="GLOBAL_ANALYTICS_CARD_TEXT">
-                        <h1 class="GLOBAL_ANALYTICS_CARD_TITLE">Last Month's Income</h1></h1>
+                        <h1 class="GLOBAL_ANALYTICS_CARD_TITLE">Last Month's Income</h1>
+                        </h1>
                         <h1 class="GLOBAL_ANALYTICS_CARD_VALUE">Php 65,521+</h1>
                     </div>
                     <div class="GLOBAL-ANALYTICS_CARD_ICON">
@@ -62,7 +64,7 @@
                 <input type="text" placeholder="Search">
             </div>
         </div>
-    
+
         <div class="ORDERS_CONTENT">
             <div class="GLOBAL_TABLE">
                 <table>

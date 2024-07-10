@@ -1,9 +1,13 @@
 <?php
 
-const BASE_PATH = __DIR__ . "/..";
+const BASE_PATH = __DIR__ . "/../..";
 
 $urlPath = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
-$pagePath = BASE_PATH . "/pages$urlPath";
+
+session_start();
+
+$pagePath = BASE_PATH . "/src/pages$urlPath";
+
 ?>
 
 <!DOCTYPE html>
@@ -20,13 +24,14 @@ $pagePath = BASE_PATH . "/pages$urlPath";
 
 <body class="font-poppins">
     <?php
+    // Include the requested page if it exists
     if (file_exists($pagePath . "/index.php")) {
         include_once $pagePath . "/index.php";
     } elseif (file_exists($pagePath . ".php")) {
         include_once $pagePath . ".php";
     } else {
-        // TODO: Improve 404 error page.
-        // http_response_code(404); 
+        // Show a 404 error if the page is not found
+        http_response_code(404);
         echo "404 Not Found";
     }
     ?>
