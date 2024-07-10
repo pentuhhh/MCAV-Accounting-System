@@ -45,7 +45,21 @@
                         <th></th>
                     </tr>
                     <tr>
+                        <td>1</td>
                         <td></td>
+                        <td>Pastor</td>
+                        <td>Alnino</td>
+                        <td>23102078@usc.edu.ph</td>
+                        <td>09927822748</td>
+                        <td>User</td>
+                        <td>
+                            <select>
+                                <option value="">
+                                </option>
+                                <option value="">
+                                </option>
+                            </select>
+                        </td>
                     </tr>
                 </table>
             </div>

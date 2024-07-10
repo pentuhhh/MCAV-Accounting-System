@@ -10,7 +10,7 @@
                     receipt_long
                 </i>
                 <span>Order Management</span>
-                <a href="/orders/add-new/customers" class="GLOBAL_BUTTON_BLUE ml-7">Add order</a>
+                <a href="/orders/add-order/" class="GLOBAL_BUTTON_BLUE ml-7">Add order</a>
             </div>
             <div class="GLOBAL_HEADER_USER">
                 <div class="GLOBAL_HEADER_COLUMN">
