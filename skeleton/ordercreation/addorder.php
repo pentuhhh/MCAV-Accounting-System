@@ -6,11 +6,18 @@ $customerLname = '';
 $customerEmail = '';
 $customerPhone = '';
 
+$paymentMethod = '';
+$duemonth;
+$dueday;
+$dueyear;
+$paymentprocessor = '';
 // Database connection parameters
 $servername = "localhost";
 $username = "MCAVDB";
 $password = "password1010";
 $dbname = "MCAV";
+
+$orderid;
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -40,6 +47,21 @@ function populateVariables($conn){
     if (isset($_POST['CustomerPhone'])) {
         $customerPhone = sanitize_input($conn, $_POST['CustomerPhone']);
     }
+
+    if (isset($_POST['payment-method'])) {
+        $paymentMethod = sanitize_input($conn, $_POST['payment-method']);
+    }
+
+    // Process due date fields
+    if (isset($_POST['month']) && isset($_POST['day']) && isset($_POST['year'])) {
+        $duemonth = sanitize_input($conn, $_POST['month']);
+        $dueday = sanitize_input($conn, $_POST['day']);
+        $dueyear = sanitize_input($conn, $_POST['year']);
+    }
+
+    if (isset($_POST['processor'])) {
+        $paymentprocessor = sanitize_input($conn, $_POST['processor']);
+    }
 }
 
 function userExists($conn){
@@ -66,8 +88,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
 
     // Check if user exists
     userExists($conn);
-
-
     // If user does not exist, it will add and remember the customer ID
     if ($customerID == 0) {
         $createcustomer = "insert into Customers (customerfname, customerlname, customeremail, customerphone)
@@ -88,8 +108,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
     // If user exists then just use that user
         echo "User exists with ID: " . $customerID;
     }
-    
-    
+
+    //proceed to create order entry
+
+    $orderentryquery = "insert into orders (customerId, OrderstartDate) values ('$customerID', curdate());";
+    $conn->query($orderentryquery);
+
+    //retrieve order ID
+
+    $retrieveorderid ="select orderID from orders where customerID = '$customerID';";
+    $result = $conn->query($retrieveorderid);
+    $row = $result->fetch_assoc();
+    $orderid = (int)$row['orderID'];
+
+    //create paymentplan entry
+
 }
 
 // Close connection
@@ -98,6 +131,19 @@ $conn->close();
 
 <!DOCTYPE html>
 <html>
+    <head>
+
+    <script>
+        function enableInput(select) {
+            var processorSelect = document.getElementById("processor");
+            if (select.value === "bank-transfer") {
+                processorSelect.disabled = false;
+            } else {
+                processorSelect.disabled = true;
+            }
+        }
+    </script>
+    </head>
     <body>
         <form method="post">
             Create Order<br>
@@ -115,6 +161,32 @@ $conn->close();
             
             <input type="hidden" name="action" value="search">
             <input type="submit" value="Submit">
+
+
+            <br><br>
+            <label for="payment-method">Payment Method</label>
+                            <select name="payment-method" id="payment-method" onchange="enableInput(this)">
+                                <option value="cash">Cash</option>
+                                <option value="bank-transfer">Digital Wallet</option>
+                                <!-- Enter More Options -->
+                            </select>
+
+                            <label for="due-date">Due Date</label>
+                            <div class="flex flex-row gap-2">
+                                <input type="number" id="month" min="1" max="12" size="2" placeholder="Month" required>
+                                <input type="number" id="day" min="1" max="31" size="2" placeholder="Day" required>
+                                <input type="number" id="year" min="1900" max="2100" placeholder="Year" size="4" required>
+                            </div>
+
+                            <label for="processor">Processor</label>
+                        <select id="processor" name="processor" disabled>
+                            <option value="none">None</option>
+                            <option value="gcash">GCash</option>
+                            <option value="metrobank">Metrobank</option>
+                            <option value="metrobank">BDO</option>
+                            <option value="metrobank">Paypal</option>
+                            <!-- Enter More Options -->
+                        </select>
         </form>
 
     
