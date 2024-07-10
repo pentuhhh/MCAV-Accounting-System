@@ -104,10 +104,6 @@
                         </select>
                     </div>
                 </div>
-                <div class="flex flex-row justify-end pb-5">
-                    <a href="/orders" class="GLOBAL_BUTTON_GRAY mr-4">Cancel</a>
-                    <a class="GLOBAL_BUTTON_BLUE" onclick="scrollToSection('input')">Proceed</a>
-                </div>
 
                 <div id="input" class="GLOBAL_SUBHEADER">
                     <h1>Product Input</h1>
@@ -146,19 +142,7 @@
                         </div>
 
                         <div class="PRODUCTS_INPUT_COLUMN_NUMBER_CONTAINER">
-                            <div class="PRODUCTS_INPUT_COLUMN_NUMBER_CONTAINER_BUTTON">
-                                <i class="material-symbols-rounded">
-                                    remove
-                                </i>
-                            </div>
-                            <div class="PRODUCTS_INPUT_COLUMN_NUMBER_CONTAINER_DISPLAY GLOBAL_BOX_DIV">
-                                <p>1</p>
-                            </div>
-                            <div class="PRODUCTS_INPUT_COLUMN_NUMBER_CONTAINER_BUTTON">
-                                <i class="material-symbols-rounded">
-                                    add
-                                </i>
-                            </div>
+                            <input type="number" name="quantity" placeholder="Qty" required>
                             <button class="GLOBAL_BUTTON_BLUE ml-5">Add Item</button>
                         </div>
                     </div>

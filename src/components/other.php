@@ -87,37 +87,13 @@
             <div class="COMPONENT_OTHERS_CONTAINER_ROW_COLUMN_INNERDIV">
                 <div class="COMPONENT_OTHERS_CONTAINER_ROW_COLUMN_INNERDIV_INNERROW">
                     <h1>Width:</h1>
-                    <div class="PRODUCTS_INPUT_COLUMN_NUMBER_CONTAINER_BUTTON">
-                        <i class="material-symbols-rounded">
-                            remove
-                        </i>
-                    </div>
-                    <div class="PRODUCTS_INPUT_COLUMN_NUMBER_CONTAINER_DISPLAY GLOBAL_BOX_DIV">
-                        <p>1</p>
-                    </div>
-                    <div class="PRODUCTS_INPUT_COLUMN_NUMBER_CONTAINER_BUTTON">
-                        <i class="material-symbols-rounded">
-                            add
-                        </i>
-                    </div>
+                    <input type="number">
                 </div>
             </div>
 
             <div class="COMPONENT_OTHERS_CONTAINER_ROW_COLUMN_INNERDIV_INNERROW">
                 <h1>Height:</h1>
-                <div class="PRODUCTS_INPUT_COLUMN_NUMBER_CONTAINER_BUTTON">
-                    <i class="material-symbols-rounded">
-                        remove
-                    </i>
-                </div>
-                <div class="PRODUCTS_INPUT_COLUMN_NUMBER_CONTAINER_DISPLAY GLOBAL_BOX_DIV">
-                    <p>1</p>
-                </div>
-                <div class="PRODUCTS_INPUT_COLUMN_NUMBER_CONTAINER_BUTTON">
-                    <i class="material-symbols-rounded">
-                        add
-                    </i>
-                </div>
+                <input type="number">
             </div>
         </div>
     </div>
