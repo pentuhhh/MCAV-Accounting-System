@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
-$username = "constable";
-$password = "batoncuff1013";
+$username = "MCAVDB";
+$password = "password1010";
 $dbname = "MCAV";
 
 // Create connection
