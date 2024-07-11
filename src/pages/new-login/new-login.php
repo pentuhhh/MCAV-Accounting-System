@@ -1,11 +1,6 @@
 <?php
 require "../utilities/db-connection.php";
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Data for employee_info
@@ -17,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $address = $_POST['address'];
     $hire_date = $_POST['hire-date'];
     $birth_date = $_POST['birth-date'];
-    $gender = $_POST['gender']; // Now 'M' or 'F'
+    $gender = $_POST['gender'] == 'male' ? 'M' : 'F';
     $position = $_POST['position']; // Capture position from the form
     $password = $_POST['password'];
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
@@ -25,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // File upload handling
     $profile_picture_path = ''; // Default value
-    if (isset($_FILES['profilePicture']) && $_FILES['profilePicture']['error'] == 0) {
+    if (isset($_FILES['profilePicture']) && $_FILES['profilePicture']['error'] == UPLOAD_ERR_OK) {
         $file = $_FILES['profilePicture'];
 
         // Get file info
@@ -53,15 +48,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (move_uploaded_file($fileTmpName, $targetFile)) {
                 $profile_picture_path = 'assets/' . $fileName; // relative path for storing in the database
             } else {
-                die("Error: There was a problem uploading your file.");
+                die("Error: There was a problem moving the uploaded file.");
             }
         } else {
             die("Error: Invalid file type.");
         }
+    } else {
+        die("Error: File upload error code " . $_FILES['profilePicture']['error']);
     }
-    // else {
-    //     die("Error: " . $_FILES['profilePicture']['error']);
-    // }
 
     // Insert into employee_info
     $sql_info = "INSERT INTO employee_info (
@@ -80,16 +74,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 '1', '$employee_id', '$email', '$hashed_password', '$permission', 'Activated'
                             )";
 
-        if ($conn->query($sql_credentials) === TRUE) {
-            echo "Registration successful";
-        } else {
-            echo "Error: " . $sql_credentials . "<br>" . $conn->error;
-        }
+        // Error handling for credentials
+
+        // if ($conn->query($sql_credentials) === TRUE) {
+        //     echo "Registration successful";
+        // } else {
+        //     echo "Error: " . $sql_credentials . "<br>" . $conn->error;
+        // }
+        
     } else {
         echo "Error: " . $sql_info . "<br>" . $conn->error;
     }
 }
 
 $conn->close();
-
 ?>

@@ -430,7 +430,7 @@
                 <!-- -- OTHERS SECTION -- -->
 
                 <div class="GLOBAL_SUBHEADER justify-start">
-                    <h1>Tarpaulin Options</h1>
+                    <h1>Other Options</h1>
                     <input type="number" name="quantity" placeholder="Qty" class="PRODUCT_INPUT_QUANTITY" required>
                     <button class="GLOBAL_BUTTON_BLUE ml-5">Add Item</button>
                 </div>

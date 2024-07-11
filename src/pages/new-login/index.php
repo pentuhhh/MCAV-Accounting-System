@@ -24,7 +24,7 @@
             <div class="GLOBAL_SUBHEADER">
                 <h1>User Information</h1>
             </div>
-            <form action="/new-login/new-login" method="post">
+            <form action="/new-login/new-login" method="post" enctype="multipart/form-data">
                 <div class="NEWLOGIN_INPUT GLOBAL_BOX_DIV">
 
                     <!-- Column 1 -->
@@ -91,7 +91,7 @@
                     <div class="NEWLOGIN_INPUT_COLUMN">
                         <div class="NEWLOGIN_INPUT_COLUMN_CONTAINER">
                             <label for="fileInput">Upload a file</label>
-                            <input id="fileInput" name="profilePicture" type="file" accept="image/*" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+                            <input id="fileInput" name="profilePicture" type="file" accept="image/*" class=" mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
                             <p class="mt-2 text-xs text-gray-500">Only .jpg, .png, files allowed</p>
                         </div>
                         <div class="NEWLOGIN_INPUT_COLUMN_CONTAINER">

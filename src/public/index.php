@@ -1,12 +1,41 @@
 <?php
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
 
-const BASE_PATH = __DIR__ . "/../..";
+    const BASE_PATH = __DIR__ . "/../..";
 
-$urlPath = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
+    $urlPath = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
 
-session_start();
+    session_start();
+    echo "Session started. Session ID: " . session_id() . "<br>";
 
-$pagePath = BASE_PATH . "/src/pages$urlPath";
+    // Function to check if user is logged in
+    function isLoggedIn()
+    {
+        return isset($_SESSION['username']);
+    }
+
+    // Function to redirect to login page
+    function redirectToLogin()
+    {
+        echo "Redirecting to login page...<br>";
+        header("Location: /login");
+        exit();
+    }
+
+    // Check if the user is trying to access the login page
+    $isLoginPage = ($urlPath === '/login' || $urlPath === '/login/');
+
+    echo "Current URL path: " . $urlPath . "<br>";
+    echo "Is login page: " . ($isLoginPage ? "Yes" : "No") . "<br>";
+    echo "Is logged in: " . (isLoggedIn() ? "Yes" : "No") . "<br>";
+
+    // If not logged in and not trying to access the login page, redirect to login
+    if (!isLoggedIn() && !$isLoginPage) {
+        redirectToLogin();
+    }
+
+    $pagePath = BASE_PATH . "/src/pages$urlPath";
 
 ?>
 

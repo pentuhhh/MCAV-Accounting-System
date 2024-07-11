@@ -57,7 +57,7 @@
                             <td>09927822748</td>
                             <td>User</td>
                             <td class="flex flex-row justify-center">
-                                <button class="text-[#DF166E]">
+                                <button class="text-[#DF166E]" onclick="return confirm('Are you sure you want to delete row?');">
                                     Delete
                                 </button>
                             </td>

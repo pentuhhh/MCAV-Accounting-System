@@ -66,7 +66,7 @@ $activePath = [
 
     <!-- Log Out -->
     <div class="COMPONENT_SIDEBAR_LOGOUT_BUTTON mb-6">
-        <a href="/login">
+        <a href="/logout.php" onclick="return confirm('Are you sure you want to log out?');">
             <i class="material-symbols-rounded text-white text-3xl">
                 Logout
             </i>
