@@ -57,10 +57,8 @@
                             <td>09927822748</td>
                             <td>User</td>
                             <td class="flex flex-row justify-center">
-                                <button class="GLOBAL_TABLE_BUTTON_DELETE">
-                                    <i class="material-symbols-rounded text-[14px]">
-                                        delete_forever
-                                    </i>
+                                <button class="text-[#DF166E]">
+                                    Delete
                                 </button>
                             </td>
                         </tr>
