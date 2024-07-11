@@ -7,6 +7,10 @@
     $urlPath = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
 
     session_start();
+
+    //Ron these fucking functions are literal satan's spawn spent like a solid hour
+    // trying to debug what wasnt working und it was this mf buttholes
+
     // echo "Session started. Session ID: " . session_id() . "<br>";
 
     // // Function to check if user is logged in

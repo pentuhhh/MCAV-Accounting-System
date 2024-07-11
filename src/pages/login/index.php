@@ -7,7 +7,7 @@
         </div>
 
         <!-------------------------------------USERNAME------------------------------------------->
-        <form class="LOGIN_CONTAINER_LOGINBOX_FORM" action="/login/handler" method="post">
+        <form class="LOGIN_CONTAINER_LOGINBOX_FORM" action="/login/handler" method="POST">
             <div class="form-group UsernameSec">
                 <div class="flex flex-row mb-2">
                     <i class="material-symbols-rounded text-gray-300">person</i>
