@@ -1,15 +1,14 @@
-
 <div class="GLOBAL_PAGE flex">
     <?php include_once __DIR__ . "/../../components/sidebar.php"; ?>
 
-    <div class="GLOBAL_PAGE_CONTAINER flex-1 p-6">
-        <div class="GLOBAL_HEADER flex items-center justify-between mb-6">
+    <div class="GLOBAL_PAGE_CONTAINER">
+        <div class="GLOBAL_HEADER flex items-center justify-between">
             <div class="GLOBAL_HEADER_TITLE flex items-center">
                 <i class="material-symbols-rounded text-4xl">
                     receipt_long
                 </i>
                 <span class="ml-3 text-2xl font-semibold">Order Management</span>
-                <a href="/orders/add-order" class="ml-7 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Add order</a>
+                <a href="/orders/add-order" class="GLOBAL_BUTTON_BLUE ml-5">Add order</a>
             </div>
             <div class="GLOBAL_HEADER_USER flex items-center">
                 <div class="GLOBAL_HEADER_COLUMN text-right mr-4">
@@ -20,29 +19,28 @@
             </div>
         </div>
 
-        <div class="ORDERS_SEARCH mb-6">
-            <div class="relative">
-                <input type="text" placeholder="Search" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring">
-                <a href="#" class="absolute right-2 top-2 text-gray-500 hover:text-gray-700">
+        <div class="ORDERS_SEARCH">
+            <div class="columns-1">
+                <a href="" class="ORDER_SEARCH_BUTTON">
                     <i class="material-symbols-rounded">
                         search
                     </i>
                 </a>
+                <input type="text" placeholder="Search">
             </div>
         </div>
 
-        <div class="ORDERS_CONTENT bg-white shadow rounded-lg p-6">
-            <div class="GLOBAL_TABLE overflow-x-auto">
-                <table class="w-full border-collapse">
+        <div class="ORDERS_CONTENT">
+            <div class="GLOBAL_TABLE">
+                <table>
                     <thead>
-                        <tr class="bg-gray-200">
-                            <th class="border p-2">Order ID</th>
-                            <th class="border p-2">Customer</th>
-                            <th class="border p-2">Order Date</th>
-                            <th class="border p-2">Amount</th>
-                            <th class="border p-2">Order Deadline</th>
-                            <th class="border p-2">Status</th>
-                            
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Order Date</th>
+                            <th>Amount</th>
+                            <th>Order Deadline</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody id="ordersTable">
@@ -50,13 +48,14 @@
                     </tbody>
                 </table>
             </div>
+            <div class="pagination mt-4 text-end">
+                <button onclick="prevPage()" class="">
+                    < Prev</button>
+                        <span id="pageButtons"></span>
+                        <button onclick="nextPage()" class="">Next ></button>
+            </div>
         </div>
 
-        <div class="pagination mt-4 text-center">
-            <button onclick="prevPage()" class="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded">Previous</button>
-            <span id="pageButtons"></span>
-            <button onclick="nextPage()" class="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded">Next</button>
-        </div>
     </div>
 </div>
 
@@ -91,14 +90,14 @@
                 FROM      
                     orders o     
                 INNER JOIN customers c ON o.customerid = c.customerID
-                INNER JOIN payment_plans p ON p.orderID = o.orderID      
+                INNER JOIN payment_plans p ON p.orderID = o.orderID
                 WHERE o.isremoved = 0 
                 ORDER BY o.orderId DESC;";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
             $rows = [];
-            while($row = $result->fetch_assoc()) {
+            while ($row = $result->fetch_assoc()) {
                 $rows[] = json_encode($row);
             }
             echo implode(",", $rows);
@@ -129,7 +128,7 @@
                 } else {
                     cell.textContent = item[key];
                 }
-                cell.classList.add('border', 'p-2');
+                // cell.classList.add('border', 'p-2');
                 row.appendChild(cell);
             });
             tableBody.appendChild(row);
@@ -169,9 +168,10 @@
                 };
             })(i);
             if (i === currentPage) {
-                button.classList.add('font-bold');
+                button.classList.add('px-4', 'py-2', 'font-bold', 'text-white', 'duration-200', 'bg-[#00A1E2]', 'hover:bg-[#007BB5]', 'rounded-md', 'mx-1');
+            } else {
+                button.classList.add('px-4', 'py-2', 'bg-white', 'hover:bg-[#dddddd]', 'duration-200', 'rounded-md', 'mx-1');
             }
-            button.classList.add('px-4', 'py-2', 'bg-gray-200', 'hover:bg-gray-300', 'rounded', 'mx-1');
             pageButtonsContainer.appendChild(button);
         }
     }

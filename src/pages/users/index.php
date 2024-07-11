@@ -19,7 +19,7 @@
                 <img src="/assets/JumanjiRon.png" alt="">
             </div>
         </div>
-    
+
         <div class="ORDERS_SEARCH">
             <div class="columns-1">
                 <a href="" class="ORDER_SEARCH_BUTTON">
@@ -30,37 +30,41 @@
                 <input type="text" placeholder="Search">
             </div>
         </div>
-    
+
         <div class="ORDERS_CONTENT">
             <div class="GLOBAL_TABLE">
                 <table>
-                    <tr>
-                        <th>#</th>
-                        <th>User</th>
-                        <th>Last Name</th>
-                        <th>First Name</th>
-                        <th>Email</th>
-                        <th>Contact Number</th>
-                        <th>Position</th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td></td>
-                        <td>Pastor</td>
-                        <td>Alnino</td>
-                        <td>23102078@usc.edu.ph</td>
-                        <td>09927822748</td>
-                        <td>User</td>
-                        <td>
-                            <select>
-                                <option value="">
-                                </option>
-                                <option value="">
-                                </option>
-                            </select>
-                        </td>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>User</th>
+                            <th>Last Name</th>
+                            <th>First Name</th>
+                            <th>Email</th>
+                            <th>Contact Number</th>
+                            <th>Position</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td><a href="" onclick="openModal(), event.preventDefault()" class="GLOBAL_TABLE_ID">1</a></td>
+                            <td></td>
+                            <td>Pastor</td>
+                            <td>Alnino</td>
+                            <td>23102078@usc.edu.ph</td>
+                            <td>09927822748</td>
+                            <td>User</td>
+                            <td class="flex flex-row justify-center">
+                                <button class="GLOBAL_TABLE_BUTTON_DELETE">
+                                    <i class="material-symbols-rounded text-[14px]">
+                                        delete_forever
+                                    </i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </div>

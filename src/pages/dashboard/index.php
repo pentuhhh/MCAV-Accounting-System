@@ -1,5 +1,5 @@
 <?php
-    require "dashboard.php";
+require "dashboard.php";
 ?>
 <div class="GLOBAL_PAGE">
     <?php
@@ -25,51 +25,68 @@
 
         <div class="GLOBAL_ANALYTICS">
             <div class="GLOBAL_SUBHEADER">
-                <h1 class="GLOBAL_SUBHEADER_TITLE">Analytics</h1> 
+                <h1 class="GLOBAL_SUBHEADER_TITLE">Analytics</h1>
             </div>
             <div class="GLOBAL_ANALYTICS_ROW">
                 <div class="GLOBAL_ANALYTICS_CARD GLOBAL_BOX_DIV">
-                    <h1 class="GLOBAL_ANALYTICS_CARD_TITLE">Monthly Sales</h1>
-                    <h1 class="GLOBAL_ANALYTICS_CARD_VALUE">Php $<?php echo number_format($monthlySales, 2); ?></h1>
+                    <div class="GLOBAL_ANALYTICS_CARD_TEXT">
+                        <h1 class="GLOBAL_ANALYTICS_CARD_TITLE">Monthly Sales</h1>
+                        <h1 class="GLOBAL_ANALYTICS_CARD_VALUE">P <?php echo number_format($monthlySales, 2); ?></h1>
+                    </div>
+                    <i class="material-symbols-rounded text-8xl">
+                        monitoring
+                    </i>
                 </div>
                 <div class="GLOBAL_ANALYTICS_CARD GLOBAL_BOX_DIV">
-                    <h1 class="GLOBAL_ANALYTICS_CARD_TITLE">Total Orders</h1>
-                    <h1 class="GLOBAL_ANALYTICS_CARD_VALUE"><?php echo $totalOrders; ?></h1>
+                    <div class="GLOBAL_ANALYTICS_CARD_TEXT">
+                        <h1 class="GLOBAL_ANALYTICS_CARD_TITLE">Total Orders</h1>
+                        <h1 class="GLOBAL_ANALYTICS_CARD_VALUE"><?php echo $totalOrders; ?></h1>
+                    </div>
+                    <i class="material-symbols-rounded text-8xl">
+                        orders
+                    </i>
                 </div>
                 <div class="GLOBAL_ANALYTICS_CARD GLOBAL_BOX_DIV">
-                    <h1 class="GLOBAL_ANALYTICS_CARD_TITLE">Total Sales</h1>
-                    <h1 class="GLOBAL_ANALYTICS_CARD_VALUE">Php $<?php echo number_format($totalSales, 2); ?></h1>
+                    <div class="GLOBAL_ANALYTICS_CARD_TEXT">
+                        <h1 class="GLOBAL_ANALYTICS_CARD_TITLE">Total Sales</h1>
+                        <h1 class="GLOBAL_ANALYTICS_CARD_VALUE">P <?php echo number_format($totalSales, 2); ?></h1>
+                    </div>
+                    <i class="material-symbols-rounded text-8xl">
+                        local_atm
+                    </i>
                 </div>
             </div>
         </div>
-    
+
         <div class="DASHBOARD_RECENT">
-            <h1 class="GLOBAL_SUBHEADER_TITLE">Recent Orders</h1>
+            <div class="GLOBAL_SUBHEADER">
+                <h1 class="GLOBAL_SUBHEADER_TITLE">Recent Orders</h1>
+            </div>
             <div class="GLOBAL_TABLE">
-            <table>
-    <thead>
-        <tr>
-            <th>Order ID</th>
-            <th>Customer Name</th>
-            <th>Order Date</th>
-            <th>Amount</th>
-            <th>Deadline</th>
-            <th>Status</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php while ($row = $recentOrders->fetch_assoc()) { ?>
-            <tr>
-                <td><?php echo $row['Order ID']; ?></td>
-                <td><?php echo $row['Customer Name']; ?></td>
-                <td><?php echo $row['Order Date']; ?></td>
-                <td>$<?php echo number_format($row['Amount'], 2); ?></td>
-                <td><?php echo $row['Deadline']; ?></td>
-                <td><?php echo $row['Status']; ?></td>
-            </tr>
-        <?php } ?>
-    </tbody>
-</table>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer Name</th>
+                            <th>Order Date</th>
+                            <th>Amount</th>
+                            <th>Deadline</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while ($row = $recentOrders->fetch_assoc()) { ?>
+                            <tr>
+                                <td class="GLOBAL_TABLE_ID"><?php echo $row['Order ID']; ?></td>
+                                <td><?php echo $row['Customer Name']; ?></td>
+                                <td><?php echo $row['Order Date']; ?></td>
+                                <td>$<?php echo number_format($row['Amount'], 2); ?></td>
+                                <td><?php echo $row['Deadline']; ?></td>
+                                <td><?php echo $row['Status']; ?></td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
             </div>
             <a href="" class="DASHBOARD_RECENT_SHOW_A">Show all</a>
         </div>

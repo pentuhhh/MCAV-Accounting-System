@@ -68,18 +68,34 @@
         <div class="ORDERS_CONTENT">
             <div class="GLOBAL_TABLE">
                 <table>
-                    <tr>
-                        <th>#</th>
-                        <th>Receipt</th>
-                        <th>Order</th>
-                        <th>Payment Method</th>
-                        <th>Amount Paid</th>
-                        <th>Payment Date</th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <td></td>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Receipt</th>
+                            <th>Order</th>
+                            <th>Payment Method</th>
+                            <th>Amount Paid</th>
+                            <th>Payment Date</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><a href="" onclick="openModalReceipt(), event.preventDefault()" class="GLOBAL_TABLE_ID">123123</a></td>
+                            <td>123123</td>
+                            <td>Cash</td>
+                            <td>Php 1,000.00</td>
+                            <td>2021-10-10</td>
+                            <td>
+                                <button class="GLOBAL_TABLE_BUTTON_DELETE">
+                                    <i class="material-symbols-rounded text-[14px]">
+                                        delete_forever
+                                    </i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </div>

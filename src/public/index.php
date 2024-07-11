@@ -35,6 +35,95 @@ $pagePath = BASE_PATH . "/src/pages$urlPath";
         echo "404 Not Found";
     }
     ?>
+
+    <div id="popupModal" class="POPUP_CONTAINER hidden">
+        <!-- Modal content -->
+        <div class="POPUP_CONTAINER_BOX GLOBAL_BOX_DIV">
+            <span class="closeButton absolute top-2 right-4 text-2xl text-gray-500 cursor-pointer">&times;</span>
+            <div class="GLOBAL_SUBHEADER_TITLE flex flex-row justify-between">
+                <h1>Alvin De Leon</h1>
+                <button class="GLOBAL_BUTTON_BLUE">Edit</button>
+            </div>
+            <h1 class="text-[#00A1E2] font-semibold text-lg pb-5">EM0001</h1>
+            <table>
+                <tr>
+                    <td>Employee Name</td>
+                    <td>Alvin De Leon</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>alvin253@gmail.com</td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td>Email</td>
+                </tr>
+                <tr>
+                    <td>Phone Number</td>
+                    <td>09662537382</td>
+                </tr>
+                <tr>
+                    <td>Birthdate</td>
+                    <td>02-14-1976</td>
+                </tr>
+                <tr>
+                    <td>Hiredate</td>
+                    <td>02-15-2012</td>
+                </tr>
+                <tr>
+                    <td>Position</td>
+                    <td>User</td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td>**********</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div id="popupModalReceipt" class="POPUP_CONTAINER hidden">
+        <!-- Modal content -->
+        <div class="POPUP_CONTAINER_BOX GLOBAL_BOX_DIV">
+            <span class="closeButtonReceipt absolute top-2 right-4 text-2xl text-gray-500 cursor-pointer">&times;</span>
+            <div class="flex flex-row justify-between">
+                <div class="GLOBAL_HEADER_TITLE">
+                    <i class="material-symbols-rounded text-[40px]">
+                        payments
+                    </i>
+                    <h1 class="text-2xl font-bold ml-2">RCT000001</h1>
+                </div>
+                <button class="GLOBAL_BUTTON_BLUE ml-5">Edit</button>
+            </div>
+            <h1 class="font-semibold text-lg mb-4">Details</h1>
+            <table class="pb-5">
+                <tr>
+                    <td>Order ID</td>
+                    <td>ODR00001</td>
+                </tr>
+                <tr>
+                    <td>Amount Paid</td>
+                    <td>P 20.30</td>
+                </tr>
+                <tr>
+                    <td>Payment Date</td>
+                    <td>24-02-24</td>
+                </tr>
+                <tr>
+                    <td>Pay Method</td>
+                    <td>Cash</td>
+                </tr>
+            </table>
+            <h1 class="text-right font-semibold text-lg mt-5">
+                Total Amount:
+                <span>P 72.20</span>
+            </h1>
+            <h1 class="text-right font-semibold text-lg">
+                Payment Amount Left:
+                <span>P 52.30</span>
+            </h1>
+        </div>
+    </div>
 </body>
 
 </html>
