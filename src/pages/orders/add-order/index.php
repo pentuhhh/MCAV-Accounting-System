@@ -38,12 +38,12 @@
                         <!-- First Name -->
                         <div class="CUSTOMERS_INPUT_COLUMN_CONTAINER">
                             <label for="first-name">First Name</label>
-                            <input type="text" name="first-name" placeholder="First name" required>
+                            <input id="first-name" type="text" name="first-name" placeholder="First name" required>
                         </div>
                         <!-- Last Name -->
                         <div class="CUSTOMERS_INPUT_COLUMN_CONTAINER">
                             <label for="last-name">Last Name</label>
-                            <input type="text" name="last-name" placeholder="Last name" required>
+                            <input id="last-name" type="text" name="last-name" placeholder="Last name" required>
                         </div>
                     </div>
 
@@ -52,12 +52,12 @@
                         <!-- Email -->
                         <div class="CUSTOMERS_INPUT_COLUMN_CONTAINER">
                             <label for="email">Email</label>
-                            <input type="text" name="contact-number" placeholder="Email" required>
+                            <input id="email" type="text" name="contact-number" placeholder="Email" required>
                         </div>
                         <!-- Phone Number -->
                         <div class="CUSTOMERS_INPUT_COLUMN_CONTAINER">
                             <label for="phone-number">Phone Number</label>
-                            <input type="text" name="phone-number" placeholder="Phone number" required>
+                            <input id="phone-number" type="text" name="phone-number" placeholder="Phone number" required>
                         </div>
                     </div>
                 </div>
@@ -82,11 +82,7 @@
                         <!-- Due Date -->
                         <div class="CUSTOMERS_INPUT_COLUMN_CONTAINER">
                             <label for="due-date">Due Date</label>
-                            <div class="flex flex-row gap-2">
-                                <input type="number" id="month" min="1" max="12" size="2" placeholder="Month" required>
-                                <input type="number" id="day" min="1" max="31" size="2" placeholder="Day" required>
-                                <input type="number" id="year" min="1900" max="2100" placeholder="Year" size="4" required>
-                            </div>
+                            <input id="due-date" name="due-date" type="date">
                         </div>
                     </div>
 
@@ -98,8 +94,8 @@
                             <option value="none">None</option>
                             <option value="gcash">GCash</option>
                             <option value="metrobank">Metrobank</option>
-                            <option value="metrobank">BDO</option>
-                            <option value="metrobank">Paypal</option>
+                            <option value="BDO">BDO</option>
+                            <option value="Paypal">Paypal</option>
                             <!-- Enter More Options -->
                         </select>
                     </div>
@@ -113,7 +109,7 @@
 
                 <div class="COMPONENT_STICKER_CONTAINER pb-10">
                     <div class="COMPONENT_STICKER_CONTAINER_ROW">
-                        <button class="COMPONENT_STICKER_CONTAINER_ROW_OPTION GLOBAL_BOX_DIV" name="" value="">
+                        <button name="1-inch-circle" value="0.70" value="0.70" class="COMPONENT_STICKER_CONTAINER_ROW_OPTION GLOBAL_BOX_DIV">
                             <div class="COMPONENT_STICKER_CONTAINER_ROW_OPTION_PRICE">
                                 <h1>₱ 0.70</h1>
                             </div>
@@ -125,7 +121,7 @@
                             </div>
                         </button>
 
-                        <button class="COMPONENT_STICKER_CONTAINER_ROW_OPTION GLOBAL_BOX_DIV">
+                        <button name="1.5-inch-circle" id="1.5-inch-circle" value="1.30" class="COMPONENT_STICKER_CONTAINER_ROW_OPTION GLOBAL_BOX_DIV">
                             <div class="COMPONENT_STICKER_CONTAINER_ROW_OPTION_PRICE">
                                 <h1>₱ 1.30</h1>
                             </div>
@@ -137,7 +133,7 @@
                             </div>
                         </button>
 
-                        <button class="COMPONENT_STICKER_CONTAINER_ROW_OPTION GLOBAL_BOX_DIV">
+                        <button name="2-inch-circle" id="2-inch-circle" value="2.30" class="COMPONENT_STICKER_CONTAINER_ROW_OPTION GLOBAL_BOX_DIV">
                             <div class="COMPONENT_STICKER_CONTAINER_ROW_OPTION_PRICE">
                                 <h1>₱ 2.30</h1>
                             </div>
@@ -149,7 +145,7 @@
                             </div>
                         </button>
 
-                        <button class="COMPONENT_STICKER_CONTAINER_ROW_OPTION GLOBAL_BOX_DIV">
+                        <button name="2.5-inches-circle" id="2.5-inches-circle" value="3.50" class="COMPONENT_STICKER_CONTAINER_ROW_OPTION GLOBAL_BOX_DIV">
                             <div class="COMPONENT_STICKER_CONTAINER_ROW_OPTION_PRICE">
                                 <h1>₱ 3.50</h1>
                             </div>
@@ -161,7 +157,7 @@
                             </div>
                         </button>
 
-                        <button class="COMPONENT_STICKER_CONTAINER_ROW_OPTION GLOBAL_BOX_DIV">
+                        <button name="3-inches-circles" id="3-inches-circle" value="5" class="COMPONENT_STICKER_CONTAINER_ROW_OPTION GLOBAL_BOX_DIV">
                             <div class="COMPONENT_STICKER_CONTAINER_ROW_OPTION_PRICE">
                                 <h1>₱ 5.00</h1>
                             </div>
@@ -175,7 +171,7 @@
                     </div>
 
                     <div class="COMPONENT_STICKER_CONTAINER_ROW">
-                        <button class="COMPONENT_STICKER_CONTAINER_ROW_OPTION GLOBAL_BOX_DIV">
+                        <button name="1-inch-square" id="1-inch-square" value="0.50" class="COMPONENT_STICKER_CONTAINER_ROW_OPTION GLOBAL_BOX_DIV">
                             <div class="COMPONENT_STICKER_CONTAINER_ROW_OPTION_PRICE">
                                 <h1>₱ 0.50</h1>
                             </div>
@@ -187,7 +183,7 @@
                             </div>
                         </button>
 
-                        <button class="COMPONENT_STICKER_CONTAINER_ROW_OPTION GLOBAL_BOX_DIV">
+                        <button name="1.5-inch-square" id="1.5-inch-square" value="1" class="COMPONENT_STICKER_CONTAINER_ROW_OPTION GLOBAL_BOX_DIV">
                             <div class="COMPONENT_STICKER_CONTAINER_ROW_OPTION_PRICE">
                                 <h1>₱ 1.00</h1>
                             </div>
@@ -199,7 +195,7 @@
                             </div>
                         </button>
 
-                        <button class="COMPONENT_STICKER_CONTAINER_ROW_OPTION GLOBAL_BOX_DIV">
+                        <button name="2-inch-square" id="2-inch-square" value="1.50" class="COMPONENT_STICKER_CONTAINER_ROW_OPTION GLOBAL_BOX_DIV">
                             <div class="COMPONENT_STICKER_CONTAINER_ROW_OPTION_PRICE">
                                 <h1>₱ 1.50</h1>
                             </div>
@@ -211,7 +207,7 @@
                             </div>
                         </button>
 
-                        <button class="COMPONENT_STICKER_CONTAINER_ROW_OPTION GLOBAL_BOX_DIV">
+                        <button name="2.5-inch-square" id="2.5-inch-square" value="2.20" class="COMPONENT_STICKER_CONTAINER_ROW_OPTION GLOBAL_BOX_DIV">
                             <div class="COMPONENT_STICKER_CONTAINER_ROW_OPTION_PRICE">
                                 <h1>₱ 2.20</h1>
                             </div>
@@ -223,7 +219,7 @@
                             </div>
                         </button>
 
-                        <button class="COMPONENT_STICKER_CONTAINER_ROW_OPTION GLOBAL_BOX_DIV">
+                        <button name="3-inch-square" id="3-inch-square" value="3.20" class="COMPONENT_STICKER_CONTAINER_ROW_OPTION GLOBAL_BOX_DIV">
                             <div class="COMPONENT_STICKER_CONTAINER_ROW_OPTION_PRICE">
                                 <h1>₱ 3.20</h1>
                             </div>
@@ -241,7 +237,7 @@
                             <h1>None</h1>
                         </button>
 
-                        <button class="COMPONENT_STICKER_CONTAINER_ROW_OPTION_CENTER GLOBAL_BOX_DIV">
+                        <button name="manual-cut" id="manual-cut" value="50" class="COMPONENT_STICKER_CONTAINER_ROW_OPTION_CENTER GLOBAL_BOX_DIV">
                             <div class="COMPONENT_STICKER_CONTAINER_ROW_OPTION_PRICE">
                                 <h1>₱ 50.00</h1>
                             </div>
@@ -250,7 +246,7 @@
                             </div>
                         </button>
 
-                        <button class="COMPONENT_STICKER_CONTAINER_ROW_OPTION_CENTER GLOBAL_BOX_DIV">
+                        <button name="dye-cut" id="dye-cut" value="80" class="COMPONENT_STICKER_CONTAINER_ROW_OPTION_CENTER GLOBAL_BOX_DIV">
                             <div class="COMPONENT_STICKER_CONTAINER_ROW_OPTION_PRICE">
                                 <h1>₱ 80.00</h1>
                             </div>
@@ -271,7 +267,7 @@
 
                 <div class="COMPONENT_BANNER_CONTAINER pb-10">
                     <div class="COMPONENT_BANNER_CONTAINER_ROW">
-                        <button class="COMPONENT_BANNER_CONTAINER_ROW_OPTION GLOBAL_BOX_DIV">
+                        <button name="2x5SQFT" id="2x5SQFT" class="COMPONENT_BANNER_CONTAINER_ROW_OPTION GLOBAL_BOX_DIV">
                             <div class="COMPONENT_BANNER_CONTAINER_ROW_OPTION_PRICE">
                                 <h1>₱ 0.70</h1>
                             </div>
@@ -283,7 +279,7 @@
                             </div>
                         </button>
 
-                        <button class="COMPONENT_BANNER_CONTAINER_ROW_OPTION GLOBAL_BOX_DIV">
+                        <button name="2x6SQFT" id="2x6SQFT" class="COMPONENT_BANNER_CONTAINER_ROW_OPTION GLOBAL_BOX_DIV">
                             <div class="COMPONENT_BANNER_CONTAINER_ROW_OPTION_PRICE">
                                 <h1>₱ 1.30</h1>
                             </div>

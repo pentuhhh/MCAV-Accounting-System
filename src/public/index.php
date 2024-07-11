@@ -7,33 +7,33 @@
     $urlPath = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
 
     session_start();
-    echo "Session started. Session ID: " . session_id() . "<br>";
+    // echo "Session started. Session ID: " . session_id() . "<br>";
 
-    // Function to check if user is logged in
-    function isLoggedIn()
-    {
-        return isset($_SESSION['username']);
-    }
+    // // Function to check if user is logged in
+    // function isLoggedIn()
+    // {
+    //     return isset($_SESSION['username']);
+    // }
 
-    // Function to redirect to login page
-    function redirectToLogin()
-    {
-        echo "Redirecting to login page...<br>";
-        header("Location: /login");
-        exit();
-    }
+    // // Function to redirect to login page
+    // function redirectToLogin()
+    // {
+    //     echo "Redirecting to login page...<br>";
+    //     header("Location: /login");
+    //     exit();
+    // }
 
-    // Check if the user is trying to access the login page
-    $isLoginPage = ($urlPath === '/login' || $urlPath === '/login/');
+    // // Check if the user is trying to access the login page
+    // $isLoginPage = ($urlPath === '/login' || $urlPath === '/login/');
 
-    echo "Current URL path: " . $urlPath . "<br>";
-    echo "Is login page: " . ($isLoginPage ? "Yes" : "No") . "<br>";
-    echo "Is logged in: " . (isLoggedIn() ? "Yes" : "No") . "<br>";
+    // echo "Current URL path: " . $urlPath . "<br>";
+    // echo "Is login page: " . ($isLoginPage ? "Yes" : "No") . "<br>";
+    // echo "Is logged in: " . (isLoggedIn() ? "Yes" : "No") . "<br>";
 
-    // If not logged in and not trying to access the login page, redirect to login
-    if (!isLoggedIn() && !$isLoginPage) {
-        redirectToLogin();
-    }
+    // // If not logged in and not trying to access the login page, redirect to login
+    // if (!isLoggedIn() && !$isLoginPage) {
+    //     redirectToLogin();
+    // }
 
     $pagePath = BASE_PATH . "/src/pages$urlPath";
 

@@ -8,7 +8,7 @@
                     receipt_long
                 </i>
                 <span class="ml-3 text-2xl font-semibold">Order Management</span>
-                <a href="/orders/add-order" class="GLOBAL_BUTTON_BLUE ml-5">Add order</a>
+                <a href="/orders/add-order2" class="GLOBAL_BUTTON_BLUE ml-5">Add order</a>
             </div>
             <div class="GLOBAL_HEADER_USER flex items-center">
                 <div class="GLOBAL_HEADER_COLUMN text-right mr-4">
@@ -49,13 +49,11 @@
                 </table>
             </div>
             <div class="pagination mt-4 text-end">
-                <button onclick="prevPage()" class="">
-                    < Prev</button>
-                        <span id="pageButtons"></span>
-                        <button onclick="nextPage()" class="">Next ></button>
+                <button onclick="prevPage()" class="">< Prev</button>
+                <span id="pageButtons"></span>
+                <button onclick="nextPage()" class="">Next ></button>
             </div>
         </div>
-
     </div>
 </div>
 
