@@ -39,11 +39,6 @@
                             <label for="first-name">First Name</label>
                             <input id="first-name" type="text" name="first-name" placeholder="First name" required>
                         </div>
-                        <!-- Middle Name -->
-                        <div class="NEWLOGIN_INPUT_COLUMN_CONTAINER">
-                            <label for="middle-name">Middle Name</label>
-                            <input id="middle-name" type="text" name="middle-name" placeholder="Middle name" required>
-                        </div>
                         <!-- Last Name -->
                         <div class="NEWLOGIN_INPUT_COLUMN_CONTAINER">
                             <label for="middle-name">Last Name</label>
@@ -53,6 +48,11 @@
                         <div class="NEWLOGIN_INPUT_COLUMN_CONTAINER">
                             <label for="suffix">Suffix</label>
                             <input id="suffix" type="text" name="suffix" placeholder="Suffix">
+                        </div>
+                        <!-- Position -->
+                        <div class="NEWLOGIN_INPUT_COLUMN_CONTAINER">
+                            <label for="position">Position</label>
+                            <input id="position" type="text" name="position" placeholder="Position" required>
                         </div>
                     </div>
 
@@ -82,8 +82,8 @@
                         <div class="NEWLOGIN_INPUT_COLUMN_CONTAINER w-1/2">
                             <label for="gender">Gender</label>
                             <select id="gender" name="gender" required>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
+                                <option value="M">Male</option>
+                                <option value="F">Female</option>
                             </select>
                         </div>
                     </div>

@@ -1,11 +1,5 @@
 <?php
-$servername = "localhost";
-$username = "MCAVDB";
-$password = "password1010";
-$dbname = "MCAV";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+require "../utilities/db-connection.php";
 
 // Check connection
 if ($conn->connect_error) {
@@ -17,19 +11,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Data for employee_info
     $email = $_POST['email'];
     $first_name = $_POST['first-name'];
-    $middle_name = $_POST['middle-name'];
     $last_name = $_POST['last-name'];
     $suffix = $_POST['suffix'] ?? ''; // Optional field
     $contact_number = $_POST['contact-number'];
     $address = $_POST['address'];
     $hire_date = $_POST['hire-date'];
     $birth_date = $_POST['birth-date'];
-    $gender = $_POST['gender'];
+    $gender = $_POST['gender']; // Now 'M' or 'F'
+    $position = $_POST['position']; // Capture position from the form
     $password = $_POST['password'];
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
     $permission = $_POST['permission'] == 'admin' ? 1 : 0;
 
     // File upload handling
+    $profile_picture_path = ''; // Default value
     if (isset($_FILES['profilePicture']) && $_FILES['profilePicture']['error'] == 0) {
         $file = $_FILES['profilePicture'];
 
@@ -44,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Check if the file type is allowed
         if (in_array($fileType, $allowedTypes)) {
             // Define the target directory
-            $targetDir = __DIR__ . '/../public/assets/';
+            $targetDir = __DIR__ . '/../../public/assets/';
 
             // Ensure the target directory exists
             if (!is_dir($targetDir)) {
@@ -56,26 +51,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             // Move the uploaded file to the target directory
             if (move_uploaded_file($fileTmpName, $targetFile)) {
-                $profile_picture_path = 'public/assets/' . $fileName; // relative path for storing in the database
+                $profile_picture_path = 'assets/' . $fileName; // relative path for storing in the database
             } else {
                 die("Error: There was a problem uploading your file.");
             }
         } else {
             die("Error: Invalid file type.");
         }
-    } else {
-        die("Error: " . $_FILES['profilePicture']['error']);
     }
+    // else {
+    //     die("Error: " . $_FILES['profilePicture']['error']);
+    // }
 
     // Insert into employee_info
     $sql_info = "INSERT INTO employee_info (
-                    ProfilePicturePath, EmployeeFirstname, EmployeeMiddlename, EmployeeLastname, EmployeeSuffix, 
-                    EmployeeEmail, EmployeeContactNumber, EmployeeAddress, EmployeeHireDate, EmployeeBirthDate, 
-                    Gender, WebUserLevel, IsRemoved
+                    ProfilePicturePath, EmployeeFirstname, EmployeeLastname, EmployeeHireDate, Gender, Position, WebUserLevel, IsRemoved
                 ) VALUES (
-                    '$profile_picture_path', '$first_name', '$middle_name', '$last_name', '$suffix', 
-                    '$email', '$contact_number', '$address', '$hire_date', '$birth_date', 
-                    '$gender', '$permission', '0'
+                    '$profile_picture_path', '$first_name', '$last_name', '$hire_date', '$gender', '$position', '$permission', '0'
                 )";
 
     if ($conn->query($sql_info) === TRUE) {
@@ -100,3 +92,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 $conn->close();
 
+?>
