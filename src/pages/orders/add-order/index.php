@@ -559,7 +559,7 @@
 
                     <div class="PRODUCTS_INPUT_ITEMS_TOTAL GLOBAL_BOX_DIV">
                         <div class="PRODUCTS_INPUT_ITEMS_TOTAL_TITLE">
-                            <h1>Total Charge</h1>
+                            <h1>Total Charge</h1>   
                             <h1>Php 72.30</h1>
                         </div>
                         <div class="PRODUCTS_INPUT_ITEMS_TOTAL_BUTTONS">

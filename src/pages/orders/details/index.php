@@ -145,7 +145,7 @@
                 </div>
                 <div class="DETAILS_CONTAINER_ROW_RIGHT">
                     <div class="GLOBAL_SUBHEADER_TITLE">
-                        <h1>Order Information</h1>
+                        <h1>Transactions</h1>
                     </div>
                     <div class="DETAILS_CONTAINER_ROW_TABLE GLOBAL_BOX_DIV">
                         <table>
