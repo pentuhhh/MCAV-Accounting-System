@@ -11,7 +11,7 @@
             <div class="form-group UsernameSec">
                 <div class="flex flex-row mb-2">
                     <i class="material-symbols-rounded text-gray-300">person</i>
-                    <label for="username" class="block text-gray-300 font-bold  quantico">Email</label>
+                    <label for="username" class="block text-gray-300 font-bold  quantico">Username</label>
                 </div>
                 <input data-error="<?= var_export(isset($_SESSION["error"]["username"])); ?>" type="text" id="username" name="username" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline data-[error='true']:ring data-[error='true']:ring-[#DF166E]" placeholder="Enter username" required>
                 <span class="text-[#DF166E] text-sm pt-1"><?= $_SESSION["error"]["username"] ?? ""; ?></span>

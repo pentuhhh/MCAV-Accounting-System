@@ -49,9 +49,10 @@
                 </table>
             </div>
             <div class="pagination mt-4 text-end">
-                <button onclick="prevPage()" class="">< Prev</button>
-                <span id="pageButtons"></span>
-                <button onclick="nextPage()" class="">Next ></button>
+                <button onclick="prevPage()" class="">
+                    < Prev</button>
+                        <span id="pageButtons"></span>
+                        <button onclick="nextPage()" class="">Next ></button>
             </div>
         </div>
     </div>
@@ -105,7 +106,7 @@
     ];
 
     let currentPage = 1;
-    const rowsPerPage = 5;
+    const rowsPerPage = 13;
 
     function displayTable(page) {
         const tableBody = document.getElementById('ordersTable');
@@ -120,13 +121,31 @@
                 const cell = document.createElement('td');
                 if (key === 'OrderID') {
                     const link = document.createElement('a');
-                    link.href = `orderdetails.php?orderID=${item[key]}`;
+                    link.href = `orders/details/?orderID=${item[key]}`;
                     link.textContent = item[key];
+                    link.classList.add('order-id-link');
                     cell.appendChild(link);
                 } else {
                     cell.textContent = item[key];
                 }
-                // cell.classList.add('border', 'p-2');
+
+                if (key === 'Status') {
+                    switch (item[key]) {
+                        case 'Pending':
+                            cell.classList.add('status-pending');
+                            break;
+                        case 'Started':
+                            cell.classList.add('status-started');
+                            break;
+                        case 'Completed':
+                            cell.classList.add('status-completed');
+                            break;
+                        default:
+                            cell.classList.add('status-unknown');
+                            break;
+                    }
+                }
+
                 row.appendChild(cell);
             });
             tableBody.appendChild(row);

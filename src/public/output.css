@@ -1845,6 +1845,30 @@ select{
 
 /* End of Popup Classes */
 
+/* Table Colors */
+
+.order-id-link {
+  color: #00A1E2;
+}
+
+.status-pending {
+  color: #FEED03;
+}
+
+.status-started {
+  color: orange;
+}
+
+.status-completed {
+  color: #6FD273;
+}
+
+.status-unknown {
+  color: #707070;
+}
+
+/* End of Table Colors */
+
 .absolute{
   position: absolute;
 }
@@ -1864,10 +1888,6 @@ select{
 
 .mb-2{
   margin-bottom: 0.5rem;
-}
-
-.mb-3{
-  margin-bottom: 0.75rem;
 }
 
 .mb-4{
@@ -2053,10 +2073,6 @@ select{
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.p-2{
-  padding: 0.5rem;
-}
-
 .px-10{
   padding-left: 2.5rem;
   padding-right: 2.5rem;
@@ -2182,6 +2198,10 @@ select{
 
 .font-bold{
   font-weight: 700;
+}
+
+.font-normal{
+  font-weight: 400;
 }
 
 .font-semibold{
