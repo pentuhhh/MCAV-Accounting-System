@@ -1,6 +1,5 @@
 <?php
-session_start();
-echo session_id();
+
 // Variables
 $customerID = 0;
 $customerFname = '';
@@ -47,16 +46,16 @@ function populateVariables($conn){
     global $customerFname, $customerLname, $customerEmail, $customerPhone;
 
     if (isset($_POST['CustomerFname'])) {
-        $customerFname = sanitize_input($conn, $_POST['CustomerFname']);
+        $customerFname = sanitize_input($conn, $_POST['first-name']);
     }
     if (isset($_POST['CustomerLname'])) {
-        $customerLname = sanitize_input($conn, $_POST['CustomerLname']);
+        $customerLname = sanitize_input($conn, $_POST['last-name']);
     }
     if (isset($_POST['CustomerEmail'])) {
-        $customerEmail = sanitize_input($conn, $_POST['CustomerEmail']);
+        $customerEmail = sanitize_input($conn, $_POST['contact-email']);
     }
     if (isset($_POST['CustomerPhone'])) {
-        $customerPhone = sanitize_input($conn, $_POST['CustomerPhone']);
+        $customerPhone = sanitize_input($conn, $_POST['phone-number']);
     }
 
     if (isset($_POST['payment-method'])) {
@@ -214,14 +213,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
     foreach ($_SESSION['product_list'] as $product) {
         $productDescription = $product['productDescription'];
         $dimensions = $product['dimensions'];
-        $price =$product['price'];
         $amount = $product['amount'];
         $remarks = $product['remarks'];
 
         // Insert the data into the database or perform the desired action
-        $insertproductquery = "INSERT INTO products (orderID, productDescription, productDimensions, productPrice, productQuantity, productRemarks) VALUES (?, ?, ?, ?, ?, ?)";
+        $insertproductquery = "INSERT INTO products (orderID, productDescription, productDimensions, productQuantity, productRemarks) VALUES (?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($insertproductquery);
-        $stmt->bind_param("issdis", $orderID, $productDescription, $dimensions, $price ,$amount, $remarks);
+        $stmt->bind_param("issis", $orderID, $productDescription, $dimensions, $amount, $remarks);
 
         if (!$stmt->execute()) {
             echo "Error adding product: " . $stmt->error;
@@ -240,6 +238,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
     $conn->query($updatetotal);
 
     $stmt->close();
+    $conn->close();
 
     // Clear the product list from the session after insertion
     unset($_SESSION['product_list']);
@@ -248,126 +247,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
 // Close connection
 $conn->close();
 ?>
-
-
-<!DOCTYPE html>
-<html>
-    <head>
-
-    <script>
-        function enableInput(select) {
-            var processorSelect = document.getElementById("processor");
-            if (select.value === "bank-transfer") {
-                processorSelect.disabled = false;
-            } else {
-                processorSelect.disabled = true;
-            }
-        }
-    </script>
-    </head>
-    <body>
-        <form method="post">
-            Create Order<br>
-            <label for="fname">First Name:</label>
-            <input type="text" id="fname" name="CustomerFname" required><br><br>
-            
-            <label for="lname">Last Name:</label>
-            <input type="text" id="lname" name="CustomerLname" required><br><br>
-            
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="CustomerEmail" required><br><br>
-            
-            <label for="phone">Phone:</label>
-            <input type="text" id="phone" name="CustomerPhone" required><br><br>
-            
-
-            <label for="payment-method">Payment Method</label>
-                            <select name="payment-method" id="payment-method" onchange="enableInput(this)">
-                                <option value="cash">Cash</option>
-                                <option value="bank-transfer">Digital Wallet</option>
-                                <!-- Enter More Options -->
-                            </select>
-
-                            <label for="due-date">Due Date</label>
-                            <input id="due-date" name="due-date" type="date">
-
-                            <label for="processor">Processor</label>
-                        <select id="processor" name="processor" disabled>
-                            <option value="none">None</option>
-                            <option value="gcash">GCash</option>
-                            <option value="metrobank">Metrobank</option>
-                            <option value="metrobank">BDO</option>
-                            <option value="metrobank">Paypal</option>
-                            <!-- Enter More Options -->
-                        </select>
-                <br>
-                <input type="hidden" name="action" value="main">
-                <input type="submit" value="Submit">
-        </form>
-
-        <form id="productForm">
-
-            <input type="hidden" name="action" value="addProduct">
-
-            <label for="product-description">Product Description:</label>
-            <input id="product-description" type="text" name="product-description" placeholder="Product Description" required><br>
-
-            <label for="dimensions">Dimensions:</label>
-            <input id="dimensions" type="text" name="dimensions" placeholder="Dimensions" required><br>
-
-            <label for="amount">Amount:</label>
-            <input id="amount" type="number" name="amount" placeholder="Amount" required><br>
-
-            <label for="amount">Price:</label>
-            <input id="price" step="0.01" type="number" name="price" placeholder="price" required><br>
-
-            <label for="remarks">Remarks:</label>
-            <input id="remarks" type="text" name="remarks" placeholder="Remarks"><br>
-
-            <button type="button" onclick="addItemToList()">Add Item</button>
-        </form>
-        
-        <h2>Product List</h2>
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>Product Description</th>
-                        <th>Dimensions</th>
-                        <th>Amount</th>
-                        <th>Price</th>
-                        <th>Remarks</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-
-                    $totalSum = 0;
-
-                    if (isset($_SESSION['product_list']) && !empty($_SESSION['product_list'])) {
-                        foreach ($_SESSION['product_list'] as $index => $product) {
-
-                            $totalPrice = $product['amount'] * $product['price'];
-                            $totalSum += $totalPrice; // Add to the total sum
-
-                            echo "<tr>";
-                            echo "<td>" . htmlspecialchars($product['productDescription']) . "</td>";
-                            echo "<td>" . htmlspecialchars($product['dimensions']) . "</td>";
-                            echo "<td>" . htmlspecialchars($product['price']) . "</td>";
-                            echo "<td>" . htmlspecialchars($product['amount']) . "</td>";
-                            echo "<td>" . htmlspecialchars($product['remarks']) . "</td>";
-                            echo "<td><button type='button' onclick='deleteItem($index)'>Delete</button></td>";
-                            echo "</tr>";
-                        }
-                    } else {
-                        echo "<tr><td colspan='5'>No products added.</td></tr>";
-                    }
-                    ?>
-                </tbody>
-            </table>
-
-            <h3>Total Sum: <?php echo htmlspecialchars($totalSum); ?></h3>
-
         <script>
             function addItemToList() {
                 var formData = new FormData(document.getElementById("productForm"));
