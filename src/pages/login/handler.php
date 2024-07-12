@@ -1,14 +1,14 @@
 <?php
 require_once "../utilities/db-connection.php";
 
-echo "Session started. Session ID: " . session_id() . "<br>";
+// echo "Session started. Session ID: " . session_id() . "<br>";
 
-if (isset($_SESSION['username'])) {
-    echo "User is already logged in as: " . $_SESSION['username'] . "<br>";
-    echo "Redirecting to dashboard in 5 seconds...";
-    header("Refresh: 5; URL=/dashboard");
-    exit();
-}
+// if (isset($_SESSION['username'])) {
+//     echo "User is already logged in as: " . $_SESSION['username'] . "<br>";
+//     echo "Redirecting to dashboard in 5 seconds...";
+//     header("Refresh: 5; URL=/dashboard");
+//     exit();
+// }
 
 // Get credentials from POST data
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -37,15 +37,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['username'] = $username;
                 $_SESSION['user_level'] = $row['UserLevel'];
                 $_SESSION['account_status'] = $row['accountStatus'];
-                echo "Login successful.";
+                // echo "Login successful.";
                 // Redirect to a logged-in page or dashboard
                 header("Location: /dashboard");
                 exit();
             } else {
-                echo "Invalid password.";
+                $_SESSION['error']['password'] = "Invalid password.";
+                header("Location: /login");
+                exit();
             }
         } else {
-            echo "No user found with the provided username.";
+            $_SESSION['error']['username'] = "Invalid email.";
+            header("Location: /login");
+            exit();
         }
 
         $stmt->close();
