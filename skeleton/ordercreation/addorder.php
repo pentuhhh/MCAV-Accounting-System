@@ -1,4 +1,7 @@
 <?php
+if(session_id()){
+    session_destroy();  
+}
 
 session_start();
 echo session_id();
@@ -10,9 +13,7 @@ $customerEmail = '';
 $customerPhone = '';
 
 $paymentMethod = '';
-$duemonth;
-$dueday;
-$dueyear;
+$duedate;
 $paymentprocessor = '';
 $orderid;
 
@@ -66,16 +67,11 @@ function populateVariables($conn){
         $paymentMethod = sanitize_input($conn, $_POST['payment-method']);
     }
 
-    // Process due date fields
-    if (isset($_POST['month']) && isset($_POST['day']) && isset($_POST['year'])) {
-        $duemonth = sanitize_input($conn, $_POST['month']);
-        $dueday = sanitize_input($conn, $_POST['day']);
-        $dueyear = sanitize_input($conn, $_POST['year']);
-    }
-
     if (isset($_POST['processor'])) {
         $paymentprocessor = sanitize_input($conn, $_POST['processor']);
     }
+
+    
 }
 
 function userExists($conn){
@@ -148,6 +144,11 @@ if (isset($_POST['action']) && $_POST['action'] == 'deleteProduct') {
 //  MAIN    
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["action"] == "main") {
+    // Print the entire POST array to see what values are being sent
+    echo '<pre>';
+    print_r($_POST);
+    echo '</pre>';
+
     // Get values and store them into variables
     populateVariables($conn);
 
@@ -155,8 +156,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
     userExists($conn);
     // If user does not exist, it will add and remember the customer ID
     if ($customerID == 0) {
-        $createcustomer = "insert into Customers (customerfname, customerlname, customeremail, customerphone)
-                    values ('$customerFname','$customerLname','$customerEmail','$customerPhone');";
+        $createcustomer = "INSERT INTO Customers (customerfname, customerlname, customeremail, customerphone)
+                    VALUES ('$customerFname','$customerLname','$customerEmail','$customerPhone');";
         
         $conn->query($createcustomer);
 
@@ -170,34 +171,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
 
         echo "User does not exist new user added with ID: ". $customerID;
     } else {
-    // If user exists then just use that user
+        // If user exists then just use that user
         echo "User exists with ID: " . $customerID;
     }
 
-    //proceed to create order entry
-
-    $orderentryquery = "insert into orders (customerID, orderStartDate) values ('$customerID', curdate());";
+    // Proceed to create order entry
+    $orderentryquery = "INSERT INTO orders (customerID, orderStartDate) VALUES ('$customerID', curdate());";
     $conn->query($orderentryquery);
 
-
-    //retrieve order ID
-
-    $retrieveorderid = "select orderID from orders where customerID = '$customerID';";
+    // Retrieve order ID
+    $retrieveorderid = "SELECT orderID from orders where customerID = $customerID order by orderID desc limit 1;";
     $result = $conn->query($retrieveorderid);
     $row = $result->fetch_assoc();
-    $orderid = (int)$row['orderID'];
+    $orderID = $row['orderID'];
 
-    // convert due date to mysql format
+    // Retrieve and sanitize due date
+    if (isset($_POST['due-date'])) {
+        $duedate = sanitize_input($conn, $_POST['due-date']);
+        echo "Due date before sanitization: " . $_POST['due-date'] . "<br>";
+        echo "Due date after sanitization: " . $duedate . "<br>";
+    } else {
+        echo "Due date not set in POST array.";
+    }
 
-    $duedate = $dueyear . '-' . str_pad($duemonth, 2, '0', STR_PAD_LEFT) . '-' . str_pad($dueday, 2, '0', STR_PAD_LEFT);
+    // Validate the due date
+    if (!empty($duedate)) {
+        // Ensure due date is in correct format (YYYY-MM-DD)
+        $dateTime = DateTime::createFromFormat('Y-m-d', $duedate);
+        if ($dateTime && $dateTime->format('Y-m-d') === $duedate) {
+            // Create payment plan entry
+            $paymentplanquery = "INSERT INTO payment_plans (orderID, TotalAmount, dueDate, paymentMethod, PaymentProcessor) VALUES 
+                ('$orderID', 0, '$duedate', '$paymentMethod', '$paymentprocessor');";
+            if ($conn->query($paymentplanquery) === TRUE) {
+                echo "Payment plan created successfully.";
+            } else {
+                echo "Error creating payment plan: " . $conn->error;
+            }
+        } else {
+            echo "Error: Invalid due date format.";
+        }
+    } else {
+        echo "Error: Due date value is not set properly.";
+    }
 
-    //create paymentplan entry
-
-    $paymentplanquery = "insert into payment_plans (orderID, TotalAmount, dueDate, paymentMethod, PaymentProcessor, ) values 
-        ('$orderid', 0, '$duedate', '$paymentMethod', '$paymentprocessor');";
-
-    // insert products
-
+    // Insert products
     foreach ($_SESSION['product_list'] as $product) {
         $productDescription = $product['productDescription'];
         $dimensions = $product['dimensions'];
@@ -205,9 +222,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
         $remarks = $product['remarks'];
 
         // Insert the data into the database or perform the desired action
-        $insertproductquery = "INSERT INTO products (orderID, productDescription, productDimensions, productQuantity, productPrice, productRemarks) VALUES (?, ?, ?, ?, ?, ?)";
+        $insertproductquery = "INSERT INTO products (orderID, productDescription, productDimensions, productQuantity, productRemarks) VALUES (?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($insertproductquery);
-        $stmt->bind_param("ssis", $orderID ,$productDescription, $dimensions, $amount, $remarks);
+        $stmt->bind_param("issis", $orderID, $productDescription, $dimensions, $amount, $remarks);
 
         if (!$stmt->execute()) {
             echo "Error adding product: " . $stmt->error;
@@ -215,22 +232,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
         }
     }
 
-    // retrive price
+    // Retrieve price
+    $retrievetotal = "SELECT SUM(ProductPrice * ProductQuantity) AS TotalPrice FROM products WHERE OrderID = '$orderID';";
+    $result = $conn->query($retrievetotal);
+    $row = $result->fetch_assoc();
+    $totalamount = (float)$row['TotalPrice'];
 
-    // $retrievetotal = "SELECT SUM(ProductPrice * ProductQuantity) AS TotalPrice FROM products WHERE OrderID = '$orderID';";
-    // $result = $conn->query($retrievetotal);
-    // $row = $result->fetch_assoc();
-    // $totalamount = (float)$row['TotalPrice'];
-
-    // update totalamount
-
-    $updatetotal = "update payment_plans set totalAmount = '$totalamount' where orderID = '$orderID';";
+    // Update total amount
+    $updatetotal = "UPDATE payment_plans SET totalAmount = '$totalamount' WHERE orderID = '$orderID';";
     $conn->query($updatetotal);
-
 
     $stmt->close();
     $conn->close();
-
 
     // Clear the product list from the session after insertion
     unset($_SESSION['product_list']);
@@ -239,6 +252,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
 // Close connection
 $conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -279,11 +293,7 @@ $conn->close();
                             </select>
 
                             <label for="due-date">Due Date</label>
-                            <div class="flex flex-row gap-2">
-                                <input type="number" id="month" min="1" max="12" size="2" placeholder="Month" required>
-                                <input type="number" id="day" min="1" max="31" size="2" placeholder="Day" required>
-                                <input type="number" id="year" min="1900" max="2100" placeholder="Year" size="4" required>
-                            </div>
+                            <input id="due-date" name="due-date" type="date">
 
                             <label for="processor">Processor</label>
                         <select id="processor" name="processor" disabled>
