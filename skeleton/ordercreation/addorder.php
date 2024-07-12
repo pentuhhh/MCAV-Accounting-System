@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+echo session_id();
 // Variables
 $customerID = 0;
 $customerFname = '';
@@ -11,13 +14,22 @@ $duemonth;
 $dueday;
 $dueyear;
 $paymentprocessor = '';
+$orderid;
+
+
+//Products and stuff
+
+$productDescription;
+$dimensions;
+$amount;
+$remarks;
+
 // Database connection parameters
 $servername = "localhost";
 $username = "MCAVDB";
 $password = "password1010";
 $dbname = "MCAV";
 
-$orderid;
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -26,6 +38,8 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+
+//
 
 // Function to sanitize input to prevent SQL injection
 function sanitize_input($conn, $data) {
@@ -82,7 +96,58 @@ function userExists($conn){
     }
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["action"] == "search") {
+// add products
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['action'] == 'addProduct') {
+    $productDescription = $_POST['product-description'];
+    $dimensions = $_POST['dimensions'];
+    $price = $_POST['price'];
+    $amount = $_POST['amount'];
+    $remarks = $_POST['remarks'];
+
+    // Validate and sanitize input data
+    $productDescription = sanitize_input($conn, $productDescription);
+    $dimensions = sanitize_input($conn, $dimensions);
+    $price = sanitize_input($conn, $price);
+    $amount = sanitize_input($conn, $amount);
+    $remarks = sanitize_input($conn, $remarks);
+
+    // Prepare product data as an associative array
+    $product = [
+        'productDescription' => $productDescription,
+        'dimensions' => $dimensions,
+        'price' => $price,
+        'amount' => $amount,
+        'remarks' => $remarks
+    ];
+
+    // Check if the product list already exists in the session
+    if (!isset($_SESSION['product_list'])) {
+        $_SESSION['product_list'] = [];
+    }
+
+    // Add the new product to the product list
+    $_SESSION['product_list'][] = $product;
+
+    echo "Product added to the list.";
+    exit;
+}
+
+if (isset($_POST['action']) && $_POST['action'] == 'deleteProduct') {
+    $index = $_POST['index'];
+
+    if (isset($_SESSION['product_list'][$index])) {
+        array_splice($_SESSION['product_list'], $index, 1);
+        echo "Product removed from the list.";
+    } else {
+        echo "Invalid product index.";
+    }
+    exit;
+}
+
+//  MAIN    
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["action"] == "main") {
     // Get values and store them into variables
     populateVariables($conn);
 
@@ -111,18 +176,64 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
 
     //proceed to create order entry
 
-    $orderentryquery = "insert into orders (customerId, OrderstartDate) values ('$customerID', curdate());";
+    $orderentryquery = "insert into orders (customerID, orderStartDate) values ('$customerID', curdate());";
     $conn->query($orderentryquery);
+
 
     //retrieve order ID
 
-    $retrieveorderid ="select orderID from orders where customerID = '$customerID';";
+    $retrieveorderid = "select orderID from orders where customerID = '$customerID';";
     $result = $conn->query($retrieveorderid);
     $row = $result->fetch_assoc();
     $orderid = (int)$row['orderID'];
 
+    // convert due date to mysql format
+
+    $duedate = $dueyear . '-' . str_pad($duemonth, 2, '0', STR_PAD_LEFT) . '-' . str_pad($dueday, 2, '0', STR_PAD_LEFT);
+
     //create paymentplan entry
 
+    $paymentplanquery = "insert into payment_plans (orderID, TotalAmount, dueDate, paymentMethod, PaymentProcessor, ) values 
+        ('$orderid', 0, '$duedate', '$paymentMethod', '$paymentprocessor');";
+
+    // insert products
+
+    foreach ($_SESSION['product_list'] as $product) {
+        $productDescription = $product['productDescription'];
+        $dimensions = $product['dimensions'];
+        $amount = $product['amount'];
+        $remarks = $product['remarks'];
+
+        // Insert the data into the database or perform the desired action
+        $insertproductquery = "INSERT INTO products (orderID, productDescription, productDimensions, productQuantity, productPrice, productRemarks) VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($insertproductquery);
+        $stmt->bind_param("ssis", $orderID ,$productDescription, $dimensions, $amount, $remarks);
+
+        if (!$stmt->execute()) {
+            echo "Error adding product: " . $stmt->error;
+            break;
+        }
+    }
+
+    // retrive price
+
+    // $retrievetotal = "SELECT SUM(ProductPrice * ProductQuantity) AS TotalPrice FROM products WHERE OrderID = '$orderID';";
+    // $result = $conn->query($retrievetotal);
+    // $row = $result->fetch_assoc();
+    // $totalamount = (float)$row['TotalPrice'];
+
+    // update totalamount
+
+    $updatetotal = "update payment_plans set totalAmount = '$totalamount' where orderID = '$orderID';";
+    $conn->query($updatetotal);
+
+
+    $stmt->close();
+    $conn->close();
+
+
+    // Clear the product list from the session after insertion
+    unset($_SESSION['product_list']);
 }
 
 // Close connection
@@ -159,11 +270,7 @@ $conn->close();
             <label for="phone">Phone:</label>
             <input type="text" id="phone" name="CustomerPhone" required><br><br>
             
-            <input type="hidden" name="action" value="search">
-            <input type="submit" value="Submit">
 
-
-            <br><br>
             <label for="payment-method">Payment Method</label>
                             <select name="payment-method" id="payment-method" onchange="enableInput(this)">
                                 <option value="cash">Cash</option>
@@ -187,7 +294,114 @@ $conn->close();
                             <option value="metrobank">Paypal</option>
                             <!-- Enter More Options -->
                         </select>
+                <br>
+                <input type="hidden" name="action" value="main">
+                <input type="submit" value="Submit">
         </form>
+
+        <form id="productForm">
+
+            <input type="hidden" name="action" value="addProduct">
+
+            <label for="product-description">Product Description:</label>
+            <input id="product-description" type="text" name="product-description" placeholder="Product Description" required><br>
+
+            <label for="dimensions">Dimensions:</label>
+            <input id="dimensions" type="text" name="dimensions" placeholder="Dimensions" required><br>
+
+            <label for="amount">Amount:</label>
+            <input id="amount" type="number" name="amount" placeholder="Amount" required><br>
+
+            <label for="amount">Price:</label>
+            <input id="price" step="0.01" type="number" name="price" placeholder="price" required><br>
+
+            <label for="remarks">Remarks:</label>
+            <input id="remarks" type="text" name="remarks" placeholder="Remarks" required><br>
+
+            <button type="button" onclick="addItemToList()">Add Item</button>
+        </form>
+        
+        <h2>Product List</h2>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Product Description</th>
+                        <th>Dimensions</th>
+                        <th>Amount</th>
+                        <th>Price</th>
+                        <th>Remarks</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+
+                    $totalSum = 0;
+
+                    if (isset($_SESSION['product_list']) && !empty($_SESSION['product_list'])) {
+                        foreach ($_SESSION['product_list'] as $index => $product) {
+
+                            $totalPrice = $product['amount'] * $product['price'];
+                            $totalSum += $totalPrice; // Add to the total sum
+
+                            echo "<tr>";
+                            echo "<td>" . htmlspecialchars($product['productDescription']) . "</td>";
+                            echo "<td>" . htmlspecialchars($product['dimensions']) . "</td>";
+                            echo "<td>" . htmlspecialchars($product['price']) . "</td>";
+                            echo "<td>" . htmlspecialchars($product['amount']) . "</td>";
+                            echo "<td>" . htmlspecialchars($product['remarks']) . "</td>";
+                            echo "<td><button type='button' onclick='deleteItem($index)'>Delete</button></td>";
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='5'>No products added.</td></tr>";
+                    }
+                    ?>
+                </tbody>
+            </table>
+
+            <h3>Total Sum: <?php echo htmlspecialchars($totalSum); ?></h3>
+
+        <script>
+            function addItemToList() {
+                var formData = new FormData(document.getElementById("productForm"));
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "", true);
+
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        // handle the response from the server
+                        alert(xhr.responseText);
+                        location.reload();
+                    }
+                };
+
+                xhr.send(formData);
+            }
+
+            function deleteItem(index) {
+                var formData = new FormData();
+                formData.append('action', 'deleteProduct');
+                formData.append('index', index);
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "", true);
+
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        // handle the response from the server
+                        alert(xhr.responseText);
+                        // Refresh the page to display the updated product list
+                        location.reload();
+                    }
+                };
+
+                xhr.send(formData);
+            }
+            
+            
+        </script>
 
     
     </body>
