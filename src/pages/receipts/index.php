@@ -87,11 +87,9 @@
                             <td>Cash</td>
                             <td>Php 1,000.00</td>
                             <td>2021-10-10</td>
-                            <td>
-                                <button class="GLOBAL_TABLE_BUTTON_DELETE">
-                                    <i class="material-symbols-rounded text-[14px]">
-                                        delete_forever
-                                    </i>
+                            <td class="flex flex-row justify-center">
+                                <button class="text-[#DF166E]" onclick="return confirm('Are you sure you want to delete row?');">
+                                    Delete
                                 </button>
                             </td>
                         </tr>
