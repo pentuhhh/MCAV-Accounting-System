@@ -92,7 +92,7 @@ require "dashboard.php";
                     </tbody>
                 </table>
             </div>
-            <a href="" class="DASHBOARD_RECENT_SHOW_A">Show all</a>
+            <a href="/orders" class="DASHBOARD_RECENT_SHOW_A">Show all</a>
         </div>
     </div>
 </div>
