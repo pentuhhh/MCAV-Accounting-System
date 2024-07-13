@@ -101,8 +101,10 @@ require "dashboard.php";
 $conn->close();
 ?>
 
+<!-- JavaScript Section for Data Handling and Display -->
 <script>
-    
+    const data = <?php echo json_encode($rows); ?>;
+
     function displayTable() {
         const tableBody = document.getElementById('ordersTable');
         tableBody.innerHTML = "";
