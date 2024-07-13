@@ -668,6 +668,30 @@
 		grid-template-columns: 1fr;
 		width: 75%;
 	}
+	
+	.LOGIN_CONTAINER_LOGINBOX_FORM_TITLE{
+		@apply flex flex-row mb-2 items-center;
+	}
+	
+	.LOGIN_CONTAINER_LOGINBOX_FORM_TITLE_INPUT_TEXT{
+		 @apply text-gray-300 font-bold justify-center;
+	}
+	.LOGIN_CONTAINER_LOGINBOX_FORM_ERROR{
+		@apply text-[#DF166E] text-sm pt-1;
+	}
+
+	.LOGIN_CONTAINER_LOGINBOX_FORM_LOGIN{
+		@apply flex flex-col items-center;
+	}
+
+	.LOGIN_CONTAINER_LOGINBOX_FORM_LOGIN_BUTTON{
+		@apply bg-[#00A1E2] hover:bg-[#007BB5] duration-300 text-white font-bold py-0.5 px-10 mb-6 mt-5 rounded;
+	}
+	
+	.LOGIN_CONTAINER_LOGINBOX_FORM_LOGIN_PICTURE{
+		@apply mb-4;
+	}
+	
 	/* End of Login Classes */
 
 	/* Popup Classes */
