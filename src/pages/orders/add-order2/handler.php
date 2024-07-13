@@ -21,21 +21,7 @@ $amount;
 $remarks;
 
 // Database connection parameters
-$servername = "localhost";
-$username = "MCAVDB";
-$password = "password1010";
-$dbname = "MCAV";
-
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-//
+require "../utilities/db-connection.php";
 
 // Function to sanitize input to prevent SQL injection
 function sanitize_input($conn, $data) {
@@ -236,6 +222,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
     // Update total amount
     $updatetotal = "UPDATE payment_plans SET totalAmount = '$totalamount' WHERE orderID = '$orderID';";
     $conn->query($updatetotal);
+
+    // Update balance to equal total amount
+    $updatebalance = "UPDATE payment_plans SET balance = '$totalamount' WHERE orderID = '$orderID';";
 
     $stmt->close();
     $conn->close();
