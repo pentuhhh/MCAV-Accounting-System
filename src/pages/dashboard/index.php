@@ -86,7 +86,7 @@ require "dashboard.php";
                                 <td><?php echo $row['Order Date']; ?></td>
                                 <td>$<?php echo number_format($row['Amount'], 2); ?></td>
                                 <td><?php echo $row['Deadline']; ?></td>
-                                <td><?php echo $row['Status']; 
+                                <td><?php
                                     if ($row['Status'] == 'Completed') {
                                         echo '<span class= "status-completed">Completed</span>';
                                     }else if($row['Status'] == 'Pending'){
