@@ -249,8 +249,8 @@
                             </tr>
                         </table>
                         <div class="DETAILS_CONTAINER_ROW_BUTTON">
-                            <button class="GLOBAL_BUTTON_RED">Cancel Order</button>
-                            <button class="GLOBAL_BUTTON_GREEN">Complete</button>
+                            <button class="GLOBAL_BUTTON_RED" onclick="return confirm('Are you sure you want cancel order?')">Cancel Order </button>
+                            <button class="GLOBAL_BUTTON_GREEN" onclick="return confirm('Are you sure you want to complete the order?')">Complete</button>
                         </div>
                     </div>
                 </div>
