@@ -1269,6 +1269,11 @@ select{
   color: rgb(0 161 226 / var(--tw-text-opacity));
 }
 
+.GLOBAL_TABLE a{
+  --tw-text-opacity: 1;
+  color: rgb(0 161 226 / var(--tw-text-opacity));
+}
+
 .GLOBAL_BUTTON_GRAY{
   border-radius: 1.5rem;
   --tw-bg-opacity: 1;
@@ -1931,6 +1936,10 @@ select{
 
 .mb-4{
   margin-bottom: 1rem;
+}
+
+.mb-5{
+  margin-bottom: 1.25rem;
 }
 
 .mb-6{

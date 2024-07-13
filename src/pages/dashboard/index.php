@@ -77,7 +77,7 @@ require "dashboard.php";
                     <tbody>
                         <?php while ($row = $recentOrders->fetch_assoc()) { ?>
                             <tr>
-                                <td class="GLOBAL_TABLE_ID">
+                                <td>
                                     <a href = "/orders/details/?orderID=<?php echo $row['Order ID']; ?>">
                                         <?php echo $row['Order ID']; ?>
                                     </a>

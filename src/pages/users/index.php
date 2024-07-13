@@ -43,13 +43,13 @@
                             <th>Email</th>
                             <th>Contact Number</th>
                             <th>Position</th>
-                            <th></th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
 
                         <tr>
-                            <td><a href="" onclick="openModal(), event.preventDefault()" class="GLOBAL_TABLE_ID">1</a></td>
+                            <td><a href="" onclick="openModal(), event.preventDefault()">1</a></td>
                             <td></td>
                             <td>Pastor</td>
                             <td>Alnino</td>

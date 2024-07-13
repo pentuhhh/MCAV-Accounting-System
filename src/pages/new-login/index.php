@@ -29,10 +29,10 @@
 
                     <!-- Column 1 -->
                     <div class="NEWLOGIN_INPUT_COLUMN">
-                        <!-- Email -->
+                        <!-- username -->
                         <div class="NEWLOGIN_INPUT_COLUMN_CONTAINER">
-                            <label for="email">Email</label>
-                            <input id="email" type="email" name="email" placeholder="Email" required>
+                            <label for="username">Username</label>
+                            <input id="username" type="text" name="username" placeholder="Username" required>
                         </div>
                         <!-- First Name -->
                         <div class="NEWLOGIN_INPUT_COLUMN_CONTAINER">
