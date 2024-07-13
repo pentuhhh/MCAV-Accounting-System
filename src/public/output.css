@@ -1590,13 +1590,6 @@ select{
 
 /* Products Input Classes */
 
-.PRODUCTS_INPUT{
-  flex-grow: 1;
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
-  padding-bottom: 2.5rem;
-}
-
 .PRODUCTS_INPUT_NOTE{
   display: flex;
   flex-direction: row;
@@ -1677,15 +1670,6 @@ select{
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-}
-
-.PRODUCTS_INPUT_COLUMN{
-  display: flex;
-  width: 100%;
-  -moz-columns: 2;
-       columns: 2;
-  flex-direction: row;
-  gap: 1.25rem;
 }
 
 .PRODUCT_INPUT_QUANTITY{
@@ -1947,10 +1931,6 @@ select{
 
 .mb-4{
   margin-bottom: 1rem;
-}
-
-.mb-5{
-  margin-bottom: 1.25rem;
 }
 
 .mb-6{

@@ -77,7 +77,11 @@ require "dashboard.php";
                     <tbody>
                         <?php while ($row = $recentOrders->fetch_assoc()) { ?>
                             <tr>
-                                <td class="GLOBAL_TABLE_ID"><?php echo $row['Order ID']; ?></td>
+                                <td class="GLOBAL_TABLE_ID">
+                                    <a href = "/orders/details/?orderID=<?php echo $row['Order ID']; ?>">
+                                        <?php echo $row['Order ID']; ?>
+                                    </a>
+                                </td>
                                 <td><?php echo $row['Customer Name']; ?></td>
                                 <td><?php echo $row['Order Date']; ?></td>
                                 <td>$<?php echo number_format($row['Amount'], 2); ?></td>
