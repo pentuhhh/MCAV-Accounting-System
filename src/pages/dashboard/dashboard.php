@@ -40,36 +40,25 @@ $totalSales = fetchSingleValue($conn, "
 // Fetch Recent Orders
 $recentOrdersQuery = "
     SELECT
-        o.orderID AS 'Order ID',
-        CONCAT(c.customerFname, ' ', c.customerLname) AS 'Customer Name',
-        o.orderStartDate AS 'Order Date',
+        o.OrderID AS 'Order ID',
+        CONCAT(c.CustomerFname, ' ', c.CustomerLname) AS 'Customer Name',
+        o.OrderStartDate AS 'Order Date',
         pp.TotalAmount AS 'Amount',
         o.OrderDeadline AS 'Deadline',
-        o.OrderStatusCode AS 'Status'
+        CASE
+            WHEN o.OrderStatusCode = 1 THEN 'Pending'
+            WHEN o.OrderStatusCode = 2 THEN 'Started'
+            WHEN o.OrderStatusCode = 3 THEN 'Completed'
+            ELSE 'Unknown'
+        END AS 'Status'
     FROM orders o
     INNER JOIN payment_plans pp ON pp.orderID = o.orderID
     INNER JOIN customers c ON o.customerID = c.customerID
-    ORDER BY o.OrderDeadline ASC LIMIT 5
+    WHERE o.isremoved = 0
+    ORDER BY o.OrderStartDate DESC
+    LIMIT 5
 ";
 
-$sql = "SELECT      
-            o.OrderID,      
-            CONCAT(c.CustomerFname, ' ', c.CustomerLname) AS CustomerName,           
-            o.OrderStartDate,
-            p.totalamount,      
-            o.OrderDeadline,      
-            CASE
-                WHEN o.OrderStatusCode = 1 THEN 'Pending'
-                WHEN o.OrderStatusCode = 2 THEN 'Started'
-                WHEN o.OrderStatusCode = 3 THEN 'Completed'
-                ELSE 'Unknown'
-            END AS Status
-        FROM      
-            orders o     
-        INNER JOIN customers c ON o.customerid = c.customerID
-        INNER JOIN payment_plans p ON p.orderID = o.orderID
-        WHERE o.isremoved = 0 
-        ORDER BY o.OrderStartDate DESC;";
 
 
 $recentOrders = $conn->query($recentOrdersQuery);
