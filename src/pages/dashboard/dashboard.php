@@ -59,8 +59,6 @@ $recentOrdersQuery = "
     LIMIT 5
 ";
 
-
-
 $recentOrders = $conn->query($recentOrdersQuery);
 if ($recentOrders === false) {
     die("Query failed: " . $conn->error);

@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.3.0, for macos14.2 (arm64)
+-- MySQL dump 10.13  Distrib 8.4.1, for Win64 (x86_64)
 --
 -- Host: localhost    Database: MCAV
 -- ------------------------------------------------------
--- Server version	8.3.0
+-- Server version	8.0.38
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `Action_Logs`
+-- Table structure for table `action_logs`
 --
 
-DROP TABLE IF EXISTS `Action_Logs`;
+DROP TABLE IF EXISTS `action_logs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Action_Logs` (
+CREATE TABLE `action_logs` (
   `logID` int NOT NULL AUTO_INCREMENT,
   `EmployeeWebID` int NOT NULL,
   `PermissionsID` int NOT NULL,
@@ -41,12 +41,12 @@ CREATE TABLE `Action_Logs` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Action_Logs`
+-- Dumping data for table `action_logs`
 --
 
-LOCK TABLES `Action_Logs` WRITE;
-/*!40000 ALTER TABLE `Action_Logs` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Action_Logs` ENABLE KEYS */;
+LOCK TABLES `action_logs` WRITE;
+/*!40000 ALTER TABLE `action_logs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `action_logs` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -93,7 +93,7 @@ CREATE TABLE `customers` (
   `CustomerEmail` varchar(32) NOT NULL,
   `CustomerPhone` varchar(11) NOT NULL,
   PRIMARY KEY (`CustomerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,7 +102,7 @@ CREATE TABLE `customers` (
 
 LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
-INSERT INTO `customers` VALUES (1,'John','Doe','john.doe@example.com','1234567890'),(2,'Jane','Smith','jane.smith@example.com','1234567891'),(3,'Alice','Johnson','alice.johnson@example.com','1234567892'),(4,'Bob','Williams','bob.williams@example.com','1234567893'),(5,'Carol','Brown','carol.brown@example.com','1234567894'),(6,'David','Jones','david.jones@example.com','1234567895'),(7,'Eve','Garcia','eve.garcia@example.com','1234567896'),(8,'Frank','Martinez','frank.martinez@example.com','1234567897'),(9,'Grace','Lee','grace.lee@example.com','1234567898'),(10,'Hank','Perez','hank.perez@example.com','1234567899'),(11,'Ivy','Clark','ivy.clark@example.com','1234567800'),(12,'Jack','Lewis','jack.lewis@example.com','1234567801'),(13,'Kara','Robinson','kara.robinson@example.com','1234567802'),(14,'Leo','Walker','leo.walker@example.com','1234567803'),(15,'Mia','Young','mia.young@example.com','1234567804'),(16,'Noah','Harris','noah.harris@example.com','1234567805'),(17,'Olivia','King','olivia.king@example.com','1234567806'),(18,'Paul','Scott','paul.scott@example.com','1234567807'),(19,'Quinn','Green','quinn.green@example.com','1234567808'),(20,'Ruth','Adams','ruth.adams@example.com','1234567809');
+INSERT INTO `customers` VALUES (1,'John','Doe','john.doe@example.com','1234567890'),(2,'Jane','Smith','jane.smith@example.com','1234567891'),(3,'Alice','Johnson','alice.johnson@example.com','1234567892'),(4,'Bob','Williams','bob.williams@example.com','1234567893'),(5,'Carol','Brown','carol.brown@example.com','1234567894'),(6,'David','Jones','david.jones@example.com','1234567895'),(7,'Eve','Garcia','eve.garcia@example.com','1234567896'),(8,'Frank','Martinez','frank.martinez@example.com','1234567897'),(9,'Grace','Lee','grace.lee@example.com','1234567898'),(10,'Hank','Perez','hank.perez@example.com','1234567899'),(11,'Ivy','Clark','ivy.clark@example.com','1234567800'),(12,'Jack','Lewis','jack.lewis@example.com','1234567801'),(13,'Kara','Robinson','kara.robinson@example.com','1234567802'),(14,'Leo','Walker','leo.walker@example.com','1234567803'),(15,'Mia','Young','mia.young@example.com','1234567804'),(16,'Noah','Harris','noah.harris@example.com','1234567805'),(17,'Olivia','King','olivia.king@example.com','1234567806'),(18,'Paul','Scott','paul.scott@example.com','1234567807'),(19,'Quinn','Green','quinn.green@example.com','1234567808'),(20,'Ruth','Adams','ruth.adams@example.com','1234567809'),(21,'rio','pazer','rony@gmail.com','09927822777');
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -124,9 +124,9 @@ CREATE TABLE `employee_credentials` (
   PRIMARY KEY (`EmployeeWebID`),
   KEY `PermissionsID` (`PermissionsID`),
   KEY `EmployeeID` (`EmployeeID`),
-  CONSTRAINT `employee_credentials_ibfk_1` FOREIGN KEY (`PermissionsID`) REFERENCES `Permissions` (`PermissionsID`),
+  CONSTRAINT `employee_credentials_ibfk_1` FOREIGN KEY (`PermissionsID`) REFERENCES `permissions` (`PermissionsID`),
   CONSTRAINT `employee_credentials_ibfk_2` FOREIGN KEY (`EmployeeID`) REFERENCES `employee_info` (`EmployeeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -135,7 +135,7 @@ CREATE TABLE `employee_credentials` (
 
 LOCK TABLES `employee_credentials` WRITE;
 /*!40000 ALTER TABLE `employee_credentials` DISABLE KEYS */;
-INSERT INTO `employee_credentials` VALUES (1,1,1,'jdoe',_binary 'password1\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',1,'Activated'),(2,2,2,'jsmith',_binary 'password2\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',2,'Activated'),(3,3,3,'ajohnson',_binary 'password3\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',1,'Deactivated'),(4,4,4,'bwilliams',_binary 'password4\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',3,'Activated'),(5,5,5,'cbrown',_binary 'password5\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',1,'Activated'),(6,6,6,'djones',_binary 'password6\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',2,'Deactivated'),(7,7,7,'egarcia',_binary 'password7\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',1,'Activated'),(8,8,8,'fmartinez',_binary 'password8\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',3,'Activated'),(9,9,9,'glee',_binary 'password9\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',2,'Deactivated'),(10,10,10,'hperez',_binary 'password10\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',1,'Activated'),(11,11,11,'iclark',_binary 'password11\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',3,'Activated'),(12,12,12,'jlewis',_binary 'password12\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',1,'Deactivated'),(13,13,13,'krobinson',_binary 'password13\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',2,'Activated'),(14,14,14,'lwalker',_binary 'password14\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',1,'Activated'),(15,15,15,'myoung',_binary 'password15\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',3,'Deactivated'),(16,16,16,'nharris',_binary 'password16\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',2,'Activated'),(17,17,17,'oking',_binary 'password17\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',1,'Activated'),(18,18,18,'pscott',_binary 'password18\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',3,'Deactivated'),(19,19,19,'qgreen',_binary 'password19\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',2,'Activated'),(20,20,20,'radams',_binary 'password20\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',1,'Activated');
+INSERT INTO `employee_credentials` VALUES (1,1,1,'jdoe',_binary 'password1\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',1,'Activated'),(2,2,2,'jsmith',_binary 'password2\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',2,'Activated'),(3,3,3,'ajohnson',_binary 'password3\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',1,'Deactivated'),(4,4,4,'bwilliams',_binary 'password4\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',3,'Activated'),(5,5,5,'cbrown',_binary 'password5\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',1,'Activated'),(6,6,6,'djones',_binary 'password6\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',2,'Deactivated'),(7,7,7,'egarcia',_binary 'password7\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',1,'Activated'),(8,8,8,'fmartinez',_binary 'password8\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',3,'Activated'),(9,9,9,'glee',_binary 'password9\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',2,'Deactivated'),(10,10,10,'hperez',_binary 'password10\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',1,'Activated'),(11,11,11,'iclark',_binary 'password11\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',3,'Activated'),(12,12,12,'jlewis',_binary 'password12\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',1,'Deactivated'),(13,13,13,'krobinson',_binary 'password13\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',2,'Activated'),(14,14,14,'lwalker',_binary 'password14\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',1,'Activated'),(15,15,15,'myoung',_binary 'password15\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',3,'Deactivated'),(16,16,16,'nharris',_binary 'password16\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',2,'Activated'),(17,17,17,'oking',_binary 'password17\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',1,'Activated'),(18,18,18,'pscott',_binary 'password18\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',3,'Deactivated'),(19,19,19,'qgreen',_binary 'password19\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',2,'Activated'),(20,20,20,'radams',_binary 'password20\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',1,'Activated'),(21,1,21,'ron_ramas@yahoo.com',_binary '$2y$10$Uh10bYq.GF9HLn7pbNnZxuXkUrFKbUXxj5AlAJGYlLAEvV9uyPLXW',0,'Activated'),(22,1,22,'ronpatrickramas7@gmail.com',_binary '$2y$10$IK33GHPgN0bo08adECs88Oyx6jBlmbZH/2puJwOE0QzbiB4zmZRse',0,'Activated'),(23,1,26,'test',_binary '$2y$10$fmnXFlb1Iy6hwdtk.cWzMuvRuRcOVO5X1uzEWFDUhulE8TXLrmWDy',0,'Activated'),(24,1,27,'tests',_binary '$2y$10$4GlIPUi6Kf/a3W8tr7P.CuugOgElOdj4fM2Yu/OJt4tvgOW3WVqVq',0,'Activated');
 /*!40000 ALTER TABLE `employee_credentials` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -158,7 +158,7 @@ CREATE TABLE `employee_info` (
   `IsRemoved` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`EmployeeID`),
   CONSTRAINT `employee_info_chk_1` CHECK ((`Gender` in (_utf8mb4'M',_utf8mb4'F')))
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -167,7 +167,7 @@ CREATE TABLE `employee_info` (
 
 LOCK TABLES `employee_info` WRITE;
 /*!40000 ALTER TABLE `employee_info` DISABLE KEYS */;
-INSERT INTO `employee_info` VALUES (1,'path1.jpg','John','Doe','2020-01-01','M','Manager',1,0),(2,'path2.jpg','Jane','Smith','2020-02-01','F','Developer',2,0),(3,'path3.jpg','Alice','Johnson','2020-03-01','F','Designer',1,0),(4,'path4.jpg','Bob','Williams','2020-04-01','M','Tester',3,0),(5,'path5.jpg','Carol','Brown','2020-05-01','F','Support',1,0),(6,'path6.jpg','David','Jones','2020-06-01','M','Manager',2,0),(7,'path7.jpg','Eve','Garcia','2020-07-01','F','Developer',1,0),(8,'path8.jpg','Frank','Martinez','2020-08-01','M','Designer',3,0),(9,'path9.jpg','Grace','Lee','2020-09-01','F','Tester',2,0),(10,'path10.jpg','Hank','Perez','2020-10-01','M','Support',1,0),(11,'path11.jpg','Ivy','Clark','2020-11-01','F','Manager',3,0),(12,'path12.jpg','Jack','Lewis','2020-12-01','M','Developer',1,0),(13,'path13.jpg','Kara','Robinson','2021-01-01','F','Designer',2,0),(14,'path14.jpg','Leo','Walker','2021-02-01','M','Tester',1,0),(15,'path15.jpg','Mia','Young','2021-03-01','F','Support',3,0),(16,'path16.jpg','Noah','Harris','2021-04-01','M','Manager',2,0),(17,'path17.jpg','Olivia','King','2021-05-01','F','Developer',1,0),(18,'path18.jpg','Paul','Scott','2021-06-01','M','Designer',3,0),(19,'path19.jpg','Quinn','Green','2021-07-01','F','Tester',2,0),(20,'path20.jpg','Ruth','Adams','2021-08-01','F','Support',1,0);
+INSERT INTO `employee_info` VALUES (1,'path1.jpg','John','Doe','2020-01-01','M','Manager',1,0),(2,'path2.jpg','Jane','Smith','2020-02-01','F','Developer',2,0),(3,'path3.jpg','Alice','Johnson','2020-03-01','F','Designer',1,0),(4,'path4.jpg','Bob','Williams','2020-04-01','M','Tester',3,0),(5,'path5.jpg','Carol','Brown','2020-05-01','F','Support',1,0),(6,'path6.jpg','David','Jones','2020-06-01','M','Manager',2,0),(7,'path7.jpg','Eve','Garcia','2020-07-01','F','Developer',1,0),(8,'path8.jpg','Frank','Martinez','2020-08-01','M','Designer',3,0),(9,'path9.jpg','Grace','Lee','2020-09-01','F','Tester',2,0),(10,'path10.jpg','Hank','Perez','2020-10-01','M','Support',1,0),(11,'path11.jpg','Ivy','Clark','2020-11-01','F','Manager',3,0),(12,'path12.jpg','Jack','Lewis','2020-12-01','M','Developer',1,0),(13,'path13.jpg','Kara','Robinson','2021-01-01','F','Designer',2,0),(14,'path14.jpg','Leo','Walker','2021-02-01','M','Tester',1,0),(15,'path15.jpg','Mia','Young','2021-03-01','F','Support',3,0),(16,'path16.jpg','Noah','Harris','2021-04-01','M','Manager',2,0),(17,'path17.jpg','Olivia','King','2021-05-01','F','Developer',1,0),(18,'path18.jpg','Paul','Scott','2021-06-01','M','Designer',3,0),(19,'path19.jpg','Quinn','Green','2021-07-01','F','Tester',2,0),(20,'path20.jpg','Ruth','Adams','2021-08-01','F','Support',1,0),(21,'','Ron','Ramas','2024-01-01','M','Manager',0,0),(22,'assets/Screenshot 2023-09-10 163529.png','Jerk','Tear','2024-01-04','F','Manager',0,0),(23,'assets/Screenshot 2023-09-10 163529.png','Jerk','Tear','2024-01-04','F','Manager',0,0),(24,'assets/Screenshot 2023-10-08 202759.png','Neil','Gabisay','2024-01-04','F','Admin',0,0),(25,'assets/Screenshot 2023-10-08 202853.png','Radon','Deez','2020-07-31','F','User',0,0),(26,'assets/Screenshot 2023-10-08 202841.png','te','st','2021-12-29','F','Admin',0,0),(27,'assets/Screenshot 2023-09-10 163529.png','tes','ts','2018-12-27','F','Admin',0,0);
 /*!40000 ALTER TABLE `employee_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -191,7 +191,7 @@ CREATE TABLE `employee_info_archive` (
   `ArchiveTimestamp` datetime DEFAULT NULL,
   PRIMARY KEY (`employeeArchiveID`),
   KEY `employeeID` (`employeeID`),
-  CONSTRAINT `employee_info_archive_ibfk_1` FOREIGN KEY (`employeeID`) REFERENCES `Employee_Info` (`EmployeeID`)
+  CONSTRAINT `employee_info_archive_ibfk_1` FOREIGN KEY (`employeeID`) REFERENCES `employee_info` (`EmployeeID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -288,7 +288,7 @@ CREATE TABLE `payment_plans` (
   `totalamount` float DEFAULT '0',
   PRIMARY KEY (`PlanID`),
   KEY `OrderID` (`OrderID`),
-  CONSTRAINT `payment_plans_ibfk_1` FOREIGN KEY (`OrderID`) REFERENCES `Orders` (`OrderID`)
+  CONSTRAINT `payment_plans_ibfk_1` FOREIGN KEY (`OrderID`) REFERENCES `orders` (`OrderID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -336,13 +336,13 @@ LOCK TABLES `payment_plans_archive` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Payment_Receipt_Archive`
+-- Table structure for table `payment_receipt_archive`
 --
 
-DROP TABLE IF EXISTS `Payment_Receipt_Archive`;
+DROP TABLE IF EXISTS `payment_receipt_archive`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Payment_Receipt_Archive` (
+CREATE TABLE `payment_receipt_archive` (
   `ReceiptArchiveID` int NOT NULL AUTO_INCREMENT,
   `ReceiptID` int NOT NULL,
   `PlanID` int NOT NULL,
@@ -354,27 +354,27 @@ CREATE TABLE `Payment_Receipt_Archive` (
   `PaymentProcessorReferenceNumber` float DEFAULT '0',
   PRIMARY KEY (`ReceiptArchiveID`),
   KEY `ReceiptID` (`ReceiptID`),
-  CONSTRAINT `payment_receipt_archive_ibfk_1` FOREIGN KEY (`ReceiptID`) REFERENCES `Payment_Receipts` (`ReceiptID`)
+  CONSTRAINT `payment_receipt_archive_ibfk_1` FOREIGN KEY (`ReceiptID`) REFERENCES `payment_receipts` (`ReceiptID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Payment_Receipt_Archive`
+-- Dumping data for table `payment_receipt_archive`
 --
 
-LOCK TABLES `Payment_Receipt_Archive` WRITE;
-/*!40000 ALTER TABLE `Payment_Receipt_Archive` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Payment_Receipt_Archive` ENABLE KEYS */;
+LOCK TABLES `payment_receipt_archive` WRITE;
+/*!40000 ALTER TABLE `payment_receipt_archive` DISABLE KEYS */;
+/*!40000 ALTER TABLE `payment_receipt_archive` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Payment_Receipts`
+-- Table structure for table `payment_receipts`
 --
 
-DROP TABLE IF EXISTS `Payment_Receipts`;
+DROP TABLE IF EXISTS `payment_receipts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Payment_Receipts` (
+CREATE TABLE `payment_receipts` (
   `ReceiptID` int NOT NULL AUTO_INCREMENT,
   `PlanID` int NOT NULL,
   `ReceiptImagePath` varchar(255) DEFAULT NULL,
@@ -386,28 +386,28 @@ CREATE TABLE `Payment_Receipts` (
   `IsRemoved` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`ReceiptID`),
   KEY `PlanID` (`PlanID`),
-  CONSTRAINT `payment_receipts_ibfk_1` FOREIGN KEY (`PlanID`) REFERENCES `payment_Plans` (`PlanID`)
+  CONSTRAINT `payment_receipts_ibfk_1` FOREIGN KEY (`PlanID`) REFERENCES `payment_plans` (`PlanID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Payment_Receipts`
+-- Dumping data for table `payment_receipts`
 --
 
-LOCK TABLES `Payment_Receipts` WRITE;
-/*!40000 ALTER TABLE `Payment_Receipts` DISABLE KEYS */;
-INSERT INTO `Payment_Receipts` VALUES (1,1,'receipt1.jpg',1,100,'2023-02-01','Processor 1',123456,0),(2,2,'receipt2.jpg',1,200,'2023-02-02','Processor 2',234567,0),(3,3,'receipt3.jpg',0,300,'2023-02-03','Processor 3',345678,0),(4,4,'receipt4.jpg',1,400,'2023-02-04','Processor 4',456789,0),(5,5,'receipt5.jpg',1,500,'2023-02-05','Processor 1',567890,0),(6,6,'receipt6.jpg',0,600,'2023-02-06','Processor 2',678901,0),(7,7,'receipt7.jpg',1,700,'2023-02-07','Processor 3',789012,0),(8,8,'receipt8.jpg',1,800,'2023-02-08','Processor 4',890123,0),(9,9,'receipt9.jpg',0,900,'2023-02-09','Processor 1',901234,0),(10,10,'receipt10.jpg',1,1000,'2023-02-10','Processor 2',123456,0),(11,11,'receipt11.jpg',1,1100,'2023-02-11','Processor 3',234567,0),(12,12,'receipt12.jpg',0,1200,'2023-02-12','Processor 4',345678,0),(13,13,'receipt13.jpg',1,1300,'2023-02-13','Processor 1',456789,0),(14,14,'receipt14.jpg',1,1400,'2023-02-14','Processor 2',567890,0),(15,15,'receipt15.jpg',0,1500,'2023-02-15','Processor 3',678901,0),(16,16,'receipt16.jpg',1,1600,'2023-02-16','Processor 4',789012,0),(17,17,'receipt17.jpg',1,1700,'2023-02-17','Processor 1',890123,0),(18,18,'receipt18.jpg',0,1800,'2023-02-18','Processor 2',901234,0),(19,19,'receipt19.jpg',1,1900,'2023-02-19','Processor 3',123456,0),(20,20,'receipt20.jpg',1,2000,'2023-02-20','Processor 4',234567,0),(21,1,'sadsdas',1,100,'2024-07-04','processor1',23131,0);
-/*!40000 ALTER TABLE `Payment_Receipts` ENABLE KEYS */;
+LOCK TABLES `payment_receipts` WRITE;
+/*!40000 ALTER TABLE `payment_receipts` DISABLE KEYS */;
+INSERT INTO `payment_receipts` VALUES (1,1,'receipt1.jpg',1,100,'2023-02-01','Processor 1',123456,0),(2,2,'receipt2.jpg',1,200,'2023-02-02','Processor 2',234567,0),(3,3,'receipt3.jpg',0,300,'2023-02-03','Processor 3',345678,0),(4,4,'receipt4.jpg',1,400,'2023-02-04','Processor 4',456789,0),(5,5,'receipt5.jpg',1,500,'2023-02-05','Processor 1',567890,0),(6,6,'receipt6.jpg',0,600,'2023-02-06','Processor 2',678901,0),(7,7,'receipt7.jpg',1,700,'2023-02-07','Processor 3',789012,0),(8,8,'receipt8.jpg',1,800,'2023-02-08','Processor 4',890123,0),(9,9,'receipt9.jpg',0,900,'2023-02-09','Processor 1',901234,0),(10,10,'receipt10.jpg',1,1000,'2023-02-10','Processor 2',123456,0),(11,11,'receipt11.jpg',1,1100,'2023-02-11','Processor 3',234567,0),(12,12,'receipt12.jpg',0,1200,'2023-02-12','Processor 4',345678,0),(13,13,'receipt13.jpg',1,1300,'2023-02-13','Processor 1',456789,0),(14,14,'receipt14.jpg',1,1400,'2023-02-14','Processor 2',567890,0),(15,15,'receipt15.jpg',0,1500,'2023-02-15','Processor 3',678901,0),(16,16,'receipt16.jpg',1,1600,'2023-02-16','Processor 4',789012,0),(17,17,'receipt17.jpg',1,1700,'2023-02-17','Processor 1',890123,0),(18,18,'receipt18.jpg',0,1800,'2023-02-18','Processor 2',901234,0),(19,19,'receipt19.jpg',1,1900,'2023-02-19','Processor 3',123456,0),(20,20,'receipt20.jpg',1,2000,'2023-02-20','Processor 4',234567,0),(21,1,'sadsdas',1,100,'2024-07-04','processor1',23131,0);
+/*!40000 ALTER TABLE `payment_receipts` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Permissions`
+-- Table structure for table `permissions`
 --
 
-DROP TABLE IF EXISTS `Permissions`;
+DROP TABLE IF EXISTS `permissions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Permissions` (
+CREATE TABLE `permissions` (
   `PermissionsID` int NOT NULL AUTO_INCREMENT,
   `PermissionCreate` tinyint(1) DEFAULT '0',
   `PermissionDelete` tinyint(1) DEFAULT '0',
@@ -420,13 +420,13 @@ CREATE TABLE `Permissions` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Permissions`
+-- Dumping data for table `permissions`
 --
 
-LOCK TABLES `Permissions` WRITE;
-/*!40000 ALTER TABLE `Permissions` DISABLE KEYS */;
-INSERT INTO `Permissions` VALUES (1,1,1,1,1,1,1),(2,0,1,0,1,0,0),(3,1,0,1,0,1,0),(4,0,0,0,0,0,0),(5,1,1,0,0,1,1),(6,1,0,0,1,0,0),(7,0,1,1,0,1,0),(8,1,1,1,0,1,1),(9,0,0,1,1,0,0),(10,1,0,1,1,1,0),(11,0,1,0,1,0,1),(12,1,1,0,0,1,0),(13,1,0,1,1,0,0),(14,0,1,1,1,1,0),(15,1,0,0,0,0,1),(16,0,1,0,0,1,0),(17,1,0,1,1,0,1),(18,0,0,1,0,0,0),(19,1,1,1,0,1,0),(20,0,0,0,1,0,1);
-/*!40000 ALTER TABLE `Permissions` ENABLE KEYS */;
+LOCK TABLES `permissions` WRITE;
+/*!40000 ALTER TABLE `permissions` DISABLE KEYS */;
+INSERT INTO `permissions` VALUES (1,1,1,1,1,1,1),(2,0,1,0,1,0,0),(3,1,0,1,0,1,0),(4,0,0,0,0,0,0),(5,1,1,0,0,1,1),(6,1,0,0,1,0,0),(7,0,1,1,0,1,0),(8,1,1,1,0,1,1),(9,0,0,1,1,0,0),(10,1,0,1,1,1,0),(11,0,1,0,1,0,1),(12,1,1,0,0,1,0),(13,1,0,1,1,0,0),(14,0,1,1,1,1,0),(15,1,0,0,0,0,1),(16,0,1,0,0,1,0),(17,1,0,1,1,0,1),(18,0,0,1,0,0,0),(19,1,1,1,0,1,0),(20,0,0,0,1,0,1);
+/*!40000 ALTER TABLE `permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -480,7 +480,7 @@ CREATE TABLE `products` (
   `ProductPrice` float DEFAULT '0',
   PRIMARY KEY (`productID`),
   KEY `OrderID` (`OrderID`),
-  CONSTRAINT `products_ibfk_1` FOREIGN KEY (`OrderID`) REFERENCES `Orders` (`OrderID`)
+  CONSTRAINT `products_ibfk_1` FOREIGN KEY (`OrderID`) REFERENCES `orders` (`OrderID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -503,4 +503,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-08 15:56:12
+-- Dump completed on 2024-07-13 20:44:58

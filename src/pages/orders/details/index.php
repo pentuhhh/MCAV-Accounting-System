@@ -132,32 +132,103 @@
                     </i>
                 </a>
             </div>
+                <!-- EDIT INFO -->
+            <?php
+                if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'edit') {
+                    // Display the edit form
+                    $customerID = htmlspecialchars($_POST['customerID']);
+                    echo <<<HTML
+                    <div class="POPUP_CONTAINER">
+                        <div class="POPUP_CONTAINER_BOX GLOBAL_BOX_DIV flex flex-col gap-4 w-full">
+                        <a href="/orders/details?orderID={$orderID}" class="absolute top-2 right-4 text-2xl text-gray-500 cursor-pointer">&times;</a>
+                            <h1 class = "text-lg font-bold">Edit Customer Information</h1>
+                            <form method="post" class = "flex flex-col gap-4">
+                                <input type="hidden" name="action" value="save">
+                                <input type="hidden" name="customerID" value="{$customerID}">
+                                <input type="text" name="editCustomerName" value="{$customerName}" placeholder="Customer Name">
+                                <input type="email" name="editCustomerEmail" value="{$customerEmail}" placeholder="Customer Email">
+                                <input type="tel" name="editCustomerPhone" value="{$customerPhone}" placeholder="Customer Phone">
+                                <!-- Add other fields as needed -->
+                                <button type="submit" class="GLOBAL_BUTTON_BLUE flex-grow-0 w-min">Save</button>
+                            </form>
+                        </div>
+                    </div> 
+                    HTML; 
+        
+                }
+            ?>
 
+                <!-- END EDIT INFO -->
+
+                <!-- Render Table -->
             <div class="DETAILS_CONTAINER_ROW columns-2">
                 <div class="DETAILS_CONTAINER_ROW_LEFT">
                     <div class="GLOBAL_SUBHEADER_TITLE">
                         <h1>Customer Information</h1>
                     </div>
-                    <div class="DETAILS_CONTAINER_ROW_TABLE GLOBAL_BOX_DIV">
+                      <div class="DETAILS_CONTAINER_ROW_TABLE GLOBAL_BOX_DIV">
                         <table>
                             <tr>
                                 <td>Customer Name</td>
-                                <td><?php echo $customerName ?? ''; ?></td>
+                                <td><?=htmlspecialchars($customerName); ?></td>
                             </tr>
                             <tr>
                                 <td>Email</td>
-                                <td><?php echo $customerEmail ?? ''; ?></td>
+                                <td><?=htmlspecialchars($customerEmail); ?></td>
                             </tr>
                             <tr>
                                 <td>Contact Number</td>
-                                <td><?php echo $customerPhone ?? ''; ?></td>
+                                <td><?=htmlspecialchars($customerPhone); ?></td>
                             </tr>
                         </table>
                         <div class="DETAILS_CONTAINER_ROW_BUTTON">
-                            <button class="GLOBAL_BUTTON_BLUE">Edit Info</button>
+                            <form method="post">
+                                <input type="hidden" name="action" value="edit">
+                                <input type="hidden" name="customerID" value="<?=htmlspecialchars($customerID); ?>">
+                                <button type="submit" class="GLOBAL_BUTTON_BLUE">Edit Info</button>
+                            </form>
                         </div>
                     </div>
                 </div>
+
+                <!-- End Render Table -->
+
+                <!-- Save Info TODO: BACKEND DEVELOPER-->
+                <?php
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'save') {
+                        // Retrieve POST data
+                        $customerID = htmlspecialchars($_POST['customerID']);
+                        $editedName = htmlspecialchars($_POST['editCustomerName']);
+                        $editedEmail = htmlspecialchars($_POST['editCustomerEmail']);
+                        $editedPhone = htmlspecialchars($_POST['editCustomerPhone']);
+                        
+                        // Update the customer information in the database
+                        updateCustomerInfo($customerID, $editedName, $editedEmail, $editedPhone);
+                        
+                        // Optionally, redirect or show a success message
+                        header("Location: " . $_SERVER['PHP_SELF']);
+                        exit;
+                    }
+
+                    function updateCustomerInfo($id, $name, $email, $phone) {
+                        try {
+                            // Replace with your actual database connection details
+                            $pdo = new PDO('mysql:host=your_host;dbname=your_db', 'your_user', 'your_password');
+                            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                            
+                            $sql = "UPDATE customers SET name = ?, email = ?, phone = ? WHERE id = ?";
+                            $stmt = $pdo->prepare($sql);
+                            $stmt->execute([$name, $email, $phone, $id]);
+                            
+                            echo "Customer information updated successfully.";
+                        } catch (PDOException $e) {
+                            echo "Error: " . $e->getMessage();
+                        }
+                    }
+                ?>
+
+                <!-- END Save Info -->
+
                 <div class="DETAILS_CONTAINER_ROW_RIGHT">
                     <div class="GLOBAL_SUBHEADER_TITLE">
                         <h1>Order Information</h1>
