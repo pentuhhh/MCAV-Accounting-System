@@ -132,32 +132,103 @@
                     </i>
                 </a>
             </div>
+                <!-- EDIT Customer INFO -->
+            <?php
+                if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'edit') {
+                    // Display the edit form
+                    $customerID = htmlspecialchars($_POST['customerID']);
+                    echo <<<HTML
+                    <div class="POPUP_CONTAINER">
+                        <div class="POPUP_CONTAINER_BOX GLOBAL_BOX_DIV flex flex-col gap-4 w-full">
+                        <a href="/orders/details?orderID={$orderID}" class="absolute top-2 right-4 text-2xl text-gray-500 cursor-pointer">&times;</a>
+                            <h1 class = "text-lg font-bold">Edit Customer Information</h1>
+                            <form method="post" class = "flex flex-col gap-4">
+                                <input type="hidden" name="action" value="save">
+                                <input type="hidden" name="customerID" value="{$customerID}">
+                                <input type="text" name="editCustomerName" value="{$customerName}" placeholder="Customer Name">
+                                <input type="email" name="editCustomerEmail" value="{$customerEmail}" placeholder="Customer Email">
+                                <input type="tel" name="editCustomerPhone" value="{$customerPhone}" placeholder="Customer Phone">
+                                <!-- Add other fields as needed -->
+                                <button type="submit" class="GLOBAL_BUTTON_BLUE flex-grow-0 w-min">Save</button>
+                            </form>
+                        </div>
+                    </div> 
+                    HTML; 
+        
+                }
+            ?>
 
+                <!-- END EDIT Customer INFO -->
+
+                <!-- Render Table -->
             <div class="DETAILS_CONTAINER_ROW columns-2">
                 <div class="DETAILS_CONTAINER_ROW_LEFT">
                     <div class="GLOBAL_SUBHEADER_TITLE">
                         <h1>Customer Information</h1>
                     </div>
-                    <div class="DETAILS_CONTAINER_ROW_TABLE GLOBAL_BOX_DIV">
+                      <div class="DETAILS_CONTAINER_ROW_TABLE GLOBAL_BOX_DIV">
                         <table>
                             <tr>
                                 <td>Customer Name</td>
-                                <td><?php echo $customerName ?? ''; ?></td>
+                                <td><?=htmlspecialchars($customerName); ?></td>
                             </tr>
                             <tr>
                                 <td>Email</td>
-                                <td><?php echo $customerEmail ?? ''; ?></td>
+                                <td><?=htmlspecialchars($customerEmail); ?></td>
                             </tr>
                             <tr>
                                 <td>Contact Number</td>
-                                <td><?php echo $customerPhone ?? ''; ?></td>
+                                <td><?=htmlspecialchars($customerPhone); ?></td>
                             </tr>
                         </table>
                         <div class="DETAILS_CONTAINER_ROW_BUTTON">
-                            <button class="GLOBAL_BUTTON_BLUE">Edit Info</button>
+                            <form method="post">
+                                <input type="hidden" name="action" value="edit">
+                                <input type="hidden" name="customerID" value="<?=htmlspecialchars($customerID); ?>">
+                                <button type="submit" class="GLOBAL_BUTTON_BLUE">Edit Info</button>
+                            </form>
                         </div>
                     </div>
                 </div>
+
+                <!-- End Render Table -->
+
+                <!-- Save Info TODO: BACKEND DEVELOPER-->
+                <?php
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'save') {
+                        // Retrieve POST data
+                        $customerID = htmlspecialchars($_POST['customerID']);
+                        $editedName = htmlspecialchars($_POST['editCustomerName']);
+                        $editedEmail = htmlspecialchars($_POST['editCustomerEmail']);
+                        $editedPhone = htmlspecialchars($_POST['editCustomerPhone']);
+                        
+                        // Update the customer information in the database
+                        updateCustomerInfo($customerID, $editedName, $editedEmail, $editedPhone);
+                        
+                        // Optionally, redirect or show a success message
+                        header("Location: " . $_SERVER['PHP_SELF']);
+                        exit;
+                    }
+
+                    function updateCustomerInfo($id, $name, $email, $phone) {
+                        try {
+                            // Replace with your actual database connection details
+                            $pdo = new PDO('mysql:host=your_host;dbname=your_db', 'your_user', 'your_password');
+                            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                            
+                            $sql = "UPDATE customers SET name = ?, email = ?, phone = ? WHERE id = ?";
+                            $stmt = $pdo->prepare($sql);
+                            $stmt->execute([$name, $email, $phone, $id]);
+                            
+                            echo "Customer information updated successfully.";
+                        } catch (PDOException $e) {
+                            echo "Error: " . $e->getMessage();
+                        }
+                    }
+                ?>
+
+                <!-- END Save Info -->
+
                 <div class="DETAILS_CONTAINER_ROW_RIGHT">
                     <div class="GLOBAL_SUBHEADER_TITLE">
                         <h1>Order Information</h1>
@@ -178,8 +249,8 @@
                             </tr>
                         </table>
                         <div class="DETAILS_CONTAINER_ROW_BUTTON">
-                            <button class="GLOBAL_BUTTON_RED">Cancel Order</button>
-                            <button class="GLOBAL_BUTTON_GREEN">Complete</button>
+                            <button class="GLOBAL_BUTTON_RED" onclick="return confirm('Are you sure you want cancel order?')">Cancel Order </button>
+                            <button class="GLOBAL_BUTTON_GREEN" onclick="return confirm('Are you sure you want to complete the order?')">Complete</button>
                         </div>
                     </div>
                 </div>
@@ -226,37 +297,113 @@
                     <div class="GLOBAL_SUBHEADER_TITLE">
                         <h1>Payment Plan</h1>
                     </div>
+
+
+                    <!-- EDIT PAYMENT PLAN -->
+                    <?php
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'editPaymentPlan') {
+                        // Display the edit form for payment plan
+                        $paymentPlanID = htmlspecialchars($_POST['paymentPlanID']);
+                        echo <<<HTML
+                        <div class="POPUP_CONTAINER">
+                            <div class="POPUP_CONTAINER_BOX GLOBAL_BOX_DIV flex flex-col gap-4 w-full">
+                                <a href="/orders/details?orderID={$orderID}" class="absolute top-2 right-4 text-2xl text-gray-500 cursor-pointer">&times;</a>
+                                <h1 class="text-lg font-bold">Edit Payment Plan</h1>
+                                <form method="post" class="flex flex-col gap-4">
+                                    <input type="hidden" name="action" value="savePaymentPlan">
+                                    <input type="hidden" name="paymentPlanID" value="{$paymentPlanID}">
+                                    <input type="text" name="editPaymentMethod" value="{$paymentPlan['PaymentMethod']}" placeholder="Payment Method">
+                                    <input type="date" name="editDueDate" value="{$paymentPlan['DueDate']}" placeholder="Due Date">
+                                    <input type="text" name="editPaymentStatus" value="{$paymentPlan['PaymentStatus']}" placeholder="Status">
+                                    <input type="number" step="0.01" name="editTotalAmount" value="{$paymentPlan['TotalAmount']}" placeholder="Total Amount">
+                                    <input type="number" step="0.01" name="editAmountPaid" value="{$paymentPlan['AmountPaid']}" placeholder="Amount Paid">
+                                    <input type="number" step="0.01" name="editBalance" value="{$paymentPlan['Balance']}" placeholder="Balance">
+                                    <!-- Add other fields as needed -->
+                                    <button type="submit" class="GLOBAL_BUTTON_BLUE flex-grow-0 w-min">Save</button>
+                                </form>
+                            </div>
+                        </div> 
+                        HTML; 
+                    }
+                    ?>
+                    <!-- END EDIT PAYMENT PLAN -->
+
+                    <!-- Render Payment Plan Table -->
                     <div class="DETAILS_CONTAINER_ROW_TABLE GLOBAL_BOX_DIV">
                         <table>
                             <tr>
                                 <td>Payment Method</td>
-                                <td><?php echo $paymentPlan['PaymentMethod'] ?? ''; ?></td>
+                                <td><?php echo htmlspecialchars($paymentPlan['PaymentMethod'] ?? ''); ?></td>
                             </tr>
                             <tr>
                                 <td>Due Date</td>
-                                <td><?php echo $paymentPlan['DueDate'] ?? ''; ?></td>
+                                <td><?php echo htmlspecialchars($paymentPlan['DueDate'] ?? ''); ?></td>
                             </tr>
                             <tr>
                                 <td>Status</td>
-                                <td><?php echo $paymentPlan['PaymentStatus'] ?? ''; ?></td>
+                                <td><?php echo htmlspecialchars($paymentPlan['PaymentStatus'] ?? ''); ?></td>
                             </tr>
                             <tr>
                                 <td>Total Amount</td>
-                                <td><?php echo $paymentPlan['TotalAmount'] ?? ''; ?></td>
+                                <td><?php echo htmlspecialchars($paymentPlan['TotalAmount'] ?? ''); ?></td>
                             </tr>
                             <tr>
                                 <td>Amount Paid</td>
-                                <td><?php echo $paymentPlan['AmountPaid'] ?? ''; ?></td>
+                                <td><?php echo htmlspecialchars($paymentPlan['AmountPaid'] ?? ''); ?></td>
                             </tr>
                             <tr>
                                 <td>Balance</td>
-                                <td><?php echo $paymentPlan['Balance'] ?? ''; ?></td>
+                                <td><?php echo htmlspecialchars($paymentPlan['Balance'] ?? ''); ?></td>
                             </tr>
                         </table>
                         <div class="DETAILS_CONTAINER_ROW_BUTTON">
-                            <button class="GLOBAL_BUTTON_BLUE">Edit Payment Plan</button>
+                            <form method="post">
+                                <input type="hidden" name="action" value="editPaymentPlan">
+                                <input type="hidden" name="paymentPlanID" value="<?= htmlspecialchars($paymentPlanID); ?>">
+                                <button type="submit" class="GLOBAL_BUTTON_BLUE">Edit Payment Plan</button>
+                            </form>
                         </div>
                     </div>
+                    <!-- END Render Payment Plan Table -->
+
+                    <!-- Save Payment Plan Info: BACKEND DEVELOPER: NIKOLAI -->
+                    <?php
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'savePaymentPlan') {
+                        // Retrieve POST data
+                        $paymentPlanID = htmlspecialchars($_POST['paymentPlanID']);
+                        $editedPaymentMethod = htmlspecialchars($_POST['editPaymentMethod']);
+                        $editedDueDate = htmlspecialchars($_POST['editDueDate']);
+                        $editedPaymentStatus = htmlspecialchars($_POST['editPaymentStatus']);
+                        $editedTotalAmount = htmlspecialchars($_POST['editTotalAmount']);
+                        $editedAmountPaid = htmlspecialchars($_POST['editAmountPaid']);
+                        $editedBalance = htmlspecialchars($_POST['editBalance']);
+                        
+                        // Update the payment plan information in the database
+                        updatePaymentPlanInfo($paymentPlanID, $editedPaymentMethod, $editedDueDate, $editedPaymentStatus, $editedTotalAmount, $editedAmountPaid, $editedBalance);
+                        
+                        // Optionally, redirect or show a success message
+                        header("Location: " . $_SERVER['PHP_SELF']);
+                        exit;
+                    }
+
+                    function updatePaymentPlanInfo($id, $paymentMethod, $dueDate, $paymentStatus, $totalAmount, $amountPaid, $balance) {
+                        try {
+                            // Replace with your actual database connection details
+                            $pdo = new PDO('mysql:host=your_host;dbname=your_db', 'your_user', 'your_password');
+                            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                            
+                            $sql = "UPDATE payment_plans SET payment_method = ?, due_date = ?, payment_status = ?, total_amount = ?, amount_paid = ?, balance = ? WHERE id = ?";
+                            $stmt = $pdo->prepare($sql);
+                            $stmt->execute([$paymentMethod, $dueDate, $paymentStatus, $totalAmount, $amountPaid, $balance, $id]);
+                            
+                            echo "Payment plan information updated successfully.";
+                        } catch (PDOException $e) {
+                            echo "Error: " . $e->getMessage();
+                        }
+                    }
+                    ?>
+                    <!-- END Save Payment Plan Info -->
+
                 </div>
                 <div class="DETAILS_CONTAINER_ROW_RIGHT">
                     <div class="GLOBAL_SUBHEADER_TITLE mb-5">

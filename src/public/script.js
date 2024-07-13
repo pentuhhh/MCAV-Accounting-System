@@ -95,4 +95,26 @@ function deleteItem(index) {
 }
 
 
+function openEditModal(customerID) {
+    // Make an AJAX request to fetch customer details based on customerID
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "/fetch-customer.php?customerID=" + customerID, true);
 
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var customerData = JSON.parse(xhr.responseText);
+            populateEditModal(customerData);
+            modal.style.display = "block"; // Display the edit modal
+        }
+    };
+
+    xhr.send();
+}
+
+function populateEditModal(customerData) {
+    // Populate the fields in the edit modal with customerData
+    document.getElementById('editCustomerName').value = customerData.CustomerName;
+    document.getElementById('editCustomerEmail').value = customerData.CustomerEmail;
+    document.getElementById('editCustomerPhone').value = customerData.CustomerPhone;
+    // Populate other fields as needed
+}

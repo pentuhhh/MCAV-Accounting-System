@@ -708,7 +708,7 @@
 	}
 
 	.POPUP_CONTAINER_BOX {
-		@apply p-12 relative max-w-[800px] max-h-[500px] transform -translate-y-1/2 -translate-x-1/2 top-1/2 left-1/2;
+		@apply p-12 absolute max-w-[800px] max-h-[500px] transform -translate-y-1/2 -translate-x-1/2 top-1/2 left-1/2;
 	}
 	/* End of Popup Classes */
 
