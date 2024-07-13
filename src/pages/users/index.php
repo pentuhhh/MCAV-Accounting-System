@@ -8,7 +8,6 @@
                     person
                 </i>
                 <span class="ml-3 text-2xl font-semibold">Users</span>
-                <a href="/users/add-user" class="GLOBAL_BUTTON_BLUE ml-5">Add User</a>
             </div>
             <div class="GLOBAL_HEADER_USER flex items-center">
                 <div class="GLOBAL_HEADER_COLUMN text-right mr-4">
@@ -99,6 +98,15 @@
                     '<span class="status-deactivated">Deactivated</span>';
 
                 $users[] = $row;
+            }
+        }
+
+        $defaultImagePath = "/assets/defaultProfilePicture.jpg";
+
+        // Set the default image path if ProfilePicturePath is null or empty
+        foreach ($users as &$row) {
+            if ($row['ProfilePicturePath'] === "") {
+                $row['ProfilePicturePath'] = $defaultImagePath;
             }
         }
 

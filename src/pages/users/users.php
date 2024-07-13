@@ -27,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $stmt->execute(["%$search%", "%$search%"]);
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+
     echo json_encode($data);
 } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['action']) && $_POST['action'] === 'delete' && isset($_POST['EmployeeWebID'])) {
