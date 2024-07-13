@@ -65,5 +65,12 @@ $recentOrders = $conn->query($recentOrdersQuery);
 if ($recentOrders === false) {
     die("Query failed: " . $conn->error);
 }
+if ($recentOrders->num_rows > 0) {
+    $rows = [];
+    while ($row = $recentOrders->fetch_assoc()) {
+        $rows[] = json_encode($row);
+    }
+    echo implode(",", $rows);
+}
 
 ?>

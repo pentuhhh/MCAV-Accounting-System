@@ -74,7 +74,7 @@ require "dashboard.php";
                             <th>Status</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id ="recentOrders">
                         <?php while ($row = $recentOrders->fetch_assoc()) { ?>
                             <tr>
                                 <td>
@@ -106,7 +106,7 @@ $conn->close();
     const data = <?php echo json_encode($rows); ?>;
 
     function displayTable() {
-        const tableBody = document.getElementById('ordersTable');
+        const tableBody = document.getElementById('recentOrders');
         tableBody.innerHTML = "";
 
         data.forEach(item => {
