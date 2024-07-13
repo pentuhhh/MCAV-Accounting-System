@@ -475,8 +475,6 @@ th{
   padding-right: 1.25rem;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
   font-weight: 600;
   transition-duration: 300ms;
 }
@@ -494,8 +492,6 @@ td{
 td:nth-of-type(2){
   text-align: end;
 }
-
-/* !! Hyperlink Elements (may cause error) */
 
 a{
   cursor: pointer;
@@ -737,7 +733,7 @@ select{
 
 /* -- End of Sidebar Component -- */
 
-/* Sticker Tab Component */
+/* -- Sticker Tab Component -- */
 
 .COMPONENT_STICKER_CONTAINER{
   display: flex;
@@ -841,9 +837,9 @@ select{
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
-/* End of Sticker Tab Component */
+/* -- End of Sticker Tab Component -- */
 
-/* Banner Tab Component */
+/* -- Banner Tab Component -- */
 
 .COMPONENT_BANNER_CONTAINER{
   display: flex;
@@ -909,9 +905,9 @@ select{
   gap: 1.25rem;
 }
 
-/* End of Banner Tab Component */
+/* -- End of Banner Tab Component -- */
 
-/* Tarpaulin Tab Component */
+/* -- Tarpaulin Tab Component -- */
 
 .COMPONENT_TARPAULIN_CONTAINER{
   display: flex;
@@ -1034,9 +1030,9 @@ select{
   gap: 1.25rem;
 }
 
-/* End of Tarpaulin Tab Component */
+/* -- End of Tarpaulin Tab Component -- */
 
-/* Others Classes */
+/* -- Others Tab Classes -- */
 
 .COMPONENT_OTHERS_CONTAINER{
   display: flex;
@@ -1150,7 +1146,7 @@ select{
   gap: 1.25rem;
 }
 
-/* End of Others Classes */
+/* -- End of Others Classes -- */
 
 /* -- Global Classes -- */
 
@@ -1268,10 +1264,9 @@ select{
   text-align: center;
 }
 
-.GLOBAL_TABLE_ID{
+.GLOBAL_TABLE td:nth-of-type(1){
   --tw-text-opacity: 1;
   color: rgb(0 161 226 / var(--tw-text-opacity));
-  text-decoration-line: underline;
 }
 
 .GLOBAL_BUTTON_GRAY{
@@ -1595,6 +1590,13 @@ select{
 
 /* Products Input Classes */
 
+.PRODUCTS_INPUT{
+  flex-grow: 1;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
 .PRODUCTS_INPUT_NOTE{
   display: flex;
   flex-direction: row;
@@ -1677,6 +1679,15 @@ select{
   justify-content: flex-end;
 }
 
+.PRODUCTS_INPUT_COLUMN{
+  display: flex;
+  width: 100%;
+  -moz-columns: 2;
+       columns: 2;
+  flex-direction: row;
+  gap: 1.25rem;
+}
+
 .PRODUCT_INPUT_QUANTITY{
   margin-left: 1.25rem;
   width: 6rem;
@@ -1738,25 +1749,20 @@ select{
   padding-top: 0.75rem;
 }
 
-.DETAILS_CONTAINER_ROW_TABLE tr{
-  border-bottom-width: 1px;
-  --tw-border-opacity: 1;
-  border-color: rgb(229 231 235 / var(--tw-border-opacity));
-}
-
-.DETAILS_CONTAINER_ROW_TABLE tr:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
-}
-
 .DETAILS_CONTAINER_ROW_TABLE td{
   padding-left: 1rem;
   padding-right: 1rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
   font-weight: 600;
+}
+
+.DETAILS_CONTAINER_ROW_TABLE td:nth-of-type(2){
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-weight: 400;
 }
 
 .DETAILS_CONTAINER_ROW_BUTTON{
@@ -1892,6 +1898,10 @@ select{
 
 .mb-4{
   margin-bottom: 1rem;
+}
+
+.mb-5{
+  margin-bottom: 1.25rem;
 }
 
 .mb-6{
