@@ -67,3 +67,49 @@ if ($recentOrders === false) {
 }
 
 ?>
+
+<!-- JavaScript Section for Data Handling and Display -->
+<script>
+    const data = <?php echo json_encode($rows); ?>;
+
+    function displayTable() {
+        const tableBody = document.getElementById('ordersTable');
+        tableBody.innerHTML = "";
+
+        data.forEach(item => {
+            const row = document.createElement('tr');
+
+            Object.keys(item).forEach(key => {
+                const cell = document.createElement('td');
+                cell.textContent = item[key];
+
+                if (key === 'Status') {
+                    // Add class based on status
+                    switch (item[key]) {
+                        case 'Pending':
+                            cell.classList.add('status-pending');
+                            break;
+                        case 'Started':
+                            cell.classList.add('status-started');
+                            break;
+                        case 'Completed':
+                            cell.classList.add('status-completed');
+                            break;
+                        default:
+                            cell.classList.add('status-unknown');
+                            break;
+                    }
+                }
+
+                row.appendChild(cell);
+            });
+
+            tableBody.appendChild(row);
+        });
+    }
+
+    // Simulate loading of data (you would replace this with actual data retrieval logic)
+    window.onload = function() {
+        displayTable();
+    };
+</script>
