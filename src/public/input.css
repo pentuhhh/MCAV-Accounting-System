@@ -363,6 +363,11 @@
 		@apply text-[#00A1E2];
 	}
 
+	.GLOBAL_TABLE a {
+		@apply text-[#00A1E2];
+	}
+
+
 	.GLOBAL_BUTTON_GRAY {
 		@apply rounded-3xl bg-[#ebebeb] py-1 px-5 text-sm font-semibold text-[#707070] duration-300 hover:bg-[#dddddd];
 	}

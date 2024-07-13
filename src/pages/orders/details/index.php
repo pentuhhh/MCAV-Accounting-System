@@ -187,11 +187,11 @@
 
             <div class="DETAILS_CONTAINER_ROW">
                 <div class="DETAILS_CONTAINER_ROW_COLUMN">
-                    <div class="DETAILS_CONTAINER_SUBHEADER">
+                    <div class="DETAILS_CONTAINER_SUBHEADER mb-5">
                         <h1>Ordered Products</h1>
                         <button class="GLOBAL_BUTTON_BLUE ml-5">Add Item</button>
                     </div>
-                    <div class="DETAILS_CONTAINER_ROW_TABLE GLOBAL_BOX_DIV">
+                    <div class="GLOBAL_TABLE GLOBAL_BOX_DIV mb-5">
                         <table>
                             <tr>
                                 <th class="text-center">#</th>
@@ -254,15 +254,15 @@
                             </tr>
                         </table>
                         <div class="DETAILS_CONTAINER_ROW_BUTTON">
-                            <button class="GLOBAL_BUTTON_GREEN">Edit Payment Plan</button>
+                            <button class="GLOBAL_BUTTON_BLUE">Edit Payment Plan</button>
                         </div>
                     </div>
                 </div>
                 <div class="DETAILS_CONTAINER_ROW_RIGHT">
-                    <div class="GLOBAL_SUBHEADER_TITLE">
+                    <div class="GLOBAL_SUBHEADER_TITLE mb-5">
                         <h1>Receipts</h1>
                     </div>
-                    <div class="DETAILS_CONTAINER_ROW_TABLE GLOBAL_BOX_DIV">
+                    <div class="GLOBAL_TABLE GLOBAL_BOX_DIV">
                         <table>
                             <tr>
                                 <th>#</th>

@@ -4,7 +4,7 @@ require "../utilities/db-connection.php";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Data for employee_info
-    $email = $_POST['email'];
+    $username = $_POST['username'];
     $first_name = $_POST['first-name'];
     $last_name = $_POST['last-name'];
     $suffix = $_POST['suffix'] ?? ''; // Optional field
@@ -71,16 +71,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sql_credentials = "INSERT INTO employee_credentials (
                                 PermissionsID, EmployeeID, username, employee_Password, UserLevel, accountStatus
                             ) VALUES (
-                                '1', '$employee_id', '$email', '$hashed_password', '$permission', 'Activated'
+                                '1', '$employee_id', '$username', '$hashed_password', '$permission', 'Activated'
                             )";
 
         // Error handling for credentials
 
-        // if ($conn->query($sql_credentials) === TRUE) {
-        //     echo "Registration successful";
-        // } else {
-        //     echo "Error: " . $sql_credentials . "<br>" . $conn->error;
-        // }
+        if ($conn->query($sql_credentials) === TRUE) {
+            header("Location: /dashboard");
+            exit();
+        } else {
+            echo "Error: " . $sql_credentials . "<br>" . $conn->error;
+        }
         
     } else {
         echo "Error: " . $sql_info . "<br>" . $conn->error;
