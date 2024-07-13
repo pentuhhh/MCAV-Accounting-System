@@ -702,6 +702,28 @@
 	.POPUP_CONTAINER_BOX {
 		@apply p-12 relative max-w-[800px] max-h-[500px] transform -translate-y-1/2 -translate-x-1/2 top-1/2 left-1/2;
 	}
-
 	/* End of Popup Classes */
+
+	/* Table Colors */
+	.order-id-link {
+        color: #00A1E2;
+    }
+
+    .status-pending {
+        color: #FEED03;
+    }
+
+    .status-started {
+        color: orange;
+    }
+
+    .status-completed {
+        color: #6FD273;
+    }
+
+    .status-unknown {
+        color: #707070;
+    }
+
+	/* End of Table Colors */
 }
