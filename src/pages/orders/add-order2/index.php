@@ -113,7 +113,7 @@ require "handler.php";
 
                 <div class="GLOBAL_SUBHEADER justify-start">
                     <h1>Product Options</h1>
-                    <input id="amount" type="number" name="amount" placeholder="Qty" class="PRODUCT_INPUT_QUANTITY" required>
+                    <input id="amount" type="number" name="amount" min="0" placeholder="Qty" class="PRODUCT_INPUT_QUANTITY" required>
                     <button class="GLOBAL_BUTTON_BLUE ml-5" type="button" onclick="addItemToList()">Add Item</button>
                 </div>
 
@@ -173,17 +173,19 @@ require "handler.php";
                                 <th>Qty</th>
                                 <th>Price</th>
                                 <th>Remarks</th>
-                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
+
                             $totalSum = 0;
 
                             if (isset($_SESSION['product_list']) && !empty($_SESSION['product_list'])) {
                                 foreach ($_SESSION['product_list'] as $index => $product) {
-                                    $totalPrice = $product['amount'] * $product['price'];
-                                    $totalSum += $totalPrice;
+                                    $amount = (float) $product['amount'];
+                                    $price = (float) $product['price'];
+                                    $totalPrice = $amount * $price;
+                                    $totalSum += $totalPrice; // Add to the total sum
 
                                     echo "<tr id='product-row-$index'>";
                                     echo "<td>$index</td>";
