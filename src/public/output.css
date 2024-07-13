@@ -2023,6 +2023,10 @@ select{
   height: 1rem;
 }
 
+.h-16{
+  height: 4rem;
+}
+
 .w-1\/2{
   width: 50%;
 }
@@ -2045,6 +2049,10 @@ select{
 
 .w-full{
   width: 100%;
+}
+
+.w-16{
+  width: 4rem;
 }
 
 .cursor-pointer{
@@ -2128,6 +2136,11 @@ select{
 .bg-white{
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.object-cover{
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .px-12{
@@ -2298,16 +2311,6 @@ select{
 .text-white{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-green-500{
-  --tw-text-opacity: 1;
-  color: rgb(34 197 94 / var(--tw-text-opacity));
-}
-
-.text-yellow-500{
-  --tw-text-opacity: 1;
-  color: rgb(234 179 8 / var(--tw-text-opacity));
 }
 
 .shadow{

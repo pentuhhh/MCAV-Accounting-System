@@ -34,6 +34,10 @@
 		@apply w-full rounded-lg border border-gray-300 px-5 py-1;
 	}
 
+	td image {
+		@apply w-10 h-10;
+	}
+
 	select {
 		@apply w-full rounded-lg border border-gray-300 px-5 py-1;
 	}
@@ -728,6 +732,12 @@
     .status-unknown {
         color: #707070;
     }
+    .status-active {
+        color: #6FD273;
+    }
 
+    .status-deactivated {
+        color: #DC186E;
+    }
 	/* End of Table Colors */
 }

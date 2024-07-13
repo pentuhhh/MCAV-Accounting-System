@@ -199,7 +199,7 @@
                                 <th class="text-center">Qty</th>
                                 <th class="text-center">Price</th>
                                 <th class="text-center">Total</th>
-                                <th></th>
+                                <th>Action</th>
                             </tr>
                             <?php foreach ($products as $product) : ?>
                                 <tr>

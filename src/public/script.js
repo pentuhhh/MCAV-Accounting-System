@@ -52,47 +52,47 @@ closeButton.onclick = closeModal;
 closeButtonReceipt.onclick = closeModalReceipt;
 window.onclick = clickOutsideToClose;
 
-    function enableInput(select) {
-		var processor = document.getElementById("processor");
-		if (select.value === "bank-transfer") {
-			processor.disabled = false;
-		} else {
-			processor.disabled = true;
-			processor.value = "none";
+function enableInput(select) {
+	var processor = document.getElementById("processor");
+	if (select.value === "bank-transfer") {
+		processor.disabled = false;
+	} else {
+		processor.disabled = true;
+		processor.value = "none";
+	}
+}
+
+function addItemToList() {
+	var formData = new FormData(document.getElementById("productForm"));
+
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", "", true);
+
+	xhr.onreadystatechange = function () {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			location.reload();
 		}
-	}
+	};
 
-	function addItemToList() {
-		var formData = new FormData(document.getElementById("productForm"));
+	xhr.send(formData);
+}
 
-		var xhr = new XMLHttpRequest();
-		xhr.open("POST", "", true);
+function deleteItem(index) {
+	var formData = new FormData();
+	formData.append("action", "deleteProduct");
+	formData.append("index", index);
 
-		xhr.onreadystatechange = function () {
-			if (xhr.readyState == 4 && xhr.status == 200) {
-				location.reload();
-			}
-		};
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", "", true);
 
-		xhr.send(formData);
-	}
+	xhr.onreadystatechange = function () {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			location.reload();
+		}
+	};
 
-	function deleteItem(index) {
-		var formData = new FormData();
-		formData.append("action", "deleteProduct");
-		formData.append("index", index);
+	xhr.send(formData);
+}
 
-		var xhr = new XMLHttpRequest();
-		xhr.open("POST", "", true);
 
-		xhr.onreadystatechange = function () {
-			if (xhr.readyState == 4 && xhr.status == 200) {
-				location.reload();
-			}
-		};
-
-		xhr.send(formData);
-	}
-
-	
 
