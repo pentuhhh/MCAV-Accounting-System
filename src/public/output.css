@@ -511,11 +511,6 @@ input{
   padding-bottom: 0.25rem;
 }
 
-td image{
-  height: 2.5rem;
-  width: 2.5rem;
-}
-
 select{
   width: 100%;
   border-radius: 0.5rem;
@@ -1918,14 +1913,6 @@ select{
 
 .status-unknown {
   color: #707070;
-}
-
-.status-active {
-  color: #6FD273;
-}
-
-.status-deactivated {
-  color: #DC186E;
 }
 
 /* End of Table Colors */
