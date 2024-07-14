@@ -178,11 +178,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
     $orderentryquery = "INSERT INTO orders (customerID, employeeID, orderStartDate) VALUES ('$customerID', '$employeeID', curdate());";
     $conn->query($orderentryquery);
 
+    
+
     // Retrieve order ID
     $retrieveorderid = "SELECT orderID from orders where customerID = $customerID order by orderID desc limit 1;";
     $result = $conn->query($retrieveorderid);
     $row = $result->fetch_assoc();
     $orderID = $row['orderID'];
+
+    // Log Order creation action
+
+    $employeeWebID = $_SESSION['employeeWebID'];
+    $sql = "Insert into action_logs (employeeWebID, userAction, affectedEntityType, affectedEntityID, LogTimeStamp) values ('$employeeID', 'Create', 'Orders', '$orderID', now());";
+    $conn->query($sql);
 
     // Retrieve and sanitize due date
     if (isset($_POST['due-date'])) {
@@ -202,6 +210,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
             $paymentplanquery = "INSERT INTO payment_plans (orderID, TotalAmount, dueDate, paymentMethod, PaymentProcessor) VALUES 
                 ('$orderID', 0, '$duedate', '$paymentMethod', '$paymentprocessor');";
             if ($conn->query($paymentplanquery) === TRUE) {
+
+                // Retrieve payment plan ID
+                $retrieveplanid = "SELECT PlanID from payment_plans where orderID = $orderID order by PlanID desc limit 1;";
+                $result = $conn->query($retrieveplanid);
+                $row = $result->fetch_assoc();
+                $planID = $row['PlanID'];
+
+                // Log payment plan creation action
+                $sql = "Insert into action_logs (employeeWebID, userAction, affectedEntityType, affectedEntityID, LogTimeStamp) values ('$employeeID', 'Create', 'Payment_Plan', '$planID', now());";
+                $conn->query($sql);
                 // debug: echo "Payment plan created successfully.";
             } else {
                 // debug: echo "Error creating payment plan: " . $conn->error;
@@ -217,20 +235,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
     foreach ($_SESSION['product_list'] as $product) {
         $productDescription = $product['productDescription'];
         $dimensions = $product['dimensions'];
-        $price =$product['price'];
+        $price = $product['price'];
         $amount = $product['amount'];
         $remarks = $product['remarks'];
-
-        // Insert the data into the database or perform the desired action
+    
+        // Insert the data into the database
         $insertproductquery = "INSERT INTO products (orderID, productDescription, productDimensions, productPrice, productQuantity, productRemarks) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($insertproductquery);
         $stmt->bind_param("issdis", $orderID, $productDescription, $dimensions, $price ,$amount, $remarks);
-
-        if (!$stmt->execute()) {
-            // debug: echo "Error adding product: " . $stmt->error;
+    
+        if ($stmt->execute()) {
+            // Get the inserted product ID
+            $productID = $stmt->insert_id;
+    
+            // Log product creation action if employeeWebID is set
+            if (isset($_SESSION['employeeWebID'])) {
+                $employeeWebID = $_SESSION['employeeWebID'];
+                $sql = "INSERT INTO action_logs (employeeWebID, userAction, affectedEntityType, affectedEntityID, LogTimeStamp) VALUES ('$employeeWebID', 'Create', 'Products', '$productID', NOW())";
+                if (!$conn->query($sql)) {
+                    // Log insertion failed
+                    error_log("Error logging product creation: " . $conn->error);
+                }
+            } else {
+                // Handle case where $_SESSION['employeeWebID'] is not set
+                error_log("Error: employeeWebID not set in session");
+            }
+        } else {
+            // Log insertion failed
+            error_log("Error adding product: " . $stmt->error);
             break;
         }
     }
+    
+
 
     // Retrieve price
     $retrievetotal = "SELECT SUM(ProductPrice * ProductQuantity) AS TotalPrice FROM products WHERE OrderID = '$orderID';";

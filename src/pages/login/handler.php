@@ -44,6 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 // Successful login
                 $_SESSION['username'] = $username;
+                $_SESSION['employeeWebID'] = $employeeWebID;
                 $_SESSION['employeeID'] = $employeeID;
                 $_SESSION['user_level'] = $row['UserLevel'];
                 $_SESSION['account_status'] = $row['accountStatus'];
