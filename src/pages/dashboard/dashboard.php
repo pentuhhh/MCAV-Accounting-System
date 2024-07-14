@@ -5,37 +5,51 @@ error_reporting(E_ALL);
 
 require "../utilities/db-connection.php";
 
-// Function to fetch single value
-function fetchSingleValue($conn, $query) {
-    $result = $conn->query($query);
-    if ($result === false) {
-        die("Query failed: " . $conn->error);
-    }
-    $row = $result->fetch_assoc();
-    return array_values($row)[0];
-}
-
 // Fetch Monthly Sales
-$monthlySales = fetchSingleValue($conn, "
-    SELECT SUM(ReceiptAmountPaid) AS 'Monthly Sales'
+$monthlySalesQuery = "
+    SELECT COALESCE(SUM(ReceiptAmountPaid), 0) AS 'Monthly Sales'
     FROM Payment_Receipts
     WHERE PaymentDate >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
     AND PaymentDate <= CURDATE()
-");
+";
+
+$resultMonthlySales = $conn->query($monthlySalesQuery);
+if ($resultMonthlySales === false) {
+    die("Monthly Sales query failed: " . $conn->error);
+}
+
+$rowMonthlySales = $resultMonthlySales->fetch_assoc();
+$monthlySales = isset($rowMonthlySales['Monthly Sales']) ? $rowMonthlySales['Monthly Sales'] : 0;
 
 // Fetch Total Orders
-$totalOrders = fetchSingleValue($conn, "
+$totalOrdersQuery = "
     SELECT COUNT(OrderID) AS 'Total Orders'
     FROM orders
     WHERE isremoved = 0
-");
+";
+
+$resultTotalOrders = $conn->query($totalOrdersQuery);
+if ($resultTotalOrders === false) {
+    die("Total Orders query failed: " . $conn->error);
+}
+
+$rowTotalOrders = $resultTotalOrders->fetch_assoc();
+$totalOrders = isset($rowTotalOrders['Total Orders']) ? $rowTotalOrders['Total Orders'] : 0;
 
 // Fetch Total Sales
-$totalSales = fetchSingleValue($conn, "
-    SELECT SUM(ReceiptAmountPaid) AS 'Total Sales'
+$totalSalesQuery = "
+    SELECT COALESCE(SUM(ReceiptAmountPaid), 0) AS 'Total Sales'
     FROM Payment_Receipts
     WHERE isremoved = 0
-");
+";
+
+$resultTotalSales = $conn->query($totalSalesQuery);
+if ($resultTotalSales === false) {
+    die("Total Sales query failed: " . $conn->error);
+}
+
+$rowTotalSales = $resultTotalSales->fetch_assoc();
+$totalSales = isset($rowTotalSales['Total Sales']) ? $rowTotalSales['Total Sales'] : 0;
 
 // Fetch Recent Orders
 $recentOrdersQuery = "
@@ -59,9 +73,11 @@ $recentOrdersQuery = "
     LIMIT 5
 ";
 
-$recentOrders = $conn->query($recentOrdersQuery);
-if ($recentOrders === false) {
-    die("Query failed: " . $conn->error);
+$resultRecentOrders = $conn->query($recentOrdersQuery);
+if ($resultRecentOrders === false) {
+    die("Recent Orders query failed: " . $conn->error);
 }
 
+// Output or use the fetched data as needed
 ?>
+

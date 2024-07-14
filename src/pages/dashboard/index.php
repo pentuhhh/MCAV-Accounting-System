@@ -79,7 +79,7 @@ $profilePicture = isset($_SESSION['profile_picture']) ? $_SESSION['profile_pictu
                         </tr>
                     </thead>
                     <tbody id="recentOrders">
-                        <?php while ($row = $recentOrders->fetch_assoc()) { ?>
+                        <?php while ($row = $resultRecentOrders->fetch_assoc()) { ?>
                             <tr>
                                 <td>
                                     <a href="/orders/details/?orderID=<?php echo $row['Order ID']; ?>">
