@@ -170,8 +170,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
         // debug: echo "User exists with ID: " . $customerID;
     }
 
+    // Retrieve who is making the order
+    $employeeID = $_SESSION['employeeID'];
+
+
     // Proceed to create order entry
-    $orderentryquery = "INSERT INTO orders (customerID, orderStartDate) VALUES ('$customerID', curdate());";
+    $orderentryquery = "INSERT INTO orders (customerID, employeeID, orderStartDate) VALUES ('$customerID', '$employeeID', curdate());";
     $conn->query($orderentryquery);
 
     // Retrieve order ID
