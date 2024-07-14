@@ -136,8 +136,8 @@
             }
         }
 
-        if($_SERVER)
-        $conn->close();
+        if ($_SERVER)
+            $conn->close();
         ?>
         <div class="DETAILS_CONTAINER">
             <div class="GLOBAL_SUBHEADER">
@@ -166,7 +166,7 @@
                 $customerID = htmlspecialchars($_POST['customerID']);
 
                 // breakdown customer name
-                
+
                 $sql = "SELECT CustomerFname, CustomerLname FROM customers WHERE CustomerID = $globCustomerID";
                 $result = $conn->query($sql);
                 $row = $result->fetch_assoc();
@@ -233,20 +233,19 @@
                 <?php
 
                 require "../utilities/db-connection.php";
-                    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'save-customer') {
-                        // Retrieve POST data
-                        $editedFName = htmlspecialchars($_POST['editCustomerFName']);
-                        $editedLName = htmlspecialchars($_POST['editCustomerLName']);
-                        $editedEmail = htmlspecialchars($_POST['editCustomerEmail']);
-                        $editedPhone = htmlspecialchars($_POST['editCustomerPhone']);
+                if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'save-customer') {
+                    // Retrieve POST data
+                    $editedFName = htmlspecialchars($_POST['editCustomerFName']);
+                    $editedLName = htmlspecialchars($_POST['editCustomerLName']);
+                    $editedEmail = htmlspecialchars($_POST['editCustomerEmail']);
+                    $editedPhone = htmlspecialchars($_POST['editCustomerPhone']);
 
-                        // Update the customer information in the database
-                        $sql = "UPDATE customers SET CustomerFname = '$editedFName', CustomerLname = '$editedLName', CustomerEmail = '$editedEmail', CustomerPhone = '$editedPhone' WHERE CustomerID = '$globCustomerID'";
-                        $conn->query($sql);
-                        
-                    }
+                    // Update the customer information in the database
+                    $sql = "UPDATE customers SET CustomerFname = '$editedFName', CustomerLname = '$editedLName', CustomerEmail = '$editedEmail', CustomerPhone = '$editedPhone' WHERE CustomerID = '$globCustomerID'";
+                    $conn->query($sql);
+                }
 
-                    ?>
+                ?>
 
                 <!-- END Save Info -->
 
@@ -270,33 +269,32 @@
                             </tr>
                         </table>
                         <div class="DETAILS_CONTAINER_ROW_BUTTON">
-                        <form method="post">
-                            <button type="submit" class="GLOBAL_BUTTON_RED" name="action" value="cancel-order" onclick="return confirm('Are you sure you want to cancel the order?')">Cancel Order </button>
-                            <input type="hidden" name="orderID" value="<?php echo htmlspecialchars($_GET['orderID']); ?>">
-                        </form>
-                        <form method="post">
-                            <button type="submit" class="GLOBAL_BUTTON_GREEN" name="action" value="inprogress-order" onclick="return confirm('Are you sure you want to mark the order as Pending?')">Pending </button>
-                            <input type="hidden" name="orderID" value="<?php echo htmlspecialchars($_GET['orderID']); ?>">
-                        </form>
-                        <form method="post">
-                            <button type="submit" class="GLOBAL_BUTTON_GREEN" name="action" value="complete-order" onclick="return confirm('Are you sure you want to mark complete the order?')">Complete Order </button>
-                            <input type="hidden" name="orderID" value="<?php echo htmlspecialchars($_GET['orderID']); ?>">
-                        </form>
-                        
+                            <form method="post">
+                                <button type="submit" class="GLOBAL_BUTTON_RED" name="action" value="cancel-order" onclick="return confirm('Are you sure you want to cancel the order?')">Cancel Order </button>
+                                <input type="hidden" name="orderID" value="<?php echo htmlspecialchars($_GET['orderID']); ?>">
+                            </form>
+                            <form method="post">
+                                <button type="submit" class="GLOBAL_BUTTON_YELLOW ml-2" name="action" value="inprogress-order" onclick="return confirm('Are you sure you want to mark the order as Pending?')">Pending </button>
+                                <input type="hidden" name="orderID" value="<?php echo htmlspecialchars($_GET['orderID']); ?>">
+                            </form>
+                            <form method="post">
+                                <button type="submit" class="GLOBAL_BUTTON_GREEN" name="action" value="complete-order" onclick="return confirm('Are you sure you want to mark complete the order?')">Complete Order </button>
+                                <input type="hidden" name="orderID" value="<?php echo htmlspecialchars($_GET['orderID']); ?>">
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
 
-           <!-- EDIT ordered Product INFO -->
-           <?php
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'editProductInfo') {
-                    // Display the edit form for product
-                    $productID = htmlspecialchars($_POST['productID']);
-                    $productDescription = htmlspecialchars($_POST['productDescription']);
-                    $productQuantity = htmlspecialchars($_POST['productQuantity']);
-                    $productPrice = htmlspecialchars($_POST['productPrice']);
-                    echo <<<HTML
+            <!-- EDIT ordered Product INFO -->
+            <?php
+            if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'editProductInfo') {
+                // Display the edit form for product
+                $productID = htmlspecialchars($_POST['productID']);
+                $productDescription = htmlspecialchars($_POST['productDescription']);
+                $productQuantity = htmlspecialchars($_POST['productQuantity']);
+                $productPrice = htmlspecialchars($_POST['productPrice']);
+                echo <<<HTML
                         <div class="POPUP_CONTAINER">
                             <div class="POPUP_CONTAINER_BOX GLOBAL_BOX_DIV flex flex-col gap-4 w-full">
                                 <a href="/orders/details?orderID={$orderID}" class="absolute top-2 right-4 text-2xl text-gray-500 cursor-pointer">&times;</a>
@@ -312,15 +310,15 @@
                             </div>
                         </div> 
                     HTML;
-                }
-                ?>
-                <!-- EDIT ordered Product INFO -->
+            }
+            ?>
+            <!-- EDIT ordered Product INFO -->
 
-                <!-- ADD ordered Product INFO -->
-                <?php
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'addProductInfo') {
-                    // Display the add form for product
-                    echo <<<HTML
+            <!-- ADD ordered Product INFO -->
+            <?php
+            if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'addProductInfo') {
+                // Display the add form for product
+                echo <<<HTML
                         <div class="POPUP_CONTAINER">
                             <div class="POPUP_CONTAINER_BOX GLOBAL_BOX_DIV flex flex-col gap-4 w-full">
                                 <a href="/orders/details?orderID={$orderID}" class="absolute top-2 right-4 text-2xl text-gray-500 cursor-pointer">&times;</a>
@@ -331,87 +329,87 @@
                                     <input type="number" name="newProductQuantity" placeholder="Product Quantity">
                                     <input type="number" step="0.01" name="newProductPrice" placeholder="Product Price">
                                     <textarea name="newProductRemarks" placeholder="Remarks"></textarea>
-                                    <button type="submit" class="GLOBAL_BUTTON_BLUE flex-grow-0 w-min">Add Item</button>
+                                    <button type="submit" class="GLOBAL_BUTTON_BLUE w-32">Add Item</button>
                                 </form>
                             </div>
                         </div> 
                     HTML;
-                }
-                ?>
-                <!-- end ADD ordered Product INFO -->
+            }
+            ?>
+            <!-- end ADD ordered Product INFO -->
 
-                <!-- Render Ordered Products Table -->
-                <div class="DETAILS_CONTAINER_ROW">
-                    <div class="DETAILS_CONTAINER_ROW_COLUMN">
-                        <div class="DETAILS_CONTAINER_SUBHEADER mb-5">
-                            <h1>Ordered Products</h1>
-                            <form method="post">
-                                <input type="hidden" name="action" value="addProductInfo">
-                                <button type="submit" class="GLOBAL_BUTTON_BLUE ml-5">Add Item</button>
-                            </form>
-                        </div>
-                        <div class="GLOBAL_TABLE GLOBAL_BOX_DIV mb-5">
-                            <table>
+            <!-- Render Ordered Products Table -->
+            <div class="DETAILS_CONTAINER_ROW">
+                <div class="DETAILS_CONTAINER_ROW_COLUMN">
+                    <div class="DETAILS_CONTAINER_SUBHEADER mb-5">
+                        <h1>Ordered Products</h1>
+                        <form method="post">
+                            <input type="hidden" name="action" value="addProductInfo">
+                            <button type="submit" class="GLOBAL_BUTTON_BLUE ml-5">Add Item</button>
+                        </form>
+                    </div>
+                    <div class="GLOBAL_TABLE GLOBAL_BOX_DIV mb-5">
+                        <table>
+                            <tr>
+                                <th>#</th>
+                                <th>Product Description</th>
+                                <th>Product Quantity</th>
+                                <th>Product Price</th>
+                                <th>Total Price</th>
+                                <th>Actions</th>
+                            </tr>
+                            <?php foreach ($products as $index => $product) : ?>
                                 <tr>
-                                    <th>#</th>
-                                    <th>Product Description</th>
-                                    <th>Product Quantity</th>
-                                    <th>Product Price</th>
-                                    <th>Total Price</th>
-                                    <th>Actions</th>
+                                    <td class="text-center font-normal"><?= htmlspecialchars($index + 1); ?></td>
+                                    <td class="text-center font-normal"><?= htmlspecialchars($product['ProductDescription']); ?></td>
+                                    <td class="text-center font-normal"><?= htmlspecialchars($product['ProductQuantity']); ?></td>
+                                    <td class="text-center font-normal"><?= htmlspecialchars($product['ProductPrice']); ?></td>
+                                    <td class="text-center font-normal"><?= htmlspecialchars($product['ProductQuantity'] * $product['ProductPrice']); ?></td>
+                                    <td class="flex flex-row justify-center">
+                                        <form method="post" style="display:inline;">
+                                            <input type="hidden" name="action" value="editProductInfo">
+                                            <input type="hidden" name="productID" value="<?= htmlspecialchars($product['ProductID']); ?>">
+                                            <input type="hidden" name="productDescription" value="<?= htmlspecialchars($product['ProductDescription']); ?>">
+                                            <input type="hidden" name="productQuantity" value="<?= htmlspecialchars($product['ProductQuantity']); ?>">
+                                            <input type="hidden" name="productPrice" value="<?= htmlspecialchars($product['ProductPrice']); ?>">
+                                            <button type="submit" class="GLOBAL_BUTTON_BLUE">Edit</button>
+                                        </form>
+                                        <button class="text-[#DF166E]" onclick="return confirm('Are you sure you want to delete this row?');">Delete</button>
+                                    </td>
                                 </tr>
-                                <?php foreach ($products as $index => $product) : ?>
-                                    <tr>
-                                        <td class="text-center font-normal"><?= htmlspecialchars($index + 1); ?></td>
-                                        <td class="text-center font-normal"><?= htmlspecialchars($product['ProductDescription']); ?></td>
-                                        <td class="text-center font-normal"><?= htmlspecialchars($product['ProductQuantity']); ?></td>
-                                        <td class="text-center font-normal"><?= htmlspecialchars($product['ProductPrice']); ?></td>
-                                        <td class="text-center font-normal"><?= htmlspecialchars($product['ProductQuantity'] * $product['ProductPrice']); ?></td>
-                                        <td class="flex flex-row justify-center">
-                                            <form method="post" style="display:inline;">
-                                                <input type="hidden" name="action" value="editProductInfo">
-                                                <input type="hidden" name="productID" value="<?= htmlspecialchars($product['ProductID']); ?>">
-                                                <input type="hidden" name="productDescription" value="<?= htmlspecialchars($product['ProductDescription']); ?>">
-                                                <input type="hidden" name="productQuantity" value="<?= htmlspecialchars($product['ProductQuantity']); ?>">
-                                                <input type="hidden" name="productPrice" value="<?= htmlspecialchars($product['ProductPrice']); ?>">
-                                                <button type="submit" class="GLOBAL_BUTTON_BLUE">Edit</button>
-                                            </form>
-                                            <button class="text-[#DF166E]" onclick="return confirm('Are you sure you want to delete this row?');">Delete</button>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </table>
-                        </div>
+                            <?php endforeach; ?>
+                        </table>
                     </div>
                 </div>
-                <!-- Render Ordered Products Table -->
+            </div>
+            <!-- Render Ordered Products Table -->
 
-                <!-- Save New Product Info -->
-                <?php
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'saveNewProduct') {
-                    // Retrieve POST data
-                    $newProductDescription = htmlspecialchars($_POST['newProductDescription']);
-                    $newProductQuantity = htmlspecialchars($_POST['newProductQuantity']);
-                    $newProductPrice = htmlspecialchars($_POST['newProductPrice']);
-                    $newProductRemarks = htmlspecialchars($_POST['newProductRemarks']);
+            <!-- Save New Product Info -->
+            <?php
+            if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'saveNewProduct') {
+                // Retrieve POST data
+                $newProductDescription = htmlspecialchars($_POST['newProductDescription']);
+                $newProductQuantity = htmlspecialchars($_POST['newProductQuantity']);
+                $newProductPrice = htmlspecialchars($_POST['newProductPrice']);
+                $newProductRemarks = htmlspecialchars($_POST['newProductRemarks']);
 
-                    // Insert the new product into the database (placeholder)
-                    // Replace with actual database insertion logic
-                    $newProductID = count($products) + 1; // Placeholder for auto-increment ID
-                    $newProduct = [
-                        'ProductID' => $newProductID,
-                        'ProductDescription' => $newProductDescription,
-                        'ProductQuantity' => $newProductQuantity,
-                        'ProductPrice' => $newProductPrice,
-                        'Remarks' => $newProductRemarks
-                    ];
-                    $products[] = $newProduct; // Add new product to products array
+                // Insert the new product into the database (placeholder)
+                // Replace with actual database insertion logic
+                $newProductID = count($products) + 1; // Placeholder for auto-increment ID
+                $newProduct = [
+                    'ProductID' => $newProductID,
+                    'ProductDescription' => $newProductDescription,
+                    'ProductQuantity' => $newProductQuantity,
+                    'ProductPrice' => $newProductPrice,
+                    'Remarks' => $newProductRemarks
+                ];
+                $products[] = $newProduct; // Add new product to products array
 
-                    // Optionally, redirect or show a success message
-                    header("Location: " . $_SERVER['PHP_SELF'] . "?orderID={$orderID}");
-                    exit;
-                }
-                ?>
+                // Optionally, redirect or show a success message
+                header("Location: " . $_SERVER['PHP_SELF'] . "?orderID={$orderID}");
+                exit;
+            }
+            ?>
             <!-- End Save New Product Info -->
 
             <div class="DETAILS_CONTAINER_ROW columns-2 pt-3">
@@ -442,8 +440,6 @@
                             </div>
                         </div> 
                         HTML;
-
-                        
                     }
                     ?>
                     <!-- END EDIT PAYMENT PLAN -->
@@ -502,8 +498,8 @@
                         $paymentPlanID = $row['PlanID'];
                         $editedPaymentMethod = htmlspecialchars($_POST['editPaymentMethod']);
                         $editedDueDate = htmlspecialchars($_POST['editDueDate']);
-                      
-                        
+
+
                         $sql = "UPDATE payment_plans SET PaymentMethod = '$editedPaymentMethod', DueDate = '$editedDueDate' WHERE PlanID = '$paymentPlanID'";
                         $conn->query($sql);
                     }

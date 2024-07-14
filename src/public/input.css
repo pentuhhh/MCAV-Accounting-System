@@ -33,6 +33,10 @@
 	input {
 		@apply w-full rounded-lg border border-gray-300 px-5 py-1;
 	}
+	
+	textarea {
+		@apply w-full rounded-lg border border-gray-300 px-5 py-1;
+	}
 
 	select {
 		@apply w-full rounded-lg border border-gray-300 px-5 py-1;
@@ -377,6 +381,10 @@
 
 	.GLOBAL_BUTTON_BLUE {
 		@apply rounded-3xl bg-[#00A1E2] py-1 px-5 text-sm font-semibold text-white duration-300 hover:bg-[#007BB5];
+	}
+
+	.GLOBAL_BUTTON_YELLOW {
+		@apply rounded-3xl bg-[#FEED03] py-1 px-5 text-sm font-semibold text-white duration-300 hover:bg-[#FDD303];
 	}
 
 	.GLOBAL_BUTTON_RED {
