@@ -93,7 +93,7 @@
             while ($row = $result->fetch_assoc()) {
                 $rows[] = json_encode($row);
             }
-            echo implode(",", $rows);
+            echo json_encode($rows);
         }
         $conn->close();
         ?>
