@@ -86,19 +86,19 @@ $profilePicture = isset($_SESSION['profile_picture']) ? $_SESSION['profile_pictu
                                         <?php echo $row['Order ID']; ?>
                                     </a>
                                 </td>
-                                <td><?php echo $row['Customer Name']; ?></td>
-                                <td><?php echo $row['Order Date']; ?></td>
-                                <td>P<?php echo number_format($row['Amount'], 2); ?></td>
-                                <td><?php echo $row['Deadline']; ?></td>
+                                <td><?php echo htmlspecialchars($row['Customer Name']); ?></td>
+                                <td><?php echo htmlspecialchars($row['Order Date']); ?></td>
+                                <td><?php echo number_format($row['Amount'], 2); ?></td>
+                                <td><?php echo htmlspecialchars($row['Deadline']); ?></td>
                                 <td><?php
                                     if ($row['Status'] == 'Completed') {
-                                        echo '<span class= "status-completed">Completed</span>';
+                                        echo '<span class="status-completed">Completed</span>';
                                     } else if ($row['Status'] == 'Pending') {
-                                        echo '<span class= "status-pending">Pending</span>';
+                                        echo '<span class="status-pending">Pending</span>';
                                     } else if ($row['Status'] == 'Started') {
-                                        echo '<span class= "status-started">Started</span>';
+                                        echo '<span class="status-started">Started</span>';
                                     } else {
-                                        echo '<span class= "status-unknown>Unknown</span>';
+                                        echo '<span class="status-unknown">Unknown</span>';
                                     }
                                     ?></td>
                             </tr>
