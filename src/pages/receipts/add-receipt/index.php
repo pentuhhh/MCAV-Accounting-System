@@ -74,7 +74,7 @@
 
                 <div class="flex flex-row justify-end pb-5">
                     <a href="/receipts" class="GLOBAL_BUTTON_GRAY mr-4">Cancel</a>
-                    <input type="submit" value="Add Receipt" class="GLOBAL_BUTTON_BLUE">
+                    <button type="submit" value="Add Receipt" class="GLOBAL_BUTTON_BLUE">Submit</button>
                 </div>
             </form>
 

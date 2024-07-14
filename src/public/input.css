@@ -34,10 +34,6 @@
 		@apply w-full rounded-lg border border-gray-300 px-5 py-1;
 	}
 
-	td image {
-		@apply w-10 h-10;
-	}
-
 	select {
 		@apply w-full rounded-lg border border-gray-300 px-5 py-1;
 	}
@@ -335,6 +331,10 @@
 		@apply flex flex-row items-center;
 	}
 
+	.GLOBAL_HEADER_USER img {
+		@apply w-10 h-10 rounded-full;
+	}
+
 	.GLOBAL_HEADER_COLUMN {
 		@apply flex flex-col text-right;
 	}
@@ -370,7 +370,6 @@
 	.GLOBAL_TABLE a {
 		@apply text-[#00A1E2];
 	}
-
 
 	.GLOBAL_BUTTON_GRAY {
 		@apply rounded-3xl bg-[#ebebeb] py-1 px-5 text-sm font-semibold text-[#707070] duration-300 hover:bg-[#dddddd];

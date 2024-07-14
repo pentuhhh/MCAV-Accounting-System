@@ -1,7 +1,7 @@
 <div class="GLOBAL_PAGE flex">
     <?php
     include_once __DIR__ . "/../../components/sidebar.php";
-    
+
     $username = $_SESSION['username'];
     $profilePicture = isset($_SESSION['profile_picture']) ? $_SESSION['profile_picture'] : '';
     ?>
