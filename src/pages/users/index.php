@@ -25,7 +25,7 @@
                         search
                     </i>
                 </a>
-                <input type="text" placeholder="Search">
+                <input type="text" placeholder="Search" id="searchInput">
             </div>
         </div>
 
@@ -82,49 +82,56 @@
     WHERE 
         ei.IsRemoved = 0";
 
+    $result = $conn->query($sql);
 
-        $result = $conn->query($sql);
+    $users = [];
 
-        $users = [];
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            // Modify gender display
+            $row['Gender'] = ($row['Gender'] == 'M') ? 'Male' : 'Female';
 
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                // Modify gender display
-                $row['Gender'] = ($row['Gender'] == 'M') ? 'Male' : 'Female';
+            // Modify account status display
+            $row['accountStatus'] = ($row['accountStatus'] == 'Activated') ?
+                '<span class="status-active">Activated</span>' :
+                '<span class="status-deactivated">Deactivated</span>';
 
-                // Modify account status display
-                $row['accountStatus'] = ($row['accountStatus'] == 'Activated') ?
-                    '<span class="status-active">Activated</span>' :
-                    '<span class="status-deactivated">Deactivated</span>';
-
-                $users[] = $row;
-            }
+            $users[] = $row;
         }
+    }
 
-        $defaultImagePath = "/assets/defaultProfilePicture.jpg";
+    $defaultImagePath = "/assets/defaultProfilePicture.jpg";
 
-        // Set the default image path if ProfilePicturePath is null or empty
-        foreach ($users as &$row) {
-            if ($row['ProfilePicturePath'] === "") {
-                $row['ProfilePicturePath'] = $defaultImagePath;
-            }
+    // Set the default image path if ProfilePicturePath is null or empty
+    foreach ($users as &$row) {
+        if ($row['ProfilePicturePath'] === "") {
+            $row['ProfilePicturePath'] = $defaultImagePath;
         }
+    }
 
-        $conn->close();
+    $conn->close();
 
-        // Output as JSON
-        echo json_encode($users);
-        ?>;
+    // Output as JSON
+    echo json_encode($users);
+    ?>;
 
     let currentPage = 1;
     const rowsPerPage = 8;
+    let filteredData = data;
 
     function displayTable(page) {
         const tableBody = document.getElementById('usersTable');
         tableBody.innerHTML = "";
+
+        if (filteredData.length === 0) {
+            tableBody.innerHTML = "<tr><td colspan='10' class='text-center'>User doesn't exist</td></tr>";
+            document.getElementById('pageButtons').innerHTML = '';
+            return;
+        }
+
         const start = (page - 1) * rowsPerPage;
         const end = start + rowsPerPage;
-        const paginatedItems = data.slice(start, end);
+        const paginatedItems = filteredData.slice(start, end);
 
         paginatedItems.forEach((item, index) => {
             const row = document.createElement('tr');
@@ -156,7 +163,7 @@
     }
 
     function nextPage() {
-        if (currentPage * rowsPerPage < data.length) {
+        if (currentPage * rowsPerPage < filteredData.length) {
             currentPage++;
             displayTable(currentPage);
         }
@@ -170,7 +177,7 @@
     function updatePageButtons() {
         const pageButtonsContainer = document.getElementById('pageButtons');
         pageButtonsContainer.innerHTML = '';
-        const totalPages = Math.ceil(data.length / rowsPerPage);
+        const totalPages = Math.ceil(filteredData.length / rowsPerPage);
         for (let i = 1; i <= totalPages; i++) {
             const button = document.createElement('button');
             button.textContent = i;
@@ -187,6 +194,24 @@
             pageButtonsContainer.appendChild(button);
         }
     }
+
+    function filterData(query) {
+        query = query.toLowerCase();
+        filteredData = data.filter(item => {
+            return item.username.toLowerCase().includes(query) ||
+                item.EmployeeLastname.toLowerCase().includes(query) ||
+                item.EmployeeFirstname.toLowerCase().includes(query) ||
+                item.HireDate.toLowerCase().includes(query) ||
+                item.Gender.toLowerCase().includes(query) ||
+                item.Position.toLowerCase().includes(query);
+        });
+        currentPage = 1;
+        displayTable(currentPage);
+    }
+
+    document.getElementById('searchInput').addEventListener('input', function() {
+        filterData(this.value);
+    });
 
     window.onload = function() {
         displayTable(currentPage);
