@@ -39,15 +39,15 @@
                 <table>
                     <thead>
                         <tr>
-                            <th onclick="sortTable('EmployeeWebID')">#</th>
+                            <th class="sortable" data-column="EmployeeWebID" onclick="sortTable(this)">#</th>
                             <th>Profile Picture</th>
-                            <th onclick="sortTable('username')">Username</th>
-                            <th onclick="sortTable('EmployeeLastname')">Last Name</th>
-                            <th onclick="sortTable('EmployeeFirstname')">First Name</th>
-                            <th onclick="sortTable('HireDate')">Hire Date</th>
-                            <th onclick="sortTable('Gender')">Gender</th>
-                            <th onclick="sortTable('Position')">Position</th>
-                            <th>Status</th>
+                            <th class="sortable" data-column="username" onclick="sortTable(this)">Username</th>
+                            <th class="sortable" data-column="EmployeeLastname" onclick="sortTable(this)">Last Name</th>
+                            <th class="sortable" data-column="EmployeeFirstname" onclick="sortTable(this)">First Name</th>
+                            <th class="sortable" data-column="HireDate" onclick="sortTable(this)">Hire Date </th>
+                            <th class="sortable" data-column="Gender" onclick="sortTable(this)">Gender</th>
+                            <th class="sortable" data-column="Position" onclick="sortTable(this)">Position</th>
+                            <th class="sortable" data-column="accountStatus" onclick="sortTable(this)">Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -120,6 +120,7 @@
                     echo json_encode($users);
                     ?>;
 
+
     let currentPage = 1;
     const rowsPerPage = 8;
     let filteredData = data;
@@ -143,8 +144,8 @@
             const row = document.createElement('tr');
             const rowIndex = start + index + 1;
             row.innerHTML = `
-                <td>${rowIndex}</td>
-                <td class="flex flex-row justify-center"><img src="${item.ProfilePicturePath}" alt="Profile Picture" class="w-10 h-10 rounded-full"></td>
+                <td>${item.EmployeeWebID}</td>
+                <td class="flex flex-row items-center justify-center"><img src="${item.ProfilePicturePath}" alt="Profile Picture" class="w-10 h-10 rounded-full"></td>
                 <td>${item.username}</td>
                 <td>${item.EmployeeLastname}</td>
                 <td>${item.EmployeeFirstname}</td>
@@ -215,19 +216,38 @@
         displayTable(currentPage);
     }
 
+    const sortableColumns = document.querySelectorAll('.sortable');
+
     function sortTable(column) {
-        sortDirection = !sortDirection;
-        filteredData.sort((a, b) => {
-            const aValue = a[column] ? a[column].toString().toLowerCase() : '';
-            const bValue = b[column] ? b[column].toString().toLowerCase() : '';
-            if (aValue < bValue) {
-                return sortDirection ? -1 : 1;
+        const currentDirection = column.getAttribute('data-dir');
+        const nextDirection = currentDirection === 'asc' ? 'desc' : 'asc';
+        const columnName = column.getAttribute('data-column');
+
+        // Update data array based on sorting
+        data.sort((a, b) => {
+            if (!isNaN(a[columnName])) {
+                a[columnName] = parseFloat(a[columnName]);
+                b[columnName] = parseFloat(b[columnName]);
             }
-            if (aValue > bValue) {
-                return sortDirection ? 1 : -1;
+
+            if (nextDirection === 'asc') {
+                return a[columnName] > b[columnName] ? 1 : -1;
+            } else {
+                return b[columnName] > a[columnName] ? 1 : -1;
             }
-            return 0;
         });
+
+        // Set the new sorting direction
+        column.setAttribute('data-dir', nextDirection);
+
+        // Reset other column directions
+        sortableColumns.forEach(col => {
+            if (col !== column) {
+                col.setAttribute('data-dir', '');
+            }
+        });
+
+        // Refresh table display
         displayTable(currentPage);
     }
 

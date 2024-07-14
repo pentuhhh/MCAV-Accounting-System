@@ -158,7 +158,7 @@
         $conn->close();
         ?>
     ];
-
+    
     let currentPage = 1;
     const rowsPerPage = 8;
     let filteredData = data;
@@ -270,6 +270,11 @@
 
                 // Update data array based on sorting
                 data.sort((a, b) => {
+                    if (!isNaN(a[columnName])) {
+                        a[columnName] = parseFloat(a[columnName]);
+                        b[columnName] = parseFloat(b[columnName]);
+                    }
+
                     if (nextDirection === 'asc') {
                         return a[columnName] > b[columnName] ? 1 : -1;
                     } else {
