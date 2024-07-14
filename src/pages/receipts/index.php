@@ -29,15 +29,20 @@
                         <h1 class="GLOBAL_ANALYTICS_CARD_TITLE">Last Month's Income</h1>
                         <h1 class="GLOBAL_ANALYTICS_CARD_VALUE">
                             <?php
-                            require "../utilities/db-connection.php";
+                            require_once "../utilities/db-connection.php";
 
-                            $sql = "SELECT SUM(ReceiptAmountPaid) AS total_income
+                            $sql = <<<SQL
+                                    SELECT SUM(ReceiptAmountPaid) AS total_income
                                     FROM Payment_Receipts
-                                    WHERE PaymentDate BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 MONTH) AND CURDATE()
-                                      AND IsRemoved = 0;";
+                                    WHERE
+                                        PaymentDate BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
+                                        AND CURDATE()
+                                        AND IsRemoved = 0;
+                                    SQL;
                             $result = $conn->query($sql);
                             $row = $result->fetch_assoc();
-                            echo "Php " . number_format($row['total_income'], 2);
+
+                            echo "Php " . number_format(($row['total_income'] ?? 0), 2);
                             $conn->close();
                             ?>
                         </h1>
@@ -60,7 +65,7 @@
                                       AND IsRemoved = 0;";
                             $result = $conn->query($sql);
                             $row = $result->fetch_assoc();
-                            echo "Php " . number_format($row['total_income'], 2);
+                            echo "Php " . number_format(($row['total_income'] ?? 0), 2);
                             $conn->close();
                             ?>
                         </h1>
@@ -144,7 +149,7 @@
                     r.PaymentProcessorReferenceNumber AS ReferenceNumber
                 FROM      
                     Payment_Receipts r
-                WHERE r.IsRemoved = 0 
+                WHERE r.IsRemoved = 0
                 ORDER BY r.ReceiptID DESC;";
         $result = $conn->query($sql);
 
@@ -158,7 +163,7 @@
         $conn->close();
         ?>
     ];
-    
+
     let currentPage = 1;
     const rowsPerPage = 8;
     let filteredData = data;
@@ -186,17 +191,27 @@
             });
 
             const actionCell = document.createElement('td');
+            const form = document.createElement('form');
             const deleteButton = document.createElement('button');
-            deleteButton.textContent = 'Delete';
-            deleteButton.classList.add('text-[#DF166E]');
+
+            form.action = "/receipts/delete";
+            form.method = "POST";
+
             deleteButton.onclick = function() {
-                if (confirm('Are you sure you want to delete this row?')) {
-                    // Add delete functionality here
+                if (confirm('Are you sure you want to delete this receipt?')) {
+                    form.submit();
                 }
             };
-            actionCell.appendChild(deleteButton);
-            row.appendChild(actionCell);
+            deleteButton.type = 'submit';
+            deleteButton.name = "id";
+            deleteButton.value = item.ReceiptID;
+            deleteButton.textContent = 'Delete';
+            deleteButton.classList.add('text-[#DF166E]');
 
+            form.appendChild(deleteButton);
+
+            actionCell.appendChild(form);
+            row.appendChild(actionCell);
             tableBody.appendChild(row);
         });
         updatePageButtons();
@@ -254,48 +269,49 @@
         });
         displayTable(1);
     }
-    
+
     document.getElementById('searchInput').addEventListener('input', function() {
         filterData(this.value);
     });
 
-     // Sorting functionality
-     const sortableColumns = document.querySelectorAll('.sortable');
+    // Sorting functionality
+    const sortableColumns = document.querySelectorAll('.sortable');
 
-        sortableColumns.forEach(column => {
-            column.addEventListener('click', () => {
-                const currentDirection = column.getAttribute('data-dir');
-                const nextDirection = currentDirection === 'asc' ? 'desc' : 'asc';
-                const columnName = column.getAttribute('data-column');
+    sortableColumns.forEach(column => {
+        column.addEventListener('click', () => {
+            const currentDirection = column.getAttribute('data-dir');
+            const nextDirection = currentDirection === 'asc' ? 'desc' : 'asc';
+            const columnName = column.getAttribute('data-column');
 
-                // Update data array based on sorting
-                data.sort((a, b) => {
-                    if (!isNaN(a[columnName])) {
-                        a[columnName] = parseFloat(a[columnName]);
-                        b[columnName] = parseFloat(b[columnName]);
-                    }
+            // Update data array based on sorting
+            data.sort((a, b) => {
+                if (!isNaN(a[columnName])) {
+                    a[columnName] = parseFloat(a[columnName]);
+                    b[columnName] = parseFloat(b[columnName]);
+                }
 
-                    if (nextDirection === 'asc') {
-                        return a[columnName] > b[columnName] ? 1 : -1;
-                    } else {
-                        return b[columnName] > a[columnName] ? 1 : -1;
-                    }
-                });
-
-                // Set the new sorting direction
-                column.setAttribute('data-dir', nextDirection);
-
-                // Reset other column directions
-                sortableColumns.forEach(col => {
-                    if (col !== column) {
-                        col.setAttribute('data-dir', '');
-                    }
-                });
-
-                // Refresh table display
-                displayTable(currentPage);
+                if (nextDirection === 'asc') {
+                    return a[columnName] > b[columnName] ? 1 : -1;
+                } else {
+                    return b[columnName] > a[columnName] ? 1 : -1;
+                }
             });
+
+            // Set the new sorting direction
+            column.setAttribute('data-dir', nextDirection);
+
+            // Reset other column directions
+            sortableColumns.forEach(col => {
+                if (col !== column) {
+                    col.setAttribute('data-dir', '');
+                }
+            });
+
+            // Refresh table display
+            displayTable(currentPage);
         });
+    });
+    
 
     window.onload = function() {
         displayTable(currentPage);
