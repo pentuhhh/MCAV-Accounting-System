@@ -372,9 +372,9 @@
                                             <input type="hidden" name="productDescription" value="<?= htmlspecialchars($product['ProductDescription']); ?>">
                                             <input type="hidden" name="productQuantity" value="<?= htmlspecialchars($product['ProductQuantity']); ?>">
                                             <input type="hidden" name="productPrice" value="<?= htmlspecialchars($product['ProductPrice']); ?>">
-                                            <button type="submit" class="GLOBAL_BUTTON_BLUE">Edit</button>
+                                            <button type="submit" class="text-[#00A1E2]">Edit</button>
                                         </form>
-                                        <button class="text-[#DF166E]" onclick="return confirm('Are you sure you want to delete this row?');">Delete</button>
+                                        <button class="text-[#DF166E] ml-3" onclick="return confirm('Are you sure you want to delete this row?');">Delete</button>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
