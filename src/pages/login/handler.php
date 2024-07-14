@@ -24,6 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if (password_verify($password, $row['employee_Password'])) {
                 // Fetch additional user info
+                $employeeWebID = $row['EmployeeWebID'];
                 $employeeID = $row['EmployeeID'];
                 $infoQuery = "SELECT ProfilePicturePath FROM employee_info WHERE EmployeeID = ?";
                 $infoStmt = $conn->prepare($infoQuery);
