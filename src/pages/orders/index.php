@@ -26,7 +26,7 @@
                         search
                     </i>
                 </a>
-                <input type="text" placeholder="Search">
+                <input type="text" placeholder="Search" id="searchInput">
             </div>
         </div>
 
@@ -96,13 +96,21 @@
 
     let currentPage = 1;
     const rowsPerPage = 13;
+    let filteredData = data;
 
     function displayTable(page) {
         const tableBody = document.getElementById('ordersTable');
         tableBody.innerHTML = "";
+
+        if (filteredData.length === 0) {
+            tableBody.innerHTML = "<tr><td colspan='6' class='text-center'>Order doesn't exist</td></tr>";
+            document.getElementById('pageButtons').innerHTML = '';
+            return;
+        }
+
         const start = (page - 1) * rowsPerPage;
         const end = start + rowsPerPage;
-        const paginatedItems = data.slice(start, end);
+        const paginatedItems = filteredData.slice(start, end);
 
         paginatedItems.forEach(item => {
             const row = document.createElement('tr');
@@ -150,7 +158,7 @@
     }
 
     function nextPage() {
-        if (currentPage * rowsPerPage < data.length) {
+        if (currentPage * rowsPerPage < filteredData.length) {
             currentPage++;
             displayTable(currentPage);
         }
@@ -164,7 +172,7 @@
     function updatePageButtons() {
         const pageButtonsContainer = document.getElementById('pageButtons');
         pageButtonsContainer.innerHTML = '';
-        const totalPages = Math.ceil(data.length / rowsPerPage);
+        const totalPages = Math.ceil(filteredData.length / rowsPerPage);
         for (let i = 1; i <= totalPages; i++) {
             const button = document.createElement('button');
             button.textContent = i;
@@ -181,6 +189,24 @@
             pageButtonsContainer.appendChild(button);
         }
     }
+
+    function filterData(query) {
+        query = query.toLowerCase();
+        filteredData = data.filter(item => {
+            return item.OrderID.toLowerCase().includes(query) ||
+                item.CustomerName.toLowerCase().includes(query) ||
+                item.OrderStartDate.toLowerCase().includes(query) ||
+                item.totalamount.toLowerCase().includes(query) ||
+                item.OrderDeadline.toLowerCase().includes(query) ||
+                item.Status.toLowerCase().includes(query);
+        });
+        currentPage = 1;
+        displayTable(currentPage);
+    }
+
+    document.getElementById('searchInput').addEventListener('input', function() {
+        filterData(this.value);
+    });
 
     window.onload = function() {
         displayTable(currentPage);

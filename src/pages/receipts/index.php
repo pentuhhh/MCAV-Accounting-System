@@ -97,7 +97,7 @@
                         search
                     </i>
                 </a>
-                <input type="text" placeholder="Search">
+                <input type="text" placeholder="Search" id="searchInput">
             </div>
         </div>
 
@@ -163,13 +163,21 @@
 
     let currentPage = 1;
     const rowsPerPage = 8;
+    let filteredData = data;
 
     function displayTable(page) {
         const tableBody = document.getElementById('receiptsTable');
         tableBody.innerHTML = "";
+
+        if (filteredData.length === 0) {
+            tableBody.innerHTML = "<tr><td colspan='7' class='text-center'>Receipt doesn't exist</td></tr>";
+            document.getElementById('pageButtons').innerHTML = '';
+            return;
+        }
+
         const start = (page - 1) * rowsPerPage;
         const end = start + rowsPerPage;
-        const paginatedItems = data.slice(start, end);
+        const paginatedItems = filteredData.slice(start, end);
 
         paginatedItems.forEach(item => {
             const row = document.createElement('tr');
@@ -204,7 +212,7 @@
     }
 
     function nextPage() {
-        if (currentPage * rowsPerPage < data.length) {
+        if (currentPage * rowsPerPage < filteredData.length) {
             currentPage++;
             displayTable(currentPage);
         }
@@ -218,7 +226,7 @@
     function updatePageButtons() {
         const pageButtonsContainer = document.getElementById('pageButtons');
         pageButtonsContainer.innerHTML = '';
-        const totalPages = Math.ceil(data.length / rowsPerPage);
+        const totalPages = Math.ceil(filteredData.length / rowsPerPage);
         for (let i = 1; i <= totalPages; i++) {
             const button = document.createElement('button');
             button.textContent = i;
@@ -235,6 +243,23 @@
             pageButtonsContainer.appendChild(button);
         }
     }
+
+    function filterData(query) {
+        query = query.toLowerCase();
+        filteredData = data.filter(item => {
+            return item.ReceiptID.toLowerCase().includes(query) ||
+                item.OrderID.toLowerCase().includes(query) ||
+                item.PaymentMethod.toLowerCase().includes(query) ||
+                item.AmountPaid.toLowerCase().includes(query) ||
+                item.PaymentDate.toLowerCase().includes(query) ||
+                item.ReferenceNumber.toLowerCase().includes(query);
+        });
+        displayTable(1);
+    }
+
+    document.getElementById('searchInput').addEventListener('input', function() {
+        filterData(this.value);
+    });
 
     window.onload = function() {
         displayTable(currentPage);
