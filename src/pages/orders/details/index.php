@@ -36,6 +36,18 @@
                                 WHERE customerID IN (SELECT customerID FROM orders WHERE orderID = $orderID)";
             $customerResult = $conn->query($customerQuery);
 
+            //get customer ID
+            global $globOrderID;
+            $globOrderID = $orderID;
+            global $globCustomerID;
+
+            $getCustomerID = "SELECT customerID FROM orders WHERE orderID = $orderID";
+            $customerIDResult = $conn->query($getCustomerID);
+            if ($customerIDResult->num_rows > 0) {
+                $customerIDRow = $customerIDResult->fetch_assoc();
+                $globCustomerID = $customerIDRow['customerID'];
+            }
+
             if ($customerResult->num_rows > 0) {
                 $customerRow = $customerResult->fetch_assoc();
                 $customerName = $customerRow['CustomerName'];
@@ -49,6 +61,7 @@
                                           WHEN OrderStatusCode = 1 THEN 'Pending'
                                           WHEN OrderStatusCode = 2 THEN 'Started'
                                           WHEN OrderStatusCode = 3 THEN 'Completed'
+                                          WHEN OrderStatusCode = 4 THEN 'Cancelled'
                                           ELSE 'Unknown'
                                       END AS Status
                                FROM orders
@@ -63,7 +76,7 @@
             }
 
             // Fetch and display ordered products
-            $productsQuery = "SELECT ProductID, ProductDescription, ProductDimensions, ProductQuantity, ProductPrice
+            $productsQuery = "SELECT ProductID, ProductDescription, ProductDimensions, ProductQuantity, ProductPrice, ProductRemarks
                                   FROM products
                                   WHERE orderID = $orderID AND isremoved = 0";
             $productsResult = $conn->query($productsQuery);
@@ -104,9 +117,28 @@
             echo "<p>No orderID specified.</p>";
         }
 
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($_POST['action'] == 'cancel-order') {
+                $sql = "UPDATE orders SET OrderStatusCode = 4 WHERE OrderID = $orderID";
+                if ($conn->query($sql) === FALSE) {
+                    echo "Error canceling order: " . $conn->error;
+                }
+            } elseif ($_POST['action'] == 'complete-order') {
+                $sql = "UPDATE orders SET OrderStatusCode = 3 WHERE OrderID = $orderID";
+                if ($conn->query($sql) === FALSE) {
+                    echo "Error completing order: " . $conn->error;
+                }
+            } elseif ($_POST['action'] == 'inprogress-order') {
+                $sql = "UPDATE orders SET OrderStatusCode = 2 WHERE OrderID = $orderID";
+                if ($conn->query($sql) === FALSE) {
+                    echo "Error marking order as in progress: " . $conn->error;
+                }
+            }
+        }
+
+        if($_SERVER)
         $conn->close();
         ?>
-
         <div class="DETAILS_CONTAINER">
             <div class="GLOBAL_SUBHEADER">
                 <div class="DETAILS_ORDERID">
@@ -128,25 +160,36 @@
             </div>
             <!-- EDIT Customer INFO -->
             <?php
+            require "../utilities/db-connection.php";
             if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'edit') {
                 // Display the edit form
                 $customerID = htmlspecialchars($_POST['customerID']);
+
+                // breakdown customer name
+                
+                $sql = "SELECT CustomerFname, CustomerLname FROM customers WHERE CustomerID = $globCustomerID";
+                $result = $conn->query($sql);
+                $row = $result->fetch_assoc();
+                $customerFname = $row['CustomerFname'];
+                $customerLname = $row['CustomerLname'];
+
                 echo <<<HTML
                     <div class="POPUP_CONTAINER">
                         <div class="POPUP_CONTAINER_BOX GLOBAL_BOX_DIV flex flex-col gap-4 w-full">
                         <a href="/orders/details?orderID={$orderID}" class="absolute top-2 right-4 text-2xl text-gray-500 cursor-pointer">&times;</a>
                             <h1 class = "text-lg font-bold">Edit Customer Information</h1>
                             <form method="post" class = "flex flex-col gap-4">
-                                <input type="hidden" name="action" value="save">
+                                <input type="hidden" name="action" value="save-customer">
                                 <input type="hidden" name="customerID" value="{$customerID}">
-                                <input type="text" name="editCustomerName" value="{$customerName}" placeholder="Customer Name">
+                                <input type="text" name="editCustomerFName" value="{$customerFname}" placeholder="Customer First Name">
+                                <input type="text" name="editCustomerLName" value="{$customerLname}" placeholder="Customer Last Name">
                                 <input type="email" name="editCustomerEmail" value="{$customerEmail}" placeholder="Customer Email">
                                 <input type="tel" name="editCustomerPhone" value="{$customerPhone}" placeholder="Customer Phone">
                                 <!-- Add other fields as needed -->
                                 <button type="submit" class="GLOBAL_BUTTON_BLUE flex-grow-0 w-min">Save</button>
                             </form>
-                        </div>
-                    </div> 
+                        </div> 
+                    </div>
                     HTML;
             }
             ?>
@@ -188,38 +231,22 @@
 
                 <!-- Save Info TODO: BACKEND DEVELOPER-->
                 <?php
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'save') {
-                    // Retrieve POST data
-                    $customerID = htmlspecialchars($_POST['customerID']);
-                    $editedName = htmlspecialchars($_POST['editCustomerName']);
-                    $editedEmail = htmlspecialchars($_POST['editCustomerEmail']);
-                    $editedPhone = htmlspecialchars($_POST['editCustomerPhone']);
 
-                    // Update the customer information in the database
-                    updateCustomerInfo($customerID, $editedName, $editedEmail, $editedPhone);
+                require "../utilities/db-connection.php";
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'save-customer') {
+                        // Retrieve POST data
+                        $editedFName = htmlspecialchars($_POST['editCustomerFName']);
+                        $editedLName = htmlspecialchars($_POST['editCustomerLName']);
+                        $editedEmail = htmlspecialchars($_POST['editCustomerEmail']);
+                        $editedPhone = htmlspecialchars($_POST['editCustomerPhone']);
 
-                    // Optionally, redirect or show a success message
-                    header("Location: " . $_SERVER['PHP_SELF']);
-                    exit;
-                }
-
-                function updateCustomerInfo($id, $name, $email, $phone)
-                {
-                    try {
-                        // Replace with your actual database connection details
-                        $pdo = new PDO('mysql:host=your_host;dbname=your_db', 'your_user', 'your_password');
-                        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-                        $sql = "UPDATE customers SET name = ?, email = ?, phone = ? WHERE id = ?";
-                        $stmt = $pdo->prepare($sql);
-                        $stmt->execute([$name, $email, $phone, $id]);
-
-                        echo "Customer information updated successfully.";
-                    } catch (PDOException $e) {
-                        echo "Error: " . $e->getMessage();
+                        // Update the customer information in the database
+                        $sql = "UPDATE customers SET CustomerFname = '$editedFName', CustomerLname = '$editedLName', CustomerEmail = '$editedEmail', CustomerPhone = '$editedPhone' WHERE CustomerID = '$globCustomerID'";
+                        $conn->query($sql);
+                        
                     }
-                }
-                ?>
+
+                    ?>
 
                 <!-- END Save Info -->
 
@@ -243,8 +270,19 @@
                             </tr>
                         </table>
                         <div class="DETAILS_CONTAINER_ROW_BUTTON">
-                            <button class="GLOBAL_BUTTON_RED" onclick="return confirm('Are you sure you want cancel order?')">Cancel Order </button>
-                            <button class="GLOBAL_BUTTON_GREEN" onclick="return confirm('Are you sure you want to complete the order?')">Complete</button>
+                        <form method="post">
+                            <button type="submit" class="GLOBAL_BUTTON_RED" name="action" value="cancel-order" onclick="return confirm('Are you sure you want to cancel the order?')">Cancel Order </button>
+                            <input type="hidden" name="orderID" value="<?php echo htmlspecialchars($_GET['orderID']); ?>">
+                        </form>
+                        <form method="post">
+                            <button type="submit" class="GLOBAL_BUTTON_GREEN" name="action" value="inprogress-order" onclick="return confirm('Are you sure you want to mark the order as Pending?')">Pending </button>
+                            <input type="hidden" name="orderID" value="<?php echo htmlspecialchars($_GET['orderID']); ?>">
+                        </form>
+                        <form method="post">
+                            <button type="submit" class="GLOBAL_BUTTON_GREEN" name="action" value="complete-order" onclick="return confirm('Are you sure you want to mark complete the order?')">Complete Order </button>
+                            <input type="hidden" name="orderID" value="<?php echo htmlspecialchars($_GET['orderID']); ?>">
+                        </form>
+                        
                         </div>
                     </div>
                 </div>
@@ -254,17 +292,16 @@
                 <div class="DETAILS_CONTAINER_ROW_COLUMN">
                     <div class="DETAILS_CONTAINER_SUBHEADER mb-5">
                         <h1>Ordered Products</h1>
-                        <button class="GLOBAL_BUTTON_BLUE ml-5">Add Item</button>
                     </div>
                     <div class="GLOBAL_TABLE GLOBAL_BOX_DIV mb-5">
                         <table>
                             <tr>
                                 <th class="text-center">#</th>
-                                <th class="text-center">Product</th>
-                                <th class="text-center">Qty</th>
-                                <th class="text-center">Price</th>
+                                <th class="text-center">Product Description</th>
+                                <th class="text-center">Quantity</th>
+                                <th class="text-center">Unit Price</th>
                                 <th class="text-center">Total</th>
-                                <th>Action</th>
+                                <th class="text-center">Remarks</th>
                             </tr>
                             <?php foreach ($products as $product) : ?>
                                 <tr>
@@ -273,11 +310,8 @@
                                     <td class="text-center font-normal"><?php echo $product['ProductQuantity']; ?></td>
                                     <td class="text-center font-normal"><?php echo $product['ProductPrice']; ?></td>
                                     <td class="text-center font-normal"><?php echo $product['ProductQuantity'] * $product['ProductPrice']; ?></td>
-                                    <td class="flex flex-row justify-center">
-                                        <button class="text-[#DF166E]" onclick="return confirm('Are you sure you want to delete row?');">
-                                            Delete
-                                        </button>
-                                    </td>
+                                    <td class="text-center font-normal"><?php echo $product['ProductRemarks']; ?></td>
+    
                                 </tr>
                             <?php endforeach; ?>
                         </table>
@@ -308,16 +342,14 @@
                                     <input type="hidden" name="paymentPlanID" value="{$paymentPlanID}">
                                     <input type="text" name="editPaymentMethod" value="{$paymentPlan['PaymentMethod']}" placeholder="Payment Method">
                                     <input type="date" name="editDueDate" value="{$paymentPlan['DueDate']}" placeholder="Due Date">
-                                    <input type="text" name="editPaymentStatus" value="{$paymentPlan['PaymentStatus']}" placeholder="Status">
-                                    <input type="number" step="0.01" name="editTotalAmount" value="{$paymentPlan['TotalAmount']}" placeholder="Total Amount">
-                                    <input type="number" step="0.01" name="editAmountPaid" value="{$paymentPlan['AmountPaid']}" placeholder="Amount Paid">
-                                    <input type="number" step="0.01" name="editBalance" value="{$paymentPlan['Balance']}" placeholder="Balance">
                                     <!-- Add other fields as needed -->
                                     <button type="submit" class="GLOBAL_BUTTON_BLUE flex-grow-0 w-min">Save</button>
                                 </form>
                             </div>
                         </div> 
                         HTML;
+
+                        
                     }
                     ?>
                     <!-- END EDIT PAYMENT PLAN -->
@@ -363,39 +395,25 @@
                     <!-- Save Payment Plan Info: BACKEND DEVELOPER: NIKOLAI -->
                     <?php
                     if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'savePaymentPlan') {
+
+                        // require "../utilities/db-connection.php";
+
                         // Retrieve POST data
-                        $paymentPlanID = htmlspecialchars($_POST['paymentPlanID']);
+
+                        //retrieve plan ID by orderID
+
+                        $sql = "select * from payment_plans where orderID = '$globOrderID';";
+                        $result = $conn->query($sql);
+                        $row = $result->fetch_assoc();
+                        $paymentPlanID = $row['PlanID'];
                         $editedPaymentMethod = htmlspecialchars($_POST['editPaymentMethod']);
                         $editedDueDate = htmlspecialchars($_POST['editDueDate']);
-                        $editedPaymentStatus = htmlspecialchars($_POST['editPaymentStatus']);
-                        $editedTotalAmount = htmlspecialchars($_POST['editTotalAmount']);
-                        $editedAmountPaid = htmlspecialchars($_POST['editAmountPaid']);
-                        $editedBalance = htmlspecialchars($_POST['editBalance']);
-
-                        // Update the payment plan information in the database
-                        updatePaymentPlanInfo($paymentPlanID, $editedPaymentMethod, $editedDueDate, $editedPaymentStatus, $editedTotalAmount, $editedAmountPaid, $editedBalance);
-
-                        // Optionally, redirect or show a success message
-                        header("Location: " . $_SERVER['PHP_SELF']);
-                        exit;
+                      
+                        
+                        $sql = "UPDATE payment_plans SET PaymentMethod = '$editedPaymentMethod', DueDate = '$editedDueDate' WHERE PlanID = '$paymentPlanID'";
+                        $conn->query($sql);
                     }
 
-                    function updatePaymentPlanInfo($id, $paymentMethod, $dueDate, $paymentStatus, $totalAmount, $amountPaid, $balance)
-                    {
-                        try {
-                            // Replace with your actual database connection details
-                            $pdo = new PDO('mysql:host=your_host;dbname=your_db', 'your_user', 'your_password');
-                            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-                            $sql = "UPDATE payment_plans SET payment_method = ?, due_date = ?, payment_status = ?, total_amount = ?, amount_paid = ?, balance = ? WHERE id = ?";
-                            $stmt = $pdo->prepare($sql);
-                            $stmt->execute([$paymentMethod, $dueDate, $paymentStatus, $totalAmount, $amountPaid, $balance, $id]);
-
-                            echo "Payment plan information updated successfully.";
-                        } catch (PDOException $e) {
-                            echo "Error: " . $e->getMessage();
-                        }
-                    }
                     ?>
                     <!-- END Save Payment Plan Info -->
 
