@@ -39,7 +39,6 @@ if (!isLoggedIn() && !$isLoginPage) {
 }
 
 $pagePath = BASE_PATH . "/src/pages$urlPath";
-
 ?>
 
 <!DOCTYPE html>

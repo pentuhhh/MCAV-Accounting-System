@@ -1,6 +1,10 @@
 <?php
 require "dashboard.php";
+
+$username = $_SESSION['username'];
+$profilePicture = isset($_SESSION['profile_picture']) ? $_SESSION['profile_picture'] : '';
 ?>
+
 <div class="GLOBAL_PAGE">
     <?php
     include_once __DIR__ . "/../../components/sidebar.php";
@@ -16,10 +20,10 @@ require "dashboard.php";
             </div>
             <div class="GLOBAL_HEADER_USER">
                 <div class="GLOBAL_HEADER_COLUMN">
-                    <p class="text-sm text-[#7F7F7F]">Hey, <strong class="text-black">Radon</strong></p>
-                    <p class="text-sm text-[#7F7F7F]">Admin</p>
+                    <p>Hey, <strong><?php echo htmlspecialchars($username); ?></strong></p>
+                    <p>Admin</p>
                 </div>
-                <img src="/assets/JumanjiRon.png" alt="">
+                <img src="<?php echo htmlspecialchars($profilePicture); ?>" alt="Profile Picture">
             </div>
         </div>
 
@@ -74,11 +78,11 @@ require "dashboard.php";
                             <th>Status</th>
                         </tr>
                     </thead>
-                    <tbody id ="recentOrders">
+                    <tbody id="recentOrders">
                         <?php while ($row = $recentOrders->fetch_assoc()) { ?>
                             <tr>
                                 <td>
-                                    <a href = "/orders/details/?orderID=<?php echo $row['Order ID']; ?>">
+                                    <a href="/orders/details/?orderID=<?php echo $row['Order ID']; ?>">
                                         <?php echo $row['Order ID']; ?>
                                     </a>
                                 </td>
@@ -89,14 +93,14 @@ require "dashboard.php";
                                 <td><?php
                                     if ($row['Status'] == 'Completed') {
                                         echo '<span class= "status-completed">Completed</span>';
-                                    }else if($row['Status'] == 'Pending'){
+                                    } else if ($row['Status'] == 'Pending') {
                                         echo '<span class= "status-pending">Pending</span>';
-                                    }else if($row['Status'] == 'Started'){
+                                    } else if ($row['Status'] == 'Started') {
                                         echo '<span class= "status-started">Started</span>';
                                     } else {
                                         echo '<span class= "status-unknown>Unknown</span>';
                                     }
-                                ?></td>
+                                    ?></td>
                             </tr>
                         <?php } ?>
                     </tbody>

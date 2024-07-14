@@ -1,5 +1,10 @@
 <div class="GLOBAL_PAGE flex">
-    <?php include_once __DIR__ . "/../../components/sidebar.php"; ?>
+    <?php
+    include_once __DIR__ . "/../../components/sidebar.php";
+    
+    $username = $_SESSION['username'];
+    $profilePicture = isset($_SESSION['profile_picture']) ? $_SESSION['profile_picture'] : '';
+    ?>
 
     <div class="GLOBAL_PAGE_CONTAINER">
         <div class="GLOBAL_HEADER flex items-center justify-between">
@@ -9,12 +14,12 @@
                 </i>
                 <span class="ml-3 text-2xl font-semibold">Users</span>
             </div>
-            <div class="GLOBAL_HEADER_USER flex items-center">
-                <div class="GLOBAL_HEADER_COLUMN text-right mr-4">
-                    <p>Hey, <strong>Radon</strong></p>
+            <div class="GLOBAL_HEADER_USER">
+                <div class="GLOBAL_HEADER_COLUMN">
+                    <p>Hey, <strong><?php echo htmlspecialchars($username); ?></strong></p>
                     <p>Admin</p>
                 </div>
-                <img src="/assets/JumanjiRon.png" alt="" class="w-10 h-10 rounded-full">
+                <img src="<?php echo htmlspecialchars($profilePicture); ?>" alt="Profile Picture">
             </div>
         </div>
 
@@ -62,10 +67,10 @@
 
 <script>
     const data = <?php
-    require "../utilities/db-connection.php"; // Adjust the path as needed
+                    require "../utilities/db-connection.php"; // Adjust the path as needed
 
-    // Fetch user data from the database
-    $sql = "SELECT 
+                    // Fetch user data from the database
+                    $sql = "SELECT 
     ec.EmployeeWebID,
     ec.username,
     ei.EmployeeLastname,
@@ -82,38 +87,38 @@
     WHERE 
         ei.IsRemoved = 0";
 
-    $result = $conn->query($sql);
+                    $result = $conn->query($sql);
 
-    $users = [];
+                    $users = [];
 
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            // Modify gender display
-            $row['Gender'] = ($row['Gender'] == 'M') ? 'Male' : 'Female';
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            // Modify gender display
+                            $row['Gender'] = ($row['Gender'] == 'M') ? 'Male' : 'Female';
 
-            // Modify account status display
-            $row['accountStatus'] = ($row['accountStatus'] == 'Activated') ?
-                '<span class="status-active">Activated</span>' :
-                '<span class="status-deactivated">Deactivated</span>';
+                            // Modify account status display
+                            $row['accountStatus'] = ($row['accountStatus'] == 'Activated') ?
+                                '<span class="status-active">Activated</span>' :
+                                '<span class="status-deactivated">Deactivated</span>';
 
-            $users[] = $row;
-        }
-    }
+                            $users[] = $row;
+                        }
+                    }
 
-    $defaultImagePath = "/assets/defaultProfilePicture.jpg";
+                    $defaultImagePath = "/assets/defaultProfilePicture.jpg";
 
-    // Set the default image path if ProfilePicturePath is null or empty
-    foreach ($users as &$row) {
-        if ($row['ProfilePicturePath'] === "") {
-            $row['ProfilePicturePath'] = $defaultImagePath;
-        }
-    }
+                    // Set the default image path if ProfilePicturePath is null or empty
+                    foreach ($users as &$row) {
+                        if ($row['ProfilePicturePath'] === "") {
+                            $row['ProfilePicturePath'] = $defaultImagePath;
+                        }
+                    }
 
-    $conn->close();
+                    $conn->close();
 
-    // Output as JSON
-    echo json_encode($users);
-    ?>;
+                    // Output as JSON
+                    echo json_encode($users);
+                    ?>;
 
     let currentPage = 1;
     const rowsPerPage = 8;

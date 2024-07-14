@@ -1,3 +1,68 @@
+<div class="GLOBAL_PAGE flex">
+    <?php
+    include_once __DIR__ . "/../../components/sidebar.php";
+
+    $username = $_SESSION['username'];
+    $profilePicture = isset($_SESSION['profile_picture']) ? $_SESSION['profile_picture'] : '';
+    ?>
+
+    <div class="GLOBAL_PAGE_CONTAINER">
+        <div class="GLOBAL_HEADER flex items-center justify-between">
+            <div class="GLOBAL_HEADER_TITLE flex items-center">
+                <i class="material-symbols-rounded text-4xl">
+                    receipt_long
+                </i>
+                <span class="ml-3 text-2xl font-semibold">Order Management</span>
+                <a href="/orders/add-order2" class="GLOBAL_BUTTON_BLUE ml-5">Add order</a>
+            </div>
+            <div class="GLOBAL_HEADER_USER">
+                <div class="GLOBAL_HEADER_COLUMN">
+                    <p>Hey, <strong><?php echo htmlspecialchars($username); ?></strong></p>
+                    <p>Admin</p>
+                </div>
+                <img src="<?php echo htmlspecialchars($profilePicture); ?>" alt="Profile Picture">
+            </div>
+        </div>
+
+        <div class="ORDERS_SEARCH">
+            <div class="columns-1">
+                <a href="" class="ORDER_SEARCH_BUTTON">
+                    <i class="material-symbols-rounded">
+                        search
+                    </i>
+                </a>
+                <input type="text" placeholder="Search" id="searchInput">
+            </div>
+        </div>
+
+        <div class="ORDERS_CONTENT">
+            <div class="GLOBAL_TABLE">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Order Date</th>
+                            <th>Amount</th>
+                            <th>Order Deadline</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ordersTable">
+                        <!-- Data rows will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="pagination mt-4 text-end">
+                <button onclick="prevPage()" class="">
+                    < Prev</button>
+                        <span id="pageButtons"></span>
+                        <button onclick="nextPage()" class="">Next ></button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     const data = [
         <?php

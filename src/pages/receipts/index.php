@@ -1,5 +1,10 @@
 <div class="GLOBAL_PAGE flex">
-    <?php include_once __DIR__ . "/../../components/sidebar.php"; ?>
+    <?php
+    include_once __DIR__ . "/../../components/sidebar.php";
+
+    $username = $_SESSION['username'];
+    $profilePicture = isset($_SESSION['profile_picture']) ? $_SESSION['profile_picture'] : '';
+    ?>
 
     <div class="GLOBAL_PAGE_CONTAINER">
         <div class="GLOBAL_HEADER flex items-center justify-between">
@@ -8,12 +13,12 @@
                 <span class="ml-3 text-2xl font-semibold">Receipts Management</span>
                 <a href="/receipts/add-receipt/" class="GLOBAL_BUTTON_BLUE ml-5">Add receipt</a>
             </div>
-            <div class="GLOBAL_HEADER_USER flex items-center">
-                <div class="GLOBAL_HEADER_COLUMN text-right mr-4">
-                    <p>Hey, <strong>Radon</strong></p>
+            <div class="GLOBAL_HEADER_USER">
+                <div class="GLOBAL_HEADER_COLUMN">
+                    <p>Hey, <strong><?php echo htmlspecialchars($username); ?></strong></p>
                     <p>Admin</p>
                 </div>
-                <img src="/assets/JumanjiRon.png" alt="" class="w-10 h-10 rounded-full">
+                <img src="<?php echo htmlspecialchars($profilePicture); ?>" alt="Profile Picture">
             </div>
         </div>
 

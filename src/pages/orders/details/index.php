@@ -1,5 +1,10 @@
 <div class="GLOBAL_PAGE">
-    <?php include_once __DIR__ . "/../../../components/sidebar.php"; ?>
+    <?php
+    include_once __DIR__ . "/../../../components/sidebar.php";
+
+    $username = $_SESSION['username'];
+    $profilePicture = isset($_SESSION['profile_picture']) ? $_SESSION['profile_picture'] : '';
+    ?>
 
     <div class="GLOBAL_PAGE_CONTAINER">
         <div class="GLOBAL_HEADER">
@@ -11,26 +16,15 @@
             </div>
             <div class="GLOBAL_HEADER_USER">
                 <div class="GLOBAL_HEADER_COLUMN">
-                    <p>Hey, <strong>Radon</strong></p>
+                    <p>Hey, <strong><?php echo htmlspecialchars($username); ?></strong></p>
                     <p>Admin</p>
                 </div>
-                <img src="/assets/JumanjiRon.png" alt="">
+                <img src="../../../<?php echo htmlspecialchars($profilePicture); ?>" alt="Profile Picture">
             </div>
         </div>
 
         <?php
-        $servername = "localhost";
-        $username = "MCAVDB";
-        $password = "password1010";
-        $dbname = "MCAV";
-
-        // Create connection
-        $conn = new mysqli($servername, $username, $password, $dbname);
-
-        // Check connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
+        require "../utilities/db-connection.php";
 
         // Get orderID from query string
         if (isset($_GET['orderID'])) {
@@ -132,12 +126,12 @@
                     </i>
                 </a>
             </div>
-                <!-- EDIT Customer INFO -->
+            <!-- EDIT Customer INFO -->
             <?php
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'edit') {
-                    // Display the edit form
-                    $customerID = htmlspecialchars($_POST['customerID']);
-                    echo <<<HTML
+            if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'edit') {
+                // Display the edit form
+                $customerID = htmlspecialchars($_POST['customerID']);
+                echo <<<HTML
                     <div class="POPUP_CONTAINER">
                         <div class="POPUP_CONTAINER_BOX GLOBAL_BOX_DIV flex flex-col gap-4 w-full">
                         <a href="/orders/details?orderID={$orderID}" class="absolute top-2 right-4 text-2xl text-gray-500 cursor-pointer">&times;</a>
@@ -153,38 +147,37 @@
                             </form>
                         </div>
                     </div> 
-                    HTML; 
-        
-                }
+                    HTML;
+            }
             ?>
 
-                <!-- END EDIT Customer INFO -->
+            <!-- END EDIT Customer INFO -->
 
-                <!-- Render Table -->
+            <!-- Render Table -->
             <div class="DETAILS_CONTAINER_ROW columns-2">
                 <div class="DETAILS_CONTAINER_ROW_LEFT">
                     <div class="GLOBAL_SUBHEADER_TITLE">
                         <h1>Customer Information</h1>
                     </div>
-                      <div class="DETAILS_CONTAINER_ROW_TABLE GLOBAL_BOX_DIV">
+                    <div class="DETAILS_CONTAINER_ROW_TABLE GLOBAL_BOX_DIV">
                         <table>
                             <tr>
                                 <td>Customer Name</td>
-                                <td><?=htmlspecialchars($customerName); ?></td>
+                                <td><?= htmlspecialchars($customerName); ?></td>
                             </tr>
                             <tr>
                                 <td>Email</td>
-                                <td><?=htmlspecialchars($customerEmail); ?></td>
+                                <td><?= htmlspecialchars($customerEmail); ?></td>
                             </tr>
                             <tr>
                                 <td>Contact Number</td>
-                                <td><?=htmlspecialchars($customerPhone); ?></td>
+                                <td><?= htmlspecialchars($customerPhone); ?></td>
                             </tr>
                         </table>
                         <div class="DETAILS_CONTAINER_ROW_BUTTON">
                             <form method="post">
                                 <input type="hidden" name="action" value="edit">
-                                <input type="hidden" name="customerID" value="<?=htmlspecialchars($customerID); ?>">
+                                <input type="hidden" name="customerID" value="<?= htmlspecialchars($customerID); ?>">
                                 <button type="submit" class="GLOBAL_BUTTON_BLUE">Edit Info</button>
                             </form>
                         </div>
@@ -195,36 +188,37 @@
 
                 <!-- Save Info TODO: BACKEND DEVELOPER-->
                 <?php
-                    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'save') {
-                        // Retrieve POST data
-                        $customerID = htmlspecialchars($_POST['customerID']);
-                        $editedName = htmlspecialchars($_POST['editCustomerName']);
-                        $editedEmail = htmlspecialchars($_POST['editCustomerEmail']);
-                        $editedPhone = htmlspecialchars($_POST['editCustomerPhone']);
-                        
-                        // Update the customer information in the database
-                        updateCustomerInfo($customerID, $editedName, $editedEmail, $editedPhone);
-                        
-                        // Optionally, redirect or show a success message
-                        header("Location: " . $_SERVER['PHP_SELF']);
-                        exit;
-                    }
+                if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'save') {
+                    // Retrieve POST data
+                    $customerID = htmlspecialchars($_POST['customerID']);
+                    $editedName = htmlspecialchars($_POST['editCustomerName']);
+                    $editedEmail = htmlspecialchars($_POST['editCustomerEmail']);
+                    $editedPhone = htmlspecialchars($_POST['editCustomerPhone']);
 
-                    function updateCustomerInfo($id, $name, $email, $phone) {
-                        try {
-                            // Replace with your actual database connection details
-                            $pdo = new PDO('mysql:host=your_host;dbname=your_db', 'your_user', 'your_password');
-                            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                            
-                            $sql = "UPDATE customers SET name = ?, email = ?, phone = ? WHERE id = ?";
-                            $stmt = $pdo->prepare($sql);
-                            $stmt->execute([$name, $email, $phone, $id]);
-                            
-                            echo "Customer information updated successfully.";
-                        } catch (PDOException $e) {
-                            echo "Error: " . $e->getMessage();
-                        }
+                    // Update the customer information in the database
+                    updateCustomerInfo($customerID, $editedName, $editedEmail, $editedPhone);
+
+                    // Optionally, redirect or show a success message
+                    header("Location: " . $_SERVER['PHP_SELF']);
+                    exit;
+                }
+
+                function updateCustomerInfo($id, $name, $email, $phone)
+                {
+                    try {
+                        // Replace with your actual database connection details
+                        $pdo = new PDO('mysql:host=your_host;dbname=your_db', 'your_user', 'your_password');
+                        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                        $sql = "UPDATE customers SET name = ?, email = ?, phone = ? WHERE id = ?";
+                        $stmt = $pdo->prepare($sql);
+                        $stmt->execute([$name, $email, $phone, $id]);
+
+                        echo "Customer information updated successfully.";
+                    } catch (PDOException $e) {
+                        echo "Error: " . $e->getMessage();
                     }
+                }
                 ?>
 
                 <!-- END Save Info -->
@@ -323,7 +317,7 @@
                                 </form>
                             </div>
                         </div> 
-                        HTML; 
+                        HTML;
                     }
                     ?>
                     <!-- END EDIT PAYMENT PLAN -->
@@ -377,25 +371,26 @@
                         $editedTotalAmount = htmlspecialchars($_POST['editTotalAmount']);
                         $editedAmountPaid = htmlspecialchars($_POST['editAmountPaid']);
                         $editedBalance = htmlspecialchars($_POST['editBalance']);
-                        
+
                         // Update the payment plan information in the database
                         updatePaymentPlanInfo($paymentPlanID, $editedPaymentMethod, $editedDueDate, $editedPaymentStatus, $editedTotalAmount, $editedAmountPaid, $editedBalance);
-                        
+
                         // Optionally, redirect or show a success message
                         header("Location: " . $_SERVER['PHP_SELF']);
                         exit;
                     }
 
-                    function updatePaymentPlanInfo($id, $paymentMethod, $dueDate, $paymentStatus, $totalAmount, $amountPaid, $balance) {
+                    function updatePaymentPlanInfo($id, $paymentMethod, $dueDate, $paymentStatus, $totalAmount, $amountPaid, $balance)
+                    {
                         try {
                             // Replace with your actual database connection details
                             $pdo = new PDO('mysql:host=your_host;dbname=your_db', 'your_user', 'your_password');
                             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                            
+
                             $sql = "UPDATE payment_plans SET payment_method = ?, due_date = ?, payment_status = ?, total_amount = ?, amount_paid = ?, balance = ? WHERE id = ?";
                             $stmt = $pdo->prepare($sql);
                             $stmt->execute([$paymentMethod, $dueDate, $paymentStatus, $totalAmount, $amountPaid, $balance, $id]);
-                            
+
                             echo "Payment plan information updated successfully.";
                         } catch (PDOException $e) {
                             echo "Error: " . $e->getMessage();

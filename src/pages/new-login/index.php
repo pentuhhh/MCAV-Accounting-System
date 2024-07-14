@@ -1,6 +1,9 @@
 <div class="GLOBAL_PAGE">
     <?php
     include_once __DIR__ . "/../../components/sidebar.php";
+
+    $username = $_SESSION['username'];
+    $profilePicture = isset($_SESSION['profile_picture']) ? $_SESSION['profile_picture'] : '';
     ?>
 
     <div class="GLOBAL_PAGE_CONTAINER">
@@ -13,10 +16,10 @@
             </div>
             <div class="GLOBAL_HEADER_USER">
                 <div class="GLOBAL_HEADER_COLUMN">
-                    <p>Hey, <strong class="text-black">Radon</strong></p>
+                    <p>Hey, <strong><?php echo htmlspecialchars($username); ?></strong></p>
                     <p>Admin</p>
                 </div>
-                <img src="/assets/JumanjiRon.png" alt="">
+                <img src="<?php echo htmlspecialchars($profilePicture); ?>" alt="Profile Picture">
             </div>
         </div>
 
