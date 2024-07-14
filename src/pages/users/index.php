@@ -70,22 +70,24 @@
                     require "../utilities/db-connection.php"; // Adjust the path as needed
 
                     // Fetch user data from the database
-                    $sql = "SELECT 
-    ec.EmployeeWebID,
-    ec.username,
-    ei.EmployeeLastname,
-    ei.EmployeeFirstname,
-    ei.ProfilePicturePath,
-    ei.Gender,
-    ei.Position,
-    ei.EmployeeHireDate AS HireDate,
-    ec.accountStatus
-    FROM 
-        employee_info ei
-    JOIN 
-        employee_credentials ec ON ei.EmployeeID = ec.EmployeeID
-    WHERE 
-        ei.IsRemoved = 0";
+                    $sql =  <<<SQL
+            SELECT 
+            ec.EmployeeWebID,
+            ec.username,
+            ei.EmployeeLastname,
+            ei.EmployeeFirstname,
+            ei.ProfilePicturePath,
+            ei.Gender,
+            ei.Position,
+            ei.EmployeeHireDate AS HireDate,
+            ec.accountStatus
+            FROM 
+                employee_info ei
+            JOIN 
+                employee_credentials ec ON ei.EmployeeID = ec.EmployeeID
+            WHERE 
+                ei.IsRemoved = 0
+            SQL;
 
                     $result = $conn->query($sql);
 
@@ -120,7 +122,6 @@
                     echo json_encode($users);
                     ?>;
 
-
     let currentPage = 1;
     const rowsPerPage = 8;
     let filteredData = data;
@@ -154,7 +155,10 @@
                 <td>${item.Position}</td>
                 <td>${item.accountStatus}</td>
                 <td>
-                    <button class='text-[#DF166E]' onclick='return confirm("Are you sure you want to delete this user?");'>Delete</button>
+                    <form action='/users/delete' method='post'>
+                        <input type='hidden' name='EmployeeWebID' value='" . $user['EmployeeWebID'] . "'>
+                        <button type='submit' class='text-[#00A1E2]' name="id" value="${item.EmployeeWebID}" onclick='return confirm(\"Are you sure you want to deactivate this user?\");'>Enable/Disable</button>
+                    </form>
                 </td>
             `;
             tableBody.appendChild(row);

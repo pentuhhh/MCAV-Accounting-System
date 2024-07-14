@@ -8,18 +8,8 @@ $planid = 0;
 $total_amount = 0.0;
 // this doesnt work for me, change accordingly require "../../utilities/db-connection.php";
 
-$servername = "localhost";
-$username = "MCAVDB";
-$password = "password1010";
-$dbname = "MCAV";
+require "../utilities/db-connection.php";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 // Function to sanitize input to prevent SQL injection
 function sanitize_input($conn, $data) {
     return mysqli_real_escape_string($conn, $data);
@@ -107,11 +97,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
         }
+        header ("Location: /receipts");
+        exit();
     }
 }
-
-
-
 
 $conn->close();
 ?>

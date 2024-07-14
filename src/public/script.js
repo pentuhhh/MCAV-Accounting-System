@@ -23,10 +23,11 @@ var modal = document.getElementById("popupModal");
 var modalReceipt = document.getElementById("popupModalReceipt");
 
 var closeButton = document.getElementsByClassName("closeButton")[0];
-var closeButtonReceipt = document.getElementsByClassName("closeButtonReceipt")[0];
+var closeButtonReceipt =
+	document.getElementsByClassName("closeButtonReceipt")[0];
 
 function openModal() {
-    modal.style.display = "block";
+	modal.style.display = "block";
 }
 
 function openModalReceipt() {
@@ -34,7 +35,7 @@ function openModalReceipt() {
 }
 
 function closeModal() {
-    modal.style.display = "none";
+	modal.style.display = "none";
 }
 
 function closeModalReceipt() {
@@ -42,14 +43,20 @@ function closeModalReceipt() {
 }
 
 function clickOutsideToClose(event) {
-    if (event.target == modal || event.target == modalReceipt) {
-        closeModal();
+	if (event.target == modal || event.target == modalReceipt) {
+		closeModal();
 		closeModalReceipt();
-    }
+	}
 }
 
-closeButton.onclick = closeModal;
-closeButtonReceipt.onclick = closeModalReceipt;
+if (closeButton) {
+	closeButton.onclick = closeModal;
+}
+
+if (closeButtonReceipt) {
+	closeButtonReceipt.onclick = closeModalReceipt;
+}
+
 window.onclick = clickOutsideToClose;
 
 function enableInput(select) {
@@ -94,27 +101,29 @@ function deleteItem(index) {
 	xhr.send(formData);
 }
 
-
 function openEditModal(customerID) {
-    // Make an AJAX request to fetch customer details based on customerID
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "/fetch-customer.php?customerID=" + customerID, true);
+	// Make an AJAX request to fetch customer details based on customerID
+	var xhr = new XMLHttpRequest();
+	xhr.open("GET", "/fetch-customer.php?customerID=" + customerID, true);
 
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            var customerData = JSON.parse(xhr.responseText);
-            populateEditModal(customerData);
-            modal.style.display = "block"; // Display the edit modal
-        }
-    };
+	xhr.onreadystatechange = function () {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var customerData = JSON.parse(xhr.responseText);
+			populateEditModal(customerData);
+			modal.style.display = "block"; // Display the edit modal
+		}
+	};
 
-    xhr.send();
+	xhr.send();
 }
 
 function populateEditModal(customerData) {
-    // Populate the fields in the edit modal with customerData
-    document.getElementById('editCustomerName').value = customerData.CustomerName;
-    document.getElementById('editCustomerEmail').value = customerData.CustomerEmail;
-    document.getElementById('editCustomerPhone').value = customerData.CustomerPhone;
-    // Populate other fields as needed
+	// Populate the fields in the edit modal with customerData
+	document.getElementById("editCustomerName").value =
+		customerData.CustomerName;
+	document.getElementById("editCustomerEmail").value =
+		customerData.CustomerEmail;
+	document.getElementById("editCustomerPhone").value =
+		customerData.CustomerPhone;
+	// Populate other fields as needed
 }

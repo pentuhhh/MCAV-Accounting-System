@@ -27,16 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $stmt->execute(["%$search%", "%$search%"]);
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+
     echo json_encode($data);
-} elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['action']) && $_POST['action'] === 'delete' && isset($_POST['EmployeeWebID'])) {
-        $employeeWebID = intval($_POST['EmployeeWebID']);
-
-        // Prepare and execute the update statement
-        $sql = "UPDATE employee_info SET IsRemoved = 1 WHERE EmployeeWebID = ?";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$employeeWebID]);
-
-        echo json_encode(['status' => 'success']);
-    }
 }
+
+
+
