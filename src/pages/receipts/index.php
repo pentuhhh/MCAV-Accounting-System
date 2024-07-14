@@ -158,8 +158,7 @@
         $conn->close();
         ?>
     ];
-
-    console.log(data);
+    
     let currentPage = 1;
     const rowsPerPage = 8;
     let filteredData = data;
