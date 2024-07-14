@@ -102,7 +102,7 @@ CREATE TABLE `customers` (
 
 LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
-INSERT INTO `customers` VALUES (1,'John','Doe','john.doe@example.com','1234567890'),(2,'Jane','Smith','jane.smith@example.com','9876543210'),(3,'Michael','Johnson','michael.johnson@example.com','4567890123'),(4,'Emily','Brown','emily.brown@example.com','8901234567'),(5,'David','Martinez','david.martinez@example.com','5678901234'),(6,'Sarah','Garcia','sarah.garcia@example.com','2345678901'),(7,'Kevin','Robinson','kevin.robinson@example.com','6789012345'),(8,'Lisa','Clark','lisa.clark@example.com','3456789012'),(9,'Matthew','Lewis','matthew.lewis@example.com','9012345678'),(10,'Amanda','Walker','amanda.walker@example.com','4567890123');
+INSERT INTO `customers` VALUES (1,'John','Doe','john.doe@example.com','1234567890'),(2,'Jane','Smith','jane.smith@example.com','9876543210'),(3,'Michael','Johnson','michael.johnson@example.com','4567890123'),(4,'Emily','Brown','emily.brown@example.com','8901234567'),(5,'David','Martinez','david.martinez@example.com','5678901234'),(6,'Sarah','Garcia','sarah.garcia@example.com','2345678901'),(7,'Kevin','Robinson','kevin.robinson@example.com','6789012345'),(8,'Lisa','Clark','lisa.clark@example.com','3456789012'),(9,'Matthew','Lewis','matthew.lewis@example.com','9012345678'),(10,'Amandar','Walkersa','amanda.walker@example.com','4567890123');
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -126,7 +126,7 @@ CREATE TABLE `employee_credentials` (
   KEY `EmployeeID` (`EmployeeID`),
   CONSTRAINT `employee_credentials_ibfk_1` FOREIGN KEY (`PermissionsID`) REFERENCES `Permissions` (`PermissionsID`),
   CONSTRAINT `employee_credentials_ibfk_2` FOREIGN KEY (`EmployeeID`) REFERENCES `employee_info` (`EmployeeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -135,7 +135,7 @@ CREATE TABLE `employee_credentials` (
 
 LOCK TABLES `employee_credentials` WRITE;
 /*!40000 ALTER TABLE `employee_credentials` DISABLE KEYS */;
-INSERT INTO `employee_credentials` VALUES (1,1,1,'john.smith','password1',2,'Activated'),(2,2,2,'emily.johnson','password2',1,'Activated'),(3,3,3,'michael.williams','password3',1,'Activated'),(4,4,4,'sarah.anderson','password4',1,'Activated'),(5,5,5,'david.martinez','password5',1,'Activated'),(6,6,6,'lisa.garcia','password6',1,'Activated'),(7,7,7,'kevin.brown','password7',1,'Activated'),(8,8,8,'amanda.taylor','password8',1,'Activated'),(9,9,9,'matthew.moore','password9',0,'Deactivated'),(10,10,10,'jessica.walker','password10',0,'Deactivated');
+INSERT INTO `employee_credentials` VALUES (1,1,1,'john.smith','password1',2,'Activated'),(2,2,2,'emily.johnson','password2',1,'Activated'),(3,3,3,'michael.williams','password3',1,'Activated'),(4,4,4,'sarah.anderson','password4',1,'Activated'),(5,5,5,'david.martinez','password5',1,'Activated'),(6,6,6,'lisa.garcia','password6',1,'Activated'),(7,7,7,'kevin.brown','password7',1,'Activated'),(8,8,8,'amanda.taylor','password8',1,'Activated'),(9,9,9,'matthew.moore','password9',0,'Deactivated'),(10,10,10,'jessica.walker','password10',0,'Deactivated'),(11,1,1,'hello','$2y$10$qYH7d4A1p/VYlJsutpfWieI59BxQEJ6sxc7.P2dyI9IOMKwtMLOHq',0,'Activated');
 /*!40000 ALTER TABLE `employee_credentials` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -264,7 +264,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,1,1,'2024-07-09','2024-08-01',1,0),(2,2,2,'2024-07-01','2024-07-27',2,0),(3,3,3,'2024-07-11','2024-08-06',1,0),(4,4,4,'2024-07-14','2024-07-27',3,0),(5,5,5,'2024-07-06','2024-07-06',2,0),(6,6,6,'2024-07-05','2024-07-17',1,0),(7,7,7,'2024-07-10','2024-07-23',3,0),(8,8,8,'2024-06-19','2024-07-16',1,0),(9,9,9,'2024-07-13','2024-07-29',2,0),(10,10,10,'2024-06-28','2024-06-30',3,0);
+INSERT INTO `orders` VALUES (1,1,1,'2024-07-09','2024-08-01',1,0),(2,2,2,'2024-07-01','2024-07-27',2,0),(3,3,3,'2024-07-11','2024-08-06',1,0),(4,4,4,'2024-07-14','2024-07-27',3,0),(5,5,5,'2024-07-06','2024-07-06',2,0),(6,6,6,'2024-07-05','2024-07-17',1,0),(7,7,7,'2024-07-10','2024-07-23',3,0),(8,8,8,'2024-06-19','2024-07-16',1,0),(9,9,9,'2024-07-13','2024-07-29',2,0),(10,10,10,'2024-06-28','2024-06-30',4,0);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -317,7 +317,7 @@ CREATE TABLE `payment_plans` (
 
 LOCK TABLES `payment_plans` WRITE;
 /*!40000 ALTER TABLE `payment_plans` DISABLE KEYS */;
-INSERT INTO `payment_plans` VALUES (1,1,'2023-01-31',0,'Credit Card','Visa',500,0,500,0),(2,2,'2023-02-15',1,'PayPal','PayPal',750,750,0,0),(3,3,'2023-03-10',0,'Bank Transfer','Bank of America',400,0,400,0),(4,4,'2023-04-05',1,'Cash','N/A',1200,1200,0,0),(5,5,'2023-05-20',0,'Debit Card','MasterCard',800,0,800,0),(6,6,'2023-06-15',1,'Credit Card','American Express',950,950,0,0),(7,7,'2023-07-30',0,'PayPal','PayPal',600,0,600,0),(8,8,'2023-08-10',1,'Bank Transfer','Chase Bank',300,300,0,0),(9,9,'2023-09-25',0,'Cash','N/A',1100,0,1100,0),(10,10,'2023-10-15',1,'Debit Card','Visa',850,850,0,0);
+INSERT INTO `payment_plans` VALUES (1,1,'2023-01-31',0,'Credit Card','Visa',500,23,477,0),(2,2,'2023-02-15',1,'PayPal','PayPal',750,750,0,0),(3,3,'2023-03-10',0,'Bank Transfer','Bank of America',400,0,400,0),(4,4,'2023-04-05',1,'Cash','N/A',1200,1200,0,0),(5,5,'2023-05-20',0,'Debit Card','MasterCard',800,0,800,0),(6,6,'2023-06-15',1,'Credit Card','American Express',950,950,0,0),(7,7,'2023-07-30',0,'PayPal','PayPal',600,0,600,0),(8,8,'2023-08-10',1,'Bank Transfer','Chase Bank',300,300,0,0),(9,9,'2023-09-25',0,'Cash','N/A',1100,0,1100,0),(10,10,'2023-10-15',1,'Debit Card','Visa',850,6910,-6060,0);
 /*!40000 ALTER TABLE `payment_plans` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -387,13 +387,13 @@ LOCK TABLES `Payment_Receipt_Archive` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Payment_Receipts`
+-- Table structure for table `payment_receipts`
 --
 
-DROP TABLE IF EXISTS `Payment_Receipts`;
+DROP TABLE IF EXISTS `payment_receipts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Payment_Receipts` (
+CREATE TABLE `payment_receipts` (
   `ReceiptID` int NOT NULL AUTO_INCREMENT,
   `PlanID` int NOT NULL,
   `ReceiptImagePath` varchar(255) DEFAULT '',
@@ -402,21 +402,21 @@ CREATE TABLE `Payment_Receipts` (
   `PaymentDate` date DEFAULT NULL,
   `PaymentProcessor` varchar(32) DEFAULT 'None',
   `PaymentProcessorReferenceNumber` float DEFAULT '0',
-  `IsRemoved` tinyint(1) DEFAULT NULL,
+  `IsRemoved` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`ReceiptID`),
   KEY `PlanID` (`PlanID`),
   CONSTRAINT `payment_receipts_ibfk_1` FOREIGN KEY (`PlanID`) REFERENCES `payment_Plans` (`PlanID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Payment_Receipts`
+-- Dumping data for table `payment_receipts`
 --
 
-LOCK TABLES `Payment_Receipts` WRITE;
-/*!40000 ALTER TABLE `Payment_Receipts` DISABLE KEYS */;
-INSERT INTO `Payment_Receipts` VALUES (1,1,'/path/to/receipt1.jpg',1,500,'2023-01-31','Visa',123457000,0),(2,2,'/path/to/receipt2.jpg',1,750,'2023-02-15','PayPal',987654000,0),(3,3,'/path/to/receipt3.jpg',1,400,'2023-03-10','Bank of America',246814000,0),(4,4,'/path/to/receipt4.jpg',1,1200,'2023-04-05','N/A',135792000,0),(5,5,'/path/to/receipt5.jpg',1,800,'2023-05-20','MasterCard',864210000,0),(6,6,'/path/to/receipt6.jpg',1,950,'2023-06-15','American Express',975311000,0),(7,7,'/path/to/receipt7.jpg',1,600,'2023-07-30','PayPal',531086000,0),(8,8,'/path/to/receipt8.jpg',1,300,'2023-08-10','Chase Bank',642858000,0),(9,9,'/path/to/receipt9.jpg',1,1100,'2023-09-25','N/A',718293000,0),(10,10,'/path/to/receipt10.jpg',1,850,'2023-10-15','Visa',920375000,0);
-/*!40000 ALTER TABLE `Payment_Receipts` ENABLE KEYS */;
+LOCK TABLES `payment_receipts` WRITE;
+/*!40000 ALTER TABLE `payment_receipts` DISABLE KEYS */;
+INSERT INTO `payment_receipts` VALUES (1,1,'/path/to/receipt1.jpg',1,500,'2023-01-31','Visa',123457000,0),(2,2,'/path/to/receipt2.jpg',1,750,'2023-02-15','PayPal',987654000,0),(3,3,'/path/to/receipt3.jpg',1,400,'2023-03-10','Bank of America',246814000,0),(4,4,'/path/to/receipt4.jpg',1,1200,'2023-04-05','N/A',135792000,0),(5,5,'/path/to/receipt5.jpg',1,800,'2023-05-20','MasterCard',864210000,0),(6,6,'/path/to/receipt6.jpg',1,950,'2023-06-15','American Express',975311000,0),(7,7,'/path/to/receipt7.jpg',1,600,'2023-07-30','PayPal',531086000,0),(8,8,'/path/to/receipt8.jpg',1,300,'2023-08-10','Chase Bank',642858000,0),(9,9,'/path/to/receipt9.jpg',1,1100,'2023-09-25','N/A',718293000,0),(10,10,'/path/to/receipt10.jpg',1,850,'2023-10-15','Visa',920375000,0),(11,1,'',0,23,'2024-07-22','None',123,0),(12,10,'',0,6060,'2024-07-22','None',2312,0);
+/*!40000 ALTER TABLE `payment_receipts` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -524,4 +524,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-14 18:21:35
+-- Dump completed on 2024-07-14 19:08:32
