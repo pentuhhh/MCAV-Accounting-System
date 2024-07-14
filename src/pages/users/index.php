@@ -70,7 +70,7 @@
                     require "../utilities/db-connection.php"; // Adjust the path as needed
 
                     // Fetch user data from the database
-                    $sql =  <<<SQL
+                    $sql = <<<SQL
             SELECT 
             ec.EmployeeWebID,
             ec.username,
@@ -148,7 +148,7 @@
             let buttonStatus = item.accountStatus.includes('Activated') ? 'Deactivate' : 'Activate';
             console.log(item.accountStatus);
             row.innerHTML = `
-                <td>${item.EmployeeWebID}</td>
+                <td><a href="/users/details/?EmployeeWebID=${item.EmployeeWebID}" class="text-blue-500 hover:underline">${item.EmployeeWebID}</a></td>
                 <td class="flex flex-row items-center justify-center"><img src="${item.ProfilePicturePath}" alt="Profile Picture" class="w-10 h-10 rounded-full"></td>
                 <td>${item.username}</td>
                 <td>${item.EmployeeLastname}</td>
