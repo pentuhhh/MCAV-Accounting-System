@@ -144,6 +144,9 @@
         paginatedItems.forEach((item, index) => {
             const row = document.createElement('tr');
             const rowIndex = start + index + 1;
+
+            let buttonStatus = item.accountStatus.includes('Activated') ? 'Deactivate' : 'Activate';
+            console.log(item.accountStatus);
             row.innerHTML = `
                 <td>${item.EmployeeWebID}</td>
                 <td class="flex flex-row items-center justify-center"><img src="${item.ProfilePicturePath}" alt="Profile Picture" class="w-10 h-10 rounded-full"></td>
@@ -155,9 +158,11 @@
                 <td>${item.Position}</td>
                 <td>${item.accountStatus}</td>
                 <td>
-                    <form action='/users/delete' method='post'>
+                    <form action='/users/updateStatus' method='post'>
                         <input type='hidden' name='EmployeeWebID' value='" . $user['EmployeeWebID'] . "'>
-                        <button type='submit' class='text-[#00A1E2]' name="id" value="${item.EmployeeWebID}" onclick='return confirm(\"Are you sure you want to deactivate this user?\");'>Enable/Disable</button>
+                        <button type='submit' class='text-[#00A1E2]' name="id" value="${item.EmployeeWebID}" onclick='return confirm(\"Are you sure you want to deactivate this user?\");'>
+                            ${buttonStatus}
+                        </button>
                     </form>
                 </td>
             `;
