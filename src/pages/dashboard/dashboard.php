@@ -70,7 +70,7 @@ $recentOrdersQuery = "
     INNER JOIN customers c ON o.customerID = c.customerID
     WHERE o.isremoved = 0
     ORDER BY o.OrderStartDate DESC
-    LIMIT 5
+    LIMIT 4;
 ";
 
 $resultRecentOrders = $conn->query($recentOrdersQuery);
@@ -80,4 +80,3 @@ if ($resultRecentOrders === false) {
 
 // Output or use the fetched data as needed
 ?>
-
