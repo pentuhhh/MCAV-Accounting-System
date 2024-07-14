@@ -4,9 +4,7 @@
     <div class="GLOBAL_PAGE_CONTAINER">
         <div class="GLOBAL_HEADER flex items-center justify-between">
             <div class="GLOBAL_HEADER_TITLE flex items-center">
-                <i class="material-symbols-rounded text-4xl">
-                    payments
-                </i>
+                <i class="material-symbols-rounded text-4xl">payments</i>
                 <span class="ml-3 text-2xl font-semibold">Receipts Management</span>
                 <a href="/receipts/add-receipt/" class="GLOBAL_BUTTON_BLUE ml-5">Add receipt</a>
             </div>
@@ -93,9 +91,7 @@
         <div class="ORDERS_SEARCH">
             <div class="columns-1">
                 <a href="" class="ORDER_SEARCH_BUTTON">
-                    <i class="material-symbols-rounded">
-                        search
-                    </i>
+                    <i class="material-symbols-rounded">search</i>
                 </a>
                 <input type="text" placeholder="Search" id="searchInput">
             </div>
@@ -106,12 +102,12 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Order</th>
-                            <th>Payment Processor</th>
-                            <th>Amount Paid</th>
-                            <th>Payment Date</th>
-                            <th>Reference Number</th>
+                            <th class="sortable" data-column="ReceiptID" data-dir=""># <span class="sort-icon"></span></th>
+                            <th class="sortable" data-column="OrderID" data-dir="">Order <span class="sort-icon"></span></th>
+                            <th class="sortable" data-column="PaymentMethod" data-dir="">Payment Processor <span class="sort-icon"></span></th>
+                            <th class="sortable" data-column="AmountPaid" data-dir="">Amount Paid <span class="sort-icon"></span></th>
+                            <th class="sortable" data-column="PaymentDate" data-dir="">Payment Date <span class="sort-icon"></span></th>
+                            <th class="sortable" data-column="ReferenceNumber" data-dir="">Reference Number <span class="sort-icon"></span></th>
                             <th></th>
                         </tr>
                     </thead>
@@ -121,12 +117,9 @@
                 </table>
             </div>
             <div class="pagination mt-4 text-end">
-                <button onclick="prevPage()" class="">
-                    < Prev </button>
-                        <span id="pageButtons"></span>
-                        <button onclick="nextPage()" class="">
-                            Next >
-                        </button>
+                <button onclick="prevPage()" class="">&lt; Prev</button>
+                <span id="pageButtons"></span>
+                <button onclick="nextPage()" class="">Next &gt;</button>
             </div>
         </div>
     </div>
@@ -256,10 +249,43 @@
         });
         displayTable(1);
     }
-
+    
     document.getElementById('searchInput').addEventListener('input', function() {
         filterData(this.value);
     });
+
+     // Sorting functionality
+     const sortableColumns = document.querySelectorAll('.sortable');
+
+        sortableColumns.forEach(column => {
+            column.addEventListener('click', () => {
+                const currentDirection = column.getAttribute('data-dir');
+                const nextDirection = currentDirection === 'asc' ? 'desc' : 'asc';
+                const columnName = column.getAttribute('data-column');
+
+                // Update data array based on sorting
+                data.sort((a, b) => {
+                    if (nextDirection === 'asc') {
+                        return a[columnName] > b[columnName] ? 1 : -1;
+                    } else {
+                        return b[columnName] > a[columnName] ? 1 : -1;
+                    }
+                });
+
+                // Set the new sorting direction
+                column.setAttribute('data-dir', nextDirection);
+
+                // Reset other column directions
+                sortableColumns.forEach(col => {
+                    if (col !== column) {
+                        col.setAttribute('data-dir', '');
+                    }
+                });
+
+                // Refresh table display
+                displayTable(currentPage);
+            });
+        });
 
     window.onload = function() {
         displayTable(currentPage);

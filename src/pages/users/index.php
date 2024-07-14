@@ -34,14 +34,14 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th onclick="sortTable('EmployeeWebID')">#</th>
                             <th>Profile Picture</th>
-                            <th>Username</th>
-                            <th>Last Name</th>
-                            <th>First Name</th>
-                            <th>Hire Date</th>
-                            <th>Gender</th>
-                            <th>Position</th>
+                            <th onclick="sortTable('username')">Username</th>
+                            <th onclick="sortTable('EmployeeLastname')">Last Name</th>
+                            <th onclick="sortTable('EmployeeFirstname')">First Name</th>
+                            <th onclick="sortTable('HireDate')">Hire Date</th>
+                            <th onclick="sortTable('Gender')">Gender</th>
+                            <th onclick="sortTable('Position')">Position</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -118,6 +118,7 @@
     let currentPage = 1;
     const rowsPerPage = 8;
     let filteredData = data;
+    let sortDirection = true;
 
     function displayTable(page) {
         const tableBody = document.getElementById('usersTable');
@@ -206,6 +207,22 @@
                 item.Position.toLowerCase().includes(query);
         });
         currentPage = 1;
+        displayTable(currentPage);
+    }
+
+    function sortTable(column) {
+        sortDirection = !sortDirection;
+        filteredData.sort((a, b) => {
+            const aValue = a[column] ? a[column].toString().toLowerCase() : '';
+            const bValue = b[column] ? b[column].toString().toLowerCase() : '';
+            if (aValue < bValue) {
+                return sortDirection ? -1 : 1;
+            }
+            if (aValue > bValue) {
+                return sortDirection ? 1 : -1;
+            }
+            return 0;
+        });
         displayTable(currentPage);
     }
 

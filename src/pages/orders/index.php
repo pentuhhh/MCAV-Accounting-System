@@ -1,86 +1,19 @@
-<div class="GLOBAL_PAGE flex">
-    <?php include_once __DIR__ . "/../../components/sidebar.php"; ?>
-
-    <div class="GLOBAL_PAGE_CONTAINER">
-        <div class="GLOBAL_HEADER flex items-center justify-between">
-            <div class="GLOBAL_HEADER_TITLE flex items-center">
-                <i class="material-symbols-rounded text-4xl">
-                    receipt_long
-                </i>
-                <span class="ml-3 text-2xl font-semibold">Order Management</span>
-                <a href="/orders/add-order2" class="GLOBAL_BUTTON_BLUE ml-5">Add order</a>
-            </div>
-            <div class="GLOBAL_HEADER_USER flex items-center">
-                <div class="GLOBAL_HEADER_COLUMN text-right mr-4">
-                    <p>Hey, <strong>Radon</strong></p>
-                    <p>Admin</p>
-                </div>
-                <img src="/assets/JumanjiRon.png" alt="" class="w-10 h-10 rounded-full">
-            </div>
-        </div>
-
-        <div class="ORDERS_SEARCH">
-            <div class="columns-1">
-                <a href="" class="ORDER_SEARCH_BUTTON">
-                    <i class="material-symbols-rounded">
-                        search
-                    </i>
-                </a>
-                <input type="text" placeholder="Search" id="searchInput">
-            </div>
-        </div>
-
-        <div class="ORDERS_CONTENT">
-            <div class="GLOBAL_TABLE">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Customer</th>
-                            <th>Order Date</th>
-                            <th>Amount</th>
-                            <th>Order Deadline</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody id="ordersTable">
-                        <!-- Data rows will be inserted here -->
-                    </tbody>
-                </table>
-            </div>
-            <div class="pagination mt-4 text-end">
-                <button onclick="prevPage()" class="">
-                    < Prev</button>
-                        <span id="pageButtons"></span>
-                        <button onclick="nextPage()" class="">Next ></button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script>
     const data = [
         <?php
         require "../utilities/db-connection.php";
 
         $sql = "SELECT      
-                    o.OrderID,      
-                    CONCAT(c.CustomerFname, ' ', c.CustomerLname) AS CustomerName,           
-                    o.OrderStartDate,
-                    p.totalamount,      
-                    o.OrderDeadline,      
-                    CASE
-                        WHEN o.OrderStatusCode = 1 THEN 'Pending'
-                        WHEN o.OrderStatusCode = 2 THEN 'Started'
-                        WHEN o.OrderStatusCode = 3 THEN 'Completed'
-                        ELSE 'Unknown'
-                    END AS Status
+                    r.ReceiptID,
+                    r.PlanID AS OrderID,
+                    r.PaymentProcessor AS PaymentMethod,
+                    r.ReceiptAmountPaid AS AmountPaid,
+                    r.PaymentDate,
+                    r.PaymentProcessorReferenceNumber AS ReferenceNumber
                 FROM      
-                    orders o     
-                INNER JOIN customers c ON o.customerid = c.customerID
-                INNER JOIN payment_plans p ON p.orderID = o.orderID
-                WHERE o.isremoved = 0 
-                ORDER BY o.orderId DESC;";
+                    Payment_Receipts r
+                WHERE r.IsRemoved = 0 
+                ORDER BY r.ReceiptID DESC;";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
@@ -95,15 +28,15 @@
     ];
 
     let currentPage = 1;
-    const rowsPerPage = 13;
+    const rowsPerPage = 8;
     let filteredData = data;
 
     function displayTable(page) {
-        const tableBody = document.getElementById('ordersTable');
+        const tableBody = document.getElementById('receiptsTable');
         tableBody.innerHTML = "";
 
         if (filteredData.length === 0) {
-            tableBody.innerHTML = "<tr><td colspan='6' class='text-center'>Order doesn't exist</td></tr>";
+            tableBody.innerHTML = "<tr><td colspan='7' class='text-center'>Receipt doesn't exist</td></tr>";
             document.getElementById('pageButtons').innerHTML = '';
             return;
         }
@@ -116,35 +49,22 @@
             const row = document.createElement('tr');
             Object.keys(item).forEach(key => {
                 const cell = document.createElement('td');
-                if (key === 'OrderID') {
-                    const link = document.createElement('a');
-                    link.href = `orders/details/?orderID=${item[key]}`;
-                    link.textContent = item[key];
-                    link.classList.add('order-id-link');
-                    cell.appendChild(link);
-                } else {
-                    cell.textContent = item[key];
-                }
-
-                if (key === 'Status') {
-                    switch (item[key]) {
-                        case 'Pending':
-                            cell.classList.add('status-pending');
-                            break;
-                        case 'Started':
-                            cell.classList.add('status-started');
-                            break;
-                        case 'Completed':
-                            cell.classList.add('status-completed');
-                            break;
-                        default:
-                            cell.classList.add('status-unknown');
-                            break;
-                    }
-                }
-
+                cell.textContent = item[key];
                 row.appendChild(cell);
             });
+
+            const actionCell = document.createElement('td');
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.classList.add('text-[#DF166E]');
+            deleteButton.onclick = function() {
+                if (confirm('Are you sure you want to delete this row?')) {
+                    // Add delete functionality here
+                }
+            };
+            actionCell.appendChild(deleteButton);
+            row.appendChild(actionCell);
+
             tableBody.appendChild(row);
         });
         updatePageButtons();
@@ -193,19 +113,55 @@
     function filterData(query) {
         query = query.toLowerCase();
         filteredData = data.filter(item => {
-            return item.OrderID.toLowerCase().includes(query) ||
-                item.CustomerName.toLowerCase().includes(query) ||
-                item.OrderStartDate.toLowerCase().includes(query) ||
-                item.totalamount.toLowerCase().includes(query) ||
-                item.OrderDeadline.toLowerCase().includes(query) ||
-                item.Status.toLowerCase().includes(query);
+            return item.ReceiptID.toString().toLowerCase().includes(query) ||
+                item.OrderID.toString().toLowerCase().includes(query) ||
+                item.PaymentMethod.toLowerCase().includes(query) ||
+                item.AmountPaid.toString().toLowerCase().includes(query) ||
+                item.PaymentDate.toLowerCase().includes(query) ||
+                item.ReferenceNumber.toLowerCase().includes(query);
         });
-        currentPage = 1;
-        displayTable(currentPage);
+        displayTable(1);
     }
 
     document.getElementById('searchInput').addEventListener('input', function() {
         filterData(this.value);
+    });
+
+    // Sorting functionality
+    document.querySelectorAll('.sortable').forEach(header => {
+        header.addEventListener('click', function() {
+            const column = this.dataset.column;
+            const direction = this.dataset.dir;
+            const isNumeric = column === 'AmountPaid' || column === 'ReferenceNumber';
+
+            // Reset sort icons
+            document.querySelectorAll('.sort-icon').forEach(icon => {
+                icon.innerHTML = '';
+            });
+
+            // Set sorting direction
+            this.dataset.dir = direction === 'asc' ? 'desc' : 'asc';
+            const newDirection = this.dataset.dir;
+
+            // Update sort icon
+            const sortIcon = this.querySelector('.sort-icon');
+            sortIcon.innerHTML = newDirection === 'asc' ? '&uarr;' : '&darr;';
+
+            // Sort the data
+            filteredData.sort((a, b) => {
+                const aValue = isNumeric ? parseInt(a[column]) : a[column];
+                const bValue = isNumeric ? parseInt(b[column]) : b[column];
+
+                if (newDirection === 'asc') {
+                    return aValue - bValue;
+                } else {
+                    return bValue - aValue;
+                }
+            });
+
+            // Redisplay table with sorted data
+            displayTable(currentPage);
+        });
     });
 
     window.onload = function() {
