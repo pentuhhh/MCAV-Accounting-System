@@ -112,12 +112,12 @@
                 <table>
                     <thead>
                         <tr>
-                            <th class="sortable" data-column="ReceiptID" data-dir=""># <span class="sort-icon"></span></th>
-                            <th class="sortable" data-column="OrderID" data-dir="">Order <span class="sort-icon"></span></th>
-                            <th class="sortable" data-column="PaymentMethod" data-dir="">Payment Processor <span class="sort-icon"></span></th>
-                            <th class="sortable" data-column="AmountPaid" data-dir="">Amount Paid <span class="sort-icon"></span></th>
-                            <th class="sortable" data-column="PaymentDate" data-dir="">Payment Date <span class="sort-icon"></span></th>
-                            <th class="sortable" data-column="ReferenceNumber" data-dir="">Reference Number <span class="sort-icon"></span></th>
+                            <th class="sortable" data-column="ReceiptID" data-dir="">#</th>
+                            <th class="sortable" data-column="OrderID" data-dir="">Order</th>
+                            <th class="sortable" data-column="PaymentMethod" data-dir="">Payment Processor</th>
+                            <th class="sortable" data-column="AmountPaid" data-dir="">Amount Paid </th>
+                            <th class="sortable" data-column="PaymentDate" data-dir="">Payment Date </th>
+                            <th class="sortable" data-column="ReferenceNumber" data-dir="">Reference Number</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -259,14 +259,11 @@
 
     function filterData(query) {
         query = query.toLowerCase();
-        filteredData = data.filter(item => {
-            return item.ReceiptID.toLowerCase().includes(query) ||
-                item.OrderID.toLowerCase().includes(query) ||
-                item.PaymentMethod.toLowerCase().includes(query) ||
-                item.AmountPaid.toLowerCase().includes(query) ||
-                item.PaymentDate.toLowerCase().includes(query) ||
-                item.ReferenceNumber.toLowerCase().includes(query);
-        });
+        filteredData = data.filter(item => 
+            (Object.values(item).some((value) => 
+                value.toLowerCase().includes(query)
+            ))
+        );
         displayTable(1);
     }
 
@@ -274,7 +271,7 @@
         filterData(this.value);
     });
 
-    // Sorting functionality
+     // Sorting functionality
     const sortableColumns = document.querySelectorAll('.sortable');
 
     sortableColumns.forEach(column => {
@@ -283,12 +280,12 @@
             const nextDirection = currentDirection === 'asc' ? 'desc' : 'asc';
             const columnName = column.getAttribute('data-column');
 
-            // Update data array based on sorting
-            data.sort((a, b) => {
-                if (!isNaN(a[columnName])) {
-                    a[columnName] = parseFloat(a[columnName]);
-                    b[columnName] = parseFloat(b[columnName]);
-                }
+                // Update data array based on sorting
+                filteredData.sort((a, b) => {
+                    if (!isNaN(a[columnName])) {
+                        a[columnName] = parseFloat(a[columnName]);
+                        b[columnName] = parseFloat(b[columnName]);
+                    }
 
                 if (nextDirection === 'asc') {
                     return a[columnName] > b[columnName] ? 1 : -1;
