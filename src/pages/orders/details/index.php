@@ -377,12 +377,8 @@ function reloadPage() {
                                         <form method="post" onsubmit="reloadpage()">
                                             <input type="hidden" name="action" value='removeProductByIndex'>
                                             <input type="hidden" name="productID" value="<?= htmlspecialchars($product['ProductID']); ?>">
-                                            <input type="hidden" name="productDescription" value="<?= htmlspecialchars($product['ProductDescription']); ?>">
-                                            <input type="hidden" name="productQuantity" value="<?= htmlspecialchars($product['ProductQuantity']); ?>">
-                                            <input type="hidden" name="productPrice" value="<?= htmlspecialchars($product['ProductPrice']); ?>">
-                                            <button class="text-[#DF166E] ml-3" type="submit" onclick="return confirm('Are you sure you want to delete this row?');">Delete</button>
+                                            <button type="submit" class="text-[#DF166E]" onclick="return confirm('Are you sure you want to delete this row?');">Delete</button>
                                         </form>
-                                        
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -572,5 +568,4 @@ function reloadPage() {
         </div>
     </div>
 </div>
-
 
