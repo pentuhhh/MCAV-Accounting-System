@@ -559,7 +559,7 @@
                             <form method="post">
                                 <input type="hidden" name="action" value="refresh">
                                 <input type="hidden" name="paymentPlanID" value="<?= htmlspecialchars($paymentPlanID); ?>">
-                                <button type="submit" class="GLOBAL_BUTTON_BLUE">Refresh</button>
+                                <button type="submit" class="GLOBAL_BUTTON_BLUE ml-2">Refresh</button>
                             </form>
                         </div>
                     </div>

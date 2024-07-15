@@ -1,5 +1,5 @@
 <?php
-require "../utilities/db-connection.php"; 
+require "../utilities/db-connection.php";
 
 if (!isset($_SESSION['username'])) {
     echo 'Access Denied';
@@ -26,12 +26,12 @@ $userlevel = $row['UserLevel'];
 $profilePicture = isset($_SESSION['profile_picture']) ? $_SESSION['profile_picture'] : '';
 
 if ($userlevel == 1) {
-    ?>
+?>
     <div class="GLOBAL_PAGE">
         <?php include_once __DIR__ . "/../../components/sidebar.php"; ?>
 
         <div class="GLOBAL_PAGE_CONTAINER">
-            
+
             <div class="GLOBAL_HEADER">
                 <div class="GLOBAL_HEADER_TITLE">
                     <i class="material-symbols-rounded text-[42px]">Person</i>
@@ -47,7 +47,7 @@ if ($userlevel == 1) {
             </div>
 
             <div class="GLOBAL_CONTENT">
-            <br><br>
+                <br><br>
                 Restore By ProductID :
                 <form method="post">
                     <input type="hidden" name="action" value="restore">
@@ -67,7 +67,7 @@ if ($userlevel == 1) {
                     }
                     ?>
                 </div>
-            <br><br>
+                <br><br>
                 <h2>Removed Products</h2>
                 <?php
                 // SQL query to select removed products
@@ -113,71 +113,71 @@ if ($userlevel == 1) {
             <!-- Additional content or forms can go here -->
             <br><br>
 
-                <br><br>
-                    Restore By ReceiptID :
-                    <form method="post">
-                        <input type="hidden" name="action" value="restorereceipt">
-                        <input type="number" name="receiptID" placeholder="Product ID">
-                        <input type="submit" value="Restorereceipt">
-                    </form>
-                    <div>
-                        <?php
-
-                        if (isset($_POST['action']) && $_POST['action'] == 'restorereceipt') {
-                            $receiptID = $_POST['receiptID'];
-
-                            $sql = "UPDATE payment_receipts SET IsRemoved = 0 WHERE receiptID = ?";
-                            $stmt = $conn->prepare($sql);
-                            $stmt->bind_param("i", $receiptID);
-                            $stmt->execute();
-                        }
-                        ?>
-                    </div>
-                <br><br>
-                <h2>Payment Receipts</h2>
+            <br><br>
+            Restore By ReceiptID :
+            <form method="post">
+                <input type="hidden" name="action" value="restorereceipt">
+                <input type="number" name="receiptID" placeholder="Receipt ID">
+                <input type="submit" value="Restorereceipt">
+            </form>
+            <div>
                 <?php
-                // SQL query to select payment receipts
-                $sql_receipts = "SELECT * FROM payment_receipts WHERE IsRemoved = 1";
-                $result_receipts = $conn->query($sql_receipts);
 
-                if ($result_receipts->num_rows > 0) {
-                    echo '<table border="1">';
-                    echo '<tr>';
-                    echo '<th>Receipt ID</th>';
-                    echo '<th>Plan ID</th>';
-                    echo '<th>Receipt Image Path</th>';
-                    echo '<th>Has Picture</th>';
-                    echo '<th>Amount Paid</th>';
-                    echo '<th>Payment Date</th>';
-                    echo '<th>Payment Processor</th>';
-                    echo '<th>Processor Ref Number</th>';
-                    echo '<th>Is Removed</th>';
-                    echo '</tr>';
+                if (isset($_POST['action']) && $_POST['action'] == 'restorereceipt') {
+                    $receiptID = $_POST['receiptID'];
 
-                    // Fetch and display each row of the results
-                    while ($row_receipt = $result_receipts->fetch_assoc()) {
-                        echo '<tr>';
-                        echo '<td>' . htmlspecialchars($row_receipt['ReceiptID']) . '</td>';
-                        echo '<td>' . htmlspecialchars($row_receipt['PlanID']) . '</td>';
-                        echo '<td>' . htmlspecialchars($row_receipt['ReceiptImagePath']) . '</td>';
-                        echo '<td>' . htmlspecialchars($row_receipt['HasPicture']) . '</td>';
-                        echo '<td>' . htmlspecialchars($row_receipt['ReceiptAmountPaid']) . '</td>';
-                        echo '<td>' . htmlspecialchars($row_receipt['PaymentDate']) . '</td>';
-                        echo '<td>' . htmlspecialchars($row_receipt['PaymentProcessor']) . '</td>';
-                        echo '<td>' . htmlspecialchars($row_receipt['PaymentProcessorReferenceNumber']) . '</td>';
-                        echo '<td>' . htmlspecialchars($row_receipt['IsRemoved']) . '</td>';
-                        echo '</tr>';
-                    }
-
-                    echo '</table>';
-                } else {
-                    echo 'No payment receipts found.';
+                    $sql = "UPDATE payment_receipts SET IsRemoved = 0 WHERE receiptID = ?";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param("i", $receiptID);
+                    $stmt->execute();
                 }
+                ?>
+            </div>
+            <br><br>
+            <h2>Payment Receipts</h2>
+            <?php
+            // SQL query to select payment receipts
+            $sql_receipts = "SELECT * FROM payment_receipts WHERE IsRemoved = 1";
+            $result_receipts = $conn->query($sql_receipts);
+
+            if ($result_receipts->num_rows > 0) {
+                echo '<table border="1">';
+                echo '<tr>';
+                echo '<th>Receipt ID</th>';
+                echo '<th>Plan ID</th>';
+                echo '<th>Receipt Image Path</th>';
+                echo '<th>Has Picture</th>';
+                echo '<th>Amount Paid</th>';
+                echo '<th>Payment Date</th>';
+                echo '<th>Payment Processor</th>';
+                echo '<th>Processor Ref Number</th>';
+                echo '<th>Is Removed</th>';
+                echo '</tr>';
+
+                // Fetch and display each row of the results
+                while ($row_receipt = $result_receipts->fetch_assoc()) {
+                    echo '<tr>';
+                    echo '<td>' . htmlspecialchars($row_receipt['ReceiptID']) . '</td>';
+                    echo '<td>' . htmlspecialchars($row_receipt['PlanID']) . '</td>';
+                    echo '<td>' . htmlspecialchars($row_receipt['ReceiptImagePath']) . '</td>';
+                    echo '<td>' . htmlspecialchars($row_receipt['HasPicture']) . '</td>';
+                    echo '<td>' . htmlspecialchars($row_receipt['ReceiptAmountPaid']) . '</td>';
+                    echo '<td>' . htmlspecialchars($row_receipt['PaymentDate']) . '</td>';
+                    echo '<td>' . htmlspecialchars($row_receipt['PaymentProcessor']) . '</td>';
+                    echo '<td>' . htmlspecialchars($row_receipt['PaymentProcessorReferenceNumber']) . '</td>';
+                    echo '<td>' . htmlspecialchars($row_receipt['IsRemoved']) . '</td>';
+                    echo '</tr>';
+                }
+
+                echo '</table>';
+            } else {
+                echo 'No payment receipts found.';
+            }
             ?>
         </div>
 
     </div>
-    <?php
+<?php
 } else {
     echo 'Access Denied';
 }

@@ -50,20 +50,14 @@
                                 <input id="payment-date" name="payment-date" type="date" required>
                             </div>
                         </div>
-                        <!-- Amount -->
-                        <div class="CUSTOMERS_INPUT_COLUMN_CONTAINER">
-                            <label for="amount">Amount</label>
-                            <input type="number" id="amount" name="amount" min="0" placeholder="Amount" required>
-                        </div>
                     </div>
 
                     <!-- Column 2 -->
                     <div class="CUSTOMERS_INPUT_COLUMN">
-                        <!-- Transaction Photo -->
+                        <!-- Amount -->
                         <div class="CUSTOMERS_INPUT_COLUMN_CONTAINER">
-                            <label>Transaction Picture</label>
-                            <input id="fileInput" type="file" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
-                            <p class="mt-2 text-xs text-gray-500">Only .jpg, .png, files allowed</p>
+                            <label for="amount">Amount</label>
+                            <input type="number" id="amount" name="amount" min="0" placeholder="Amount" required>
                         </div>
                         <!-- Reference Number -->
                         <div class="CUSTOMERS_INPUT_COLUMN_CONTAINER">
@@ -75,7 +69,7 @@
 
                 <div class="flex flex-row justify-end pb-5">
                     <a href="/receipts" class="GLOBAL_BUTTON_GRAY mr-4">Cancel</a>
-                    <button type="submit" value="Add Receipt" class="GLOBAL_BUTTON_BLUE">Submit</button>
+                    <button type="submit" value="Add Receipt" class="GLOBAL_BUTTON_BLUE">Add Receipt</button>
                 </div>
             </form>
 

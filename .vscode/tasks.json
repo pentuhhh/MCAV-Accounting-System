@@ -14,7 +14,7 @@
 			},
 			"problemMatcher": [],
 			"command": "php",
-			"args": ["-S", "localhost:8000", "-f", "index.php"]
+			"args": ["-S", "0.0.0.0:8000", "-f", "index.php"]
 		},
 		{
 			"label": "Dev: Tailwind",
