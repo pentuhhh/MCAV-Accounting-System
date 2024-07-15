@@ -628,6 +628,10 @@
 		@apply flex flex-row justify-between gap-5;
 	}
 
+	.DETAILS_CONTAINER_ROW_GROW {
+		@apply flex flex-row flex-grow gap-5;
+	}
+
 	.DETAILS_CONTAINER_ROW_LEFT {
 		@apply flex w-1/2 flex-col;
 	}
