@@ -31,6 +31,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['action']) && $_POST['action'] === 'delete' && isset($_POST['ReceiptID'])) {
         $receiptID = intval($_POST['ReceiptID']);
+        
+
+        $employeeWebID = $_SESSION['employeeWebID'];
+        
+        $sql = "INSERT INTO action_logs (EmployeeWebID, UserAction, affectedentitytype, affectedentity, Logtimestamp)
+                VALUES (?, 'Delete', 'Payment_Receipts', ?, NOW())";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("is", $employeeWebID, $receiptID);
+        $stmt->execute();
 
         // Prepare and execute the delete statement
         $sql = "UPDATE Payment_Receipts SET IsRemoved = 1 WHERE ReceiptID = ?";
