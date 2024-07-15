@@ -240,6 +240,16 @@
                     $editedLName = htmlspecialchars($_POST['editCustomerLName']);
                     $editedEmail = htmlspecialchars($_POST['editCustomerEmail']);
                     $editedPhone = htmlspecialchars($_POST['editCustomerPhone']);
+                    
+                    // Create archive 
+
+                    $sql = "INSERT INTO customer_info_archive (CustomerID, CustomerFname, CustomerLname, CustomerEmail, CustomerPhone, ArchiveTimestamp)
+                            SELECT CustomerID, CustomerFname, CustomerLname, CustomerEmail, CustomerPhone, NOW()
+                            FROM customers
+                            WHERE CustomerID = '$globCustomerID'";
+
+                    $conn->query($sql);
+
 
                     // Update the customer information in the database
                     $sql = "UPDATE customers SET CustomerFname = '$editedFName', CustomerLname = '$editedLName', CustomerEmail = '$editedEmail', CustomerPhone = '$editedPhone' WHERE CustomerID = '$globCustomerID'";
@@ -460,9 +470,11 @@
 
                     <!-- EDIT PAYMENT PLAN -->
                     <?php
+                    $realPlanID = 0;
                     if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'editPaymentPlan') {
                         // Display the edit form for payment plan
                         $paymentPlanID = htmlspecialchars($_POST['paymentPlanID']);
+                        $realPlanId = (int)$paymentPlanID;
                         echo <<<HTML
                         <div class="POPUP_CONTAINER">
                             <div class="POPUP_CONTAINER_BOX GLOBAL_BOX_DIV flex flex-col gap-4 w-full">
@@ -479,6 +491,33 @@
                             </div>
                         </div> 
                         HTML;
+                    }
+
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'refresh') {
+                        // Sanitize input
+                        $globOrderID = $conn->real_escape_string($globOrderID);
+
+                        //Update amount paid
+                        $sql = "UPDATE payment_plans 
+                                SET amountpaid = (SELECT SUM(ReceiptAmountPaid) 
+                                                  FROM payment_receipts 
+                                                  WHERE planID = '$realPlanID' AND isRemoved = 0) 
+                                WHERE orderid = '$globOrderID' AND IsRemoved = 0;";
+                        $conn->query($sql);
+                    
+                        // Update total amount in payment_plans
+                        $sql = "UPDATE payment_plans 
+                                SET totalamount = (SELECT SUM(productPrice * productQuantity) 
+                                                   FROM products 
+                                                   WHERE orderid = '$globOrderID' AND isRemoved = 0) 
+                                WHERE orderid = '$globOrderID';";
+                        $conn->query($sql);
+                    
+                        // Update balance
+                        $sql = "UPDATE payment_plans 
+                                SET balance = totalamount - amountpaid 
+                                WHERE orderid = '$globOrderID' AND IsRemoved = 0;";
+                        $conn->query($sql);
                     }
                     ?>
                     <!-- END EDIT PAYMENT PLAN -->
@@ -516,6 +555,11 @@
                                 <input type="hidden" name="action" value="editPaymentPlan">
                                 <input type="hidden" name="paymentPlanID" value="<?= htmlspecialchars($paymentPlanID); ?>">
                                 <button type="submit" class="GLOBAL_BUTTON_BLUE">Edit Payment Plan</button>
+                            </form>
+                            <form method="post">
+                                <input type="hidden" name="action" value="refresh">
+                                <input type="hidden" name="paymentPlanID" value="<?= htmlspecialchars($paymentPlanID); ?>">
+                                <button type="submit" class="GLOBAL_BUTTON_BLUE">Refresh</button>
                             </form>
                         </div>
                     </div>

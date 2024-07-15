@@ -76,7 +76,12 @@ $tables = [
     'orders',
     'payment_plans',
     'payment_receipts',
-    'products'
+    'products',
+    'customer_info_archive',
+    'employee_info_archive',
+    'order_archive',
+    'payment_plans_archive',
+    'payment_receipt_archive'
 ];
 
 // Display each table
