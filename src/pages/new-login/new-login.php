@@ -69,9 +69,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Insert into employee_credentials
         $sql_credentials = "INSERT INTO employee_credentials (
-                                PermissionsID, EmployeeID, username, employee_Password, UserLevel, accountStatus
+                                EmployeeID, username, employee_Password, UserLevel, accountStatus
                             ) VALUES (
-                                '1', '$employee_id', '$username', '$hashed_password', '$permission', 'Activated'
+                                '$employee_id', '$username', '$hashed_password', '$permission', 'Activated'
                             )";
 
         // Error handling for credentials
