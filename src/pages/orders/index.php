@@ -3,6 +3,7 @@
     include_once __DIR__ . "/../../components/sidebar.php";
 
     $username = $_SESSION['username'];
+    $userlevel = $_SESSION['user_level'] == 1 ? 'Admin' : 'User';
     $profilePicture = isset($_SESSION['profile_picture']) ? $_SESSION['profile_picture'] : '';
     ?>
 
@@ -18,7 +19,7 @@
             <div class="GLOBAL_HEADER_USER">
                 <div class="GLOBAL_HEADER_COLUMN">
                     <p>Hey, <strong><?php echo htmlspecialchars($username); ?></strong></p>
-                    <p>Admin</p>
+                    <p><?php echo htmlspecialchars($userlevel) ?></p>
                 </div>
                 <img src="<?php echo htmlspecialchars($profilePicture); ?>" alt="Profile Picture">
             </div>

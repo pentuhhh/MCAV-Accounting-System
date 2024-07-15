@@ -40,6 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ((password_verify($password, $row['employee_Password'])) && $aStatus == 'Activated') {
                 // Fetch additional user info
                 $employeeWebID = $row['EmployeeWebID'];
+                $userlevel = $row['WebUserLevel'];
                 $employeeID = $row['EmployeeID'];
                 $infoQuery = "SELECT ProfilePicturePath FROM employee_info WHERE EmployeeID = ?";
                 $infoStmt = $conn->prepare($infoQuery);

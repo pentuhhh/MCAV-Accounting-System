@@ -38,11 +38,13 @@ if ($conn->connect_error) {
 //
 
 // Function to sanitize input to prevent SQL injection
-function sanitize_input($conn, $data) {
+function sanitize_input($conn, $data)
+{
     return mysqli_real_escape_string($conn, $data);
 }
 
-function populateVariables($conn){
+function populateVariables($conn)
+{
     global $customerFname, $customerLname, $customerEmail, $customerPhone;
 
     if (isset($_POST['CustomerFname'])) {
@@ -65,11 +67,10 @@ function populateVariables($conn){
     if (isset($_POST['processor'])) {
         $paymentprocessor = sanitize_input($conn, $_POST['processor']);
     }
-
-    
 }
 
-function userExists($conn){
+function userExists($conn)
+{
     global $customerFname, $customerLname, $customerID;
 
     $fname = sanitize_input($conn, $customerFname);
@@ -153,7 +154,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
     if ($customerID == 0) {
         $createcustomer = "INSERT INTO Customers (customerfname, customerlname, customeremail, customerphone)
                     VALUES ('$customerFname','$customerLname','$customerEmail','$customerPhone');";
-        
+
         $conn->query($createcustomer);
 
         $fname = sanitize_input($conn, $customerFname);
@@ -178,7 +179,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
     $orderentryquery = "INSERT INTO orders (customerID, employeeID, orderStartDate) VALUES ('$customerID', '$employeeID', curdate());";
     $conn->query($orderentryquery);
 
-    
+
 
     // Retrieve order ID
     $retrieveorderid = "SELECT orderID from orders where customerID = $customerID order by orderID desc limit 1;";
@@ -198,7 +199,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
         // debug: echo "Due date before sanitization: " . $_POST['due-date'] . "<br>";
         // debug: echo "Due date after sanitization: " . $duedate . "<br>";
     } else {
-       // debug: echo "Due date not set in POST array.";
+        // debug: echo "Due date not set in POST array.";
     }
 
     // Validate the due date
@@ -238,16 +239,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
         $price = $product['price'];
         $amount = $product['amount'];
         $remarks = $product['remarks'];
-    
+
         // Insert the data into the database
         $insertproductquery = "INSERT INTO products (orderID, productDescription, productDimensions, productPrice, productQuantity, productRemarks) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($insertproductquery);
-        $stmt->bind_param("issdis", $orderID, $productDescription, $dimensions, $price ,$amount, $remarks);
-    
+        $stmt->bind_param("issdis", $orderID, $productDescription, $dimensions, $price, $amount, $remarks);
+
         if ($stmt->execute()) {
             // Get the inserted product ID
             $productID = $stmt->insert_id;
-    
+
             // Log product creation action if employeeWebID is set
             if (isset($_SESSION['employeeWebID'])) {
                 $employeeWebID = $_SESSION['employeeWebID'];
@@ -266,7 +267,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
             break;
         }
     }
-    
+
 
 
     // Retrieve price
@@ -294,6 +295,7 @@ $conn->close();
     include_once __DIR__ . "/../../../components/sidebar.php";
 
     $username = $_SESSION['username'];
+    $userlevel = $_SESSION['user_level'] == 1 ? 'Admin' : 'User';
     $profilePicture = isset($_SESSION['profile_picture']) ? $_SESSION['profile_picture'] : '';
     ?>
 
@@ -308,7 +310,7 @@ $conn->close();
             <div class="GLOBAL_HEADER_USER">
                 <div class="GLOBAL_HEADER_COLUMN">
                     <p>Hey, <strong><?php echo htmlspecialchars($username); ?></strong></p>
-                    <p>Admin</p>
+                    <p><?php echo htmlspecialchars($userlevel) ?></p>
                 </div>
                 <img src="../../../<?php echo htmlspecialchars($profilePicture); ?>" alt="Profile Picture">
             </div>
@@ -503,13 +505,14 @@ $conn->close();
                     <div class="PRODUCTS_INPUT_ITEMS_TOTAL_BUTTONS">
                         <a href="/orders" class="GLOBAL_BUTTON_RED">Cancel</a>
                         <button class="GLOBAL_BUTTON_BLUE ml-2" type="button" onclick="submitForm();">Add Order</button>
-                        
+
                         <script>
                             function submitForm() {
                                 if (confirm('Confirm order?')) {
                                     document.getElementById('order-form').submit();
                                 }
                             }
+
                             function addItemToList() {
                                 var formData = new FormData(document.getElementById("productForm"));
 
