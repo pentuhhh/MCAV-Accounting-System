@@ -47,33 +47,31 @@ if ($userlevel == 1) {
 
             <div class="GLOBAL_CONTENT">
                 <?php
-                // Display the customer_info_archive table
-                $sql = "SELECT customerArchiveID, CustomerID, CustomerFname, CustomerLname, CustomerEmail, CustomerPhone, ArchiveTimestamp 
-                        FROM customer_info_archive";
+                // Display the action_logs table
+                $sql = "SELECT logID, EmployeeWebID, UserAction, AffectedEntityType, AffectedEntityID, LogTimestamp 
+                        FROM action_logs";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
                     echo '<table class="action-logs-table">';
                     echo '<tr>';
-                    echo '<th>Customer Archive ID</th>';
-                    echo '<th>Customer ID</th>';
-                    echo '<th>Customer First Name</th>';
-                    echo '<th>Customer Last Name</th>';
-                    echo '<th>Customer Email</th>';
-                    echo '<th>Customer Phone</th>';
-                    echo '<th>Archive Timestamp</th>';
+                    echo '<th>Log ID</th>';
+                    echo '<th>Employee Web ID</th>';
+                    echo '<th>User Action</th>';
+                    echo '<th>Affected Entity Type</th>';
+                    echo '<th>Affected Entity ID</th>';
+                    echo '<th>Log Timestamp</th>';
                     echo '</tr>';
 
                     // Fetch and display each row of the results
                     while ($row = $result->fetch_assoc()) {
                         echo '<tr>';
-                        echo '<td>' . htmlspecialchars($row['customerArchiveID']) . '</td>';
-                        echo '<td>' . htmlspecialchars($row['CustomerID']) . '</td>';
-                        echo '<td>' . htmlspecialchars($row['CustomerFname']) . '</td>';
-                        echo '<td>' . htmlspecialchars($row['CustomerLname']) . '</td>';
-                        echo '<td>' . htmlspecialchars($row['CustomerEmail']) . '</td>';
-                        echo '<td>' . htmlspecialchars($row['CustomerPhone']) . '</td>';
-                        echo '<td>' . htmlspecialchars($row['ArchiveTimestamp']) . '</td>';
+                        echo '<td>' . htmlspecialchars($row['logID']) . '</td>';
+                        echo '<td>' . htmlspecialchars($row['EmployeeWebID']) . '</td>';
+                        echo '<td>' . htmlspecialchars($row['UserAction']) . '</td>';
+                        echo '<td>' . htmlspecialchars($row['AffectedEntityType']) . '</td>';
+                        echo '<td>' . htmlspecialchars($row['AffectedEntityID']) . '</td>';
+                        echo '<td>' . htmlspecialchars($row['LogTimestamp']) . '</td>';
                         echo '</tr>';
                     }
 
@@ -84,10 +82,10 @@ if ($userlevel == 1) {
                 ?>
             </div>
 
-            <br><br>Search by user (input EmployeeID):
+            <br><br>Search by user (input EmployeeWebID):
             <div class="GLOBAL_TABLE">
                 <form id="searchid" method="post" action="">
-                    <input type="number" name="employeeid" id="employeeid" placeholder="EmployeeID">
+                    <input type="number" name="employeeid" id="employeeid" placeholder="EmployeeWebID">
                     <input type="submit" class="GLOBAL_BUTTON_BLUE">
                 </form>
             </div>
@@ -96,10 +94,10 @@ if ($userlevel == 1) {
                 if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['employeeid'])) {
                     $inputemployeeid = $_POST['employeeid'];
 
-                    // Display the customer_info_archive table for that user
-                    $sql = "SELECT customerArchiveID, CustomerID, CustomerFname, CustomerLname, CustomerEmail, CustomerPhone, ArchiveTimestamp 
-                            FROM customer_info_archive 
-                            WHERE CustomerID = ?";
+                    // Display the action_logs table for that user
+                    $sql = "SELECT logID, EmployeeWebID, UserAction, AffectedEntityType, AffectedEntityID, LogTimestamp 
+                            FROM action_logs 
+                            WHERE EmployeeWebID = ? Order by logid asc";
                     $stmt = $conn->prepare($sql);
                     $stmt->bind_param("i", $inputemployeeid);
                     $stmt->execute();
@@ -108,31 +106,29 @@ if ($userlevel == 1) {
                     if ($result->num_rows > 0) {
                         echo '<table class="action-logs-table">';
                         echo '<tr>';
-                        echo '<th>Customer Archive ID</th>';
-                        echo '<th>Customer ID</th>';
-                        echo '<th>Customer First Name</th>';
-                        echo '<th>Customer Last Name</th>';
-                        echo '<th>Customer Email</th>';
-                        echo '<th>Customer Phone</th>';
-                        echo '<th>Archive Timestamp</th>';
+                        echo '<th>Log ID</th>';
+                        echo '<th>Employee Web ID</th>';
+                        echo '<th>User Action</th>';
+                        echo '<th>Affected Entity Type</th>';
+                        echo '<th>Affected Entity ID</th>';
+                        echo '<th>Log Timestamp</th>';
                         echo '</tr>';
 
                         // Fetch and display each row of the results
                         while ($row = $result->fetch_assoc()) {
                             echo '<tr>';
-                            echo '<td>' . htmlspecialchars($row['customerArchiveID']) . '</td>';
-                            echo '<td>' . htmlspecialchars($row['CustomerID']) . '</td>';
-                            echo '<td>' . htmlspecialchars($row['CustomerFname']) . '</td>';
-                            echo '<td>' . htmlspecialchars($row['CustomerLname']) . '</td>';
-                            echo '<td>' . htmlspecialchars($row['CustomerEmail']) . '</td>';
-                            echo '<td>' . htmlspecialchars($row['CustomerPhone']) . '</td>';
-                            echo '<td>' . htmlspecialchars($row['ArchiveTimestamp']) . '</td>';
+                            echo '<td>' . htmlspecialchars($row['logID']) . '</td>';
+                            echo '<td>' . htmlspecialchars($row['EmployeeWebID']) . '</td>';
+                            echo '<td>' . htmlspecialchars($row['UserAction']) . '</td>';
+                            echo '<td>' . htmlspecialchars($row['AffectedEntityType']) . '</td>';
+                            echo '<td>' . htmlspecialchars($row['AffectedEntityID']) . '</td>';
+                            echo '<td>' . htmlspecialchars($row['LogTimestamp']) . '</td>';
                             echo '</tr>';
                         }
 
                         echo '</table>';
                     } else {
-                        echo 'No results found for the specified CustomerID.';
+                        echo 'No results found for the specified EmployeeWebID.';
                     }
                 }
             ?>

@@ -45,7 +45,7 @@ if ($userlevel == 1) {
                 </div>
             </div>
 
-            <div class="GLOBAL_CONTENT">
+            <div class="GLOBAL_TABLE">
                 <?php
                 // Display the action logs table
                 $sql = "SELECT c.employeeid, CONCAT(e.employeeFirstname, ' ', e.employeeLastname) AS 'User Name', logtimestamp 
@@ -56,7 +56,7 @@ if ($userlevel == 1) {
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
-                    echo '<table class="action-logs-table">';
+                    echo '<table border="1">';
                     echo '<tr>';
                     echo '<th>Employee ID</th>';
                     echo '<th>Employee Name</th>';
@@ -103,9 +103,8 @@ if ($userlevel == 1) {
                     $result = $stmt->get_result();
 
                     if ($result->num_rows > 0) {
-                        echo '<table class="action-logs-table">';
+                        echo '<table border="1">';
                         echo '<tr>';
-                        echo '<th>Employee ID</th>';
                         echo '<th>Employee Name</th>';
                         echo '<th>Log Timestamp</th>';
                         echo '</tr>';
@@ -113,7 +112,6 @@ if ($userlevel == 1) {
                         // Fetch and display each row of the results
                         while ($row = $result->fetch_assoc()) {
                             echo '<tr>';
-                            echo '<td>' . htmlspecialchars($row['employeeid']) . '</td>';
                             echo '<td>' . htmlspecialchars($row['User Name']) . '</td>';
                             echo '<td>' . htmlspecialchars($row['logtimestamp']) . '</td>';
                             echo '</tr>';
@@ -127,22 +125,6 @@ if ($userlevel == 1) {
             ?>
         </div>
     </div>
-    <style>
-        .action-logs-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        .action-logs-table, .action-logs-table th, .action-logs-table td {
-            border: 1px solid black;
-        }
-        .action-logs-table th, .action-logs-table td {
-            padding: 8px;
-            text-align: left;
-        }
-        .action-logs-table th {
-            background-color: #f2f2f2;
-        }
-    </style>
     <?php
 } else {
     echo 'Access Denied';

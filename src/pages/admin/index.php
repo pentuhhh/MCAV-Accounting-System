@@ -37,11 +37,11 @@ $profilePicture = isset($_SESSION['profile_picture']) ? $_SESSION['profile_pictu
 
 
     Login Logs : <a href="admin/login-logs">View</a><br>
-    Action Logs : <a gref="action-logs">View</a><br>
+    Action Logs : <a href="admin/action-logs">View</a><br>
 
-    File History : <a href="file-history">View</a><br>
+    File History : <a href="admin/file-history">View</a><br>
 
-    Delete Logs : <a href="delete-logs">View</a><br>
+    Delete Logs : <a href="admin/delete-logs">View</a><br>
 
 
     </div>

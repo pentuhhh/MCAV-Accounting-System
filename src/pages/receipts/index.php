@@ -113,7 +113,7 @@
                 <table>
                     <thead>
                         <tr>
-                            <th class="sortable" data-column="ReceiptID" data-dir="">#</th>
+                            <th class="sortable" data-column="ReceiptID" data-dir="">Receipt ID</th>
                             <th class="sortable" data-column="OrderID" data-dir="">Plan ID</th>
                             <th class="sortable" data-column="PaymentMethod" data-dir="">Payment Processor</th>
                             <th class="sortable" data-column="AmountPaid" data-dir="">Amount Paid </th>
