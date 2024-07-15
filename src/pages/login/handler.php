@@ -1,4 +1,5 @@
 <?php
+session_destroy();
 session_start();
 require_once "../utilities/db-connection.php";
 
@@ -51,7 +52,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     if ($infoResult->num_rows > 0) {
                         $infoRow = $infoResult->fetch_assoc();
                         $_SESSION['profile_picture'] = $infoRow['ProfilePicturePath'];
-                    }
+                    }   
+
+
+                    // Log action
+                    $sql = "insert into action_logs (EmployeeWebID, UserAction, Logtimestamp)
+                     values ('$employeeWebID', 'Login', now());";
+                    $conn->query($sql);
 
                     $infoStmt->close();
                 }
@@ -62,6 +69,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['employeeID'] = $employeeID;
                 $_SESSION['user_level'] = $row['UserLevel'];
                 $_SESSION['account_status'] = $row['accountStatus'];
+
+                // Log Successful login
+
+                $sql = "INSERT INTO action_logs (EmployeeWebID, User) VALUES (?, 'Login')";
 
                 header("Location: /dashboard");
                 exit();

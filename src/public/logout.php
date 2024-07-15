@@ -2,6 +2,8 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+require_once "../utilities/db-connection.php";
+
 // echo "Starting logout process...<br>";
 
 session_start();
@@ -13,6 +15,15 @@ session_start();
 //     echo "No user was logged in.<br>";
 // }
 
+// Log action
+$employeeWebID = $_SESSION['employeeWebID'];
+$sql = "insert into action_logs (EmployeeWebID, UserAction, Logtimestamp)
+values ('$employeeWebID', 'Logout', now());";
+$conn->query($sql);
+
+
+
+session_destroy();
 session_destroy();
 // echo "Session destroyed.<br>";
 
