@@ -200,16 +200,21 @@
 
     function filterData(query) {
         query = query.toLowerCase();
-        filteredData = data.filter(item => {
-            return item.OrderID.toLowerCase().includes(query) ||
-                item.CustomerName.toLowerCase().includes(query) ||
-                item.OrderStartDate.toLowerCase().includes(query) ||
-                item.totalamount.toLowerCase().includes(query) ||
-                item.OrderDeadline.toLowerCase().includes(query) ||
-                item.Status.toLowerCase().includes(query);
-        });
-        currentPage = 1;
-        displayTable(currentPage);
+        filteredData = data.filter(item =>
+            (Object.values(item).some((value) => {
+                if (isNaN(value)) {
+                    return value.toLowerCase().includes(query)
+                } else {
+                    return toString(value).toLowerCase().includes(query)
+                }
+            }))
+        );
+        displayTable(1);
+    }
+
+    function searchOrders() {
+        const query = document.getElementById('searchInput').value;
+        filterData(query);
     }
 
     document.getElementById('searchInput').addEventListener('input', function() {
@@ -226,7 +231,15 @@
             const columnName = column.getAttribute('data-column');
 
             // Update data array based on sorting
-            data.sort((a, b) => {
+            filteredData.sort((a, b) => {
+                if (!isNaN(a[columnName])) {
+                    if (nextDirection === 'asc') {
+                        return a[columnName] - b[columnName];
+                    } else {
+                        return b[columnName] - a[columnName];
+                    }
+                }
+
                 if (nextDirection === 'asc') {
                     return a[columnName] > b[columnName] ? 1 : -1;
                 } else {

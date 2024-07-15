@@ -284,8 +284,11 @@
             // Update data array based on sorting
             filteredData.sort((a, b) => {
                 if (!isNaN(a[columnName])) {
-                    a[columnName] = parseFloat(a[columnName]);
-                    b[columnName] = parseFloat(b[columnName]);
+                    if (nextDirection === 'asc') {
+                        return a[columnName] - b[columnName];
+                    } else {
+                        return b[columnName] - a[columnName];
+                    }
                 }
 
                 if (nextDirection === 'asc') {
