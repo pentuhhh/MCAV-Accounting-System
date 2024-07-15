@@ -1,11 +1,11 @@
 <?php
 $servername = "localhost";
-$username = "MCAVDB";
-$password = "password1010";
+$dbusername = "MCAVDB";
+$dbpassword = "password1010";
 $dbname = "MCAV";
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 
 // Check connection
 if ($conn->connect_error) {
