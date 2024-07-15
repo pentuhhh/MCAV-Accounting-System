@@ -14,6 +14,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $query = "SELECT * FROM employee_credentials WHERE username = ?";
     $stmt = $conn->prepare($query);
 
+
+    // Retrieve if the account is activated
+        $sql = "SELECT accountStatus FROM employee_credentials WHERE Username = '$username';";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $aStatus = $row['accountStatus']; // Fetch the accountStatus from the associative array
+        } else {
+            // Handle the case where no result is found
+            $aStatus = null;
+        }
+
+
     if ($stmt) {
         $stmt->bind_param('s', $username);
         $stmt->execute();
@@ -22,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
 
-            if (password_verify($password, $row['employee_Password'])) {
+            if ((password_verify($password, $row['employee_Password'])) && $aStatus == 'Activated') {
                 // Fetch additional user info
                 $employeeWebID = $row['EmployeeWebID'];
                 $employeeID = $row['EmployeeID'];
@@ -52,9 +66,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 header("Location: /dashboard");
                 exit();
             } else {
-                $_SESSION['error']['password'] = "Invalid password.";
+                if($aStatus = 'Activated'){
+                    $_SESSION['error']['password'] = "Account Is Deactivated";
                 header("Location: /login");
                 exit();
+                } else {
+                    $_SESSION['error']['password'] = "Invalid password.";
+                header("Location: /login");
+                exit();
+                }
+                
             }
         } else {
             $_SESSION['error']['username'] = "Invalid username.";
