@@ -75,9 +75,11 @@
                     p.totalamount,      
                     o.OrderDeadline,      
                     CASE
+                        WHEN o.OrderStatusCode = 0 THEN 'New'
                         WHEN o.OrderStatusCode = 1 THEN 'Pending'
                         WHEN o.OrderStatusCode = 2 THEN 'Started'
                         WHEN o.OrderStatusCode = 3 THEN 'Completed'
+                        WHEN o.OrderStatusCode = 4 THEN 'Cancelled'
                         ELSE 'Unknown'
                     END AS Status
                 FROM      
