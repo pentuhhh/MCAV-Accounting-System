@@ -1,0 +1,37 @@
+Action_logs
++--------------------+-----------------------------------------------------------------------------------------+------+-----+---------+----------------+
+| Field              | Type                                                                                    | Null | Key | Default | Extra          |
++--------------------+-----------------------------------------------------------------------------------------+------+-----+---------+----------------+
+| logID              | int                                                                                     | NO   | PRI | NULL    | auto_increment |
+| EmployeeWebID      | int                                                                                     | NO   | MUL | NULL    |                |
+| UserAction         | enum('Create','Delete','Update','Remove','ManageUser','Login','Logout')                 | YES  |     | NULL    |                |
+| AffectedEntityType | enum('Employee_Info','Payment_Plan','Payment_Receipts','Products','Orders','Customers') | NO   |     | NULL    |                |
+| AffectedEntityID   | int                                                                                     | NO   |     | NULL    |                |
+| LogTimestamp       | datetime                                                                                | YES  |     | NULL    |                |
++--------------------+-----------------------------------------------------------------------------------------+------+-----+---------+----------------+
+
+
+mysql> describe customers;
++---------------+-------------+------+-----+---------+----------------+
+| Field         | Type        | Null | Key | Default | Extra          |
++---------------+-------------+------+-----+---------+----------------+
+| CustomerID    | int         | NO   | PRI | NULL    | auto_increment |
+| CustomerFname | varchar(32) | NO   |     |         |                |
+| CustomerLname | varchar(32) | NO   |     |         |                |
+| CustomerEmail | varchar(32) | NO   |     |         |                |
+| CustomerPhone | varchar(11) | NO   |     |         |                |
++---------------+-------------+------+-----+---------+----------------+
+
+mysql> describe employee_info;
++--------------------+---------------+------+-----+---------+----------------+
+| Field              | Type          | Null | Key | Default | Extra          |
++--------------------+---------------+------+-----+---------+----------------+
+| EmployeeID         | int           | NO   | PRI | NULL    | auto_increment |
+| ProfilePicturePath | varchar(255)  | YES  |     |         |                |
+| EmployeeFirstname  | varchar(32)   | NO   |     | NULL    |                |
+| EmployeeLastname   | varchar(32)   | NO   |     | NULL    |                |
+| EmployeeHireDate   | varchar(32)   | NO   |     | NULL    |                |
+| Gender             | enum('M','F') | NO   |     | NULL    |                |
+| Position           | varchar(32)   | NO   |     | NULL    |                |
+| WebUserLevel       | int           | NO   |     | NULL    |                |
+| IsRemoved          | tinyint(1)    | YES  |     | NULL    |                |
