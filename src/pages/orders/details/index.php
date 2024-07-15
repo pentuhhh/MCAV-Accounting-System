@@ -1,9 +1,9 @@
-
 <div class="GLOBAL_PAGE">
     <?php
     include_once __DIR__ . "/../../../components/sidebar.php";
 
     $username = $_SESSION['username'];
+    $userlevel = $_SESSION['user_level'] == 1 ? 'Admin' : 'User';
     $profilePicture = isset($_SESSION['profile_picture']) ? $_SESSION['profile_picture'] : '';
     ?>
 
@@ -18,7 +18,7 @@
             <div class="GLOBAL_HEADER_USER">
                 <div class="GLOBAL_HEADER_COLUMN">
                     <p>Hey, <strong><?php echo htmlspecialchars($username); ?></strong></p>
-                    <p>Admin</p>
+                    <p><?php echo htmlspecialchars($userlevel) ?></p>
                 </div>
                 <img src="../../../<?php echo htmlspecialchars($profilePicture); ?>" alt="Profile Picture">
             </div>
@@ -270,16 +270,17 @@
                             </tr>
                         </table>
                         <div class="DETAILS_CONTAINER_ROW_BUTTON">
+                            <h1 class="font-semibold">Update Status: </h1>
                             <form method="post" onsubmit="reloadpage()">
-                                <button type="submit" class="GLOBAL_BUTTON_RED" name="action" value="cancel-order" onclick="return confirm('Are you sure you want to cancel the order?')">Cancel Order </button>
+                                <button type="submit" class="GLOBAL_BUTTON_RED ml-2" name="action" value="cancel-order" onclick="return confirm('Are you sure you want to cancel the order?')">Cancel</button>
                                 <input type="hidden" name="orderID" value="<?php echo htmlspecialchars($_GET['orderID']); ?>">
                             </form>
                             <form method="post" onsubmit="reloadpage()">
-                                <button type="submit" class="GLOBAL_BUTTON_YELLOW ml-2" name="action" value="inprogress-order" onclick="return confirm('Are you sure you want to mark the order as Pending?')">Pending </button>
+                                <button type="submit" class="GLOBAL_BUTTON_YELLOW ml-2" name="action" value="inprogress-order" onclick="return confirm('Are you sure you want to mark the order as Pending?')">Pending</button>
                                 <input type="hidden" name="orderID" value="<?php echo htmlspecialchars($_GET['orderID']); ?>">
                             </form>
                             <form method="post" onsubmit="reloadpage()">
-                                <button type="submit" class="GLOBAL_BUTTON_GREEN" name="action" value="complete-order" onclick="return confirm('Are you sure you want to mark complete the order?')">Complete Order </button>
+                                <button type="submit" class="GLOBAL_BUTTON_GREEN" name="action" value="complete-order" onclick="return confirm('Are you sure you want to mark complete the order?')">Complete</button>
                                 <input type="hidden" name="orderID" value="<?php echo htmlspecialchars($_GET['orderID']); ?>">
                             </form>
                         </div>
@@ -378,14 +379,14 @@
                             <?php endforeach; ?>
 
                             <?php
-                            
+
                             ob_start();
                             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 if ($_POST['action'] === 'removeProductByIndex') {
                                     $productID = htmlspecialchars($_POST['productID']);
                                     $sql = "UPDATE products SET isremoved = 1 WHERE ProductID = ?";
-                                    
-                                    
+
+
 
                                     if ($stmt = $conn->prepare($sql)) {
                                         $stmt->bind_param("i", $productID);
@@ -395,7 +396,7 @@
                                         // Handle errors with prepare operation here
                                         echo "Error preparing the statement: " . $conn->error;
                                     }
-                                    
+
                                     // Log action
                                     $employeeWebID = $_SESSION['employeeWebID'];
                                     $sql = "insert into action_logs (EmployeeWebID, UserAction, AffectedEntityType, AffectedEntityID, LogTimestamp)
@@ -404,12 +405,12 @@
                                 }
                             }
 
-                            
+
 
                             // update payment_plans
                             $sql = "update payment_plans set totalamount = (select sum(productPrice * productQuantity) from products where orderid = '$globOrderID' and isRemoved = 0) where orderid = '$globOrderID';";
                             $conn->query($sql);
-                            
+
                             //update balance
                             $sql = "update payment_plans set balance = totalamount - amountpaid where orderid = '$globOrderID' and IsRemoved = 0;";
                             $conn->query($sql);
@@ -444,9 +445,8 @@
                 $conn->query($sql);
 
                 // Update balance
-                 $sql = "update payment_plans set balance = totalamount - amountpaid where orderid = '$globOrderID' and IsRemoved = 0;";
-                 $conn->query($sql);
-
+                $sql = "update payment_plans set balance = totalamount - amountpaid where orderid = '$globOrderID' and IsRemoved = 0;";
+                $conn->query($sql);
             }
             ?>
             <!-- End Save New Product Info -->
@@ -500,15 +500,15 @@
                             </tr>
                             <tr>
                                 <td>Total Amount</td>
-                                <td><?php echo htmlspecialchars($paymentPlan['TotalAmount'] ?? ''); ?></td>
+                                <td>P <?php echo htmlspecialchars($paymentPlan['TotalAmount'] ?? ''); ?></td>
                             </tr>
                             <tr>
                                 <td>Amount Paid</td>
-                                <td><?php echo htmlspecialchars($paymentPlan['AmountPaid'] ?? ''); ?></td>
+                                <td>P <?php echo htmlspecialchars($paymentPlan['AmountPaid'] ?? ''); ?></td>
                             </tr>
                             <tr>
                                 <td>Balance</td>
-                                <td><?php echo htmlspecialchars($paymentPlan['Balance'] ?? ''); ?></td>
+                                <td>P <?php echo htmlspecialchars($paymentPlan['Balance'] ?? ''); ?></td>
                             </tr>
                         </table>
                         <div class="DETAILS_CONTAINER_ROW_BUTTON">
@@ -572,5 +572,3 @@
         </div>
     </div>
 </div>
-
-

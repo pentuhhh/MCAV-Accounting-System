@@ -26,5 +26,4 @@ $profilePicture = isset($_SESSION['profile_picture']) ? $_SESSION['profile_pictu
             </div>
         </div>
     </div>
-
 </div>

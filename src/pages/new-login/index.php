@@ -3,6 +3,7 @@
     include_once __DIR__ . "/../../components/sidebar.php";
 
     $username = $_SESSION['username'];
+    $userlevel = $_SESSION['user_level'] == 1 ? 'Admin' : 'User';
     $profilePicture = isset($_SESSION['profile_picture']) ? $_SESSION['profile_picture'] : '';
     ?>
 
@@ -17,7 +18,7 @@
             <div class="GLOBAL_HEADER_USER">
                 <div class="GLOBAL_HEADER_COLUMN">
                     <p>Hey, <strong><?php echo htmlspecialchars($username); ?></strong></p>
-                    <p>Admin</p>
+                    <p><?php echo htmlspecialchars($userlevel) ?></p>
                 </div>
                 <img src="<?php echo htmlspecialchars($profilePicture); ?>" alt="Profile Picture">
             </div>
@@ -47,11 +48,6 @@
                             <label for="middle-name">Last Name</label>
                             <input id="middle-name" type="text" name="last-name" placeholder="Last name" required>
                         </div>
-                        <!-- Suffix -->
-                        <div class="NEWLOGIN_INPUT_COLUMN_CONTAINER">
-                            <label for="suffix">Suffix</label>
-                            <input id="suffix" type="text" name="suffix" placeholder="Suffix">
-                        </div>
                         <!-- Position -->
                         <div class="NEWLOGIN_INPUT_COLUMN_CONTAINER">
                             <label for="position">Position</label>
@@ -75,11 +71,6 @@
                         <div class="NEWLOGIN_INPUT_COLUMN_CONTAINER">
                             <label for="hire-date">Hire Date</label>
                             <input id="hire-date" type="date" name="hire-date">
-                        </div>
-                        <!-- Birth Date -->
-                        <div class="NEWLOGIN_INPUT_COLUMN_CONTAINER">
-                            <label for="birth-date">Birth Date</label>
-                            <input id="birth-date" type="date" name="birth-date">
                         </div>
                         <!-- Gender -->
                         <div class="NEWLOGIN_INPUT_COLUMN_CONTAINER w-1/2">

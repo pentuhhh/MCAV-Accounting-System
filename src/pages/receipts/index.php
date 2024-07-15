@@ -3,6 +3,7 @@
     include_once __DIR__ . "/../../components/sidebar.php";
 
     $username = $_SESSION['username'];
+    $userlevel = $_SESSION['user_level'] == 1 ? 'Admin' : 'User';
     $profilePicture = isset($_SESSION['profile_picture']) ? $_SESSION['profile_picture'] : '';
     ?>
 
@@ -16,7 +17,7 @@
             <div class="GLOBAL_HEADER_USER">
                 <div class="GLOBAL_HEADER_COLUMN">
                     <p>Hey, <strong><?php echo htmlspecialchars($username); ?></strong></p>
-                    <p>Admin</p>
+                    <p><?php echo htmlspecialchars($userlevel) ?></p>
                 </div>
                 <img src="<?php echo htmlspecialchars($profilePicture); ?>" alt="Profile Picture">
             </div>
@@ -259,8 +260,8 @@
 
     function filterData(query) {
         query = query.toLowerCase();
-        filteredData = data.filter(item => 
-            (Object.values(item).some((value) => 
+        filteredData = data.filter(item =>
+            (Object.values(item).some((value) =>
                 value.toLowerCase().includes(query)
             ))
         );
@@ -271,7 +272,7 @@
         filterData(this.value);
     });
 
-     // Sorting functionality
+    // Sorting functionality
     const sortableColumns = document.querySelectorAll('.sortable');
 
     sortableColumns.forEach(column => {
@@ -280,12 +281,12 @@
             const nextDirection = currentDirection === 'asc' ? 'desc' : 'asc';
             const columnName = column.getAttribute('data-column');
 
-                // Update data array based on sorting
-                filteredData.sort((a, b) => {
-                    if (!isNaN(a[columnName])) {
-                        a[columnName] = parseFloat(a[columnName]);
-                        b[columnName] = parseFloat(b[columnName]);
-                    }
+            // Update data array based on sorting
+            filteredData.sort((a, b) => {
+                if (!isNaN(a[columnName])) {
+                    a[columnName] = parseFloat(a[columnName]);
+                    b[columnName] = parseFloat(b[columnName]);
+                }
 
                 if (nextDirection === 'asc') {
                     return a[columnName] > b[columnName] ? 1 : -1;
@@ -308,7 +309,7 @@
             displayTable(currentPage);
         });
     });
-    
+
 
     window.onload = function() {
         displayTable(currentPage);
