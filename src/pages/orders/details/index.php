@@ -1,3 +1,10 @@
+<script>
+function reloadPage() {
+    // Reload the page
+    window.location.href = window.location.href.split('?')[0];
+}
+</script>
+
 <div class="GLOBAL_PAGE">
     <?php
     include_once __DIR__ . "/../../../components/sidebar.php";
@@ -178,7 +185,7 @@
                         <div class="POPUP_CONTAINER_BOX GLOBAL_BOX_DIV flex flex-col gap-4 w-full">
                         <a href="/orders/details?orderID={$orderID}" class="absolute top-2 right-4 text-2xl text-gray-500 cursor-pointer">&times;</a>
                             <h1 class = "text-lg font-bold">Edit Customer Information</h1>
-                            <form method="post" class = "flex flex-col gap-4">
+                            <form method="post" class = "flex flex-col gap-4" onsubmit="reloadpage()">
                                 <input type="hidden" name="action" value="save-customer">
                                 <input type="hidden" name="customerID" value="{$customerID}">
                                 <input type="text" name="editCustomerFName" value="{$customerFname}" placeholder="Customer First Name">
@@ -218,7 +225,7 @@
                             </tr>
                         </table>
                         <div class="DETAILS_CONTAINER_ROW_BUTTON">
-                            <form method="post">
+                            <form method="post" onsubmit="reloadpage()">
                                 <input type="hidden" name="action" value="edit">
                                 <input type="hidden" name="customerID" value="<?= htmlspecialchars($customerID); ?>">
                                 <button type="submit" class="GLOBAL_BUTTON_BLUE">Edit Info</button>
@@ -269,15 +276,15 @@
                             </tr>
                         </table>
                         <div class="DETAILS_CONTAINER_ROW_BUTTON">
-                            <form method="post">
+                            <form method="post" onsubmit="reloadpage()">
                                 <button type="submit" class="GLOBAL_BUTTON_RED" name="action" value="cancel-order" onclick="return confirm('Are you sure you want to cancel the order?')">Cancel Order </button>
                                 <input type="hidden" name="orderID" value="<?php echo htmlspecialchars($_GET['orderID']); ?>">
                             </form>
-                            <form method="post">
+                            <form method="post" onsubmit="reloadpage()">
                                 <button type="submit" class="GLOBAL_BUTTON_YELLOW ml-2" name="action" value="inprogress-order" onclick="return confirm('Are you sure you want to mark the order as Pending?')">Pending </button>
                                 <input type="hidden" name="orderID" value="<?php echo htmlspecialchars($_GET['orderID']); ?>">
                             </form>
-                            <form method="post">
+                            <form method="post" onsubmit="reloadpage()">
                                 <button type="submit" class="GLOBAL_BUTTON_GREEN" name="action" value="complete-order" onclick="return confirm('Are you sure you want to mark complete the order?')">Complete Order </button>
                                 <input type="hidden" name="orderID" value="<?php echo htmlspecialchars($_GET['orderID']); ?>">
                             </form>
@@ -299,7 +306,7 @@
                             <div class="POPUP_CONTAINER_BOX GLOBAL_BOX_DIV flex flex-col gap-4 w-full">
                                 <a href="/orders/details?orderID={$orderID}" class="absolute top-2 right-4 text-2xl text-gray-500 cursor-pointer">&times;</a>
                                 <h1 class="text-lg font-bold">Edit Product Information</h1>
-                                <form method="post" class="flex flex-col gap-4">
+                                <form method="post" class="flex flex-col gap-4" onsubmit="reloadpage()">
                                     <input type="hidden" name="action" value="saveProductInfo">
                                     <input type="hidden" name="productID" value="{$productID}">
                                     <input type="text" name="editProductDescription" value="{$productDescription}" placeholder="Product Description">
@@ -323,9 +330,10 @@
                             <div class="POPUP_CONTAINER_BOX GLOBAL_BOX_DIV flex flex-col gap-4 w-full">
                                 <a href="/orders/details?orderID={$orderID}" class="absolute top-2 right-4 text-2xl text-gray-500 cursor-pointer">&times;</a>
                                 <h1 class="text-lg font-bold">Add Product Information</h1>
-                                <form method="post" class="flex flex-col gap-4">
+                                <form method="post" class="flex flex-col gap-4" onsubmit="reloadpage()">
                                     <input type="hidden" name="action" value="saveNewProduct">
                                     <input type="text" name="newProductDescription" placeholder="Product Description">
+                                    <input type="text" name="newProductDimensions" placeholder="Product Dimensions">
                                     <input type="number" name="newProductQuantity" placeholder="Product Quantity">
                                     <input type="number" step="0.01" name="newProductPrice" placeholder="Product Price">
                                     <textarea name="newProductRemarks" placeholder="Remarks"></textarea>
@@ -343,7 +351,7 @@
                 <div class="DETAILS_CONTAINER_ROW_COLUMN">
                     <div class="DETAILS_CONTAINER_SUBHEADER mb-5">
                         <h1>Ordered Products</h1>
-                        <form method="post">
+                        <form method="post" onsubmit="reloadpage()">
                             <input type="hidden" name="action" value="addProductInfo">
                             <button type="submit" class="GLOBAL_BUTTON_BLUE ml-5">Add Item</button>
                         </form>
@@ -366,18 +374,47 @@
                                     <td class="text-center font-normal"><?= htmlspecialchars($product['ProductPrice']); ?></td>
                                     <td class="text-center font-normal"><?= htmlspecialchars($product['ProductQuantity'] * $product['ProductPrice']); ?></td>
                                     <td class="flex flex-row justify-center">
-                                        <form method="post" style="display:inline;">
-                                            <input type="hidden" name="action" value="editProductInfo">
+                                        <form method="post" onsubmit="reloadpage()">
+                                            <input type="hidden" name="action" value='removeProductByIndex'>
                                             <input type="hidden" name="productID" value="<?= htmlspecialchars($product['ProductID']); ?>">
-                                            <input type="hidden" name="productDescription" value="<?= htmlspecialchars($product['ProductDescription']); ?>">
-                                            <input type="hidden" name="productQuantity" value="<?= htmlspecialchars($product['ProductQuantity']); ?>">
-                                            <input type="hidden" name="productPrice" value="<?= htmlspecialchars($product['ProductPrice']); ?>">
-                                            <button class="text-[#DF166E] ml-3" type="submit" onclick="return confirm('Are you sure you want to delete this row?');">Delete</button>
+                                            <button type="submit" class="text-[#DF166E]" onclick="return confirm('Are you sure you want to delete this row?');">Delete</button>
                                         </form>
-                                        
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
+
+                            <?php
+                            
+                            ob_start();
+                            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                                if ($_POST['action'] === 'removeProductByIndex') {
+                                    $productID = htmlspecialchars($_POST['productID']);
+                                    $sql = "UPDATE products SET isremoved = 1 WHERE ProductID = ?";
+                                    
+                                    if ($stmt = $conn->prepare($sql)) {
+                                        $stmt->bind_param("i", $productID);
+                                        $stmt->execute();
+                                        $stmt->close();
+                                    } else {
+                                        // Handle errors with prepare operation here
+                                        echo "Error preparing the statement: " . $conn->error;
+                                    }
+                                }
+                            }
+
+                            // update payment_plans
+                            $sql = "update payment_plans set totalamount = (select sum(productPrice * productQuantity) from products where orderid = '$globOrderID' and isRemoved = 0) where orderid = '$globOrderID';";
+                            $conn->query($sql);
+                            
+                            //update balance
+                            $sql = "update payment_plans set balance = totalamount - amountpaid where orderid = '$globOrderID' and IsRemoved = 0;";
+                            $conn->query($sql);
+
+                            // Redirect to the same page to clear the form
+                            ob_end_flush();
+
+                            ?>
+
                         </table>
                     </div>
                 </div>
@@ -386,6 +423,7 @@
 
             <!-- Save New Product Info -->
             <?php
+
             if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'saveNewProduct') {
                 // Retrieve POST data
                 $newProductDescription = htmlspecialchars($_POST['newProductDescription']);
@@ -393,21 +431,18 @@
                 $newProductPrice = htmlspecialchars($_POST['newProductPrice']);
                 $newProductRemarks = htmlspecialchars($_POST['newProductRemarks']);
 
-                // Insert the new product into the database (placeholder)
-                // Replace with actual database insertion logic
-                $newProductID = count($products) + 1; // Placeholder for auto-increment ID
-                $newProduct = [
-                    'ProductID' => $newProductID,
-                    'ProductDescription' => $newProductDescription,
-                    'ProductQuantity' => $newProductQuantity,
-                    'ProductPrice' => $newProductPrice,
-                    'Remarks' => $newProductRemarks
-                ];
-                $products[] = $newProduct; // Add new product to products array
+                $sql = "insert into products (OrderID, ProductDescription, ProductQuantity, ProductPrice, ProductRemarks) values 
+                ('$globOrderID', '$newProductDescription', '$newProductQuantity', '$newProductPrice', '$newProductRemarks')";
+                $conn->query($sql);
 
-                // Optionally, redirect or show a success message
-                header("Location: " . $_SERVER['PHP_SELF'] . "?orderID={$orderID}");
-                exit;
+                // Update total amount
+                $sql = "update payment_plans set totalamount = (select sum(productPrice * productQuantity) from products where orderid = '$globOrderID' and isRemoved = 0) where orderid = '$globOrderID';";
+                $conn->query($sql);
+
+                // Update balance
+                 $sql = "update payment_plans set balance = totalamount - amountpaid where orderid = '$globOrderID' and IsRemoved = 0;";
+                 $conn->query($sql);
+
             }
             ?>
             <!-- End Save New Product Info -->
@@ -429,7 +464,7 @@
                             <div class="POPUP_CONTAINER_BOX GLOBAL_BOX_DIV flex flex-col gap-4 w-full">
                                 <a href="/orders/details?orderID={$orderID}" class="absolute top-2 right-4 text-2xl text-gray-500 cursor-pointer">&times;</a>
                                 <h1 class="text-lg font-bold">Edit Payment Plan</h1>
-                                <form method="post" class="flex flex-col gap-4">
+                                <form method="post" class="flex flex-col gap-4" onsubmit="reloadpage()">
                                     <input type="hidden" name="action" value="savePaymentPlan">
                                     <input type="hidden" name="paymentPlanID" value="{$paymentPlanID}">
                                     <input type="text" name="editPaymentMethod" value="{$paymentPlan['PaymentMethod']}" placeholder="Payment Method">
@@ -473,7 +508,7 @@
                             </tr>
                         </table>
                         <div class="DETAILS_CONTAINER_ROW_BUTTON">
-                            <form method="post">
+                            <form method="post" onsubmit="reloadpage()">
                                 <input type="hidden" name="action" value="editPaymentPlan">
                                 <input type="hidden" name="paymentPlanID" value="<?= htmlspecialchars($paymentPlanID); ?>">
                                 <button type="submit" class="GLOBAL_BUTTON_BLUE">Edit Payment Plan</button>
@@ -533,3 +568,5 @@
         </div>
     </div>
 </div>
+
+
