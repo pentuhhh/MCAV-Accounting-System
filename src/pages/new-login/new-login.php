@@ -21,11 +21,9 @@ if($userlevel == 1){
         $username = $_POST['username'];
         $first_name = $_POST['first-name'];
         $last_name = $_POST['last-name'];
-        $suffix = $_POST['suffix'] ?? ''; // Optional field
         $contact_number = $_POST['contact-number'];
         $address = $_POST['address'];
         $hire_date = $_POST['hire-date'];
-        $birth_date = $_POST['birth-date'];
         $gender = $_POST['gender'] == 'male' ? 'M' : 'F';
         $position = $_POST['position']; // Capture position from the form
         $password = $_POST['password'];
@@ -98,11 +96,20 @@ if($userlevel == 1){
             // Error handling for credentials
     
             if ($conn->query($sql_credentials) === TRUE) {
+                // Log Action
+
+                $employeeWebID = $_SESSION['employeeWebID'];
+                $sql = "insert into action_logs (EmployeeWebID, UserAction, AffectedEntityType, AffectedEntityID, Logtimestamp)
+                values ('$employeeWebID', 'Create', 'Employee_Info', '$employee_id', now());";
+                $conn->query($sql);
+
                 header("Location: /dashboard");
                 exit();
             } else {
                 echo "Error: " . $sql_credentials . "<br>" . $conn->error;
             }
+
+            
             
         } else {
             echo "Error: " . $sql_info . "<br>" . $conn->error;

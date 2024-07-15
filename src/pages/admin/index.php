@@ -1,7 +1,16 @@
 <?php
+require "../utilities/db-connection.php"; 
 $username = $_SESSION['username'];
-$userlevel = $_SESSION['user_level'] == 1 ? 'Admin' : 'User';
+
+// get userlevel
+
+$sql = "select UserLevel from employee_credentials where username = '$username';";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
+$userlevel = $row['UserLevel'];
+
 $profilePicture = isset($_SESSION['profile_picture']) ? $_SESSION['profile_picture'] : '';
+
 ?>
 
 <div class="GLOBAL_PAGE">
@@ -25,5 +34,15 @@ $profilePicture = isset($_SESSION['profile_picture']) ? $_SESSION['profile_pictu
                 <img src="<?php echo htmlspecialchars($profilePicture); ?>" alt="Profile Picture">
             </div>
         </div>
+
+
+    Login Logs : <a href="admin/login-logs">View</a><br>
+    Action Logs : <a gref="action-logs">View</a><br>
+
+    File History : <a href="file-history">View</a><br>
+
+    Delete Logs : <a href="delete-logs">View</a><br>
+
+
     </div>
 </div>
