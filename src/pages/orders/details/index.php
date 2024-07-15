@@ -1,9 +1,3 @@
-<script>
-function reloadPage() {
-    // Reload the page
-    window.location.href = window.location.href.split('?')[0];
-}
-</script>
 
 <div class="GLOBAL_PAGE">
     <?php
@@ -391,6 +385,8 @@ function reloadPage() {
                                     $productID = htmlspecialchars($_POST['productID']);
                                     $sql = "UPDATE products SET isremoved = 1 WHERE ProductID = ?";
                                     
+                                    
+
                                     if ($stmt = $conn->prepare($sql)) {
                                         $stmt->bind_param("i", $productID);
                                         $stmt->execute();
@@ -399,8 +395,16 @@ function reloadPage() {
                                         // Handle errors with prepare operation here
                                         echo "Error preparing the statement: " . $conn->error;
                                     }
+                                    
+                                    // Log action
+                                    $employeeWebID = $_SESSION['employeeWebID'];
+                                    $sql = "insert into action_logs (EmployeeWebID, UserAction, AffectedEntityType, AffectedEntityID, LogTimestamp)
+                                    values ('$employeeWebID', 'Remove', 'Products', '$productID', now());";
+                                    $conn->query($sql);
                                 }
                             }
+
+                            
 
                             // update payment_plans
                             $sql = "update payment_plans set totalamount = (select sum(productPrice * productQuantity) from products where orderid = '$globOrderID' and isRemoved = 0) where orderid = '$globOrderID';";
