@@ -114,7 +114,7 @@
                     <thead>
                         <tr>
                             <th class="sortable" data-column="ReceiptID" data-dir="">#</th>
-                            <th class="sortable" data-column="OrderID" data-dir="">Order</th>
+                            <th class="sortable" data-column="OrderID" data-dir="">Plan ID</th>
                             <th class="sortable" data-column="PaymentMethod" data-dir="">Payment Processor</th>
                             <th class="sortable" data-column="AmountPaid" data-dir="">Amount Paid </th>
                             <th class="sortable" data-column="PaymentDate" data-dir="">Payment Date </th>
@@ -143,7 +143,7 @@
 
         $sql = "SELECT      
                     r.ReceiptID,
-                    r.PlanID AS OrderID,
+                    r.PlanID,
                     r.PaymentProcessor AS PaymentMethod,
                     r.ReceiptAmountPaid AS AmountPaid,
                     r.PaymentDate,
