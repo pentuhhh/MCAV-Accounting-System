@@ -6,6 +6,7 @@ $activePath = [
     "users" => preg_match("/users/i", $urlPath) > 0,
     "orders" => preg_match("/orders/i", $urlPath) > 0,
     "receipts" => preg_match("/receipts/i", $urlPath) > 0,
+    "admin" => preg_match("/admin/i", $urlPath) > 0,
     "new-login" => preg_match("/new-login/i", $urlPath) > 0
 ];
 ?>
@@ -52,8 +53,17 @@ $activePath = [
                     <span class="text-lg font-semibold text-white">Receipts</span>
                 </a>
             </li>
+            <!-- Admin -->
+            <li data-active=<?= var_export($activePath["admin"]); ?> class="COMPONENT_SIDEBAR_BUTTON data-[active='true']:before:bg-[#DC186E]">
+                <a href="/admin">
+                    <i class="material-symbols-rounded text-white text-3xl">
+                        admin_panel_settings
+                    </i>
+                    <span class="text-lg font-semibold text-white">Admin</span>
+                </a>
+            </li>
             <!-- New Login -->
-            <li data-active=<?= var_export($activePath["new-login"]); ?> class="COMPONENT_SIDEBAR_BUTTON data-[active='true']:before:bg-[#DC186E]">
+            <li data-active=<?= var_export($activePath["new-login"]); ?> class="COMPONENT_SIDEBAR_BUTTON data-[active='true']:before:bg-[#FEED03]">
                 <a href="/new-login">
                     <i class="material-symbols-rounded text-white text-3xl">
                         add
