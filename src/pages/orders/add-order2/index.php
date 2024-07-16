@@ -208,7 +208,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["a
         $dateTime = DateTime::createFromFormat('Y-m-d', $duedate);
         if ($dateTime && $dateTime->format('Y-m-d') === $duedate) {
             // Create payment plan entry
-            $paymentplanquery = "INSERT INTO payment_plans (orderID, TotalAmount, dueDate, paymentMethod, PaymentProcessor) VALUES 
+            $paymentplanquery = "INSERT INTO payment_plans (orderID, TotalAmount, dueDate, PaymentMethod, PaymentProcessor) VALUES 
                 ('$orderID', 0, '$duedate', '$paymentMethod', '$paymentprocessor');";
             if ($conn->query($paymentplanquery) === TRUE) {
 

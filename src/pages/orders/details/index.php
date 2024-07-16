@@ -89,7 +89,7 @@
             }
 
             // Fetch and display payment plan information
-            $paymentQuery = "SELECT PaymentMethod, DueDate, 
+            $paymentQuery = "SELECT PaymentMethod, DueDate, PaymentStatus, 
                                         CASE
                                             WHEN PaymentStatus = 0 THEN 'Pending'
                                             WHEN PaymentStatus = 1 THEN 'Paid'
@@ -240,7 +240,7 @@
                     $editedLName = htmlspecialchars($_POST['editCustomerLName']);
                     $editedEmail = htmlspecialchars($_POST['editCustomerEmail']);
                     $editedPhone = htmlspecialchars($_POST['editCustomerPhone']);
-                    
+
                     // Create archive 
 
                     $sql = "INSERT INTO customer_info_archive (CustomerID, CustomerFname, CustomerLname, CustomerEmail, CustomerPhone, ArchiveTimestamp)
@@ -504,7 +504,7 @@
                                                   WHERE planID = '$realPlanID' AND isRemoved = 0) 
                                 WHERE orderid = '$globOrderID' AND IsRemoved = 0;";
                         $conn->query($sql);
-                    
+
                         // Update total amount in payment_plans
                         $sql = "UPDATE payment_plans 
                                 SET totalamount = (SELECT SUM(productPrice * productQuantity) 
@@ -512,7 +512,7 @@
                                                    WHERE orderid = '$globOrderID' AND isRemoved = 0) 
                                 WHERE orderid = '$globOrderID';";
                         $conn->query($sql);
-                    
+
                         // Update balance
                         $sql = "UPDATE payment_plans 
                                 SET balance = totalamount - amountpaid 
