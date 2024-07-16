@@ -117,7 +117,9 @@ if($userlevel == 1){
     }
 } else {
 
-    echo "access denied";
+    echo "Access Denied";
+    echo "Redirecting to dashboard in 2 seconds";  
+    header("Refresh: 2; URL=/dashboard");
 }
 
 

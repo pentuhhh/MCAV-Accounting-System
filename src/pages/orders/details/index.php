@@ -59,7 +59,7 @@
             // Fetch and display order information
             $orderQuery = "SELECT OrderStartDate, OrderDeadline, 
                                       CASE
-                                          WHEN OrderStatusCode = 1 THEN 'Pending'
+                                          WHEN OrderStatusCode = 1 THEN 'Started'
                                           WHEN OrderStatusCode = 2 THEN 'Started'
                                           WHEN OrderStatusCode = 3 THEN 'Completed'
                                           WHEN OrderStatusCode = 4 THEN 'Cancelled'
@@ -286,7 +286,7 @@
                                 <input type="hidden" name="orderID" value="<?php echo htmlspecialchars($_GET['orderID']); ?>">
                             </form>
                             <form method="post" onsubmit="reloadpage()">
-                                <button type="submit" class="GLOBAL_BUTTON_YELLOW ml-2" name="action" value="inprogress-order" onclick="return confirm('Are you sure you want to mark the order as Pending?')">Pending</button>
+                                <button type="submit" class="GLOBAL_BUTTON_ORANGE ml-2" name="action" value="inprogress-order" onclick="return confirm('Are you sure you want to mark the order as Started?')">Started</button>
                                 <input type="hidden" name="orderID" value="<?php echo htmlspecialchars($_GET['orderID']); ?>">
                             </form>
                             <form method="post" onsubmit="reloadpage()">

@@ -25,7 +25,7 @@
             </div>
         </div>
 
-        <div class="ORDERS_SEARCH">
+        <div class="ORDERS_SEARCH mx-10">
             <div class="columns-1">
                 <a href="" class="ORDER_SEARCH_BUTTON">
                     <i class="material-symbols-rounded">
@@ -77,7 +77,7 @@
                     o.OrderDeadline,      
                     CASE
                         WHEN o.OrderStatusCode = 0 THEN 'New'
-                        WHEN o.OrderStatusCode = 1 THEN 'Pending'
+                        WHEN o.OrderStatusCode = 1 THEN 'Started'
                         WHEN o.OrderStatusCode = 2 THEN 'Started'
                         WHEN o.OrderStatusCode = 3 THEN 'Completed'
                         WHEN o.OrderStatusCode = 4 THEN 'Cancelled'

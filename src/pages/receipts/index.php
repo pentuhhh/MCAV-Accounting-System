@@ -49,7 +49,9 @@
                         </h1>
                     </div>
                     <div class="GLOBAL-ANALYTICS_CARD_ICON">
-                        <!-- Icon for Last Month's Income -->
+                        <i class="material-symbols-rounded text-7xl">
+                            monitoring
+                        </i>
                     </div>
                 </div>
                 <div class="GLOBAL_ANALYTICS_CARD GLOBAL_BOX_DIV">
@@ -72,7 +74,9 @@
                         </h1>
                     </div>
                     <div class="GLOBAL-ANALYTICS_CARD_ICON">
-                        <!-- Icon for This Month's Income -->
+                        <i class="material-symbols-rounded text-7xl">
+                            monitoring
+                        </i>
                     </div>
                 </div>
                 <div class="GLOBAL_ANALYTICS_CARD GLOBAL_BOX_DIV">
@@ -93,13 +97,15 @@
                         </h1>
                     </div>
                     <div class="GLOBAL-ANALYTICS_CARD_ICON">
-                        <!-- Icon for Total Sales -->
+                        <i class="material-symbols-rounded text-7xl">
+                            local_atm
+                        </i>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="ORDERS_SEARCH">
+        <div class="ORDERS_SEARCH mx-10">
             <div class="columns-1">
                 <a href="" class="ORDER_SEARCH_BUTTON">
                     <i class="material-symbols-rounded">search</i>

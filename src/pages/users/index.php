@@ -24,7 +24,7 @@
             </div>
         </div>
 
-        <div class="ORDERS_SEARCH">
+        <div class="ORDERS_SEARCH mx-10">
             <div class="columns-1">
                 <a href="" class="ORDER_SEARCH_BUTTON">
                     <i class="material-symbols-rounded">

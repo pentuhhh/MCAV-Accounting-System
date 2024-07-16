@@ -387,6 +387,10 @@
 		@apply rounded-3xl bg-[#FEED03] py-1 px-5 text-sm font-semibold text-white duration-300 hover:bg-[#FDD303];
 	}
 
+	.GLOBAL_BUTTON_ORANGE {
+		@apply rounded-3xl bg-orange-500 py-1 px-5 text-sm font-semibold text-white duration-300 hover:bg-orange-600;
+	}
+
 	.GLOBAL_BUTTON_RED {
 		@apply rounded-3xl bg-[#DF166E] py-1 px-5 text-sm font-semibold text-white duration-200 hover:bg-[#B90D5A];
 	}
@@ -442,6 +446,10 @@
 	.GLOBAL_TABLE_BUTTON_DELETE {
 		@apply flex flex-row items-center rounded-full p-1 text-white bg-[#DF166E] font-semibold duration-200 hover:bg-[#B90D5A];
 	}
+
+	.GLOBAL_PAGE_CONTAINER_CONTENT {
+		@apply flex flex-col px-10;
+	}
 	/* -- End of Global Classes -- */
 
 	/* -- Dashboard Classes -- */
@@ -460,7 +468,7 @@
 
 	/* -- Orders Classes -- */
 	.ORDERS_SEARCH {
-		@apply mx-10 mb-3 flex flex-row items-center justify-between rounded-3xl bg-white px-10 shadow-[0_2rem_3rem_rgba(132,139,200,0.18)] duration-300 hover:shadow-none;
+		@apply mb-3 flex flex-row items-center justify-between rounded-3xl bg-white px-10 shadow-[0_2rem_3rem_rgba(132,139,200,0.18)] duration-300 hover:shadow-none;
 	}
 
 	.ORDER_SEARCH_BUTTON {
@@ -722,6 +730,16 @@
 		@apply p-12 absolute max-w-[800px] max-h-[500px] transform -translate-y-1/2 -translate-x-1/2 top-1/2 left-1/2;
 	}
 	/* End of Popup Classes */
+
+	/* Admin Classes */
+	/* .ADMIN_SEARCH {
+		@apply flex flex-row items-center justify-between rounded-3xl bg-white px-10 shadow-[0_2rem_3rem_rgba(132,139,200,0.18)] duration-300 hover:shadow-none;
+	}
+
+	.ADMIN_RESTORE {
+		@apply flex flex-row items-center justify-start gap-5;
+	} */
+	/* End of Admin Classes */
 
 	/* Table Colors */
 	.order-id-link {
