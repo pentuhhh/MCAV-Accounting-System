@@ -121,7 +121,7 @@
                         <tr>
                             <th class="sortable" data-column="ReceiptID" data-dir="">Receipt ID</th>
                             <th class="sortable" data-column="OrderID" data-dir="">Plan ID</th>
-                            <th class="sortable" data-column="PaymentMethod" data-dir="">Payment Processor</th>
+                            <!-- <th class="sortable" data-column="PaymentProcessor" data-dir="">Payment Processor</th> -->
                             <th class="sortable" data-column="AmountPaid" data-dir="">Amount Paid </th>
                             <th class="sortable" data-column="PaymentDate" data-dir="">Payment Date </th>
                             <th class="sortable" data-column="ReferenceNumber" data-dir="">Reference Number</th>
@@ -129,7 +129,6 @@
                         </tr>
                     </thead>
                     <tbody id="receiptsTable">
-                        <!-- Data rows will be inserted here -->
                     </tbody>
                 </table>
             </div>
@@ -150,12 +149,13 @@
         $sql = "SELECT      
                     r.ReceiptID,
                     r.PlanID,
-                    r.PaymentProcessor AS PaymentMethod,
+                    -- //p.PaymentProcessor,
                     r.ReceiptAmountPaid AS AmountPaid,
                     r.PaymentDate,
                     r.PaymentProcessorReferenceNumber AS ReferenceNumber
                 FROM      
                     Payment_Receipts r
+                INNER JOIN payment_plans p on p.PlanID = r.receiptid
                 WHERE r.IsRemoved = 0
                 ORDER BY r.ReceiptID DESC;";
         $result = $conn->query($sql);

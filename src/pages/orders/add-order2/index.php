@@ -7,9 +7,9 @@ $customerLname = '';
 $customerEmail = '';
 $customerPhone = '';
 
-$paymentMethod = '';
+global $paymentMethod;
 $duedate;
-$paymentprocessor = '';
+global $paymentprocessor;
 $orderid;
 
 
@@ -61,10 +61,12 @@ function populateVariables($conn)
     }
 
     if (isset($_POST['payment-method'])) {
+        global $paymentMethod;
         $paymentMethod = sanitize_input($conn, $_POST['payment-method']);
     }
 
     if (isset($_POST['processor'])) {
+        global $paymentprocessor;
         $paymentprocessor = sanitize_input($conn, $_POST['processor']);
     }
 }
