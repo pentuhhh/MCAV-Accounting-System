@@ -48,49 +48,52 @@ if ($userlevel == 1) {
 
             <div class="GLOBAL_PAGE_CONTAINER_CONTENT">
                 <div class="GLOBAL_SUBHEADER">
-                    <h1>File History</h1>
+                    <h1>Customer File History</h1>
                     <a onclick="window.history.back(); return false;">
                         <i class="material-symbols-rounded text-[#7F7F7F] text-3xl">
                             arrow_back
                         </i>
                     </a>
                 </div>
-                <?php
-                // Display the customer_info_archive table
-                $sql = "SELECT customerArchiveID, CustomerID, CustomerFname, CustomerLname, CustomerEmail, CustomerPhone, ArchiveTimestamp 
-                            FROM customer_info_archive";
-                $result = $conn->query($sql);
 
-                if ($result->num_rows > 0) {
-                    echo '<table class="action-logs-table">';
-                    echo '<tr>';
-                    echo '<th>Customer Archive ID</th>';
-                    echo '<th>Customer ID</th>';
-                    echo '<th>Customer First Name</th>';
-                    echo '<th>Customer Last Name</th>';
-                    echo '<th>Customer Email</th>';
-                    echo '<th>Customer Phone</th>';
-                    echo '<th>Archive Timestamp</th>';
-                    echo '</tr>';
+                <div class="GLOBAL_TABLE mb-8">
+                    <?php
+                    // Display the customer_info_archive table
+                    $sql = "SELECT customerArchiveID, CustomerID, CustomerFname, CustomerLname, CustomerEmail, CustomerPhone, ArchiveTimestamp 
+                                FROM customer_info_archive";
+                    $result = $conn->query($sql);
 
-                    // Fetch and display each row of the results
-                    while ($row = $result->fetch_assoc()) {
+                    if ($result->num_rows > 0) {
+                        echo '<table>';
                         echo '<tr>';
-                        echo '<td>' . htmlspecialchars($row['customerArchiveID']) . '</td>';
-                        echo '<td>' . htmlspecialchars($row['CustomerID']) . '</td>';
-                        echo '<td>' . htmlspecialchars($row['CustomerFname']) . '</td>';
-                        echo '<td>' . htmlspecialchars($row['CustomerLname']) . '</td>';
-                        echo '<td>' . htmlspecialchars($row['CustomerEmail']) . '</td>';
-                        echo '<td>' . htmlspecialchars($row['CustomerPhone']) . '</td>';
-                        echo '<td>' . htmlspecialchars($row['ArchiveTimestamp']) . '</td>';
+                        echo '<th>Customer Archive ID</th>';
+                        echo '<th>Customer ID</th>';
+                        echo '<th>Customer First Name</th>';
+                        echo '<th>Customer Last Name</th>';
+                        echo '<th>Customer Email</th>';
+                        echo '<th>Customer Phone</th>';
+                        echo '<th>Archive Timestamp</th>';
                         echo '</tr>';
-                    }
 
-                    echo '</table>';
-                } else {
-                    // echo 'No results found.';
-                }
-                ?>
+                        // Fetch and display each row of the results
+                        while ($row = $result->fetch_assoc()) {
+                            echo '<tr>';
+                            echo '<td>' . htmlspecialchars($row['customerArchiveID']) . '</td>';
+                            echo '<td>' . htmlspecialchars($row['CustomerID']) . '</td>';
+                            echo '<td>' . htmlspecialchars($row['CustomerFname']) . '</td>';
+                            echo '<td>' . htmlspecialchars($row['CustomerLname']) . '</td>';
+                            echo '<td>' . htmlspecialchars($row['CustomerEmail']) . '</td>';
+                            echo '<td>' . htmlspecialchars($row['CustomerPhone']) . '</td>';
+                            echo '<td>' . htmlspecialchars($row['ArchiveTimestamp']) . '</td>';
+                            echo '</tr>';
+                        }
+
+                        echo '</table>';
+                    } else {
+                        // echo 'No results found.';
+                    }
+                    ?>
+                </div>
 
                 <div class="ORDERS_SEARCH">
                     <form id="searchid" method="post" action="">
@@ -100,7 +103,7 @@ if ($userlevel == 1) {
                                     search
                                 </i>
                             </button>
-                            <input type="num" name="employeeid" id="employeeid" placeholder="EmployeeID">
+                            <input type="number" name="customerid" id="customerid" placeholder="Customer ID">
                         </div>
                     </form>
                 </div>
@@ -114,10 +117,9 @@ if ($userlevel == 1) {
                 </div> -->
 
                 <div class="GLOBAL_TABLE">
-
                     <?php
-                    if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['employeeid'])) {
-                        $inputemployeeid = $_POST['employeeid'];
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['customerid'])) {
+                        $inputemployeeid = $_POST['customerid'];
 
                         // Display the customer_info_archive table for that user
                         $sql = "SELECT customerArchiveID, CustomerID, CustomerFname, CustomerLname, CustomerEmail, CustomerPhone, ArchiveTimestamp 
@@ -129,7 +131,7 @@ if ($userlevel == 1) {
                         $result = $stmt->get_result();
 
                         if ($result->num_rows > 0) {
-                            echo '<table class="action-logs-table">';
+                            echo '<table>';
                             echo '<tr>';
                             echo '<th>Customer Archive ID</th>';
                             echo '<th>Customer ID</th>';
