@@ -511,6 +511,18 @@ input{
   padding-bottom: 0.25rem;
 }
 
+textarea{
+  width: 100%;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity));
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
 select{
   width: 100%;
   border-radius: 0.5rem;
@@ -1322,6 +1334,27 @@ select{
   background-color: rgb(0 123 181 / var(--tw-bg-opacity));
 }
 
+.GLOBAL_BUTTON_ORANGE{
+  border-radius: 1.5rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 115 22 / var(--tw-bg-opacity));
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+  transition-duration: 300ms;
+}
+
+.GLOBAL_BUTTON_ORANGE:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(234 88 12 / var(--tw-bg-opacity));
+}
+
 .GLOBAL_BUTTON_RED{
   border-radius: 1.5rem;
   --tw-bg-opacity: 1;
@@ -1427,6 +1460,13 @@ select{
   font-weight: 700;
 }
 
+.GLOBAL_PAGE_CONTAINER_CONTENT{
+  display: flex;
+  flex-direction: column;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
 /* -- End of Global Classes -- */
 
 /* -- Dashboard Classes -- */
@@ -1454,8 +1494,6 @@ select{
 /* -- Orders Classes -- */
 
 .ORDERS_SEARCH{
-  margin-left: 2.5rem;
-  margin-right: 2.5rem;
   margin-bottom: 0.75rem;
   display: flex;
   flex-direction: row;
@@ -1716,6 +1754,13 @@ select{
   gap: 1.25rem;
 }
 
+.DETAILS_CONTAINER_ROW_GROW{
+  display: flex;
+  flex-grow: 1;
+  flex-direction: row;
+  gap: 1.25rem;
+}
+
 .DETAILS_CONTAINER_ROW_LEFT{
   display: flex;
   width: 50%;
@@ -1899,6 +1944,18 @@ select{
 
 /* End of Popup Classes */
 
+/* Admin Classes */
+
+/* .ADMIN_SEARCH {
+		@apply flex flex-row items-center justify-between rounded-3xl bg-white px-10 shadow-[0_2rem_3rem_rgba(132,139,200,0.18)] duration-300 hover:shadow-none;
+	}
+
+	.ADMIN_RESTORE {
+		@apply flex flex-row items-center justify-start gap-5;
+	} */
+
+/* End of Admin Classes */
+
 /* Table Colors */
 
 .order-id-link {
@@ -1946,6 +2003,11 @@ select{
 .mx-1{
   margin-left: 0.25rem;
   margin-right: 0.25rem;
+}
+
+.mx-10{
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
 }
 
 .mb-4{
@@ -2036,6 +2098,10 @@ select{
   width: 60%;
 }
 
+.w-32{
+  width: 8rem;
+}
+
 .w-4{
   width: 1rem;
 }
@@ -2071,6 +2137,11 @@ select{
 .columns-2{
   -moz-columns: 2;
        columns: 2;
+}
+
+.columns-4{
+  -moz-columns: 4;
+       columns: 4;
 }
 
 .flex-row{
@@ -2113,6 +2184,10 @@ select{
   gap: 1rem;
 }
 
+.gap-5{
+  gap: 1.25rem;
+}
+
 .rounded{
   border-radius: 0.25rem;
 }
@@ -2142,6 +2217,10 @@ select{
 .bg-white{
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.p-5{
+  padding: 1.25rem;
 }
 
 .px-12{
@@ -2216,6 +2295,11 @@ select{
   line-height: 2.5rem;
 }
 
+.text-7xl{
+  font-size: 4.5rem;
+  line-height: 1;
+}
+
 .text-8xl{
   font-size: 6rem;
   line-height: 1;
@@ -2284,6 +2368,11 @@ select{
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
+.text-blue-500{
+  --tw-text-opacity: 1;
+  color: rgb(59 130 246 / var(--tw-text-opacity));
+}
+
 .text-blue-600{
   --tw-text-opacity: 1;
   color: rgb(37 99 235 / var(--tw-text-opacity));
@@ -2348,6 +2437,10 @@ select{
 .hover\:bg-\[\#dddddd\]:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(221 221 221 / var(--tw-bg-opacity));
+}
+
+.hover\:underline:hover{
+  text-decoration-line: underline;
 }
 
 .focus\:border-blue-500:focus{

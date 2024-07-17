@@ -415,8 +415,6 @@
                                 }
                             }
 
-
-
                             // update payment_plans
                             $sql = "update payment_plans set totalamount = (select sum(productPrice * productQuantity) from products where orderid = '$globOrderID' and isRemoved = 0) where orderid = '$globOrderID';";
                             $conn->query($sql);
